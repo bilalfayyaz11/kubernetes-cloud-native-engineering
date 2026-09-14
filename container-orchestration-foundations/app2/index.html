@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Application 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e5f5;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 { color: #7b1fa2; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Web Application 2</h1>
+    <p>This is running on port 8081</p>
+    <p>Container ID: <span id="hostname"></span></p>
+    <script>
+        document.getElementById('hostname').textContent =
+            window.location.hostname;
+    </script>
+</body>
+</html>
