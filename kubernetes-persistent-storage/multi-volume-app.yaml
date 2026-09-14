@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-volume-writer
+  namespace: persistent-storage
+  labels:
+    app: multi-volume-writer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multi-volume-writer
+  template:
+    metadata:
+      labels:
+        app: multi-volume-writer
+    spec:
+      containers:
+      - name: writer
+        image: busybox:1.36
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - |
+          while true; do
+            echo "Primary: $(date)" >> /data1/log1.txt
+            echo "Secondary: $(date)" >> /data2/log2.txt
+            sleep 45
+          done
+        volumeMounts:
+        - name: primary
+          mountPath: /data1
+        - name: secondary
+          mountPath: /data2
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+      volumes:
+      - name: primary
+        persistentVolumeClaim:
+          claimName: primary-pvc
+      - name: secondary
+        persistentVolumeClaim:
+          claimName: secondary-pvc
