@@ -1,0 +1,3 @@
+database-secret.yaml
+*.env
+.env

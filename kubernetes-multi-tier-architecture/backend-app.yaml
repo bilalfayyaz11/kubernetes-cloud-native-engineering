@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-app-code
+  namespace: multi-tier-app
+data:
+  app.py: |
+    from flask import Flask, jsonify
+    import mysql.connector
+    import os
+    import time
+
+    app = Flask(__name__)
+
+    def connect():
+        for attempt in range(5):
+            try:
+                return mysql.connector.connect(
+                    host=os.environ["DB_HOST"],
+                    port=int(os.environ["DB_PORT"]),
+                    database=os.environ["DB_NAME"],
+                    user=os.environ["DB_USER"],
+                    password=os.environ["DB_PASSWORD"],
+                )
+            except Exception as exc:
+                print(f"database connection attempt {attempt + 1} failed: {exc}", flush=True)
+                time.sleep(5)
+        return None
+
+    @app.get("/api/health")
+    def health():
+        return jsonify(status="healthy", service="backend")
+
+    @app.get("/api/data")
+    def data():
+        connection = connect()
+
+        if connection is None:
+            return jsonify(error="database connection failed"), 500
+
+        cursor = connection.cursor()
+        cursor.execute("SELECT VERSION()")
+        version = cursor.fetchone()[0]
+
+        cursor.close()
+        connection.close()
+
+        return jsonify(
+            message="Backend connected to database",
+            db_version=version
+        )
+
+    if __name__ == "__main__":
+        app.run(
+            host="0.0.0.0",
+            port=int(os.environ["APP_PORT"])
+        )
