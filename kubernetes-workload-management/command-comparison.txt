@@ -1,0 +1,13 @@
+Kubernetes Deployment:
+
+kubectl create deployment app --image=nginx --replicas=3
+kubectl expose deployment app --port=80 --type=NodePort
+
+
+Docker Swarm Equivalent:
+
+docker service create \
+  --name app \
+  --replicas 3 \
+  --publish 80:80 \
+  nginx
