@@ -1,0 +1,2 @@
+NAME         CPU(cores)   MEMORY(bytes)   
+nginx-demo   0m           2Mi             

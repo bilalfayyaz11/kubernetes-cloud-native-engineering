@@ -1,0 +1,100 @@
+W0914 16:51:42.017914       1 genericapiserver.go:798] Skipping API flowcontrol.apiserver.k8s.io/v1beta3 because it has no resources.
+W0914 16:51:42.017925       1 genericapiserver.go:798] Skipping API flowcontrol.apiserver.k8s.io/v1beta2 because it has no resources.
+W0914 16:51:42.017931       1 genericapiserver.go:798] Skipping API flowcontrol.apiserver.k8s.io/v1beta1 because it has no resources.
+I0914 16:51:42.097398       1 handler.go:309] Adding GroupVersion apps v1 to ResourceManager
+W0914 16:51:42.097447       1 genericapiserver.go:798] Skipping API apps/v1beta2 because it has no resources.
+W0914 16:51:42.097457       1 genericapiserver.go:798] Skipping API apps/v1beta1 because it has no resources.
+I0914 16:51:42.106778       1 handler.go:309] Adding GroupVersion admissionregistration.k8s.io v1 to ResourceManager
+W0914 16:51:42.106810       1 genericapiserver.go:798] Skipping API admissionregistration.k8s.io/v1beta1 because it has no resources.
+W0914 16:51:42.106830       1 genericapiserver.go:798] Skipping API admissionregistration.k8s.io/v1alpha1 because it has no resources.
+I0914 16:51:42.108980       1 handler.go:309] Adding GroupVersion events.k8s.io v1 to ResourceManager
+W0914 16:51:42.109020       1 genericapiserver.go:798] Skipping API events.k8s.io/v1beta1 because it has no resources.
+I0914 16:51:42.124849       1 handler.go:309] Adding GroupVersion resource.k8s.io v1 to ResourceManager
+W0914 16:51:42.124903       1 genericapiserver.go:798] Skipping API resource.k8s.io/v1beta2 because it has no resources.
+W0914 16:51:42.124913       1 genericapiserver.go:798] Skipping API resource.k8s.io/v1beta1 because it has no resources.
+W0914 16:51:42.124919       1 genericapiserver.go:798] Skipping API resource.k8s.io/v1alpha3 because it has no resources.
+I0914 16:51:42.170750       1 handler.go:309] Adding GroupVersion apiregistration.k8s.io v1 to ResourceManager
+W0914 16:51:42.170791       1 genericapiserver.go:798] Skipping API apiregistration.k8s.io/v1beta1 because it has no resources.
+I0914 16:51:43.808512       1 secure_serving.go:214] Serving securely on [::]:8443
+I0914 16:51:43.810965       1 dynamic_cafile_content.go:161] "Starting controller" name="request-header::/var/lib/minikube/certs/front-proxy-ca.crt"
+I0914 16:51:43.811409       1 dynamic_serving_content.go:135] "Starting controller" name="serving-cert::/var/lib/minikube/certs/apiserver.crt::/var/lib/minikube/certs/apiserver.key"
+I0914 16:51:43.811722       1 tlsconfig.go:243] "Starting DynamicServingCertificateController"
+I0914 16:51:43.815414       1 controller.go:89] "Starting OpenAPI V3 AggregationController"
+I0914 16:51:43.820082       1 cluster_authentication_trust_controller.go:459] Starting cluster_authentication_trust_controller controller
+I0914 16:51:43.824203       1 shared_informer.go:524] "Waiting for caches to sync"
+I0914 16:51:43.825460       1 storage_readiness_hook.go:70] Storage is ready for all registered resources
+I0914 16:51:43.825904       1 gc_controller.go:85] "Starting apiserver lease garbage collector"
+I0914 16:51:43.826132       1 shared_informer.go:524] "Waiting for caches to sync"
+I0914 16:51:43.826941       1 dynamic_serving_content.go:135] "Starting controller" name="aggregator-proxy-cert::/var/lib/minikube/certs/front-proxy-client.crt::/var/lib/minikube/certs/front-proxy-client.key"
+I0914 16:51:43.827921       1 system_namespaces_controller.go:66] Starting system namespaces controller
+I0914 16:51:43.828242       1 dynamic_cafile_content.go:161] "Starting controller" name="client-ca-bundle::/var/lib/minikube/certs/ca.crt"
+I0914 16:51:43.829192       1 customresource_discovery_controller.go:294] Starting DiscoveryController
+I0914 16:51:43.829552       1 controller.go:116] "Deleting old lease on startup" lease="kube-system/apiserver-eqt674mfxb4j56mrjjkoe7b7ii"
+I0914 16:51:43.830414       1 aggregator.go:185] waiting for initial CRD sync...
+I0914 16:51:43.830707       1 controller.go:87] "Starting OpenAPI AggregationController"
+I0914 16:51:43.831069       1 remote_available_controller.go:434] Starting RemoteAvailability controller
+I0914 16:51:43.831299       1 cache.go:32] Waiting for caches to sync for RemoteAvailability controller
+I0914 16:51:43.831593       1 apiservice_controller.go:100] Starting APIServiceRegistrationController
+I0914 16:51:43.831829       1 cache.go:32] Waiting for caches to sync for APIServiceRegistrationController controller
+I0914 16:51:43.833772       1 controller.go:127] "Starting legacy_token_tracking_controller"
+I0914 16:51:43.834123       1 shared_informer.go:524] "Waiting for caches to sync"
+I0914 16:51:43.834500       1 apf_controller.go:377] Starting API Priority and Fairness config controller
+I0914 16:51:43.835668       1 default_servicecidr_controller.go:110] "Starting" controller="kubernetes-service-cidr-controller"
+I0914 16:51:43.836336       1 shared_informer.go:524] "Waiting for caches to sync"
+I0914 16:51:43.858569       1 dynamic_cafile_content.go:161] "Starting controller" name="client-ca-bundle::/var/lib/minikube/certs/ca.crt"
+I0914 16:51:43.859776       1 dynamic_cafile_content.go:161] "Starting controller" name="request-header::/var/lib/minikube/certs/front-proxy-ca.crt"
+I0914 16:51:43.863259       1 local_available_controller.go:156] Starting LocalAvailability controller
+I0914 16:51:43.863287       1 cache.go:32] Waiting for caches to sync for LocalAvailability controller
+I0914 16:51:43.863357       1 controller.go:142] Starting OpenAPI controller
+I0914 16:51:43.863390       1 controller.go:90] Starting OpenAPI V3 controller
+I0914 16:51:43.863415       1 naming_controller.go:305] Starting NamingConditionController
+I0914 16:51:43.863455       1 nonstructuralschema_controller.go:202] Starting NonStructuralSchemaConditionController
+I0914 16:51:43.863476       1 apiapproval_controller.go:196] Starting KubernetesAPIApprovalPolicyConformantConditionController
+I0914 16:51:43.863499       1 crd_finalizer.go:276] "Starting CRDFinalizer"
+I0914 16:51:43.863527       1 crdregistration_controller.go:114] Starting crd-autoregister controller
+I0914 16:51:43.863537       1 shared_informer.go:503] "Waiting for caches to sync" controller="crd-autoregister"
+I0914 16:51:43.864088       1 repairip.go:210] Starting ipallocator-repair-controller
+I0914 16:51:43.864103       1 shared_informer.go:503] "Waiting for caches to sync" controller="ipallocator-repair-controller"
+I0914 16:51:44.722198       1 shared_informer.go:510] "Caches are synced" controller="node_authorizer"
+I0914 16:51:44.735547       1 shared_informer.go:531] "Caches are synced"
+I0914 16:51:44.735899       1 policy_source.go:253] refreshing policies
+I0914 16:51:44.748645       1 shared_informer.go:531] "Caches are synced"
+I0914 16:51:44.748675       1 policy_source.go:253] refreshing policies
+I0914 16:51:44.776310       1 shared_informer.go:531] "Caches are synced"
+I0914 16:51:44.786572       1 shared_informer.go:531] "Caches are synced"
+I0914 16:51:44.788013       1 cache.go:39] Caches are synced for RemoteAvailability controller
+I0914 16:51:44.788693       1 shared_informer.go:531] "Caches are synced"
+I0914 16:51:44.790183       1 apf_controller.go:382] Running API Priority and Fairness config worker
+I0914 16:51:44.790416       1 apf_controller.go:385] Running API Priority and Fairness periodic rebalancing process
+I0914 16:51:44.790879       1 shared_informer.go:531] "Caches are synced"
+I0914 16:51:44.791913       1 default_servicecidr_controller.go:170] "Creating default ServiceCIDR" CIDRs=["10.96.0.0/12"]
+I0914 16:51:44.792834       1 cache.go:39] Caches are synced for LocalAvailability controller
+I0914 16:51:44.794106       1 shared_informer.go:510] "Caches are synced" controller="crd-autoregister"
+I0914 16:51:44.794520       1 shared_informer.go:510] "Caches are synced" controller="ipallocator-repair-controller"
+I0914 16:51:44.794956       1 cache.go:39] Caches are synced for APIServiceRegistrationController controller
+I0914 16:51:44.798363       1 aggregator.go:187] initial CRD sync complete...
+I0914 16:51:44.798702       1 autoregister_controller.go:144] Starting autoregister controller
+I0914 16:51:44.798715       1 cache.go:32] Waiting for caches to sync for autoregister controller
+I0914 16:51:44.798727       1 cache.go:39] Caches are synced for autoregister controller
+I0914 16:51:44.799103       1 handler_discovery.go:450] Starting ResourceDiscoveryManager
+I0914 16:51:44.905579       1 cidrallocator.go:302] created ClusterIP allocator for Service CIDR 10.96.0.0/12
+I0914 16:51:44.933297       1 default_servicecidr_controller.go:234] "Setting default ServiceCIDR condition Ready to True"
+I0914 16:51:45.108217       1 controller.go:667] quota admission added evaluator for: leases.coordination.k8s.io
+I0914 16:51:45.147896       1 cidrallocator.go:278] updated ClusterIP allocator for Service CIDR 10.96.0.0/12
+I0914 16:51:45.257393       1 storage_scheduling.go:189] created PriorityClass system-node-critical with value 2000001000
+I0914 16:51:45.337973       1 storage_scheduling.go:189] created PriorityClass system-cluster-critical with value 2000000000
+I0914 16:51:45.338187       1 storage_scheduling.go:205] all system priority classes are created successfully or already exist.
+I0914 16:51:48.323189       1 controller.go:667] quota admission added evaluator for: roles.rbac.authorization.k8s.io
+I0914 16:51:48.467307       1 controller.go:667] quota admission added evaluator for: rolebindings.rbac.authorization.k8s.io
+I0914 16:51:48.669737       1 alloc.go:329] "allocated clusterIPs" service="default/kubernetes" clusterIPs={"IPv4":"10.96.0.1"}
+W0914 16:51:48.690043       1 lease.go:270] Resetting endpoints for master service "kubernetes" to [192.168.49.2]
+I0914 16:51:48.691927       1 controller.go:667] quota admission added evaluator for: endpoints
+I0914 16:51:48.704466       1 controller.go:667] quota admission added evaluator for: endpointslices.discovery.k8s.io
+I0914 16:51:49.229786       1 controller.go:667] quota admission added evaluator for: serviceaccounts
+I0914 16:51:50.099206       1 controller.go:667] quota admission added evaluator for: deployments.apps
+I0914 16:51:50.163728       1 alloc.go:329] "allocated clusterIPs" service="kube-system/kube-dns" clusterIPs={"IPv4":"10.96.0.10"}
+I0914 16:51:50.192987       1 controller.go:667] quota admission added evaluator for: daemonsets.apps
+I0914 16:51:56.713674       1 controller.go:667] quota admission added evaluator for: replicasets.apps
+I0914 16:51:56.953968       1 controller.go:667] quota admission added evaluator for: controllerrevisions.apps
+I0914 16:51:57.018608       1 cidrallocator.go:278] updated ClusterIP allocator for Service CIDR 10.96.0.0/12
+I0914 16:51:57.114278       1 cidrallocator.go:278] updated ClusterIP allocator for Service CIDR 10.96.0.0/12

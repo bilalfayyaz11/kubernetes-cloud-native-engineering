@@ -1,0 +1,5 @@
+53s         Normal   Scheduled                 pod/nginx-demo     Successfully assigned default/nginx-demo to minikube
+52s         Normal   Pulling                   pod/nginx-demo     Pulling image "nginx:1.21"
+45s         Normal   Pulled                    pod/nginx-demo     Successfully pulled image "nginx:1.21" in 6.967s (6.967s including waiting). Image size: 56746739 bytes.
+45s         Normal   Created                   pod/nginx-demo     Container created
+45s         Normal   Started                   pod/nginx-demo     Container started
