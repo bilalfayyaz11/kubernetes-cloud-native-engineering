@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-app
+  namespace: argocd
+
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/bilalfayyaz11/kubernetes-cloud-native-engineering.git
+    targetRevision: main
+    path: argocd-gitops-delivery/apps/sample-app
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sample-app
+
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+    - CreateNamespace=true
