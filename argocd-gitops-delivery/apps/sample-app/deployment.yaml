@@ -52,3 +52,13 @@ spec:
 
           initialDelaySeconds: 10
           periodSeconds: 10
+
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+
+      volumes:
+      - name: config-volume
+        configMap:
+          name: sample-app-config
