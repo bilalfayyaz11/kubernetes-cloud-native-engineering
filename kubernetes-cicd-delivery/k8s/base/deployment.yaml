@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-app
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: cicd-app
+
+  template:
+    metadata:
+      labels:
+        app: cicd-app
+
+    spec:
+      containers:
+      - name: cicd-app
+        image: docker.io/example/cicd-app:replace-me
+
+        ports:
+        - containerPort: 3000
+
+        env:
+        - name: APP_VERSION
+          value: "replace-me"
+
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 250m
+            memory: 128Mi
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 3

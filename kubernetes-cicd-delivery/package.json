@@ -1,0 +1,13 @@
+{
+  "name": "kubernetes-cicd-app",
+  "version": "1.0.0",
+  "description": "Containerized application delivered through GitHub Actions and Kubernetes",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node -e \"require('./app'); setTimeout(() => process.exit(0), 1000)\""
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
