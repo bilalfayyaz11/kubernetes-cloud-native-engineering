@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  namespace: database
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: database
+
+  template:
+    metadata:
+      labels:
+        app: database
+        tier: database
+
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:17-alpine
+
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: POSTGRES_PASSWORD
+
+        ports:
+        - containerPort: 5432
+
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+  namespace: database
+spec:
+  selector:
+    app: database
+
+  ports:
+  - port: 5432
+    targetPort: 5432
+
+  type: ClusterIP

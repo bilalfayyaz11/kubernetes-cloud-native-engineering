@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+  namespace: secure-apps
+  labels:
+    app: secure-pod
+spec:
+  automountServiceAccountToken: false
+
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10001
+    runAsGroup: 10001
+
+    seccompProfile:
+      type: RuntimeDefault
+
+  containers:
+  - name: secure-container
+    image: busybox:1.36
+
+    command:
+    - /bin/sh
+    - -c
+    - |
+      echo "Secure pod started"
+      id
+      sleep 3600
+
+    securityContext:
+      allowPrivilegeEscalation: false
+
+      capabilities:
+        drop:
+        - ALL
+
+      readOnlyRootFilesystem: true
+
+      runAsNonRoot: true
+      runAsUser: 10001
+      runAsGroup: 10001
+
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+
+      limits:
+        cpu: 100m
+        memory: 32Mi
+
+    volumeMounts:
+    - name: tmp
+      mountPath: /tmp
+
+  volumes:
+  - name: tmp
+    emptyDir: {}
