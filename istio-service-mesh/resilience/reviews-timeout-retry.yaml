@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: reviews
+  namespace: default
+
+spec:
+  hosts:
+  - reviews
+
+  http:
+
+  - match:
+    - headers:
+        end-user:
+          exact: jason
+
+    route:
+    - destination:
+        host: reviews
+        subset: v2
+
+    timeout: 3s
+
+    retries:
+      attempts: 3
+      perTryTimeout: 1s
+      retryOn: gateway-error,connect-failure,refused-stream,unavailable
+
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 50
+
+    - destination:
+        host: reviews
+        subset: v3
+      weight: 50
+
+    timeout: 3s
+
+    retries:
+      attempts: 3
+      perTryTimeout: 1s
+      retryOn: gateway-error,connect-failure,refused-stream,unavailable
