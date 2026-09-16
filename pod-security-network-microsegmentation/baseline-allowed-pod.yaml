@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: baseline-allowed
+  namespace: security-demo
+spec:
+  containers:
+    - name: nginx
+      image: nginx:stable-alpine
+      securityContext:
+        allowPrivilegeEscalation: false

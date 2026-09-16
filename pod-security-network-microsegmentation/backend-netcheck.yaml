@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend-netcheck
+  namespace: backend
+  labels:
+    app: backend-netcheck
+spec:
+  containers:
+    - name: tools
+      image: nicolaka/netshoot:latest
+      command:
+        - sleep
+        - "36000"
+
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL

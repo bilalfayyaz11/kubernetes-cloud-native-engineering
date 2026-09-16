@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: baseline-rejected
+  namespace: security-demo
+spec:
+  containers:
+    - name: privileged-container
+      image: nginx:stable-alpine
+      securityContext:
+        privileged: true
+        runAsUser: 0

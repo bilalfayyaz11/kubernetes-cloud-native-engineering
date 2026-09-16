@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  namespace: database
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: database
+
+  template:
+    metadata:
+      labels:
+        app: database
+        tier: database
+
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.4
+
+          envFrom:
+            - secretRef:
+                name: mysql-root-credentials
+
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+  namespace: database
+spec:
+  selector:
+    app: database
+
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+      protocol: TCP
+
+  type: ClusterIP
