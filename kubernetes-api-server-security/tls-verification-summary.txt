@@ -1,0 +1,16 @@
+Kubernetes API Server TLS Verification
+======================================
+
+Live API endpoint:
+https://172.31.10.68:6443
+
+Controls validated:
+- Kubernetes API server presents an X.509 server certificate.
+- API server certificate chains to the kubeadm cluster CA.
+- API server certificate contains Subject Alternative Names.
+- testuser certificate chains to the Kubernetes client CA.
+- testuser can authenticate using an X.509 client certificate.
+- RBAC allows access to security-lab while denying default namespace access.
+- HTTPS API communication succeeds using CA verification and a client certificate.
+- Independent custom CA/server/client certificate chains were generated and verified offline.
+- Kubernetes certificate expiration was inspected using kubeadm and OpenSSL.
