@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: signature-policy
+  namespace: supply-chain-security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: signature-policy
+  template:
+    metadata:
+      labels:
+        app: signature-policy
+    spec:
+      containers:
+      - name: webhook
+        image: signature-policy-webhook:1.0
+        imagePullPolicy: Never
+        env:
+        - name: COSIGN_PUBLIC_KEY
+          value: /keys/cosign.pub
+        - name: REGISTRY_ENDPOINT
+          value: "172.18.0.3:5000"
+        ports:
+        - containerPort: 8443
+          name: https
+        volumeMounts:
+        - name: cosign-key
+          mountPath: /keys
+          readOnly: true
+        - name: tls
+          mountPath: /tls
+          readOnly: true
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: cosign-key
+        secret:
+          secretName: cosign-public-key
+      - name: tls
+        secret:
+          secretName: signature-policy-tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: signature-policy
+  namespace: supply-chain-security
+spec:
+  selector:
+    app: signature-policy
+  ports:
+  - name: https
+    port: 443
+    targetPort: 8443

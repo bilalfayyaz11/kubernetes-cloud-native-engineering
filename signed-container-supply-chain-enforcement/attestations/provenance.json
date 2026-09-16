@@ -1,0 +1,17 @@
+{
+  "image": "localhost:5000/supply-chain-api",
+  "digest": "supply-chain-api@sha256:4f25b2e9941aa63c47688fbf878022ce247f158b4f82b89b2707e3ecb51f3dbe",
+  "scan": {
+    "result": "PASS",
+    "high": 7,
+    "critical": 0,
+    "report": "supply-chain-api_1.0.json"
+  },
+  "signingTimestamp": "2026-09-16T18:53:40Z",
+  "buildId": "build-20260916T185340Z",
+  "builder": "docker",
+  "securityPolicy": {
+    "maxHigh": 0,
+    "maxCritical": 0
+  }
+}

@@ -1,0 +1,7 @@
+keys/*.key
+k8s/tls/
+*.pem
+*.key
+*.p12
+.env
+image.env
