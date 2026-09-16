@@ -1,0 +1,52 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: workload-security.cloud-native
+spec:
+  failurePolicy: Fail
+
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+
+  validations:
+    - expression: >
+        object.spec.containers.all(
+          c,
+          !c.image.endsWith(':latest')
+        )
+      message: "Images using the :latest tag are not permitted."
+
+    - expression: >
+        object.spec.containers.all(
+          c,
+          has(c.securityContext) &&
+          c.securityContext.runAsNonRoot == true
+        )
+      message: "Every container must explicitly set runAsNonRoot=true."
+
+    - expression: >
+        object.spec.containers.all(
+          c,
+          has(c.securityContext) &&
+          c.securityContext.allowPrivilegeEscalation == false
+        )
+      message: "Every container must disable privilege escalation."
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: workload-security-binding
+spec:
+  policyName: workload-security.cloud-native
+
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        environment: dev
+
+  validationActions:
+    - Deny

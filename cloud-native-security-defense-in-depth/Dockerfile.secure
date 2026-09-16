@@ -1,0 +1,30 @@
+FROM node:24-alpine
+
+WORKDIR /app
+
+# Install production dependencies first for better layer caching
+COPY package*.json ./
+
+RUN npm ci --omit=dev \
+    && npm cache clean --force
+
+# Copy application source
+COPY . .
+
+# Remove development and repository artifacts
+RUN rm -rf \
+    .git \
+    .github \
+    .gitignore \
+    Dockerfile \
+    nodegoat-vulnerable-scan.json \
+    2>/dev/null || true
+
+# Ensure application files are owned by the existing non-root Node user
+RUN chown -R node:node /app
+
+USER node
+
+EXPOSE 4000
+
+CMD ["npm", "start"]

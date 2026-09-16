@@ -1,0 +1,1335 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "nodegoat:secure",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "Size": 224784896,
+    "OS": {
+      "Family": "alpine",
+      "Name": "3.24.1"
+    },
+    "ImageID": "sha256:0417f41cca304c34dee63fbd255df48ddd10ec85f389dff71f7f08d54ff6ef5d",
+    "DiffIDs": [
+      "sha256:34884abbe92863fce933ed7c39c0e045631af0ed86d5cc0dfbdf9fdca426ce3c",
+      "sha256:4d247cf2080a3351fd5a457bbe8322834cbc76afa87fccf0dc797ce91ef995e9",
+      "sha256:2f761960891e55cf9bf0b57d70b00e8538841f709ef66b6ca6e2d44dcec312d9",
+      "sha256:8ddc5e0463d19319bdf5a32a5b1e2dd45792c77f3e2d47f748e220d57ca5a853",
+      "sha256:47c4916be17c217cbfdf4091b9e50404b42ab9fc1bfb706ee94f8232c28ec1e7",
+      "sha256:ff10f9fb21b825ffaee80f2057c7b89295afb53c600554186b19fc000f88931f",
+      "sha256:094f7953dd0b63dfd2690ead3b2769654da383ed8ccf49b725da8d6edb49de43",
+      "sha256:b0e73132db0f37d1ca67a17ecec60016b9ce9dc83f592ce8a9bcea1244aa661b",
+      "sha256:d36403c940fd54180f263fef49eb5a1b354bea9f5a69ec8ac7f3518186e9eb29",
+      "sha256:a5facd6b7b6293d64635e3e94b03e3aaf57b1e6cf0d087274e74f30db4667f13"
+    ],
+    "RepoTags": [
+      "nodegoat:secure"
+    ],
+    "RepoDigests": [
+      "nodegoat@sha256:0417f41cca304c34dee63fbd255df48ddd10ec85f389dff71f7f08d54ff6ef5d"
+    ],
+    "Reference": "nodegoat:secure",
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2026-09-16T11:51:54.660792644Z",
+      "history": [
+        {
+          "created": "2026-06-16T00:01:29Z",
+          "created_by": "ADD alpine-minirootfs-3.24.1-x86_64.tar.gz / # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-16T00:01:29Z",
+          "created_by": "CMD [\"/bin/sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-09-09T18:46:19Z",
+          "created_by": "ENV NODE_VERSION=24.21.0",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-09-09T18:46:19Z",
+          "created_by": "RUN /bin/sh -c addgroup -g 1000 node     && adduser -u 1000 -G node -s /bin/sh -D node     && apk add --no-cache         libstdc++     && apk add --no-cache --virtual .build-deps         curl     && ARCH= OPENSSL_ARCH='linux*' && alpineArch=\"$(apk --print-arch)\"       && case \"${alpineArch##*-}\" in         x86_64) ARCH='x64' CHECKSUM=\"dd5ca647e656c8200c873f45098a16623129c47f2387829f0a15a6de1dac1220\" OPENSSL_ARCH=linux-x86_64;;         aarch64) OPENSSL_ARCH=linux-aarch64;;         s390x) OPENSSL_ARCH=linux-s390x;;         *) echo \"unsupported architecture\"; exit 1 ;;       esac   && if [ -n \"${CHECKSUM}\" ]; then     set -eu;     curl -fsSLO --compressed \"https://unofficial-builds.nodejs.org/download/release/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\";     echo \"$CHECKSUM  node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\" | sha256sum -c -       && tar -xJf \"node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\" -C /usr/local --strip-components=1 --no-same-owner       && ln -s /usr/local/bin/node /usr/local/bin/nodejs;   else     echo \"Building from source\"     && apk add --no-cache --virtual .build-deps-full         binutils-gold         g++         gcc         gnupg         libgcc         linux-headers         make         python3         py-setuptools     && export GNUPGHOME=\"$(mktemp -d)\"     && for key in       5BE8A3F6C8A5C01D106C0AD820B1A390B168D356       DD792F5973C6DE52C432CBDAC77ABFA00DDBF2B7       CC68F5A3106FF448322E48ED27F5E38D5B0A215F       890C08DB8579162FEE0DF9DB8BEAB4DFCF555EF4       C82FA3AE1CBEDC6BE46B9360C43CEC45C17AB93C       108F52B48DB57BB0CC439B2997B01419BD92F80A       655F3B5C1FB3FA8D1A0CA6BDE4A7D232B936D2FD       A363A499291CBBC940DD62E41F10027AF002F8B0     ; do       { gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" && gpg --batch --fingerprint \"$key\"; } ||       { gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" && gpg --batch --fingerprint \"$key\"; } ;     done     && curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz\"     && curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc\"     && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc     && gpgconf --kill all     && rm -rf \"$GNUPGHOME\"     && grep \" node-v$NODE_VERSION.tar.xz\\$\" SHASUMS256.txt | sha256sum -c -     && tar -xf \"node-v$NODE_VERSION.tar.xz\"     && cd \"node-v$NODE_VERSION\"     && ./configure     && make -j$(getconf _NPROCESSORS_ONLN) V=     && make install     && apk del .build-deps-full     && cd ..     && rm -Rf \"node-v$NODE_VERSION\"     && rm \"node-v$NODE_VERSION.tar.xz\" SHASUMS256.txt.asc SHASUMS256.txt;   fi   && rm -f \"node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\"   && find /usr/local/include/node/openssl/archs -mindepth 1 -maxdepth 1 ! -name \"$OPENSSL_ARCH\" -exec rm -rf {} \\;   && apk del .build-deps   && node --version   && npm --version   && rm -rf /tmp/* # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-09T18:46:19Z",
+          "created_by": "ENV YARN_VERSION=1.22.22",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-09-09T18:46:23Z",
+          "created_by": "RUN /bin/sh -c apk add --no-cache --virtual .build-deps-yarn curl gnupg tar   && export GNUPGHOME=\"$(mktemp -d)\"   && for key in     6A010C5166006599AA17F08146C2130DFD2497F5   ; do     { gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" && gpg --batch --fingerprint \"$key\"; } ||     { gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" && gpg --batch --fingerprint \"$key\"; } ;   done   && curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz\"   && curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc\"   && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   && gpgconf --kill all   && rm -rf \"$GNUPGHOME\"   && mkdir -p /opt   && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   && apk del .build-deps-yarn   && yarn --version   && rm -rf /tmp/* # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-09T18:46:23Z",
+          "created_by": "COPY docker-entrypoint.sh /usr/local/bin/ # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-09T18:46:23Z",
+          "created_by": "ENTRYPOINT [\"docker-entrypoint.sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-09-09T18:46:23Z",
+          "created_by": "CMD [\"node\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-09-16T11:51:19Z",
+          "created_by": "WORKDIR /app",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-16T11:51:19Z",
+          "created_by": "COPY package*.json ./ # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-16T11:51:33Z",
+          "created_by": "RUN /bin/sh -c npm ci --omit=dev     && npm cache clean --force # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-16T11:51:34Z",
+          "created_by": "COPY . . # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-16T11:51:34Z",
+          "created_by": "RUN /bin/sh -c rm -rf     .git     .github     .gitignore     Dockerfile     nodegoat-vulnerable-scan.json     2>/dev/null || true # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-16T11:51:54Z",
+          "created_by": "RUN /bin/sh -c chown -R node:node /app # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-09-16T11:51:54Z",
+          "created_by": "USER node",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-09-16T11:51:54Z",
+          "created_by": "EXPOSE [4000/tcp]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-09-16T11:51:54Z",
+          "created_by": "CMD [\"npm\" \"start\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:34884abbe92863fce933ed7c39c0e045631af0ed86d5cc0dfbdf9fdca426ce3c",
+          "sha256:4d247cf2080a3351fd5a457bbe8322834cbc76afa87fccf0dc797ce91ef995e9",
+          "sha256:2f761960891e55cf9bf0b57d70b00e8538841f709ef66b6ca6e2d44dcec312d9",
+          "sha256:8ddc5e0463d19319bdf5a32a5b1e2dd45792c77f3e2d47f748e220d57ca5a853",
+          "sha256:47c4916be17c217cbfdf4091b9e50404b42ab9fc1bfb706ee94f8232c28ec1e7",
+          "sha256:ff10f9fb21b825ffaee80f2057c7b89295afb53c600554186b19fc000f88931f",
+          "sha256:094f7953dd0b63dfd2690ead3b2769654da383ed8ccf49b725da8d6edb49de43",
+          "sha256:b0e73132db0f37d1ca67a17ecec60016b9ce9dc83f592ce8a9bcea1244aa661b",
+          "sha256:d36403c940fd54180f263fef49eb5a1b354bea9f5a69ec8ac7f3518186e9eb29",
+          "sha256:a5facd6b7b6293d64635e3e94b03e3aaf57b1e6cf0d087274e74f30db4667f13"
+        ]
+      },
+      "config": {
+        "Cmd": [
+          "npm",
+          "start"
+        ],
+        "Entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "NODE_VERSION=24.21.0",
+          "YARN_VERSION=1.22.22"
+        ],
+        "User": "node",
+        "WorkingDir": "/app",
+        "ExposedPorts": {
+          "4000/tcp": {}
+        },
+        "ArgsEscaped": true
+      }
+    },
+    "Layers": [
+      {
+        "Size": 8697856,
+        "Digest": "sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4",
+        "DiffID": "sha256:34884abbe92863fce933ed7c39c0e045631af0ed86d5cc0dfbdf9fdca426ce3c"
+      },
+      {
+        "Size": 156131840,
+        "Digest": "sha256:bc66c3ef2ea36d66807b6c1f6de35959de23c4cfd1c5ba60bf261182d939b8a5",
+        "DiffID": "sha256:4d247cf2080a3351fd5a457bbe8322834cbc76afa87fccf0dc797ce91ef995e9"
+      },
+      {
+        "Size": 5388800,
+        "Digest": "sha256:e2c9c68d0d930075e4653f2c0d8d24af9c0d593836fa1acdac1c86379fcac598",
+        "DiffID": "sha256:2f761960891e55cf9bf0b57d70b00e8538841f709ef66b6ca6e2d44dcec312d9"
+      },
+      {
+        "Size": 3584,
+        "Digest": "sha256:c45bfe2a2e422e6636048e397bb5d9f653381282d0063e97a840517dc9b01e54",
+        "DiffID": "sha256:8ddc5e0463d19319bdf5a32a5b1e2dd45792c77f3e2d47f748e220d57ca5a853"
+      },
+      {
+        "Size": 1536,
+        "Digest": "sha256:172f40682927ae7615b079f07631f8ffc017d7f77994fae005db30db7f0838ce",
+        "DiffID": "sha256:47c4916be17c217cbfdf4091b9e50404b42ab9fc1bfb706ee94f8232c28ec1e7"
+      },
+      {
+        "Size": 892928,
+        "Digest": "sha256:71390f07317dd526b614d4ac6baf3cbac6c5a233cb99672ea4408e66f0421e0e",
+        "DiffID": "sha256:ff10f9fb21b825ffaee80f2057c7b89295afb53c600554186b19fc000f88931f"
+      },
+      {
+        "Size": 22208512,
+        "Digest": "sha256:5a5a3c3db561bcbaee1a58f0b6211585ba3909dcfb87a2b9b600182920d6971f",
+        "DiffID": "sha256:094f7953dd0b63dfd2690ead3b2769654da383ed8ccf49b725da8d6edb49de43"
+      },
+      {
+        "Size": 8212992,
+        "Digest": "sha256:e6ac74151d780fc15c2043990eb85b4e4ea111227f5ea42d1f872caf10287550",
+        "DiffID": "sha256:b0e73132db0f37d1ca67a17ecec60016b9ce9dc83f592ce8a9bcea1244aa661b"
+      },
+      {
+        "Size": 2048,
+        "Digest": "sha256:3a03d359a7095b240c5f30a03a9cb943c5182e937649d5ea5df3036cb017377c",
+        "DiffID": "sha256:d36403c940fd54180f263fef49eb5a1b354bea9f5a69ec8ac7f3518186e9eb29"
+      },
+      {
+        "Size": 23244800,
+        "Digest": "sha256:73fd60af6fecf396311aaf7a2b88835ab5ef45a5b24b8140a30b56c77d655220",
+        "DiffID": "sha256:a5facd6b7b6293d64635e3e94b03e3aaf57b1e6cf0d087274e74f30db4667f13"
+      }
+    ]
+  },
+  "Results": [
+    {
+      "Target": "nodegoat:secure (alpine 3.24.1)",
+      "Class": "os-pkgs",
+      "Type": "alpine",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2026-14456",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service via unbounded memory growth in QUIC server",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14456"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-18798",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: QUIC server may trigger double free when processing INITIAL packet",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-18798"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63072",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: heap buffer overflow in CMS key unwrapping",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63072"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63076",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: invalid pointer dereference in CMP server via crafted protectionAlg",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63076"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-75803",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: openssl: AEAD forgeries possible with empty ciphertext in EVP_Cipher()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-75803"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14457",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: RPK server signature algorithm selection can dereference a missing certificate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14457"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-54874",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: excessive memory use buffering DTLS records for a future epoch",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-54874"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63073",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: untrusted sender DN used as format string in CMP response validation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63073"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63074",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: CMP indefinite cache growth of ExtraCerts",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63074"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63075",
+          "PkgID": "libcrypto3@3.5.7-r0",
+          "PkgName": "libcrypto3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: QUIC ACK-only packet retention can cause memory exhaustion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63075"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14456",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "openssl: OpenSSL: Denial of Service via unbounded memory growth in QUIC server",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14456"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-18798",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: QUIC server may trigger double free when processing INITIAL packet",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-18798"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63072",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: heap buffer overflow in CMS key unwrapping",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63072"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63076",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: invalid pointer dereference in CMP server via crafted protectionAlg",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63076"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-75803",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "openssl: openssl: AEAD forgeries possible with empty ciphertext in EVP_Cipher()",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-75803"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14457",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: RPK server signature algorithm selection can dereference a missing certificate",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14457"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-54874",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: excessive memory use buffering DTLS records for a future epoch",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-54874"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63073",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: untrusted sender DN used as format string in CMP response validation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63073"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63074",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: CMP indefinite cache growth of ExtraCerts",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63074"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63075",
+          "PkgID": "libssl3@3.5.7-r0",
+          "PkgName": "libssl3",
+          "InstalledVersion": "3.5.7-r0",
+          "FixedVersion": "3.5.8-r0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "openssl: QUIC ACK-only packet retention can cause memory exhaustion",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-63075"
+        }
+      ]
+    },
+    {
+      "Target": "Node.js",
+      "Class": "lang-pkgs",
+      "Type": "node-pkg",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2024-45590",
+          "PkgID": "body-parser@1.18.3",
+          "PkgName": "body-parser",
+          "InstalledVersion": "1.18.3",
+          "FixedVersion": "1.20.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "body-parser: Denial of Service Vulnerability in body-parser",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-45590"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-12590",
+          "PkgID": "body-parser@1.18.3",
+          "PkgName": "body-parser",
+          "InstalledVersion": "1.18.3",
+          "FixedVersion": "1.20.6, 2.3.0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "body-parser: body-parser: Denial of Service via invalid limit option",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-12590"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-13149",
+          "PkgID": "brace-expansion@1.1.11",
+          "PkgName": "brace-expansion",
+          "InstalledVersion": "1.1.11",
+          "FixedVersion": "5.0.7, 1.1.16, 2.1.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "brace-expansion: Brace-expansion: Denial of Service due to exponential-time complexity",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-13149"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14257",
+          "PkgID": "brace-expansion@1.1.11",
+          "PkgName": "brace-expansion",
+          "InstalledVersion": "1.1.11",
+          "FixedVersion": "5.0.8, 3.0.3, 2.1.3, 1.1.17",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "brace-expansion: Brace-expansion: Denial of Service via memory exhaustion in expand() function",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14257"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-69152",
+          "PkgID": "brace-expansion@1.1.11",
+          "PkgName": "brace-expansion",
+          "InstalledVersion": "1.1.11",
+          "FixedVersion": "1.1.18, 2.1.4, 3.0.6, 5.0.9",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "brace-expansion: DoS via unbounded intermediate arrays, bypassing the CVE-2026-14257 mitigation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-69152"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33750",
+          "PkgID": "brace-expansion@1.1.11",
+          "PkgName": "brace-expansion",
+          "InstalledVersion": "1.1.11",
+          "FixedVersion": "5.0.5, 3.0.2, 2.0.3, 1.1.13",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "brace-expansion: brace-expansion: Denial of Service via zero step value in brace pattern",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33750"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-5889",
+          "PkgID": "brace-expansion@1.1.11",
+          "PkgName": "brace-expansion",
+          "InstalledVersion": "1.1.11",
+          "FixedVersion": "2.0.2, 1.1.12, 3.0.1, 4.0.1",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "brace-expansion: juliangruber brace-expansion index.js expand redos",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-5889"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-14257",
+          "PkgID": "brace-expansion@5.0.7",
+          "PkgName": "brace-expansion",
+          "InstalledVersion": "5.0.7",
+          "FixedVersion": "5.0.8, 3.0.3, 2.1.3, 1.1.17",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "brace-expansion: Brace-expansion: Denial of Service via memory exhaustion in expand() function",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-14257"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-69152",
+          "PkgID": "brace-expansion@5.0.7",
+          "PkgName": "brace-expansion",
+          "InstalledVersion": "5.0.7",
+          "FixedVersion": "1.1.18, 2.1.4, 3.0.6, 5.0.9",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "brace-expansion: DoS via unbounded intermediate arrays, bypassing the CVE-2026-14257 mitigation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-69152"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-4068",
+          "PkgID": "braces@2.3.2",
+          "PkgName": "braces",
+          "InstalledVersion": "2.3.2",
+          "FixedVersion": "3.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "braces: fails to limit the number of characters it can handle",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-4068"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-7610",
+          "PkgID": "bson@1.0.9",
+          "PkgName": "bson",
+          "InstalledVersion": "1.0.9",
+          "FixedVersion": "1.1.4",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "bson: Deserialization of Untrusted Data could result in Code injection or Excessive CPU load",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7610"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-2391",
+          "PkgID": "bson@1.0.9",
+          "PkgName": "bson",
+          "InstalledVersion": "1.0.9",
+          "FixedVersion": "1.1.4",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "Incorrect parsing of certain JSON input may result in js-bson not corr ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-2391"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-47764",
+          "PkgID": "cookie@0.3.1",
+          "PkgName": "cookie",
+          "InstalledVersion": "0.3.1",
+          "FixedVersion": "0.7.0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "cookie: cookie accepts cookie name, path, and domain with out of bounds characters",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-47764"
+        },
+        {
+          "VulnerabilityID": "CVE-2017-20165",
+          "PkgID": "debug@2.2.0",
+          "PkgName": "debug",
+          "InstalledVersion": "2.2.0",
+          "FixedVersion": "3.1.0, 2.6.9",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "A vulnerability classified as problematic has been found in debug-js d ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2017-20165"
+        },
+        {
+          "VulnerabilityID": "CVE-2017-16137",
+          "PkgID": "debug@2.2.0",
+          "PkgName": "debug",
+          "InstalledVersion": "2.2.0",
+          "FixedVersion": "2.6.9, 3.1.0, 3.2.7, 4.3.1",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "nodejs-debug: Regular expression Denial of Service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2017-16137"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-38900",
+          "PkgID": "decode-uri-component@0.2.0",
+          "PkgName": "decode-uri-component",
+          "InstalledVersion": "0.2.0",
+          "FixedVersion": "0.2.1",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "decode-uri-component: improper input validation resulting in DoS",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-38900"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45822",
+          "PkgID": "decode-uri-component@0.2.0",
+          "PkgName": "decode-uri-component",
+          "InstalledVersion": "0.2.0",
+          "FixedVersion": "0.5.0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "decode-uri-component: decode-uri-component: Denial of Service via crafted input",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-45822"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-29041",
+          "PkgID": "express@4.16.4",
+          "PkgName": "express",
+          "InstalledVersion": "4.16.4",
+          "FixedVersion": "4.19.2, 5.0.0-beta.3",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "express: cause malformed URLs to be evaluated",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-29041"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-43796",
+          "PkgID": "express@4.16.4",
+          "PkgName": "express",
+          "InstalledVersion": "4.16.4",
+          "FixedVersion": "4.20.0, 5.0.0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "express: Improper Input Handling in Express Redirects",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-43796"
+        },
+        {
+          "VulnerabilityID": "GHSA-c3m8-x3cg-qm2c",
+          "PkgID": "helmet-csp@1.2.2",
+          "PkgName": "helmet-csp",
+          "InstalledVersion": "1.2.2",
+          "FixedVersion": "2.9.1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "Configuration Override in helmet-csp",
+          "PrimaryURL": "https://github.com/advisories/GHSA-c3m8-x3cg-qm2c"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-3820",
+          "PkgID": "i@0.3.6",
+          "PkgName": "i",
+          "InstalledVersion": "0.3.6",
+          "FixedVersion": "0.3.7",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "inflect vulnerable to Inefficient Regular Expression Complexity",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-3820"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-7788",
+          "PkgID": "ini@1.3.5",
+          "PkgName": "ini",
+          "InstalledVersion": "1.3.5",
+          "FixedVersion": "1.3.6",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-ini: Prototype pollution via malicious INI file",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7788"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-69192",
+          "PkgID": "ip-address@10.2.0",
+          "PkgName": "ip-address",
+          "InstalledVersion": "10.2.0",
+          "FixedVersion": "10.3.1",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "ip-address: ip-address: Inconsistent IP address parsing leads to Server-Side Request Forgery (SSRF) and trust-boundary bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-69192"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-54272",
+          "PkgID": "ip-address@10.2.0",
+          "PkgName": "ip-address",
+          "InstalledVersion": "10.2.0",
+          "FixedVersion": "10.2.1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "ip-address: ip-address: Server-Side Request Forgery via IPv4-mapped/NAT64 IPv6 address misclassification",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-54272"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-69198",
+          "PkgID": "ip-address@10.2.0",
+          "PkgName": "ip-address",
+          "InstalledVersion": "10.2.0",
+          "FixedVersion": "10.2.2",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "ip-address: ip-address: Server-Side Request Forgery (SSRF) and trust-boundary bypass",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-69198"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-20149",
+          "PkgID": "kind-of@6.0.2",
+          "PkgName": "kind-of",
+          "InstalledVersion": "6.0.2",
+          "FixedVersion": "6.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-kind-of: ctorName in index.js allows external user input to overwrite certain internal attributes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-20149"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-20149",
+          "PkgID": "kind-of@6.0.2",
+          "PkgName": "kind-of",
+          "InstalledVersion": "6.0.2",
+          "FixedVersion": "6.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-kind-of: ctorName in index.js allows external user input to overwrite certain internal attributes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-20149"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-20149",
+          "PkgID": "kind-of@6.0.2",
+          "PkgName": "kind-of",
+          "InstalledVersion": "6.0.2",
+          "FixedVersion": "6.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-kind-of: ctorName in index.js allows external user input to overwrite certain internal attributes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-20149"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-20149",
+          "PkgID": "kind-of@6.0.2",
+          "PkgName": "kind-of",
+          "InstalledVersion": "6.0.2",
+          "FixedVersion": "6.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-kind-of: ctorName in index.js allows external user input to overwrite certain internal attributes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-20149"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-20149",
+          "PkgID": "kind-of@6.0.2",
+          "PkgName": "kind-of",
+          "InstalledVersion": "6.0.2",
+          "FixedVersion": "6.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-kind-of: ctorName in index.js allows external user input to overwrite certain internal attributes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-20149"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-20149",
+          "PkgID": "kind-of@6.0.2",
+          "PkgName": "kind-of",
+          "InstalledVersion": "6.0.2",
+          "FixedVersion": "6.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-kind-of: ctorName in index.js allows external user input to overwrite certain internal attributes",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-20149"
+        },
+        {
+          "VulnerabilityID": "CVE-2017-16114",
+          "PkgID": "marked@0.3.5",
+          "PkgName": "marked",
+          "InstalledVersion": "0.3.5",
+          "FixedVersion": "0.3.9",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "The marked module is vulnerable to a regular expression denial of serv ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2017-16114"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-21680",
+          "PkgID": "marked@0.3.5",
+          "PkgName": "marked",
+          "InstalledVersion": "0.3.5",
+          "FixedVersion": "4.0.10",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "marked: regular expression block.def may lead Denial of Service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-21680"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-21681",
+          "PkgID": "marked@0.3.5",
+          "PkgName": "marked",
+          "InstalledVersion": "0.3.5",
+          "FixedVersion": "4.0.10",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "marked: regular expression inline.reflinkSearch may lead Denial of Service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-21681"
+        },
+        {
+          "VulnerabilityID": "CVE-2016-10531",
+          "PkgID": "marked@0.3.5",
+          "PkgName": "marked",
+          "InstalledVersion": "0.3.5",
+          "FixedVersion": "0.3.6",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "marked is an application that is meant to parse and compile markdown.  ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2016-10531"
+        },
+        {
+          "VulnerabilityID": "CVE-2017-1000427",
+          "PkgID": "marked@0.3.5",
+          "PkgName": "marked",
+          "InstalledVersion": "0.3.5",
+          "FixedVersion": "0.3.7",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "marked version 0.3.6 and earlier is vulnerable to an XSS attack in the ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2017-1000427"
+        },
+        {
+          "VulnerabilityID": "CVE-2018-25110",
+          "PkgID": "marked@0.3.5",
+          "PkgName": "marked",
+          "InstalledVersion": "0.3.5",
+          "FixedVersion": "0.3.17",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "Marked prior to version 0.3.17 is vulnerable to a Regular Expression D ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-25110"
+        },
+        {
+          "VulnerabilityID": "NSWG-ECO-101",
+          "PkgID": "marked@0.3.5",
+          "PkgName": "marked",
+          "InstalledVersion": "0.3.5",
+          "FixedVersion": ">=0.3.6",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "Sanitization bypass using HTML Entities",
+          "PrimaryURL": null
+        },
+        {
+          "VulnerabilityID": "CVE-2024-4067",
+          "PkgID": "micromatch@3.1.10",
+          "PkgName": "micromatch",
+          "InstalledVersion": "3.1.10",
+          "FixedVersion": "4.0.8",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "micromatch: vulnerable to Regular Expression Denial of Service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-4067"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-3517",
+          "PkgID": "minimatch@3.0.4",
+          "PkgName": "minimatch",
+          "InstalledVersion": "3.0.4",
+          "FixedVersion": "3.0.5",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-minimatch: ReDoS via the braceExpand function",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-3517"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-26996",
+          "PkgID": "minimatch@3.0.4",
+          "PkgName": "minimatch",
+          "InstalledVersion": "3.0.4",
+          "FixedVersion": "10.2.1, 9.0.6, 8.0.5, 7.4.7, 6.2.1, 5.1.7, 4.2.4, 3.1.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "minimatch: minimatch: Denial of Service via specially crafted glob patterns",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-26996"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27903",
+          "PkgID": "minimatch@3.0.4",
+          "PkgName": "minimatch",
+          "InstalledVersion": "3.0.4",
+          "FixedVersion": "10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "minimatch: minimatch: Denial of Service due to unbounded recursive backtracking via crafted glob patterns",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27903"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27904",
+          "PkgID": "minimatch@3.0.4",
+          "PkgName": "minimatch",
+          "InstalledVersion": "3.0.4",
+          "FixedVersion": "10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.4",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "minimatch: Minimatch: Denial of Service via catastrophic backtracking in glob expressions",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27904"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-44906",
+          "PkgID": "minimist@0.0.10",
+          "PkgName": "minimist",
+          "InstalledVersion": "0.0.10",
+          "FixedVersion": "1.2.6, 0.2.4",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "minimist: prototype pollution",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-44906"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-7598",
+          "PkgID": "minimist@0.0.10",
+          "PkgName": "minimist",
+          "InstalledVersion": "0.0.10",
+          "FixedVersion": "0.2.1, 1.2.3",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "nodejs-minimist: prototype pollution allows adding or modifying properties of Object.prototype using a constructor or __proto__ payload",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7598"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-44906",
+          "PkgID": "minimist@0.0.8",
+          "PkgName": "minimist",
+          "InstalledVersion": "0.0.8",
+          "FixedVersion": "1.2.6, 0.2.4",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "minimist: prototype pollution",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-44906"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-7598",
+          "PkgID": "minimist@0.0.8",
+          "PkgName": "minimist",
+          "InstalledVersion": "0.0.8",
+          "FixedVersion": "0.2.1, 1.2.3",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "nodejs-minimist: prototype pollution allows adding or modifying properties of Object.prototype using a constructor or __proto__ payload",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7598"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-44906",
+          "PkgID": "minimist@1.2.5",
+          "PkgName": "minimist",
+          "InstalledVersion": "1.2.5",
+          "FixedVersion": "1.2.6, 0.2.4",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "minimist: prototype pollution",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-44906"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-10746",
+          "PkgID": "mixin-deep@1.3.1",
+          "PkgName": "mixin-deep",
+          "InstalledVersion": "1.3.1",
+          "FixedVersion": "1.3.2, 2.0.1",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "nodejs-mixin-deep: prototype pollution in function mixin-deep",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-10746"
+        },
+        {
+          "VulnerabilityID": "GHSA-mh5c-679w-hh4r",
+          "PkgID": "mongodb@2.2.36",
+          "PkgName": "mongodb",
+          "InstalledVersion": "2.2.36",
+          "FixedVersion": "3.1.13",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "Denial of Service in mongodb",
+          "PrimaryURL": "https://github.com/advisories/GHSA-mh5c-679w-hh4r"
+        },
+        {
+          "VulnerabilityID": "CVE-2017-20162",
+          "PkgID": "ms@0.7.1",
+          "PkgName": "ms",
+          "InstalledVersion": "0.7.1",
+          "FixedVersion": "2.0.0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "Vercel ms Inefficient Regular Expression Complexity vulnerability",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2017-20162"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-21803",
+          "PkgID": "nconf@0.10.0",
+          "PkgName": "nconf",
+          "InstalledVersion": "0.10.0",
+          "FixedVersion": "0.11.4",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nconf: Prototype pollution in memory store",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-21803"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-21803",
+          "PkgID": "nconf@0.6.9",
+          "PkgName": "nconf",
+          "InstalledVersion": "0.6.9",
+          "FixedVersion": "0.11.4",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nconf: Prototype pollution in memory store",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-21803"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-7339",
+          "PkgID": "on-headers@1.0.1",
+          "PkgName": "on-headers",
+          "InstalledVersion": "1.0.1",
+          "FixedVersion": "1.1.0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "on-headers: on-headers vulnerable to http response header manipulation",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-7339"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-45296",
+          "PkgID": "path-to-regexp@0.1.7",
+          "PkgName": "path-to-regexp",
+          "InstalledVersion": "0.1.7",
+          "FixedVersion": "1.9.0, 0.1.10, 8.0.0, 3.3.0, 6.3.0",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "path-to-regexp: Backtracking regular expressions cause ReDoS",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-45296"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-52798",
+          "PkgID": "path-to-regexp@0.1.7",
+          "PkgName": "path-to-regexp",
+          "InstalledVersion": "0.1.7",
+          "FixedVersion": "0.1.12",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "path-to-regexp: path-to-regexp Unpatched `path-to-regexp` ReDoS in 0.1.x",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-52798"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-4867",
+          "PkgID": "path-to-regexp@0.1.7",
+          "PkgName": "path-to-regexp",
+          "InstalledVersion": "0.1.7",
+          "FixedVersion": "0.1.13",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "path-to-regexp: path-to-regexp: Denial of Service via catastrophic backtracking from malformed URL parameters",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-4867"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-24999",
+          "PkgID": "qs@6.5.2",
+          "PkgName": "qs",
+          "InstalledVersion": "6.5.2",
+          "FixedVersion": "6.10.3, 6.9.7, 6.8.3, 6.7.3, 6.6.1, 6.5.3, 6.4.1, 6.3.3, 6.2.4",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "express: \"qs\" prototype poisoning causes the hang of the node process",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-24999"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-15284",
+          "PkgID": "qs@6.5.2",
+          "PkgName": "qs",
+          "InstalledVersion": "6.5.2",
+          "FixedVersion": "6.14.1",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "qs: qs: Denial of Service via improper input validation in array parsing",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-15284"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-82417",
+          "PkgID": "qs@6.5.2",
+          "PkgName": "qs",
+          "InstalledVersion": "6.5.2",
+          "FixedVersion": "6.16.0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "qs: qs: Denial of Service via improper validation in stringify function",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-82417"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-25883",
+          "PkgID": "semver@5.6.0",
+          "PkgName": "semver",
+          "InstalledVersion": "5.6.0",
+          "FixedVersion": "7.5.2, 6.3.1, 5.7.2",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-semver: Regular expression denial of service",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-25883"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-43799",
+          "PkgID": "send@0.16.2",
+          "PkgName": "send",
+          "InstalledVersion": "0.16.2",
+          "FixedVersion": "0.19.0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "send: Code Execution Vulnerability in Send Library",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-43799"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-43800",
+          "PkgID": "serve-static@1.13.2",
+          "PkgName": "serve-static",
+          "InstalledVersion": "1.13.2",
+          "FixedVersion": "1.16.0, 2.1.0",
+          "Status": "fixed",
+          "Severity": "LOW",
+          "Title": "serve-static: Improper Sanitization in serve-static",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-43800"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-10747",
+          "PkgID": "set-value@0.4.3",
+          "PkgName": "set-value",
+          "InstalledVersion": "0.4.3",
+          "FixedVersion": "2.0.1, 3.0.1",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "nodejs-set-value: prototype pollution in function set-value",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-10747"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-23440",
+          "PkgID": "set-value@0.4.3",
+          "PkgName": "set-value",
+          "InstalledVersion": "0.4.3",
+          "FixedVersion": "4.0.1, 2.0.1, 3.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-set-value: type confusion allows bypass of CVE-2019-10747",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-23440"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-10747",
+          "PkgID": "set-value@2.0.0",
+          "PkgName": "set-value",
+          "InstalledVersion": "2.0.0",
+          "FixedVersion": "2.0.1, 3.0.1",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "nodejs-set-value: prototype pollution in function set-value",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-10747"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-23440",
+          "PkgID": "set-value@2.0.0",
+          "PkgName": "set-value",
+          "InstalledVersion": "2.0.0",
+          "FixedVersion": "4.0.1, 2.0.1, 3.0.3",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-set-value: type confusion allows bypass of CVE-2019-10747",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-23440"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-25345",
+          "PkgID": "swig@1.4.2",
+          "PkgName": "swig",
+          "InstalledVersion": "1.4.2",
+          "FixedVersion": null,
+          "Status": "affected",
+          "Severity": "HIGH",
+          "Title": "Arbitrary local file read vulnerability during template rendering ",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-25345"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-73566",
+          "PkgID": "tar@7.5.19",
+          "PkgName": "tar",
+          "InstalledVersion": "7.5.19",
+          "FixedVersion": "7.5.21",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "tar: node-tar: Denial of Service via crafted long-path tar archive",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-73566"
+        },
+        {
+          "VulnerabilityID": "CVE-2015-8858",
+          "PkgID": "uglify-js@2.4.24",
+          "PkgName": "uglify-js",
+          "InstalledVersion": "2.4.24",
+          "FixedVersion": ">=2.6.0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "The uglify-js package before 2.6.0 for Node.js allows attackers to cau ...",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2015-8858"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-23358",
+          "PkgID": "underscore@1.9.1",
+          "PkgName": "underscore",
+          "InstalledVersion": "1.9.1",
+          "FixedVersion": "1.12.1",
+          "Status": "fixed",
+          "Severity": "CRITICAL",
+          "Title": "nodejs-underscore: Arbitrary code execution via the template function",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-23358"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27601",
+          "PkgID": "underscore@1.9.1",
+          "PkgName": "underscore",
+          "InstalledVersion": "1.9.1",
+          "FixedVersion": "1.13.8",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "Underscore.js: Underscore.js: Denial of Service via recursive data structures in flatten and isEqual functions",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27601"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-15157",
+          "PkgID": "undici@6.27.0",
+          "PkgName": "undici",
+          "InstalledVersion": "6.27.0",
+          "FixedVersion": "6.28.0, 7.29.0, 8.9.0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "undici: undici: HTTP header injection via unvalidated blob-like body type property",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-15157"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-16728",
+          "PkgID": "undici@6.27.0",
+          "PkgName": "undici",
+          "InstalledVersion": "6.27.0",
+          "FixedVersion": "6.28.0, 7.29.0, 8.9.0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "undici: undici: Response desynchronization via retry interceptor with mismatched Content-Length",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-16728"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-16729",
+          "PkgID": "undici@6.27.0",
+          "PkgName": "undici",
+          "InstalledVersion": "6.27.0",
+          "FixedVersion": "6.28.0, 7.29.0, 8.9.0",
+          "Status": "fixed",
+          "Severity": "MEDIUM",
+          "Title": "undici: Undici: Cookie attribute injection allows bypassing security protections",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-16729"
+        },
+        {
+          "VulnerabilityID": "NSWG-ECO-445",
+          "PkgID": "utile@0.2.1",
+          "PkgName": "utile",
+          "InstalledVersion": "0.2.1",
+          "FixedVersion": null,
+          "Status": "affected",
+          "Severity": "LOW",
+          "Title": "Out-of-bounds Read",
+          "PrimaryURL": "https://hackerone.com/reports/321701"
+        },
+        {
+          "VulnerabilityID": "NSWG-ECO-445",
+          "PkgID": "utile@0.2.1",
+          "PkgName": "utile",
+          "InstalledVersion": "0.2.1",
+          "FixedVersion": null,
+          "Status": "affected",
+          "Severity": "LOW",
+          "Title": "Out-of-bounds Read",
+          "PrimaryURL": "https://hackerone.com/reports/321701"
+        },
+        {
+          "VulnerabilityID": "NSWG-ECO-445",
+          "PkgID": "utile@0.3.0",
+          "PkgName": "utile",
+          "InstalledVersion": "0.3.0",
+          "FixedVersion": null,
+          "Status": "affected",
+          "Severity": "LOW",
+          "Title": "Out-of-bounds Read",
+          "PrimaryURL": "https://hackerone.com/reports/321701"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-7774",
+          "PkgID": "y18n@3.2.1",
+          "PkgName": "y18n",
+          "InstalledVersion": "3.2.1",
+          "FixedVersion": "3.2.2, 4.0.1, 5.0.5",
+          "Status": "fixed",
+          "Severity": "HIGH",
+          "Title": "nodejs-y18n: prototype pollution vulnerability",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7774"
+        }
+      ]
+    },
+    {
+      "Target": "/app/artifacts/cert/server.key",
+      "Class": "secret",
+      "Type": null,
+      "Vulnerabilities": []
+    }
+  ]
+}
