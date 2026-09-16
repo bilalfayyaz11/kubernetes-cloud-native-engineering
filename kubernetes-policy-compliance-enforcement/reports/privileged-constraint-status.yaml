@@ -1,0 +1,64 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sDeniesPrivileged
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"constraints.gatekeeper.sh/v1beta1","kind":"K8sDeniesPrivileged","metadata":{"annotations":{},"name":"no-privileged-containers"},"spec":{"enforcementAction":"deny","match":{"excludedNamespaces":["kube-system","kube-public","kube-node-lease","gatekeeper-system"],"kinds":[{"apiGroups":[""],"kinds":["Pod"]}],"scope":"Namespaced"}}}
+  creationTimestamp: "2026-09-16T19:13:47Z"
+  generation: 1
+  name: no-privileged-containers
+  resourceVersion: "1121"
+  uid: 6e349d62-8e5d-4a85-bac9-60b5f7696809
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+    - kube-system
+    - kube-public
+    - kube-node-lease
+    - gatekeeper-system
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Pod
+    scope: Namespaced
+status:
+  auditTimestamp: "2026-09-16T19:14:29Z"
+  byPod:
+  - constraintUID: 6e349d62-8e5d-4a85-bac9-60b5f7696809
+    enforced: true
+    enforcementPointsStatus:
+    - enforcementPoint: vap.k8s.io
+      message: K8sNativeValidation engine is missing
+      observedGeneration: 1
+      state: error
+    id: gatekeeper-audit-74f586bd57-x9mtm
+    observedGeneration: 1
+    operations:
+    - audit
+    - generate
+    - mutation-status
+    - status
+  - constraintUID: 6e349d62-8e5d-4a85-bac9-60b5f7696809
+    enforced: true
+    id: gatekeeper-controller-manager-75d49687d6-d4kjd
+    observedGeneration: 1
+    operations:
+    - mutation-webhook
+    - webhook
+  - constraintUID: 6e349d62-8e5d-4a85-bac9-60b5f7696809
+    enforced: true
+    id: gatekeeper-controller-manager-75d49687d6-gd9rk
+    observedGeneration: 1
+    operations:
+    - mutation-webhook
+    - webhook
+  - constraintUID: 6e349d62-8e5d-4a85-bac9-60b5f7696809
+    enforced: true
+    id: gatekeeper-controller-manager-75d49687d6-r4lbr
+    observedGeneration: 1
+    operations:
+    - mutation-webhook
+    - webhook
+  totalViolations: 0

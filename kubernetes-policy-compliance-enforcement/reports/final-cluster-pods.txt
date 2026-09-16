@@ -1,0 +1,19 @@
+NAMESPACE            NAME                                                          READY   STATUS    RESTARTS   AGE     IP            NODE                                  NOMINATED NODE   READINESS GATES
+default              compliant                                                     1/1     Running   0          2m37s   10.244.0.11   kubernetes-compliance-control-plane   <none>           <none>
+default              compliant-app-66d789788c-9t559                                1/1     Running   0          104s    10.244.0.12   kubernetes-compliance-control-plane   <none>           <none>
+default              compliant-app-66d789788c-v7jwx                                1/1     Running   0          104s    10.244.0.13   kubernetes-compliance-control-plane   <none>           <none>
+dryrun-test          dryrun-root                                                   1/1     Running   0          56s     10.244.0.15   kubernetes-compliance-control-plane   <none>           <none>
+gatekeeper-system    gatekeeper-audit-74f586bd57-x9mtm                             1/1     Running   0          4m14s   10.244.0.7    kubernetes-compliance-control-plane   <none>           <none>
+gatekeeper-system    gatekeeper-controller-manager-75d49687d6-d4kjd                1/1     Running   0          4m14s   10.244.0.6    kubernetes-compliance-control-plane   <none>           <none>
+gatekeeper-system    gatekeeper-controller-manager-75d49687d6-gd9rk                1/1     Running   0          4m14s   10.244.0.8    kubernetes-compliance-control-plane   <none>           <none>
+gatekeeper-system    gatekeeper-controller-manager-75d49687d6-r4lbr                1/1     Running   0          4m14s   10.244.0.9    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          coredns-559f6c778d-nrpdb                                      1/1     Running   0          4m56s   10.244.0.3    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          coredns-559f6c778d-ss5gq                                      1/1     Running   0          4m56s   10.244.0.4    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          etcd-kubernetes-compliance-control-plane                      1/1     Running   0          5m7s    172.18.0.2    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          kindnet-92btj                                                 1/1     Running   0          4m56s   172.18.0.2    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          kube-apiserver-kubernetes-compliance-control-plane            1/1     Running   0          5m8s    172.18.0.2    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kubernetes-compliance-control-plane   1/1     Running   0          5m8s    172.18.0.2    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          kube-proxy-nckb2                                              1/1     Running   0          4m56s   172.18.0.2    kubernetes-compliance-control-plane   <none>           <none>
+kube-system          kube-scheduler-kubernetes-compliance-control-plane            1/1     Running   0          5m7s    172.18.0.2    kubernetes-compliance-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-75f7fc7dc5-zd5cv                       1/1     Running   0          4m56s   10.244.0.2    kubernetes-compliance-control-plane   <none>           <none>
+test-exempt          exempt-root                                                   1/1     Running   0          58s     10.244.0.14   kubernetes-compliance-control-plane   <none>           <none>

@@ -1,0 +1,31 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sdeniesprivileged
+  annotations:
+    description: Prevents privileged containers from being admitted
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sDeniesPrivileged
+      validation:
+        openAPIV3Schema:
+          type: object
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    code:
+    - engine: Rego
+      source:
+        version: "v1"
+        rego: |
+          package k8sdeniesprivileged
+
+          violation contains {"msg": msg} if {
+            some container in input.review.object.spec.containers
+            container.securityContext.privileged == true
+            msg := sprintf(
+              "Container <%v> cannot run in privileged mode",
+              [container.name]
+            )
+          }

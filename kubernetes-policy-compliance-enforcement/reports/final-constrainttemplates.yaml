@@ -1,0 +1,160 @@
+apiVersion: v1
+items:
+- apiVersion: templates.gatekeeper.sh/v1
+  kind: ConstraintTemplate
+  metadata:
+    annotations:
+      description: Prevents privileged containers from being admitted
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"templates.gatekeeper.sh/v1","kind":"ConstraintTemplate","metadata":{"annotations":{"description":"Prevents privileged containers from being admitted"},"name":"k8sdeniesprivileged"},"spec":{"crd":{"spec":{"names":{"kind":"K8sDeniesPrivileged"},"validation":{"openAPIV3Schema":{"type":"object"}}}},"targets":[{"code":[{"engine":"Rego","source":{"rego":"package k8sdeniesprivileged\n\nviolation contains {\"msg\": msg} if {\n  some container in input.review.object.spec.containers\n  container.securityContext.privileged == true\n  msg := sprintf(\n    \"Container \u003c%v\u003e cannot run in privileged mode\",\n    [container.name]\n  )\n}\n","version":"v1"}}],"target":"admission.k8s.gatekeeper.sh"}]}}
+    creationTimestamp: "2026-09-16T19:13:43Z"
+    generation: 1
+    name: k8sdeniesprivileged
+    resourceVersion: "1022"
+    uid: 8ced9cb2-1d7f-42ab-9230-346af34346c2
+  spec:
+    crd:
+      spec:
+        names:
+          kind: K8sDeniesPrivileged
+        validation:
+          legacySchema: false
+          openAPIV3Schema:
+            type: object
+    targets:
+    - code:
+      - engine: Rego
+        source:
+          rego: |
+            package k8sdeniesprivileged
+
+            violation contains {"msg": msg} if {
+              some container in input.review.object.spec.containers
+              container.securityContext.privileged == true
+              msg := sprintf(
+                "Container <%v> cannot run in privileged mode",
+                [container.name]
+              )
+            }
+          version: v1
+      target: admission.k8s.gatekeeper.sh
+  status:
+    byPod:
+    - id: gatekeeper-audit-74f586bd57-x9mtm
+      observedGeneration: 1
+      operations:
+      - audit
+      - generate
+      - mutation-status
+      - status
+      templateUID: 8ced9cb2-1d7f-42ab-9230-346af34346c2
+    - id: gatekeeper-controller-manager-75d49687d6-d4kjd
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+      templateUID: 8ced9cb2-1d7f-42ab-9230-346af34346c2
+    - id: gatekeeper-controller-manager-75d49687d6-gd9rk
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+      templateUID: 8ced9cb2-1d7f-42ab-9230-346af34346c2
+    - id: gatekeeper-controller-manager-75d49687d6-r4lbr
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+      templateUID: 8ced9cb2-1d7f-42ab-9230-346af34346c2
+    created: true
+- apiVersion: templates.gatekeeper.sh/v1
+  kind: ConstraintTemplate
+  metadata:
+    annotations:
+      description: Requires all workload containers to run as non-root
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"templates.gatekeeper.sh/v1","kind":"ConstraintTemplate","metadata":{"annotations":{"description":"Requires all workload containers to run as non-root"},"name":"k8srequirenonroot"},"spec":{"crd":{"spec":{"names":{"kind":"K8sRequireNonRoot"},"validation":{"openAPIV3Schema":{"properties":{"exemptImages":{"items":{"type":"string"},"type":"array"}},"type":"object"}}}},"targets":[{"code":[{"engine":"Rego","source":{"rego":"package k8srequirenonroot\n\nis_exempt(image) if {\n  some exempt in input.parameters.exemptImages\n  startswith(image, exempt)\n}\n\nviolation contains {\"msg\": msg} if {\n  some container in input.review.object.spec.containers\n  not is_exempt(container.image)\n  not container.securityContext.runAsNonRoot\n  msg := sprintf(\n    \"Container \u003c%v\u003e must set securityContext.runAsNonRoot=true\",\n    [container.name]\n  )\n}\n\nviolation contains {\"msg\": msg} if {\n  some container in input.review.object.spec.containers\n  not is_exempt(container.image)\n  container.securityContext.runAsUser == 0\n  msg := sprintf(\n    \"Container \u003c%v\u003e cannot run as UID 0\",\n    [container.name]\n  )\n}\n","version":"v1"}}],"target":"admission.k8s.gatekeeper.sh"}]}}
+    creationTimestamp: "2026-09-16T19:13:42Z"
+    generation: 1
+    name: k8srequirenonroot
+    resourceVersion: "1016"
+    uid: 9f8fdafc-4d42-4cea-8a16-ccad34c954d4
+  spec:
+    crd:
+      spec:
+        names:
+          kind: K8sRequireNonRoot
+        validation:
+          legacySchema: false
+          openAPIV3Schema:
+            properties:
+              exemptImages:
+                items:
+                  type: string
+                type: array
+            type: object
+    targets:
+    - code:
+      - engine: Rego
+        source:
+          rego: |
+            package k8srequirenonroot
+
+            is_exempt(image) if {
+              some exempt in input.parameters.exemptImages
+              startswith(image, exempt)
+            }
+
+            violation contains {"msg": msg} if {
+              some container in input.review.object.spec.containers
+              not is_exempt(container.image)
+              not container.securityContext.runAsNonRoot
+              msg := sprintf(
+                "Container <%v> must set securityContext.runAsNonRoot=true",
+                [container.name]
+              )
+            }
+
+            violation contains {"msg": msg} if {
+              some container in input.review.object.spec.containers
+              not is_exempt(container.image)
+              container.securityContext.runAsUser == 0
+              msg := sprintf(
+                "Container <%v> cannot run as UID 0",
+                [container.name]
+              )
+            }
+          version: v1
+      target: admission.k8s.gatekeeper.sh
+  status:
+    byPod:
+    - id: gatekeeper-audit-74f586bd57-x9mtm
+      observedGeneration: 1
+      operations:
+      - audit
+      - generate
+      - mutation-status
+      - status
+      templateUID: 9f8fdafc-4d42-4cea-8a16-ccad34c954d4
+    - id: gatekeeper-controller-manager-75d49687d6-d4kjd
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+      templateUID: 9f8fdafc-4d42-4cea-8a16-ccad34c954d4
+    - id: gatekeeper-controller-manager-75d49687d6-gd9rk
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+      templateUID: 9f8fdafc-4d42-4cea-8a16-ccad34c954d4
+    - id: gatekeeper-controller-manager-75d49687d6-r4lbr
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+      templateUID: 9f8fdafc-4d42-4cea-8a16-ccad34c954d4
+    created: true
+kind: List
+metadata:
+  resourceVersion: ""

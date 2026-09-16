@@ -1,0 +1,170 @@
+apiVersion: v1
+items:
+- apiVersion: constraints.gatekeeper.sh/v1beta1
+  kind: K8sRequireNonRoot
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"constraints.gatekeeper.sh/v1beta1","kind":"K8sRequireNonRoot","metadata":{"annotations":{},"name":"must-run-as-non-root"},"spec":{"enforcementAction":"deny","match":{"excludedNamespaces":["kube-system","kube-public","kube-node-lease","gatekeeper-system","test-exempt","dryrun-test"],"kinds":[{"apiGroups":[""],"kinds":["Pod"]}],"scope":"Namespaced"},"parameters":{"exemptImages":[]}}}
+    creationTimestamp: "2026-09-16T19:13:45Z"
+    generation: 3
+    name: must-run-as-non-root
+    resourceVersion: "1317"
+    uid: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+  spec:
+    enforcementAction: deny
+    match:
+      excludedNamespaces:
+      - kube-system
+      - kube-public
+      - kube-node-lease
+      - gatekeeper-system
+      - test-exempt
+      - dryrun-test
+      kinds:
+      - apiGroups:
+        - ""
+        kinds:
+        - Pod
+      scope: Namespaced
+    parameters:
+      exemptImages: []
+  status:
+    auditTimestamp: "2026-09-16T19:15:29Z"
+    byPod:
+    - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+      enforced: true
+      enforcementPointsStatus:
+      - enforcementPoint: vap.k8s.io
+        message: K8sNativeValidation engine is missing
+        observedGeneration: 3
+        state: error
+      id: gatekeeper-audit-74f586bd57-x9mtm
+      observedGeneration: 3
+      operations:
+      - audit
+      - generate
+      - mutation-status
+      - status
+    - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+      enforced: true
+      id: gatekeeper-controller-manager-75d49687d6-d4kjd
+      observedGeneration: 3
+      operations:
+      - mutation-webhook
+      - webhook
+    - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+      enforced: true
+      id: gatekeeper-controller-manager-75d49687d6-gd9rk
+      observedGeneration: 3
+      operations:
+      - mutation-webhook
+      - webhook
+    - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+      enforced: true
+      id: gatekeeper-controller-manager-75d49687d6-r4lbr
+      observedGeneration: 3
+      operations:
+      - mutation-webhook
+      - webhook
+    totalViolations: 1
+    violations:
+    - enforcementAction: deny
+      group: ""
+      kind: Pod
+      message: Container <local-path-provisioner> must set securityContext.runAsNonRoot=true
+      name: local-path-provisioner-75f7fc7dc5-zd5cv
+      namespace: local-path-storage
+      version: v1
+- apiVersion: constraints.gatekeeper.sh/v1beta1
+  kind: K8sRequireNonRoot
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"constraints.gatekeeper.sh/v1beta1","kind":"K8sRequireNonRoot","metadata":{"annotations":{},"name":"must-run-as-non-root-dryrun"},"spec":{"enforcementAction":"dryrun","match":{"excludedNamespaces":["kube-system","kube-public","kube-node-lease","gatekeeper-system","test-exempt"],"kinds":[{"apiGroups":[""],"kinds":["Pod"]}],"scope":"Namespaced"},"parameters":{"exemptImages":[]}}}
+    creationTimestamp: "2026-09-16T19:15:27Z"
+    generation: 1
+    name: must-run-as-non-root-dryrun
+    resourceVersion: "1315"
+    uid: 4c903646-cac6-4254-911b-feebbf67bcc3
+  spec:
+    enforcementAction: dryrun
+    match:
+      excludedNamespaces:
+      - kube-system
+      - kube-public
+      - kube-node-lease
+      - gatekeeper-system
+      - test-exempt
+      kinds:
+      - apiGroups:
+        - ""
+        kinds:
+        - Pod
+      scope: Namespaced
+    parameters:
+      exemptImages: []
+  status:
+    auditTimestamp: "2026-09-16T19:15:29Z"
+    byPod:
+    - constraintUID: 4c903646-cac6-4254-911b-feebbf67bcc3
+      enforced: true
+      enforcementPointsStatus:
+      - enforcementPoint: vap.k8s.io
+        message: K8sNativeValidation engine is missing
+        observedGeneration: 1
+        state: error
+      id: gatekeeper-audit-74f586bd57-x9mtm
+      observedGeneration: 1
+      operations:
+      - audit
+      - generate
+      - mutation-status
+      - status
+    - constraintUID: 4c903646-cac6-4254-911b-feebbf67bcc3
+      enforced: true
+      id: gatekeeper-controller-manager-75d49687d6-d4kjd
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+    - constraintUID: 4c903646-cac6-4254-911b-feebbf67bcc3
+      enforced: true
+      id: gatekeeper-controller-manager-75d49687d6-gd9rk
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+    - constraintUID: 4c903646-cac6-4254-911b-feebbf67bcc3
+      enforced: true
+      id: gatekeeper-controller-manager-75d49687d6-r4lbr
+      observedGeneration: 1
+      operations:
+      - mutation-webhook
+      - webhook
+    totalViolations: 3
+    violations:
+    - enforcementAction: dryrun
+      group: ""
+      kind: Pod
+      message: Container <local-path-provisioner> must set securityContext.runAsNonRoot=true
+      name: local-path-provisioner-75f7fc7dc5-zd5cv
+      namespace: local-path-storage
+      version: v1
+    - enforcementAction: dryrun
+      group: ""
+      kind: Pod
+      message: Container <busybox> must set securityContext.runAsNonRoot=true
+      name: dryrun-root
+      namespace: dryrun-test
+      version: v1
+    - enforcementAction: dryrun
+      group: ""
+      kind: Pod
+      message: Container <busybox> cannot run as UID 0
+      name: dryrun-root
+      namespace: dryrun-test
+      version: v1
+kind: List
+metadata:
+  resourceVersion: ""

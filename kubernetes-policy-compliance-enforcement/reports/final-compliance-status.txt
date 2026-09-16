@@ -1,0 +1,38 @@
+==========================================
+ Kubernetes Compliance Status
+==========================================
+
+1. Gatekeeper System Status
+------------------------------------------
+gatekeeper-audit-74f586bd57-x9mtm                       Running
+gatekeeper-controller-manager-75d49687d6-d4kjd          Running
+gatekeeper-controller-manager-75d49687d6-gd9rk          Running
+gatekeeper-controller-manager-75d49687d6-r4lbr          Running
+
+2. Active Constraint Templates
+------------------------------------------
+- k8sdeniesprivileged
+- k8srequirenonroot
+
+3. Active Constraints
+------------------------------------------
+- K8sRequireNonRoot/must-run-as-non-root
+- K8sDeniesPrivileged/no-privileged-containers
+
+4. Policy Violations Summary
+------------------------------------------
+- must-run-as-non-root: 1
+- no-privileged-containers: 0
+
+5. Potentially Non-Compliant Pods
+------------------------------------------
+kube-system/kube-proxy-nckb2
+
+6. Compliant Application Pods
+------------------------------------------
+- compliant-app-66d789788c-9t559: Terminating
+- compliant-app-66d789788c-v7jwx: Terminating
+
+==========================================
+ Compliance Check Complete
+==========================================

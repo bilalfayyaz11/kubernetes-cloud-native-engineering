@@ -1,0 +1,74 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireNonRoot
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"constraints.gatekeeper.sh/v1beta1","kind":"K8sRequireNonRoot","metadata":{"annotations":{},"name":"must-run-as-non-root"},"spec":{"enforcementAction":"deny","match":{"excludedNamespaces":["kube-system","kube-public","kube-node-lease","gatekeeper-system"],"kinds":[{"apiGroups":[""],"kinds":["Pod"]}],"scope":"Namespaced"},"parameters":{"exemptImages":[]}}}
+  creationTimestamp: "2026-09-16T19:13:45Z"
+  generation: 1
+  name: must-run-as-non-root
+  resourceVersion: "1119"
+  uid: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+    - kube-system
+    - kube-public
+    - kube-node-lease
+    - gatekeeper-system
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Pod
+    scope: Namespaced
+  parameters:
+    exemptImages: []
+status:
+  auditTimestamp: "2026-09-16T19:14:29Z"
+  byPod:
+  - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+    enforced: true
+    enforcementPointsStatus:
+    - enforcementPoint: vap.k8s.io
+      message: K8sNativeValidation engine is missing
+      observedGeneration: 1
+      state: error
+    id: gatekeeper-audit-74f586bd57-x9mtm
+    observedGeneration: 1
+    operations:
+    - audit
+    - generate
+    - mutation-status
+    - status
+  - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+    enforced: true
+    id: gatekeeper-controller-manager-75d49687d6-d4kjd
+    observedGeneration: 1
+    operations:
+    - mutation-webhook
+    - webhook
+  - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+    enforced: true
+    id: gatekeeper-controller-manager-75d49687d6-gd9rk
+    observedGeneration: 1
+    operations:
+    - mutation-webhook
+    - webhook
+  - constraintUID: 2f3c1379-8c6f-4016-8a3d-857a47a24a57
+    enforced: true
+    id: gatekeeper-controller-manager-75d49687d6-r4lbr
+    observedGeneration: 1
+    operations:
+    - mutation-webhook
+    - webhook
+  totalViolations: 1
+  violations:
+  - enforcementAction: deny
+    group: ""
+    kind: Pod
+    message: Container <local-path-provisioner> must set securityContext.runAsNonRoot=true
+    name: local-path-provisioner-75f7fc7dc5-zd5cv
+    namespace: local-path-storage
+    version: v1
