@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-denied
+  namespace: threat-modeling-secure
+spec:
+  containers:
+  - name: attacker
+    image: alpine:3.21
+    command:
+    - sleep
+    - "3600"
+    securityContext:
+      privileged: true
+      runAsUser: 0

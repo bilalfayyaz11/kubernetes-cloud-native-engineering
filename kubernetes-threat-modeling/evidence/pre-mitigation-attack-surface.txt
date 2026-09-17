@@ -1,0 +1,66 @@
+Kubernetes Pre-Mitigation Attack Surface
+
+Generated:
+2026-09-17T16:42:11+00:00
+
+============================================================
+Container Boundary
+============================================================
+
+Privileged container:
+YES
+
+Container user:
+root / UID 0
+
+Host root mounted:
+YES, read-only
+
+Dangerous capabilities:
+SYS_ADMIN
+NET_ADMIN
+
+============================================================
+Workload Identity
+============================================================
+
+ServiceAccount:
+default
+
+Token automatically mounted:
+YES
+
+Token value printed:
+NO
+
+Kubernetes API reachable:
+YES
+
+Pod-list API result:
+HTTP 403
+
+============================================================
+Network Exposure
+============================================================
+
+Vulnerable pod -> Backend:
+REACHABLE
+
+Vulnerable pod -> Database:
+REACHABLE
+
+NetworkPolicies:
+NONE
+
+============================================================
+Threats Demonstrated
+============================================================
+
+- container-to-host trust-boundary collapse
+- privileged execution
+- dangerous Linux capabilities
+- mounted workload identity
+- Kubernetes API reachability
+- service discovery
+- unrestricted east-west reachability
+- lateral movement potential

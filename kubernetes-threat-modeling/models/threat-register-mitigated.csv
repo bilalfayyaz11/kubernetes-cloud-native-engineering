@@ -1,0 +1,9 @@
+ID,Asset,Trust Boundary,Threat Category,Threat,Pre-Mitigation Exposure,Planned Control,Implemented Control,Residual Exposure
+T01,ServiceAccount Token,Workload to API,Spoofing,Token theft or identity misuse,ServiceAccount token mounted; API endpoint reachable,RBAC and workload-specific ServiceAccounts,Dedicated ServiceAccounts; token automount disabled; least-privilege RBAC,Reduced
+T02,Application Configuration,Workload boundary,Tampering,Unauthorized configuration modification,Open,Least-privilege RBAC,Least-privilege ServiceAccounts and scoped RBAC,Reduced
+T03,Cluster Activity,Control plane,Repudiation,Insufficient attribution of security-relevant actions,Open,Audit logging and identity tracking,Identity-specific RBAC evidence,Partially reduced
+T04,Database,Backend to Database,Information Disclosure,Unauthorized direct database access,Database directly reachable from unrelated workload,NetworkPolicy segmentation,Default-deny plus backend-to-database NetworkPolicy,Reduced
+T05,Application Availability,External and workload boundaries,Denial of Service,Resource exhaustion,Open,Resource requests and limits,CPU and memory requests/limits,Reduced
+T06,Kubernetes Node,Container to Host,Elevation of Privilege,Privileged workload or host access,Privileged root workload with hostPath and dangerous capabilities,Restricted security context and Pod Security,Non-root; no hostPath; capability drop; seccomp; Pod Security Admission,Reduced
+T07,Backend Service,Frontend to Backend,Information Disclosure,Lateral movement from compromised workload,Backend directly reachable from unrelated workload,Microsegmentation,Default-deny plus frontend-to-backend segmentation,Reduced
+T08,Container Images,Supply chain,Tampering,Untrusted or modified container image,Partially addressed,Image verification controls,Previously addressed by container supply-chain controls,Residual dependency

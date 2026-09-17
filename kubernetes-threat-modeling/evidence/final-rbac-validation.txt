@@ -1,0 +1,8 @@
+restricted-sa get pods:
+yes
+
+restricted-sa get secrets:
+no
+
+restricted-sa create deployments:
+no

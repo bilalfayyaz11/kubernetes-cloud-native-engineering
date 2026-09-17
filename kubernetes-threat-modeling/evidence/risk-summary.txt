@@ -1,0 +1,15 @@
+KUBERNETES THREAT MODEL RISK SUMMARY
+
+Threats by priority:
+Critical: 1
+High: 3
+Medium: 7
+Low: 1
+
+Threats by STRIDE category:
+Spoofing: 2
+Tampering: 2
+Repudiation: 1
+Information Disclosure: 3
+Denial of Service: 2
+Elevation of Privilege: 2

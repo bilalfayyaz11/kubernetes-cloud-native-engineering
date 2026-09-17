@@ -1,0 +1,150 @@
+Kubernetes Threat Modeling Final Validation
+
+Generated:
+2026-09-17T16:47:35+00:00
+
+============================================================
+Methodology
+============================================================
+
+Threat modeling methodology:
+STRIDE
+
+Trust boundaries:
+5
+
+Primary attack paths:
+4
+
+Threat register:
+Created
+
+Residual risk:
+Documented
+
+============================================================
+Pre-Mitigation Findings
+============================================================
+
+Unrestricted east-west traffic:
+Observed
+
+Default ServiceAccount usage:
+Observed
+
+Automatic ServiceAccount token mounting:
+Observed
+
+Privileged root workload:
+Observed
+
+SYS_ADMIN:
+Observed
+
+NET_ADMIN:
+Observed
+
+hostPath access:
+Observed
+
+Backend lateral movement:
+Observed
+
+Database lateral movement:
+Observed
+
+============================================================
+Implemented Controls
+============================================================
+
+Dedicated ServiceAccounts:
+YES
+
+ServiceAccount token minimization:
+YES
+
+Least-privilege RBAC:
+YES
+
+Default-deny NetworkPolicy:
+YES
+
+Frontend -> Backend segmentation:
+YES
+
+Backend -> Database segmentation:
+YES
+
+Non-root workload:
+YES
+
+Privilege escalation disabled:
+YES
+
+Capabilities dropped:
+YES
+
+RuntimeDefault seccomp:
+YES
+
+Restricted Pod Security Admission:
+YES
+
+CPU/memory controls:
+YES
+
+============================================================
+Validated Post-Mitigation Behavior
+============================================================
+
+Unrelated workload -> Backend:
+BLOCKED
+
+Unrelated workload -> Database:
+BLOCKED
+
+Frontend -> Backend:
+ALLOWED
+
+Backend -> Database:
+ALLOWED
+
+restricted-sa get pods:
+ALLOWED
+
+restricted-sa get Secrets:
+DENIED
+
+restricted-sa create deployment:
+DENIED
+
+Privileged workload in restricted namespace:
+DENIED
+
+============================================================
+Deliverables
+============================================================
+
+Trust boundary model:
+models/trust-boundaries.md
+
+Asset inventory:
+models/asset-inventory.md
+
+Data flow model:
+models/data-flows.md
+
+Attack path analysis:
+models/attack-paths.md
+
+Defense-in-depth model:
+models/defense-in-depth.md
+
+STRIDE analysis:
+models/stride-analysis.md
+
+Final risk register:
+models/final-risk-register.csv
+
+Final report:
+reports/kubernetes-threat-model-report.md

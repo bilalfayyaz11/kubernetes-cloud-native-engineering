@@ -1,0 +1,7 @@
+NAME                        POD-SELECTOR   AGE
+allow-backend-egress        tier=api       3m48s
+allow-backend-to-database   tier=data      3m48s
+allow-dns                   <none>         3m48s
+allow-frontend-egress       tier=web       3m48s
+allow-frontend-to-backend   tier=api       3m48s
+default-deny                <none>         3m49s

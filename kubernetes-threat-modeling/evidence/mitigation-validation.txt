@@ -1,0 +1,40 @@
+===== MITIGATION VALIDATION =====
+
+NetworkPolicies:
+NAME                        POD-SELECTOR   AGE
+allow-backend-egress        tier=api       16s
+allow-backend-to-database   tier=data      16s
+allow-dns                   <none>         16s
+allow-frontend-egress       tier=web       16s
+allow-frontend-to-backend   tier=api       16s
+default-deny                <none>         17s
+
+Dedicated ServiceAccounts:
+NAME            AGE
+backend-sa      35s
+default         3m39s
+frontend-sa     35s
+restricted-sa   35s
+
+Restricted ServiceAccount permissions:
+yes
+no
+
+Pod security controls:
+{
+  "serviceAccount": "restricted-sa",
+  "seccomp": {
+    "type": "RuntimeDefault"
+  },
+  "containerSecurityContext": {
+    "allowPrivilegeEscalation": false,
+    "capabilities": {
+      "drop": [
+        "ALL"
+      ]
+    },
+    "readOnlyRootFilesystem": false,
+    "runAsNonRoot": true,
+    "runAsUser": 1000
+  }
+}

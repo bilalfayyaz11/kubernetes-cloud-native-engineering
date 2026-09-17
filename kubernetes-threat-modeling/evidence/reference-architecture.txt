@@ -1,0 +1,25 @@
+===== DEPLOYMENTS =====
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                    SELECTOR
+backend    2/2     2            2           24s   backend      hashicorp/http-echo:1.0   app=backend,tier=api
+database   1/1     1            1           23s   database     postgres:17-alpine        app=database,tier=data
+frontend   2/2     2            2           24s   frontend     nginx:1.27-alpine         app=frontend,tier=web
+
+===== SERVICES =====
+NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+backend-service    ClusterIP   10.96.8.116    <none>        8080/TCP   24s
+database-service   ClusterIP   10.96.59.175   <none>        5432/TCP   23s
+frontend-service   ClusterIP   10.96.88.195   <none>        80/TCP     24s
+
+===== PODS =====
+NAME                        READY   STATUS    RESTARTS   AGE   IP           NODE                            NOMINATED NODE   READINESS GATES
+backend-5646f45666-4glmf    1/1     Running   0          24s   10.244.0.7   threat-modeling-control-plane   <none>           <none>
+backend-5646f45666-hbqts    1/1     Running   0          24s   10.244.0.8   threat-modeling-control-plane   <none>           <none>
+database-576484564b-92pmq   1/1     Running   0          23s   10.244.0.9   threat-modeling-control-plane   <none>           <none>
+frontend-5f64b64cc-jhft9    1/1     Running   0          24s   10.244.0.6   threat-modeling-control-plane   <none>           <none>
+frontend-5f64b64cc-sv482    1/1     Running   0          24s   10.244.0.5   threat-modeling-control-plane   <none>           <none>
+
+===== NETWORK POLICIES =====
+
+===== SERVICE ACCOUNTS =====
+NAME      AGE
+default   26s

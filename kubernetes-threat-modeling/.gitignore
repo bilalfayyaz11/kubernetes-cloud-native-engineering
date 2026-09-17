@@ -1,0 +1,30 @@
+# Kubernetes credentials
+*.kubeconfig
+*.token
+token
+token.txt
+service-account-token*
+
+# Secrets
+*.secret
+*.secrets
+credentials*
+password*
+.env
+.env.*
+
+# Keys
+*.key
+*-key.pem
+*.p12
+*.pfx
+
+# Runtime output
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Raw generated credentials
+secret.yaml
+secrets.yaml

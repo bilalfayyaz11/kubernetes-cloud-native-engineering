@@ -1,0 +1,13 @@
+ID,STRIDE,Asset,Threat,Pre-Mitigation Exposure,Implemented Control,Residual Exposure,Priority
+S1,Spoofing,ServiceAccount Identity,Workload identity misuse,Automatic token mounting,Dedicated ServiceAccounts and token minimization,API-enabled workloads may still expose identity,Medium
+S2,Spoofing,Internal Services,Service impersonation,Internal service discovery,NetworkPolicy segmentation,No cryptographic service identity,Medium
+T1,Tampering,Kubernetes Workloads,Unauthorized resource modification,Potential API access through workload identity,Scoped RBAC and token removal,Privileged identities remain trusted,Medium
+T2,Tampering,Container Images,Image tampering,Supply-chain dependency,Image verification controls,Trusted images may still contain vulnerabilities,Medium
+R1,Repudiation,Control Plane,Insufficient activity attribution,Generic workload identity,Workload-specific identities,Centralized audit correlation still required,Medium
+I1,Information Disclosure,Database,Unauthorized database access,Database reachable from unrelated workload,Backend-only NetworkPolicy access,Compromised backend remains authorized,High
+I2,Information Disclosure,Credentials,Secret exposure,Credential exposure potential,Kubernetes Secret plus RBAC restrictions,Cluster privileged users retain access,High
+I3,Information Disclosure,Service Topology,Internal service discovery,Internal DNS exposed topology,Network segmentation,DNS metadata remains visible,Low
+D1,Denial of Service,Application Availability,Resource exhaustion,No explicit workload limits,CPU and memory limits,Distributed DoS still possible,Medium
+D2,Denial of Service,Control Plane,API request abuse,Workload API access,Token minimization and RBAC,Additional APF controls may be required,Medium
+E1,Elevation of Privilege,Kubernetes Node,Container escape,Privileged root workload with hostPath,Restricted security context and Pod Security,Kernel/runtime vulnerabilities remain,Critical
+E2,Elevation of Privilege,Control Plane,RBAC escalation,Potential excessive permissions,Least-privilege RBAC,RBAC drift remains possible,High

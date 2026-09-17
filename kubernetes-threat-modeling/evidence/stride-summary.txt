@@ -1,0 +1,24 @@
+===== STRIDE THREAT SUMMARY =====
+
+Total threats:
+12
+
+Priority distribution:
+      7 Medium
+      3 High
+      1 Low
+      1 Critical
+
+STRIDE distribution:
+      3 Information Disclosure
+      2 Tampering
+      2 Spoofing
+      2 Elevation of Privilege
+      2 Denial of Service
+      1 Repudiation
+
+High and Critical threats:
+I1 | Information Disclosure | Database | Unauthorized database access
+I2 | Information Disclosure | Credentials | Secret exposure
+E1 | Elevation of Privilege | Kubernetes Node | Container escape
+E2 | Elevation of Privilege | Control Plane | RBAC escalation

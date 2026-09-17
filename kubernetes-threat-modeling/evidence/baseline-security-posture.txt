@@ -1,0 +1,38 @@
+===== KUBERNETES THREAT MODEL BASELINE =====
+
+=== Workloads ===
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+backend    2/2     2            2           20s
+database   1/1     1            1           19s
+frontend   2/2     2            2           20s
+
+=== Services ===
+NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+backend-service    ClusterIP   10.96.8.116    <none>        8080/TCP   20s
+database-service   ClusterIP   10.96.59.175   <none>        5432/TCP   19s
+frontend-service   ClusterIP   10.96.88.195   <none>        80/TCP     20s
+
+=== ServiceAccounts ===
+NAME      AGE
+default   23s
+
+=== NetworkPolicies ===
+Count: 0
+RISK: unrestricted workload east-west networking
+
+=== RBAC Bindings ===
+
+=== Pod Security Admission ===
+NAME              STATUS   AGE   LABELS
+threat-modeling   Active   24s   environment=security-analysis,kubernetes.io/metadata.name=threat-modeling
+
+=== HostPath Usage ===
+
+=== Privileged Containers ===
+
+=== ServiceAccount Assignment ===
+backend-5646f45666-4glmf	default
+backend-5646f45666-hbqts	default
+database-576484564b-92pmq	default
+frontend-5f64b64cc-jhft9	default
+frontend-5f64b64cc-sv482	default

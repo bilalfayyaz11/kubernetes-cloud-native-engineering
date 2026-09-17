@@ -1,0 +1,16 @@
+{
+  "pod": "secure-pod",
+  "serviceAccount": "restricted-sa",
+  "seccomp": {
+    "type": "RuntimeDefault"
+  },
+  "runAsNonRoot": true,
+  "runAsUser": 1000,
+  "allowPrivilegeEscalation": false,
+  "capabilities": {
+    "drop": [
+      "ALL"
+    ]
+  },
+  "hostPathCount": 0
+}

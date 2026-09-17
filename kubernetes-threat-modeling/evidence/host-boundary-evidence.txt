@@ -1,0 +1,26 @@
+Host root entries:
+LICENSES
+bin
+boot
+dev
+etc
+home
+kind
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+
+Host OS metadata:
+NAME="Debian GNU/Linux"
+VERSION="13 (trixie)"
+ID=debian

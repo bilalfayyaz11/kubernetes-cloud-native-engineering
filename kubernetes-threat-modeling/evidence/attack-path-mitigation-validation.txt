@@ -1,0 +1,80 @@
+Kubernetes Attack Path Mitigation Validation
+
+Generated:
+2026-09-17T16:44:03+00:00
+
+============================================================
+AP-01: Compromised Workload -> Database
+============================================================
+
+Before:
+Unrelated vulnerable workload could reach database directly.
+
+After:
+Unrelated secure pod database connectivity:
+BLOCKED
+
+Control:
+Default-deny + backend-to-database NetworkPolicy
+
+============================================================
+AP-02: Compromised Workload -> Backend
+============================================================
+
+Before:
+Unrelated vulnerable workload could reach backend directly.
+
+After:
+Unrelated secure pod backend connectivity:
+BLOCKED
+
+Control:
+Default-deny + frontend-to-backend NetworkPolicy
+
+============================================================
+AP-03: Workload Identity -> Kubernetes API
+============================================================
+
+Before:
+Default ServiceAccount token automatically mounted.
+
+After:
+Frontend ServiceAccount token:
+automount disabled
+
+Backend ServiceAccount token:
+automount disabled
+
+Restricted administrative test identity:
+restricted-sa with pod read-only RBAC
+
+============================================================
+AP-04: Container -> Host
+============================================================
+
+Before:
+Privileged UID 0 container
+SYS_ADMIN
+NET_ADMIN
+hostPath /
+
+After:
+Secure workload:
+- non-root
+- privilege escalation disabled
+- all capabilities dropped
+- no hostPath
+- RuntimeDefault seccomp
+
+Restricted namespace privileged workload:
+DENIED
+
+============================================================
+Required Business Flows
+============================================================
+
+Frontend -> Backend:
+FAILED
+
+Backend -> Database:
+FAILED
