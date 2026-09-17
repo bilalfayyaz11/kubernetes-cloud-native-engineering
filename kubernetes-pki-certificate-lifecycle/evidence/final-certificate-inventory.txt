@@ -1,0 +1,7 @@
+CERTIFICATE                                SUBJECT                        EXPIRY                        
+pki/root-ca/ca.pem                         CN = Kubernetes Root CA        Sep 14 14:31:10 2036 GMT      
+pki/intermediate-ca/ca.pem                 CN = Kubernetes Intermediate CA Sep 16 14:31:13 2031 GMT      
+pki/api-server/api-server.pem              CN = kube-apiserver, O = system:masters Sep 17 14:31:55 2027 GMT      
+pki/etcd/etcd.pem                          CN = etcd, O = etcd            Sep 17 14:31:56 2027 GMT      
+pki/kubelet/kubelet.pem                    CN = system:node:worker-1, O = system:nodes Sep 17 14:31:57 2027 GMT      
+pki/certs/admin.pem                        CN = admin, O = system:masters Sep 17 14:31:58 2027 GMT      

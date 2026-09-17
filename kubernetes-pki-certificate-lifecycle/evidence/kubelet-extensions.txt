@@ -1,0 +1,13 @@
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Subject Key Identifier: 
+                66:EF:5E:D4:A2:82:6B:C5:BD:DA:9A:73:00:89:E2:4C:35:22:93:4D
+            X509v3 Authority Key Identifier: 
+--
+            X509v3 Subject Alternative Name: 
+                DNS:worker-1, DNS:localhost, IP Address:127.0.0.1
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        29:2a:88:57:58:db:9a:41:b4:37:d5:80:4d:92:09:16:2f:50:

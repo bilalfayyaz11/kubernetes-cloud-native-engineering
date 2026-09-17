@@ -1,0 +1,7 @@
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Subject Key Identifier: 
+                3C:27:99:67:E2:3C:94:4B:FB:F8:E1:97:51:FD:29:3F:25:8B:88:6C
+            X509v3 Authority Key Identifier: 

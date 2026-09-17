@@ -1,0 +1,43 @@
+===== OpenSSL =====
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
+
+===== CFSSL =====
+Version: 1.6.5
+Runtime: go1.22.0
+
+===== CFSSLJSON =====
+Version: 1.6.5
+Runtime: go1.22.0
+
+===== kubectl =====
+clientVersion:
+  buildDate: "2026-06-11T18:12:06Z"
+  compiler: gc
+  gitCommit: 24e2b02af5543d7910c2bb074c7264df5a8f0467
+  gitTreeState: clean
+  gitVersion: v1.36.2
+  goVersion: go1.26.4
+  major: "1"
+  minor: "36"
+  platform: linux/amd64
+kustomizeVersion: v5.8.1
+
+
+===== Clock =====
+2026-09-17T14:30:56+00:00
+
+===== Workspace =====
+.
+./config
+./kubeconfigs
+./pki
+./pki/api-server
+./pki/archive
+./pki/certs
+./pki/etcd
+./pki/intermediate-ca
+./pki/keys
+./pki/kubelet
+./pki/root-ca
+./reports
+./scripts

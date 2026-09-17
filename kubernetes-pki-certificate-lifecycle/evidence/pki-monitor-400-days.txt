@@ -1,0 +1,6 @@
+OK      root-ca/ca.pem                           expires in 3649 days  (2036-09-14T14:31:10Z)
+OK      intermediate-ca/ca.pem                   expires in 1824 days  (2031-09-16T14:31:13Z)
+WARNING api-server/api-server.pem                expires in 364 days  (2027-09-17T14:31:55Z)
+WARNING etcd/etcd.pem                            expires in 364 days  (2027-09-17T14:31:56Z)
+WARNING kubelet/kubelet.pem                      expires in 364 days  (2027-09-17T14:31:57Z)
+WARNING certs/admin.pem                          expires in 364 days  (2027-09-17T14:31:58Z)

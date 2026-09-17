@@ -1,0 +1,4 @@
+pki/api-server/api-server.pem: OK
+pki/etcd/etcd.pem: OK
+pki/kubelet/kubelet.pem: OK
+pki/certs/admin.pem: OK

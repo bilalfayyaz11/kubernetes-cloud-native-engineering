@@ -1,0 +1,7 @@
+[ v3_leaf ]
+basicConstraints = critical, CA:FALSE
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+subjectAltName = DNS:worker-1,DNS:localhost,IP:127.0.0.1

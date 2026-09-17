@@ -1,0 +1,4 @@
+400 pki/api-server/api-server-key.pem
+400 pki/etcd/etcd-key.pem
+400 pki/kubelet/kubelet-key.pem
+400 pki/keys/admin-key.pem

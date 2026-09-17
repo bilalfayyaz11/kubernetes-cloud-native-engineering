@@ -1,0 +1,8 @@
+CERTIFICATE                              NOT AFTER                     
+-----------                              ---------                     
+pki/root-ca/ca.pem                       Sep 14 14:31:10 2036 GMT      
+pki/intermediate-ca/ca.pem               Sep 16 14:31:13 2031 GMT      
+pki/api-server/api-server.pem            Sep 17 14:31:55 2027 GMT      
+pki/etcd/etcd.pem                        Sep 17 14:31:56 2027 GMT      
+pki/kubelet/kubelet.pem                  Sep 17 14:31:57 2027 GMT      
+pki/certs/admin.pem                      Sep 17 14:31:58 2027 GMT      

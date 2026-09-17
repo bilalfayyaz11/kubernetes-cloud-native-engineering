@@ -1,0 +1,32 @@
+===== pki/api-server/api-server.pem =====
+subject=CN = kube-apiserver, O = system:masters
+issuer=CN = Kubernetes Intermediate CA
+serial=6604D4E855A5D9B38461EF3CA58D83E7FD997E3A
+notBefore=Sep 17 14:31:55 2026 GMT
+notAfter=Sep 17 14:31:55 2027 GMT
+sha256 Fingerprint=0C:5F:74:F8:8E:9A:09:CA:F3:C1:1A:B3:1D:1D:24:4C:78:FE:C5:77:F0:EF:B2:A9:C9:E9:A2:75:E9:4F:FD:AA
+
+===== pki/etcd/etcd.pem =====
+subject=CN = etcd, O = etcd
+issuer=CN = Kubernetes Intermediate CA
+serial=6604D4E855A5D9B38461EF3CA58D83E7FD997E3B
+notBefore=Sep 17 14:31:56 2026 GMT
+notAfter=Sep 17 14:31:56 2027 GMT
+sha256 Fingerprint=F9:76:92:C7:1E:25:84:C2:0D:A3:10:43:CE:43:F0:5D:16:F9:BC:40:B5:32:7C:46:D5:2A:66:87:65:B3:76:3F
+
+===== pki/kubelet/kubelet.pem =====
+subject=CN = system:node:worker-1, O = system:nodes
+issuer=CN = Kubernetes Intermediate CA
+serial=6604D4E855A5D9B38461EF3CA58D83E7FD997E3C
+notBefore=Sep 17 14:31:57 2026 GMT
+notAfter=Sep 17 14:31:57 2027 GMT
+sha256 Fingerprint=02:A3:86:DF:FE:A9:FC:4F:1D:7D:50:1D:99:CD:ED:21:89:A4:3B:69:28:09:51:85:E3:BC:71:08:5B:F0:6E:E8
+
+===== pki/certs/admin.pem =====
+subject=CN = admin, O = system:masters
+issuer=CN = Kubernetes Intermediate CA
+serial=6604D4E855A5D9B38461EF3CA58D83E7FD997E3D
+notBefore=Sep 17 14:31:58 2026 GMT
+notAfter=Sep 17 14:31:58 2027 GMT
+sha256 Fingerprint=E5:A9:F6:E4:F9:0C:2E:35:DF:19:92:78:09:92:45:D3:31:06:F9:4A:E3:63:D9:EF:94:EA:73:B3:D6:F3:45:43
+

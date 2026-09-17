@@ -1,0 +1,13 @@
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication, TLS Web Client Authentication
+            X509v3 Subject Key Identifier: 
+                51:67:CF:52:99:49:42:2F:EB:D1:14:39:B2:94:06:2A:2B:D3:77:E5
+            X509v3 Authority Key Identifier: 
+--
+            X509v3 Subject Alternative Name: 
+                DNS:kubernetes, DNS:kubernetes.default, DNS:kubernetes.default.svc, DNS:kubernetes.default.svc.cluster.local, DNS:localhost, IP Address:127.0.0.1, IP Address:10.96.0.1
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        57:fd:3d:c2:68:cf:be:4b:e7:f2:3d:04:46:d1:75:26:b8:a1:

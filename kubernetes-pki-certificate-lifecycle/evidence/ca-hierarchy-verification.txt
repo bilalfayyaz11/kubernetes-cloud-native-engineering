@@ -1,0 +1,48 @@
+===== ROOT CA =====
+subject=CN = Kubernetes Root CA
+issuer=CN = Kubernetes Root CA
+serial=04ED26407964509951A47266AA08D6091E985D54
+notBefore=Sep 17 14:31:10 2026 GMT
+notAfter=Sep 14 14:31:10 2036 GMT
+sha256 Fingerprint=30:E8:B7:9F:E8:2C:77:D1:F8:98:4C:0D:A5:A6:47:A0:FD:D1:D5:C7:FC:84:D2:DE:CB:6D:C3:51:29:02:43:74
+
+===== INTERMEDIATE CA =====
+subject=CN = Kubernetes Intermediate CA
+issuer=CN = Kubernetes Root CA
+serial=6995C26682CA6B19DBA5AB3796CF3B4EAD9EC2E5
+notBefore=Sep 17 14:31:13 2026 GMT
+notAfter=Sep 16 14:31:13 2031 GMT
+sha256 Fingerprint=7E:2A:F6:DC:F4:A2:F7:3C:B2:77:43:94:70:79:10:19:A6:67:39:6C:4F:D9:98:3F:F9:02:57:A2:06:AB:EA:48
+
+===== ROOT CONSTRAINTS =====
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Key Usage: critical
+                Certificate Sign, CRL Sign
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        3c:bd:69:eb:ff:ad:36:05:65:19:62:8a:25:20:ef:25:20:5b:
+        b6:6f:87:de:b5:88:97:87:4b:60:e3:6a:af:1c:13:91:3a:8f:
+        4e:bf:34:f4:dc:4f:d3:78:c6:e0:78:b4:7b:43:53:39:42:42:
+        83:08:7d:43:63:b9:b5:4a:6e:9a:f2:a0:cb:ab:94:5a:cc:71:
+        c0:44:c7:93:3b:51:c2:d6:fb:3b:a3:75:bf:28:22:85:ba:ba:
+
+===== INTERMEDIATE CONSTRAINTS =====
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Key Usage: critical
+                Certificate Sign, CRL Sign
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        2b:ab:93:7b:c2:97:6e:99:08:c6:e0:5c:2b:6d:2d:a9:17:a5:
+        d7:df:7b:e8:ff:75:01:52:2e:5a:64:b2:25:77:d0:21:87:13:
+        dc:68:8d:c1:70:3a:21:a3:fd:b4:41:5c:dd:25:0a:fe:48:70:
+        d8:f9:6a:81:74:40:61:7b:c0:16:0c:40:20:90:48:85:ca:72:
+        48:77:9d:81:f9:88:dc:4f:21:eb:d9:5e:37:d8:02:d9:5b:ec:
+
+===== PERMISSIONS =====
+400 pki/root-ca/ca-key.pem
+400 pki/intermediate-ca/ca-key.pem
+
+===== VERIFICATION =====
+pki/intermediate-ca/ca.pem: OK

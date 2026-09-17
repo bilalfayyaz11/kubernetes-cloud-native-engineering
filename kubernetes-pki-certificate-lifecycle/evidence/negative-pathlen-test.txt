@@ -1,0 +1,1 @@
+/tmp/pki-negative-test/subca.pem: OK

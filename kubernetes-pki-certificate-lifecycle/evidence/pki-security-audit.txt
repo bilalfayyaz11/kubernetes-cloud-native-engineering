@@ -1,0 +1,78 @@
+Kubernetes PKI Security Audit
+
+Generated:
+2026-09-17T14:38:49+00:00
+
+============================================================
+Trust Hierarchy
+============================================================
+
+Root CA:
+Kubernetes Root CA
+
+Intermediate CA:
+Kubernetes Intermediate CA
+
+Intermediate constraint:
+CA:TRUE, pathlen:0
+
+============================================================
+Issued Identities
+============================================================
+
+kube-apiserver
+etcd
+system:node:worker-1
+admin
+
+============================================================
+Security Controls
+============================================================
+
+- RSA-4096 root and intermediate CA private keys
+- RSA-2048 leaf private keys
+- Private key permissions enforced at 0400
+- CA hierarchy validated with OpenSSL
+- Component SAN and EKU restrictions
+- Inline kubeconfig certificate material
+- Certificate expiry monitoring
+- Automated certificate rotation
+- Pre-replacement certificate validation
+- Timestamped credential archival
+- Rollback protection
+- Negative trust validation
+- Intermediate CA path-length enforcement
+
+============================================================
+Lifecycle Controls
+============================================================
+
+10-day monitor:
+Expected exit code 0
+
+400-day monitor:
+Expected exit code 2 due to 365-day leaf certificates
+
+Rotation:
+API server certificate successfully replaced and archived
+
+============================================================
+Trust Boundary Validation
+============================================================
+
+Self-signed unauthorized certificate:
+Rejected
+
+Certificate validated against unrelated CA:
+Rejected
+
+Subordinate CA beneath pathlen:0 intermediate:
+Rejected
+
+============================================================
+Outcome
+============================================================
+
+The PKI hierarchy provides controlled certificate issuance,
+chain validation, restricted trust, expiry visibility, and
+repeatable credential rotation.

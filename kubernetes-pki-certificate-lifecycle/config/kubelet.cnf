@@ -1,0 +1,17 @@
+[ req ]
+prompt = no
+default_md = sha256
+distinguished_name = dn
+req_extensions = req_ext
+
+[ dn ]
+CN = system:node:worker-1
+O = system:nodes
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = worker-1
+DNS.2 = localhost
+IP.1 = 127.0.0.1

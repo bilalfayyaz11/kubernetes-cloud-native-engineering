@@ -1,0 +1,13 @@
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication, TLS Web Client Authentication
+            X509v3 Subject Key Identifier: 
+                BA:44:D2:F5:26:D3:A7:9E:25:85:10:C8:59:A7:F6:60:9C:C4:F5:B7
+            X509v3 Authority Key Identifier: 
+--
+            X509v3 Subject Alternative Name: 
+                DNS:localhost, DNS:etcd.kube-system.svc.cluster.local, IP Address:127.0.0.1
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        1e:6f:15:fe:4a:0e:a9:7a:cd:fc:df:3f:4c:81:26:da:1b:7c:

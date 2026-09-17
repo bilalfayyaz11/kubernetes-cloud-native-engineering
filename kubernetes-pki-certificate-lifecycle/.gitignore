@@ -1,0 +1,21 @@
+# Private cryptographic material
+*-key.pem
+*.key
+
+# Certificate requests and serial state
+*.csr
+*.srl
+
+# Embedded client credentials
+*.kubeconfig
+
+# Rotation staging
+*.new
+
+# Archived private credentials
+archive/
+
+# Raw kubeconfig dumps may contain embedded private keys
+*raw*
+*admin-kubeconfig-view*
+*kubelet-kubeconfig-view*

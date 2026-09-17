@@ -1,0 +1,3 @@
+CN = kube-apiserver, O = system:masters
+error 20 at 0 depth lookup: unable to get local issuer certificate
+error pki/api-server/api-server.pem: verification failed
