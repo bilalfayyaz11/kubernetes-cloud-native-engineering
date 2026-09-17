@@ -1,0 +1,24 @@
+===== RBAC SECURITY EVENT ANALYSIS =====
+
+Authentication failures (401):
+
+Authorization failures (403):
+
+Top identities:
+    149 system:anonymous
+     72 system:kube-scheduler
+     71 system:apiserver
+     69 system:kube-controller-manager
+     52 kubernetes-admin
+     37 system:node:api-security-control-plane
+     18 system:serviceaccount:kube-system:generic-garbage-collector
+     12 system:serviceaccount:kube-system:deployment-controller
+     10 system:serviceaccount:kube-system:resourcequota-controller
+      8 system:serviceaccount:kube-system:replicaset-controller
+
+Top response codes:
+    451 200
+     33 201
+     10 404
+      4 304
+      2 409

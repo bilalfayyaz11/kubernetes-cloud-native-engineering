@@ -1,0 +1,14 @@
+{
+  "name": "limited-user-flow",
+  "precedence": 1000,
+  "priorityLevel": "limited-priority",
+  "status": [
+    {
+      "lastTransitionTime": "2026-09-17T15:04:01Z",
+      "message": "This FlowSchema references the PriorityLevelConfiguration object named \"limited-priority\" and it exists",
+      "reason": "Found",
+      "status": "False",
+      "type": "Dangling"
+    }
+  ]
+}

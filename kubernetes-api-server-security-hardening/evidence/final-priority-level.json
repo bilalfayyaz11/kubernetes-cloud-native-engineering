@@ -1,0 +1,14 @@
+{
+  "name": "limited-priority",
+  "type": "Limited",
+  "nominalConcurrencyShares": 5,
+  "lendablePercent": 0,
+  "queueConfig": {
+    "queuing": {
+      "handSize": 4,
+      "queueLengthLimit": 50,
+      "queues": 16
+    },
+    "type": "Queue"
+  }
+}

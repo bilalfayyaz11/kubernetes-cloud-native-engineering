@@ -1,0 +1,13 @@
+{
+  "name": "secure-pod",
+  "phase": "Running",
+  "seccomp": "RuntimeDefault",
+  "runAsNonRoot": true,
+  "runAsUser": 1000,
+  "allowPrivilegeEscalation": false,
+  "capabilities": {
+    "drop": [
+      "ALL"
+    ]
+  }
+}

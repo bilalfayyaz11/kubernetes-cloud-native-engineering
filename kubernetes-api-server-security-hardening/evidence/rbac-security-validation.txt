@@ -1,0 +1,35 @@
+Kubernetes API RBAC Security Validation
+
+Generated:
+2026-09-17T15:03:14+00:00
+
+Limited ServiceAccount:
+system:serviceaccount:security-test:limited-user
+
+Allowed:
+- get pods
+- list pods
+
+Denied:
+- create deployments
+- read secrets
+- delete secrets
+
+Namespace Admin ServiceAccount:
+system:serviceaccount:security-test:admin-user
+
+Validated:
+- deployment creation allowed
+- deployment deletion allowed
+
+Authentication testing:
+- invalid bearer token rejected
+
+Audit telemetry:
+- 401 events observed: 0
+- 403 events observed: 0
+- limited-user identity present in audit trail
+- admin-user identity present in audit trail
+
+Secret payload logging:
+- sensitive Secret body excluded

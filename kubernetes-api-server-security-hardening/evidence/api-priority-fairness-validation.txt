@@ -1,0 +1,36 @@
+Kubernetes API Priority and Fairness Validation
+
+Generated:
+2026-09-17T15:04:09+00:00
+
+FlowSchema:
+limited-user-flow
+
+PriorityLevelConfiguration:
+limited-priority
+
+Target identity:
+system:serviceaccount:security-test:limited-user
+
+Matching precedence:
+1000
+
+Concurrency model:
+Limited
+
+Nominal concurrency shares:
+5
+
+Queue count:
+16
+
+Queue hand size:
+4
+
+Queue length limit:
+50
+
+Purpose:
+Apply a dedicated request-flow class to the limited workload identity
+so API-server request handling can be constrained independently of
+higher-priority control-plane traffic.

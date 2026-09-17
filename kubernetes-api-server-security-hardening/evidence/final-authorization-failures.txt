@@ -1,0 +1,4 @@
+2026-09-17T15:00:10.309766Z	system:serviceaccount:kube-system:root-ca-cert-publisher	create	configmaps	audit-test	kube-root-ca.crt	403
+2026-09-17T15:00:16.545785Z	system:serviceaccount:kube-system:root-ca-cert-publisher	create	configmaps	audit-secret-test	kube-root-ca.crt	403
+2026-09-17T15:03:58.288538Z	kubernetes-admin	create	pods	secure-namespace	privileged-pod	403
+2026-09-17T15:04:54.155608Z	kubernetes-admin	create	pods	secure-namespace	privileged-pod	403

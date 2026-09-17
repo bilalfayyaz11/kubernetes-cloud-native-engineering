@@ -1,0 +1,95 @@
+Kubernetes API Server Security Validation
+
+Generated:
+2026-09-17T15:05:01+00:00
+
+============================================================
+API Server Auditing
+============================================================
+
+Audit policy:
+Enabled
+
+Audit log:
+Enabled
+
+Secret audit level:
+Metadata
+
+Secret request/response bodies:
+Excluded
+
+============================================================
+Authentication
+============================================================
+
+Invalid bearer token:
+DENIED
+
+Observed HTTP 401 audit events:
+0
+
+============================================================
+Authorization
+============================================================
+
+Limited ServiceAccount:
+system:serviceaccount:security-test:limited-user
+
+Permitted:
+- get pods
+- list pods
+
+Denied:
+- read secrets
+- create deployments
+
+Observed HTTP 403 audit events:
+4
+
+============================================================
+Pod Security Admission
+============================================================
+
+Policy level:
+restricted
+
+Privileged workload:
+DENIED
+
+Compliant workload:
+ALLOWED
+
+Privileged workload audit events:
+4
+
+============================================================
+API Priority and Fairness
+============================================================
+
+FlowSchema:
+limited-user-flow
+
+PriorityLevelConfiguration:
+limited-priority
+
+Target:
+security-test/limited-user
+
+Request handling:
+Limited + queued
+
+============================================================
+Security Controls Demonstrated
+============================================================
+
+- Kubernetes API server audit logging
+- Sensitive-resource audit minimization
+- Authentication failure visibility
+- Authorization failure visibility
+- Least-privilege RBAC
+- Short-lived ServiceAccount tokens
+- Pod Security Admission
+- Restricted Pod Security Standard
+- API Priority and Fairness
+- Structured audit-log analysis

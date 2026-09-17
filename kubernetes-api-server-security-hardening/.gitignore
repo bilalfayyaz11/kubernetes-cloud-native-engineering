@@ -1,0 +1,28 @@
+# Raw Kubernetes audit data
+*.jsonl
+*audit-events*
+*kube-apiserver-audit*
+
+# Credentials and tokens
+*.kubeconfig
+*.token
+*-token
+token.txt
+credentials*
+secrets*
+
+# Keys and certificates
+*.key
+*-key.pem
+*.p12
+*.pfx
+
+# Environment files
+.env
+.env.*
+
+# Runtime and temporary files
+*.log
+*.tmp
+*.bak
+*.swp

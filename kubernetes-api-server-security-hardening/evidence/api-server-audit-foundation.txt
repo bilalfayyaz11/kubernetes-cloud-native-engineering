@@ -1,0 +1,20 @@
+===== NODE =====
+NAME                         STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+api-security-control-plane   Ready    control-plane   54s   v1.37.0   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+
+===== API SERVER =====
+NAME                                        READY   STATUS    RESTARTS   AGE   IP           NODE                         NOMINATED NODE   READINESS GATES
+kube-apiserver-api-security-control-plane   1/1     Running   0          48s   172.18.0.2   api-security-control-plane   <none>           <none>
+
+===== AUDIT FLAGS =====
+    - --audit-log-maxbackup=10
+    - --audit-log-maxsize=100
+    - --audit-log-path=/var/log/kubernetes/kube-apiserver-audit.log
+    - --audit-policy-file=/etc/kubernetes/policies/audit-policy.yaml
+    - --audit-log-maxage=30
+
+===== AUDIT LOG =====
+-rw------- 1 root root 1.9M Sep 17 15:00 /var/log/kubernetes/kube-apiserver-audit.log
+
+===== SECRET PAYLOAD TEST =====
+PASS

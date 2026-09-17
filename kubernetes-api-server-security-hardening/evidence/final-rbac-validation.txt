@@ -1,0 +1,11 @@
+limited-user get pods:
+yes
+
+limited-user get secrets:
+no
+
+limited-user create deployments:
+no
+
+admin-user create deployments:
+yes

@@ -1,0 +1,6 @@
+{
+  "namespace": "secure-namespace",
+  "enforce": "restricted",
+  "audit": "restricted",
+  "warn": "restricted"
+}

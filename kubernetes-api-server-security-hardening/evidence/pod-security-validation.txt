@@ -1,0 +1,23 @@
+Pod Security Admission Validation
+
+Generated:
+2026-09-17T15:04:09+00:00
+
+Namespace:
+secure-namespace
+
+Policy:
+restricted
+
+Privileged workload:
+DENIED
+
+Restricted-compliant workload:
+ALLOWED
+
+Required controls demonstrated:
+- runAsNonRoot
+- explicit non-root UID
+- RuntimeDefault seccomp
+- allowPrivilegeEscalation=false
+- all Linux capabilities dropped

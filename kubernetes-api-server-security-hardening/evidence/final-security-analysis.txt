@@ -1,0 +1,51 @@
+===== KUBERNETES API SECURITY ANALYSIS =====
+
+Total events:
+1500
+
+Authentication failures:
+0
+
+Authorization failures:
+4
+
+Top users:
+    350 system:anonymous
+    211 kubernetes-admin
+    176 system:kube-controller-manager
+    175 system:apiserver
+    174 system:kube-scheduler
+    144 system:serviceaccount:kube-system:namespace-controller
+    140 system:node:api-security-control-plane
+     28 system:serviceaccount:kube-system:generic-garbage-collector
+     21 system:serviceaccount:kube-system:deployment-controller
+     20 system:serviceaccount:kube-system:resourcequota-controller
+
+Top API resources:
+    487 non-resource
+    382 leases
+    133 pods
+     49 nodes
+     47 namespaces
+     44 events
+     43 endpointslices
+     40 endpoints
+     29 deployments
+     28 serviceaccounts
+     20 replicasets
+     20 configmaps
+     13 roles
+     11 services
+     11 secrets
+
+Top verbs:
+    654 get
+    418 update
+    150 list
+    104 create
+     64 deletecollection
+     61 watch
+     38 patch
+     11 delete
+
+Denied limited-user operations:

@@ -1,0 +1,31 @@
+===== API SERVER AUDIT SUMMARY =====
+
+Total events:
+100
+
+Response codes:
+     98 200
+      1 409
+      1 403
+
+Top verbs:
+     33 list
+     32 deletecollection
+     18 get
+     15 update
+      1 watch
+      1 create
+
+Top users:
+     72 system:serviceaccount:kube-system:namespace-controller
+     10 system:anonymous
+      5 system:kube-scheduler
+      5 system:kube-controller-manager
+      5 system:apiserver
+      1 system:serviceaccount:kube-system:root-ca-cert-publisher
+      1 system:node:api-security-control-plane
+      1 kubernetes-admin
+
+Secret operations:
+2026-09-17T15:00:16.920522Z	deletecollection	audit-secret-test	-	system:serviceaccount:kube-system:namespace-controller	200
+2026-09-17T15:00:16.926906Z	list	audit-secret-test	-	system:serviceaccount:kube-system:namespace-controller	200
