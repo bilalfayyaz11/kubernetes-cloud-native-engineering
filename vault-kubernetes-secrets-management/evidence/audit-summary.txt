@@ -1,0 +1,19 @@
+Vault Audit Validation
+
+Total audit records:
+
+
+Kubernetes authentication events:
+
+
+Static secret access events:
+
+
+Dynamic database credential events:
+
+
+Validated behavior:
+- Kubernetes-authenticated workload activity is auditable.
+- Static secret access is recorded.
+- Dynamic database credential issuance is recorded.
+- Application output does not intentionally expose retrieved secret values.

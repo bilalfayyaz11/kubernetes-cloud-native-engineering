@@ -1,0 +1,31 @@
+===== KUBERNETES =====
+NAME                           STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+vault-security-control-plane   Ready    control-plane   57s   v1.37.0   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+
+===== VAULT POD =====
+NAME      READY   STATUS    RESTARTS   AGE   IP           NODE                           NOMINATED NODE   READINESS GATES
+vault-0   1/1     Running   0          21s   10.244.0.5   vault-security-control-plane   <none>           <none>
+
+===== VAULT SERVICE =====
+NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+vault            ClusterIP   10.96.175.188   <none>        8200/TCP,8201/TCP   21s
+vault-internal   ClusterIP   None            <none>        8200/TCP,8201/TCP   21s
+
+===== HELM RELEASE =====
+NAME 	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART       	APP VERSION
+vault	vault    	1       	2026-09-17 14:46:25.208358524 +0000 UTC	deployed	vault-0.34.1	2.0.4      
+
+===== VAULT STATUS =====
+Key                Value
+---                -----
+Seal Type          shamir
+Initialized        false
+Sealed             true
+Total Shares       0
+Threshold          0
+Unseal Progress    0/0
+Unseal Nonce       n/a
+Version            2.0.4
+Build Date         2026-08-03T16:14:36Z
+Storage Type       file
+HA Enabled         false

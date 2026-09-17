@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vault-auth-test
+  namespace: vault
+  labels:
+    app: vault-auth-test
+spec:
+  serviceAccountName: vault-auth
+  automountServiceAccountToken: true
+  containers:
+  - name: client
+    image: alpine:3.21
+    command:
+    - /bin/sh
+    - -c
+    - |
+      apk add --no-cache curl jq >/dev/null
+      sleep infinity

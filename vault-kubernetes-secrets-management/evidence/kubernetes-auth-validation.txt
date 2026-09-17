@@ -1,0 +1,21 @@
+===== SERVICE ACCOUNTS =====
+NAME         AGE
+default      45s
+vault        41s
+vault-auth   11s
+
+===== TOKENREVIEW RBAC =====
+yes
+
+===== AUTH METHODS =====
+
+===== POLICY =====
+path "secret/data/myapp/*" {
+  capabilities = ["read"]
+}
+
+path "database/creds/my-role" {
+  capabilities = ["read"]
+}
+
+===== AUTH ROLE =====

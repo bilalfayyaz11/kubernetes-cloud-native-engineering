@@ -1,0 +1,92 @@
+Vault on Kubernetes Security Validation
+
+Generated:
+2026-09-17T14:50:59+00:00
+
+============================================================
+Authentication
+============================================================
+
+Approved Kubernetes ServiceAccount:
+vault-auth
+
+Vault Kubernetes role:
+myapp-role
+
+Approved ServiceAccount authentication:
+PASS
+
+Unauthorized ServiceAccount authentication:
+DENIED
+
+============================================================
+Authorization
+============================================================
+
+Allowed static secret scope:
+secret/data/myapp/*
+
+Allowed capabilities:
+read
+
+Out-of-scope path:
+secret/data/platform/restricted
+
+Out-of-scope access:
+DENIED
+
+Application write access:
+DENIED
+
+============================================================
+Dynamic Database Credentials
+============================================================
+
+Database secrets engine:
+Enabled
+
+Database:
+PostgreSQL
+
+Credential model:
+Short-lived Vault-generated database identities
+
+Real database login:
+PASS
+
+Lease revocation:
+PASS
+
+Database role removal after revocation:
+PASS
+
+Revoked credential authentication:
+DENIED
+
+============================================================
+Auditability
+============================================================
+
+Kubernetes authentication events:
+
+
+Static secret access events:
+
+
+Dynamic database credential events:
+
+
+============================================================
+Security Controls Demonstrated
+============================================================
+
+- Kubernetes ServiceAccount authentication
+- TokenReview-based identity validation
+- Least-privilege Vault policy
+- KV v2 static secret management
+- Restricted secret-path authorization
+- Dynamic PostgreSQL credentials
+- Lease-based credential lifecycle
+- Explicit credential revocation
+- Vault audit logging
+- Secret-safe application output

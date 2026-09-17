@@ -1,0 +1,33 @@
+# Vault bootstrap material
+init.json
+*unseal*
+*root-token*
+*root_token*
+
+# Kubernetes credentials
+*.kubeconfig
+*-token*
+service-account-token*
+
+# Secret-bearing files
+*.secret
+*.secrets
+credentials*
+credential*
+password*
+token.json
+
+# Raw audit logs
+*.log
+audit.log
+vault-audit*
+
+# Runtime/generated material
+*.tmp
+*.bak
+*.backup
+*.swp
+
+# Local environment files
+.env
+.env.*
