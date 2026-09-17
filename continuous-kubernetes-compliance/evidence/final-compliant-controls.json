@@ -1,0 +1,22 @@
+{
+  "pod_runAsNonRoot": true,
+  "pod_runAsUser": 10001,
+  "containers": [
+    {
+      "name": "nginx",
+      "runAsNonRoot": true,
+      "allowPrivilegeEscalation": false,
+      "capabilities": [
+        "ALL"
+      ],
+      "requests": {
+        "cpu": "25m",
+        "memory": "32Mi"
+      },
+      "limits": {
+        "cpu": "100m",
+        "memory": "64Mi"
+      }
+    }
+  ]
+}

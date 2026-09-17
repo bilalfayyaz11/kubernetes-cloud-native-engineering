@@ -1,0 +1,35 @@
+CLUSTER COMPLIANCE REPORT
+============================================================
+timestamp: 2026-09-17T17:44:07+00:00
+context: kubernetes-admin@kubernetes
+
+KUBE-BENCH (CIS Benchmark)
+============================================================
+total_pass: 
+total_fail: 
+total_warn: 
+
+FAIL checks:
+- none
+
+POLARIS (Best Practices)
+============================================================
+score: 88
+danger_count: 1
+warning_count: 31
+
+Danger-level findings:
+- hostNetworkSet | resource=etcd-ip-172-31-10-153
+
+UNIFIED RISK SCORE
+============================================================
+formula:
+(kube_pass / (kube_pass + kube_fail)) * 0.6
++ (polaris_score / 100) * 0.4
+
+result: 35.20%
+
+EXIT DECISION
+============================================================
+exit_code: 1
+reason: warnings or best-practice findings present, but no kube-bench FAIL

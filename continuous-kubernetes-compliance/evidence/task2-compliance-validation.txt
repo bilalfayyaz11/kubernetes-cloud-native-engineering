@@ -1,0 +1,71 @@
+Kubernetes Compliance Scanning Validation
+
+Generated:
+2026-09-17T17:40:52+00:00
+
+============================================================
+Non-Compliant Workload
+============================================================
+
+Deployment:
+noncompliant-app
+
+Image:
+nginx:1.25-alpine
+
+Resource limits configured:
+NO
+
+Security context configured:
+NO
+
+Liveness probe:
+NO
+
+Readiness probe:
+NO
+
+============================================================
+kube-bench
+============================================================
+
+PASS:
+
+
+FAIL:
+
+
+WARN:
+
+
+============================================================
+Polaris
+============================================================
+
+Score:
+87
+
+Danger findings:
+1
+
+Warning findings:
+31
+
+============================================================
+Unified Compliance Contract
+============================================================
+
+Unified score:
+34.80%
+
+Exit code:
+1
+
+Expected exit code:
+1
+
+Exit contract:
+PASS
+
+Required report sections missing:
+0

@@ -1,0 +1,5 @@
+NAME                                             READY   STATUS    RESTARTS       AGE    IP           NODE               NOMINATED NODE   READINESS GATES
+gatekeeper-audit-7d89d4569c-fxsrn                1/1     Running   2 (114s ago)   2m6s   10.244.0.3   ip-172-31-10-153   <none>           <none>
+gatekeeper-controller-manager-74cd57cc58-h66fg   1/1     Running   0              2m6s   10.244.0.5   ip-172-31-10-153   <none>           <none>
+gatekeeper-controller-manager-74cd57cc58-ks82b   1/1     Running   0              2m6s   10.244.0.2   ip-172-31-10-153   <none>           <none>
+gatekeeper-controller-manager-74cd57cc58-phrr9   1/1     Running   0              2m6s   10.244.0.4   ip-172-31-10-153   <none>           <none>

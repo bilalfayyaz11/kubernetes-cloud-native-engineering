@@ -1,0 +1,16 @@
+{
+  "generated": "2026-09-17T17:40:51+00:00",
+  "context": "kubernetes-admin@kubernetes",
+  "kube_bench": {
+    "pass": ,
+    "fail": ,
+    "warn": 
+  },
+  "polaris": {
+    "score": 87,
+    "danger_count": 1,
+    "warning_count": 31
+  },
+  "unified_score_percent": 34.80,
+  "exit_code": 1
+}

@@ -1,0 +1,2 @@
+NAME              ENFORCEMENT-ACTION   TOTAL-VIOLATIONS
+require-nonroot   deny                 

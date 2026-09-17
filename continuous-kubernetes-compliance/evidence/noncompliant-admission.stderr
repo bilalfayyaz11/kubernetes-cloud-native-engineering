@@ -1,0 +1,4 @@
+Error from server (Forbidden): error when creating "manifests/noncompliant-app.yaml": admission webhook "validation.gatekeeper.sh" denied the request: [require-resource-limits] container "nginx" must define resources.limits.cpu
+[require-resource-limits] container "nginx" must define resources.limits.memory
+[require-nonroot] container "nginx" must set securityContext.runAsNonRoot=true
+[require-nonroot] pod-level securityContext.runAsNonRoot must be true

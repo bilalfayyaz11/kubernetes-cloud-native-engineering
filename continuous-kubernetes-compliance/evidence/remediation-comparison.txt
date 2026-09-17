@@ -1,0 +1,68 @@
+Kubernetes Compliance Remediation Comparison
+
+Generated:
+2026-09-17T17:44:07+00:00
+
+============================================================
+Admission Enforcement
+============================================================
+
+Non-compliant Deployment rejected:
+PASS
+
+Resource limits violation detected:
+PASS
+
+Non-root violation detected:
+PASS
+
+Compliant Deployment admitted:
+PASS
+
+============================================================
+Polaris
+============================================================
+
+Pre-remediation score:
+87
+
+Post-remediation score:
+88
+
+Score improved:
+PASS
+
+============================================================
+Unified Compliance
+============================================================
+
+Pre-remediation score:
+%
+
+Post-remediation score:
+35.20%
+
+Pre-remediation exit code:
+
+
+Post-remediation exit code:
+1
+
+============================================================
+Control Model
+============================================================
+
+Detect:
+kube-bench + Polaris
+
+Decide:
+Unified scoring contract
+
+Prevent:
+OPA Gatekeeper
+
+Remediate:
+Hardened Deployment
+
+Verify:
+Post-remediation Polaris + unified scoring

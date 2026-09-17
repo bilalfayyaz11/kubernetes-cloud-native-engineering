@@ -1,0 +1,96 @@
+Kubernetes Continuous Compliance Final Validation
+
+Generated:
+2026-09-17T17:44:24+00:00
+
+============================================================
+Cluster
+============================================================
+
+Cluster healthy:
+PASS
+
+Ready nodes:
+1
+
+============================================================
+Scanning
+============================================================
+
+Baseline scanner reports:
+FAIL
+
+Final kube-bench scan:
+PASS
+
+Polaris baseline score:
+87
+
+Polaris post-remediation score:
+88
+
+Polaris improvement:
+PASS
+
+============================================================
+Gatekeeper
+============================================================
+
+Resource limits template:
+PASS
+
+Non-root template:
+PASS
+
+Enforcement mode:
+PASS
+
+Validating webhook:
+PASS
+
+Non-compliant workload rejected:
+PASS
+
+Compliant workload admitted:
+FAIL
+
+============================================================
+Unified Compliance
+============================================================
+
+Pre-remediation score:
+%
+
+Post-remediation score:
+35.20%
+
+Baseline exit code:
+
+
+Post-remediation exit code:
+1
+
+Exit contract:
+FAIL
+
+Required sections:
+PASS
+
+============================================================
+Control Loop
+============================================================
+
+Detect:
+PASS
+
+Score:
+PASS
+
+Enforce:
+PASS
+
+Remediate:
+FAIL
+
+Re-scan:
+PASS

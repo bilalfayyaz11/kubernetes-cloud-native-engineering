@@ -1,0 +1,42 @@
+{
+  "enforcementAction": "deny",
+  "totalViolations": 4,
+  "violations": [
+    {
+      "enforcementAction": "deny",
+      "group": "apps",
+      "kind": "Deployment",
+      "message": "pod-level securityContext.runAsNonRoot must be true",
+      "name": "coredns",
+      "namespace": "kube-system",
+      "version": "v1"
+    },
+    {
+      "enforcementAction": "deny",
+      "group": "apps",
+      "kind": "Deployment",
+      "message": "container \"coredns\" must set securityContext.runAsNonRoot=true",
+      "name": "coredns",
+      "namespace": "kube-system",
+      "version": "v1"
+    },
+    {
+      "enforcementAction": "deny",
+      "group": "apps",
+      "kind": "Deployment",
+      "message": "pod-level securityContext.runAsNonRoot must be true",
+      "name": "gatekeeper-controller-manager",
+      "namespace": "gatekeeper-system",
+      "version": "v1"
+    },
+    {
+      "enforcementAction": "deny",
+      "group": "apps",
+      "kind": "Deployment",
+      "message": "pod-level securityContext.runAsNonRoot must be true",
+      "name": "gatekeeper-audit",
+      "namespace": "gatekeeper-system",
+      "version": "v1"
+    }
+  ]
+}

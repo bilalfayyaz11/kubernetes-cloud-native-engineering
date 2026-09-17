@@ -1,0 +1,3 @@
+NAME                       AGE
+k8srequirenonroot          1s
+k8srequireresourcelimits   1s

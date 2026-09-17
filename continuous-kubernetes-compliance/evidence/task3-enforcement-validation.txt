@@ -1,0 +1,53 @@
+Kubernetes Compliance Enforcement Validation
+
+Generated:
+2026-09-17T17:44:08+00:00
+
+============================================================
+Gatekeeper
+============================================================
+
+Resource limits template:
+APPLIED
+
+Non-root template:
+APPLIED
+
+Enforcement:
+deny
+
+============================================================
+Negative Test
+============================================================
+
+noncompliant-app admission:
+PASS
+
+Resource limits rejection:
+PASS
+
+Non-root rejection:
+PASS
+
+============================================================
+Positive Test
+============================================================
+
+compliant-app admission:
+PASS
+
+============================================================
+Post-Remediation Audit
+============================================================
+
+Polaris pre-score:
+87
+
+Polaris post-score:
+88
+
+Polaris improvement:
+PASS
+
+Unified post-remediation exit code:
+1

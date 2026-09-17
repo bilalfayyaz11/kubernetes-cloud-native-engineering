@@ -1,0 +1,61 @@
+Kubernetes Compliance Automation Environment
+
+Generated:
+2026-09-17T17:40:33+00:00
+
+============================================================
+Kubernetes
+============================================================
+
+Node Ready:
+YES
+
+Kubernetes:
+v1.36.4
+
+Runtime:
+containerd
+
+Cluster type:
+single-node kubeadm
+
+============================================================
+Compliance Tooling
+============================================================
+
+kube-bench:
+0.15.6
+
+kube-bench JSON smoke test:
+PASS
+
+Polaris:
+Polaris version:10.2.0
+
+Polaris JSON smoke test:
+PASS
+
+Gatekeeper namespace:
+PASS
+
+Gatekeeper running pods:
+4
+
+============================================================
+Required Toolchain
+============================================================
+
+kubectl:
+/home/ubuntu/.local/bin/kubectl
+
+kubeadm:
+/usr/bin/kubeadm
+
+kubelet:
+/usr/bin/kubelet
+
+kube-bench:
+/usr/local/bin/kube-bench
+
+polaris:
+/usr/local/bin/polaris

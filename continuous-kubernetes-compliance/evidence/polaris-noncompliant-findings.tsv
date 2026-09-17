@@ -1,0 +1,4 @@
+automountServiceAccountToken	The ServiceAccount will be automounted
+missingNetworkPolicy	A NetworkPolicy should match pod labels and contain applied egress and ingress rules
+priorityClassNotSet	Priority class should be set
+topologySpreadConstraint	Pod should be configured with a valid topology spread constraint

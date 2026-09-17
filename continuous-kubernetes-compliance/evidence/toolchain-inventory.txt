@@ -1,0 +1,24 @@
+Kubernetes:
+Client Version: v1.36.2
+Kustomize Version: v5.8.1
+Server Version: v1.36.4
+
+kubeadm:
+v1.36.4
+
+kubelet:
+Kubernetes v1.36.4
+
+containerd:
+containerd containerd.io v2.2.5 e53c7c1516c3b2bff98eb76f1f4117477e6f4e66
+
+kube-bench:
+0.15.6
+
+Polaris:
+Polaris version:10.2.0
+
+Gatekeeper:
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+gatekeeper-audit                1/1     1            1           2m12s
+gatekeeper-controller-manager   3/3     3            3           2m12s

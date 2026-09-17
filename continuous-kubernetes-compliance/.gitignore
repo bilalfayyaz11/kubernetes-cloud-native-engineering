@@ -1,0 +1,30 @@
+# Kubernetes credentials
+*.kubeconfig
+admin.conf
+
+# Certificates / keys
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+# Tokens / secrets
+*.token
+.env
+.env.*
+credentials*
+password*
+secret*
+
+# Runtime
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Raw cluster dumps
+kube-bench.json
+polaris.json
+polaris-post-remediation.json
+kube-bench-final.json
