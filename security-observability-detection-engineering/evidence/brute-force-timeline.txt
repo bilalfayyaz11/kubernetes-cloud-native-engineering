@@ -1,0 +1,11 @@
+BRUTE-FORCE ATTACK TIMELINE
+
+2026-09-17T17:02:33.522050+00:00 | login_attempt | failed | -
+2026-09-17T17:02:33.672267+00:00 | login_attempt | failed | -
+2026-09-17T17:02:33.822515+00:00 | login_attempt | failed | -
+2026-09-17T17:02:33.972719+00:00 | login_attempt | failed | -
+2026-09-17T17:02:34.122950+00:00 | login_attempt | failed | -
+2026-09-17T17:02:34.273158+00:00 | login_attempt | failed | -
+2026-09-17T17:02:34.423396+00:00 | login_attempt | failed | -
+2026-09-17T17:02:34.573624+00:00 | login_attempt | failed | -
+2026-09-17T17:02:34.723849+00:00 | security_alert | critical | brute-force-authentication

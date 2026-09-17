@@ -1,0 +1,3 @@
+node-exporter	up	
+prometheus	up	
+security-exporter	up	

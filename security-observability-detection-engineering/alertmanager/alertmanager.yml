@@ -1,0 +1,18 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: security-webhook
+  group_by:
+  - alertname
+  - severity
+  group_wait: 5s
+  group_interval: 15s
+  repeat_interval: 2m
+
+receivers:
+
+- name: security-webhook
+  webhook_configs:
+  - url: http://security-webhook:5001/
+    send_resolved: true

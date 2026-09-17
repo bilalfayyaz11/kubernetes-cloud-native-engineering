@@ -1,0 +1,35 @@
+Security Observability Alert Validation
+
+Generated:
+2026-09-17T17:01:54+00:00
+
+Exporter modes:
+- normal baseline validated
+- deterministic attack mode validated
+
+Prometheus security exporter target:
+UP
+
+Security attack telemetry generated:
+YES
+
+Active alerts observed:
+5
+
+Firing alerts observed:
+5
+
+Alertmanager received alerts:
+5
+
+Detections evaluated:
+- failed-login rate
+- brute-force source
+- API latency anomaly
+- request burst
+
+Primary simulated source:
+10.0.0.66
+
+Sensitive credential output:
+NONE

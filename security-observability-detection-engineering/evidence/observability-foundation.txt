@@ -1,0 +1,22 @@
+Security Observability Foundation
+
+Prometheus: operational
+Alertmanager: operational
+Grafana: operational
+Node exporter: operational
+Custom security exporter: operational
+Webhook receiver: operational
+
+Grafana credential:
+stored outside working directory
+
+Security alert rules:
+HighFailedLoginRate	alerting	inactive
+BruteForceSourceDetected	alerting	inactive
+HighAPIResponseLatency	alerting	inactive
+SecurityRequestBurst	alerting	inactive
+
+Prometheus targets:
+node-exporter	up	
+prometheus	up	
+security-exporter	up	

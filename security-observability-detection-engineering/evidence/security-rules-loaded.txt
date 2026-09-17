@@ -1,0 +1,4 @@
+HighFailedLoginRate	alerting	inactive
+BruteForceSourceDetected	alerting	inactive
+HighAPIResponseLatency	alerting	inactive
+SecurityRequestBurst	alerting	inactive

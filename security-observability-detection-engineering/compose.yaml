@@ -1,0 +1,104 @@
+services:
+
+  prometheus:
+    image: prom/prometheus:v3.14.0
+    container_name: security-prometheus
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=12h
+      - --web.enable-lifecycle
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus:ro
+      - prometheus-data:/prometheus
+    depends_on:
+      - alertmanager
+      - node-exporter
+      - security-exporter
+    networks:
+      - security-monitoring
+
+  alertmanager:
+    image: prom/alertmanager:v0.33.0
+    container_name: security-alertmanager
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager:/etc/alertmanager:ro
+    depends_on:
+      - security-webhook
+    networks:
+      - security-monitoring
+
+  node-exporter:
+    image: prom/node-exporter:v1.9.1
+    container_name: security-node-exporter
+    restart: unless-stopped
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    networks:
+      - security-monitoring
+
+  security-exporter:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: security-exporter
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    networks:
+      - security-monitoring
+
+  security-webhook:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.webhook
+    container_name: security-webhook
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./logs:/data
+    networks:
+      - security-monitoring
+
+  grafana:
+    image: grafana/grafana:12.1.1
+    container_name: security-grafana
+    restart: unless-stopped
+    env_file:
+      - /home/ubuntu/.security-observability-secrets/grafana.env
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    networks:
+      - security-monitoring
+
+volumes:
+
+  prometheus-data:
+
+  grafana-data:
+
+networks:
+
+  security-monitoring:
+    driver: bridge

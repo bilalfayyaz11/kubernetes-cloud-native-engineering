@@ -1,0 +1,5 @@
+SecurityRequestBurst	warning	active
+BruteForceSourceDetected	critical	active
+HighAPIResponseLatency	warning	active
+SecurityRequestBurst	warning	active
+HighFailedLoginRate	critical	active

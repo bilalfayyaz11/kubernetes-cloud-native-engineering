@@ -1,0 +1,5 @@
+HighFailedLoginRate	critical	firing	2026-09-17T16:59:45.793299484Z
+BruteForceSourceDetected	critical	firing	2026-09-17T16:59:55.793299484Z
+HighAPIResponseLatency	warning	firing	2026-09-17T16:59:45.793299484Z
+SecurityRequestBurst	warning	firing	2026-09-17T16:59:55.793299484Z
+SecurityRequestBurst	warning	firing	2026-09-17T16:59:55.793299484Z

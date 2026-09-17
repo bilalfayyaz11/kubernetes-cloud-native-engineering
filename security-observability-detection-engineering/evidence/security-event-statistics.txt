@@ -1,0 +1,22 @@
+SECURITY EVENT STATISTICS
+
+Total entries: 69
+
+Event types:
+- api_access: 24
+- login_attempt: 23
+- security_alert: 22
+
+Login outcomes:
+- failed: 10
+- success: 13
+
+HTTP status codes:
+- 200: 8
+- 201: 6
+- 400: 3
+- 401: 2
+- 403: 1
+- 404: 4
+
+Critical alerts: 7

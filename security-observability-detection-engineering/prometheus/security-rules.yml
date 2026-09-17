@@ -1,0 +1,45 @@
+groups:
+
+- name: security-detection
+
+  rules:
+
+  - alert: HighFailedLoginRate
+    expr: rate(security_login_attempts_total{status="failed"}[1m]) > 0.20
+    for: 30s
+    labels:
+      severity: critical
+      category: authentication
+    annotations:
+      summary: "Elevated failed-login rate detected"
+      description: "Failed login activity is above the configured security threshold."
+
+  - alert: BruteForceSourceDetected
+    expr: rate(security_failed_logins_per_ip_total[1m]) > 0.15
+    for: 30s
+    labels:
+      severity: critical
+      category: brute_force
+    annotations:
+      summary: "Possible brute-force source detected"
+      description: "A source IP is generating repeated failed authentication attempts."
+
+  - alert: HighAPIResponseLatency
+    expr: histogram_quantile(0.95, rate(security_api_response_seconds_bucket[2m])) > 1.5
+    for: 1m
+    labels:
+      severity: warning
+      category: application
+    annotations:
+      summary: "Security API response latency elevated"
+      description: "95th percentile response latency is above 1.5 seconds."
+
+  - alert: SecurityRequestBurst
+    expr: rate(security_http_requests_total[30s]) > 2
+    for: 20s
+    labels:
+      severity: warning
+      category: request_anomaly
+    annotations:
+      summary: "Abnormal request burst detected"
+      description: "Security telemetry indicates a sudden increase in request volume."

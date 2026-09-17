@@ -1,0 +1,118 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.150",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0.01818181818181818"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.132",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.127",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.89",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.133",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.109",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.160",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.76",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.82",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "ip_address": "10.0.0.28",
+          "job": "security-exporter"
+        },
+        "value": [
+          1789664644.877,
+          "0"
+        ]
+      }
+    ]
+  }
+}

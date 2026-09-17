@@ -1,0 +1,5 @@
+HighFailedLoginRate	authentication	critical	firing
+BruteForceSourceDetected	brute_force	critical	firing
+HighAPIResponseLatency	application	warning	firing
+SecurityRequestBurst	request_anomaly	warning	firing
+SecurityRequestBurst	request_anomaly	warning	firing

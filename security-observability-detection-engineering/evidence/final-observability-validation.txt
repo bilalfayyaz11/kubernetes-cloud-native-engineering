@@ -1,0 +1,126 @@
+Security Observability Final Validation
+
+Generated:
+2026-09-17T17:04:05+00:00
+
+============================================================
+Monitoring Stack
+============================================================
+
+Prometheus:
+OPERATIONAL
+
+Alertmanager:
+OPERATIONAL
+
+Grafana:
+OPERATIONAL
+
+Node Exporter:
+OPERATIONAL
+
+Custom Security Exporter:
+OPERATIONAL
+
+Webhook Receiver:
+OPERATIONAL
+
+Down Prometheus targets:
+0
+
+============================================================
+Metrics Detection
+============================================================
+
+Failed-login rate:
+IMPLEMENTED
+
+Per-IP brute-force rate:
+IMPLEMENTED
+
+API latency anomaly:
+IMPLEMENTED
+
+Request burst detection:
+IMPLEMENTED
+
+Historical firing alerts observed:
+5
+
+============================================================
+Alert Routing
+============================================================
+
+Prometheus -> Alertmanager:
+CONNECTED
+
+Active Alertmanager endpoints:
+1
+
+Alertmanager -> Webhook:
+VALIDATED DURING ATTACK SIMULATION
+
+============================================================
+Structured Logging
+============================================================
+
+Format:
+NDJSON
+
+Brute-force source:
+10.0.0.66
+
+Detected failed attempts:
+8
+
+Critical structured alerts:
+7
+
+============================================================
+Grafana
+============================================================
+
+Provisioned dashboard:
+Security Observability
+
+Dashboard UID:
+security-observability
+
+Panel count:
+6
+
+Panels:
+- Failed Login Rate
+- Failed Logins by Source IP
+- API p95 Latency
+- HTTP Request Rate
+- Active Sessions
+- Attack Simulation Mode
+
+============================================================
+Security Engineering Outcomes
+============================================================
+
+Metrics collection:
+VALIDATED
+
+PromQL detections:
+VALIDATED
+
+Alert evaluation:
+VALIDATED
+
+Alert routing:
+VALIDATED
+
+Structured logging:
+VALIDATED
+
+Brute-force detection:
+VALIDATED
+
+Critical-event extraction:
+VALIDATED
+
+Dashboard provisioning:
+VALIDATED

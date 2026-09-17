@@ -1,0 +1,14 @@
+FROM python:3.12-alpine
+
+WORKDIR /app
+
+COPY webhook_receiver.py .
+
+RUN mkdir -p /data && \
+    chown -R 65532:65532 /data /app
+
+USER 65532:65532
+
+EXPOSE 5001
+
+CMD ["python", "/app/webhook_receiver.py"]

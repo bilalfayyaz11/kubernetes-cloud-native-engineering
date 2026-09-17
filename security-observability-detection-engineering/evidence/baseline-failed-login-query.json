@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "instance": "security-exporter:8000",
+          "job": "security-exporter",
+          "status": "failed"
+        },
+        "value": [
+          1789664366.324,
+          "0.085405"
+        ]
+      }
+    ]
+  }
+}

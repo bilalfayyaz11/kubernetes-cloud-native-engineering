@@ -1,0 +1,38 @@
+===== SECURITY LOG ANALYSIS =====
+
+=== Event Counts ===
+api_access: 24
+login_attempt: 23
+security_alert: 22
+
+=== Brute-Force Sources ===
+10.0.0.66: 8 failed logins
+
+=== Critical Alerts ===
+{"attack_simulation": true, "description": "Repeated failed authentication activity detected", "event_type": "security_alert", "hostname": "ip-172-31-10-218", "rule": "brute-force-authentication", "severity": "critical", "source_ip": "10.0.0.66", "timestamp": "2026-09-17T17:02:34.723849+00:00"}
+{"event_type": "security_alert", "hostname": "ip-172-31-10-218", "rule": "suspicious-api-access", "severity": "critical", "source_ip": "10.0.0.160", "timestamp": "2026-09-17T17:02:36.262259+00:00"}
+{"event_type": "security_alert", "hostname": "ip-172-31-10-218", "rule": "suspicious-api-access", "severity": "critical", "source_ip": "10.0.0.185", "timestamp": "2026-09-17T17:02:37.385172+00:00"}
+{"event_type": "security_alert", "hostname": "ip-172-31-10-218", "rule": "unexpected-login-pattern", "severity": "critical", "source_ip": "10.0.0.41", "timestamp": "2026-09-17T17:02:37.688797+00:00"}
+{"event_type": "security_alert", "hostname": "ip-172-31-10-218", "rule": "request-anomaly", "severity": "critical", "source_ip": "10.0.0.69", "timestamp": "2026-09-17T17:02:38.396253+00:00"}
+{"event_type": "security_alert", "hostname": "ip-172-31-10-218", "rule": "request-anomaly", "severity": "critical", "source_ip": "10.0.0.94", "timestamp": "2026-09-17T17:02:40.791664+00:00"}
+{"event_type": "security_alert", "hostname": "ip-172-31-10-218", "rule": "request-anomaly", "severity": "critical", "source_ip": "10.0.0.118", "timestamp": "2026-09-17T17:02:40.963554+00:00"}
+
+=== HTTP Status Counts ===
+200: 8
+201: 6
+400: 3
+401: 2
+403: 1
+404: 4
+
+=== Suspicious HTTP Sources ===
+10.0.0.100: 1 suspicious responses
+10.0.0.104: 1 suspicious responses
+10.0.0.108: 1 suspicious responses
+10.0.0.150: 1 suspicious responses
+10.0.0.171: 1 suspicious responses
+10.0.0.175: 1 suspicious responses
+10.0.0.26: 1 suspicious responses
+10.0.0.36: 1 suspicious responses
+10.0.0.51: 1 suspicious responses
+10.0.0.77: 1 suspicious responses
