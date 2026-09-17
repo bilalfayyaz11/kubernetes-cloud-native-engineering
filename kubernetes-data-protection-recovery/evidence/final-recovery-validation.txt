@@ -1,0 +1,12 @@
+===== RECOVERY VALIDATION =====
+
+Restored etcd health:
+
+Recovery marker:
+FAIL: marker not recovered
+
+Recovery workload:
+FAIL: Deployment not recovered
+
+Post-backup object:
+PASS: post-backup object absent

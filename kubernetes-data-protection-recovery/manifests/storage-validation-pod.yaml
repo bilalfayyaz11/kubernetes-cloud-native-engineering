@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: storage-validation
+  namespace: data-protection
+  labels:
+    app: storage-validation
+spec:
+  automountServiceAccountToken: false
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: validation
+    image: busybox:1.36
+    command:
+    - sh
+    - -c
+    - sleep 3600
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+      capabilities:
+        drop:
+        - ALL
+    volumeMounts:
+    - name: secure-data
+      mountPath: /data
+  volumes:
+  - name: secure-data
+    persistentVolumeClaim:
+      claimName: secure-persistent-pvc

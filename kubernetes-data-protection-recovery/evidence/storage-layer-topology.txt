@@ -1,0 +1,3 @@
+NAME                 TYPE  FSTYPE       SIZE MOUNTPOINTS
+loop10               loop  crypto_LUKS    1G 
+└─k8s-secure-storage crypt ext4        1008M /mnt/k8s-secure-storage

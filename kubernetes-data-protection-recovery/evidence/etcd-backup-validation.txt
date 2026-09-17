@@ -1,0 +1,77 @@
+Kubernetes etcd Backup Validation
+
+Generated:
+2026-09-17T17:15:16+00:00
+
+============================================================
+Control Plane
+============================================================
+
+Cluster:
+data-protection
+
+Control-plane node:
+data-protection-control-plane
+
+etcd endpoint:
+https://127.0.0.1:2379
+
+etcd health:
+FAILED
+
+============================================================
+Snapshot
+============================================================
+
+Snapshot created:
+NO
+
+Snapshot size:
+0 bytes
+
+Snapshot structure validation:
+FAIL
+
+SHA-256 validation:
+FAIL
+
+Retention:
+7 days
+
+============================================================
+Recovery Validation State
+============================================================
+
+Namespace:
+recovery-validation
+
+ConfigMap:
+recovery-marker
+
+Expected marker:
+PRE_INCIDENT_STATE
+
+Deployment:
+recovery-workload
+
+Expected replicas:
+2
+
+============================================================
+Credential Handling
+============================================================
+
+etcd private key copied to project:
+NO
+
+etcd certificates copied to project:
+NO
+
+Snapshot stored inside Git working tree:
+NO
+
+Backup directory permissions:
+0700
+
+Snapshot permissions:
+0600

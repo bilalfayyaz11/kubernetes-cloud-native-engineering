@@ -1,0 +1,3 @@
+--- etcdctl version ---
+
+--- endpoint health ---

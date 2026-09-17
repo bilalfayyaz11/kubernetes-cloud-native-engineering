@@ -1,0 +1,15 @@
+===== CONFIGMAP =====
+{
+  "name": "recovery-marker",
+  "data": {
+    "environment": "secure-platform",
+    "recoveryMarker": "PRE_INCIDENT_STATE",
+    "storageClass": "luks2-backed"
+  }
+}
+
+===== DEPLOYMENT =====
+{
+  "name": "recovery-workload",
+  "replicas": 2
+}

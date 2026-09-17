@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: secure-persistent-pv
+  labels:
+    storage-security: luks2
+spec:
+  capacity:
+    storage: 750Mi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: secure-luks-storage
+  hostPath:
+    path: /secure-persistent-data
+    type: Directory
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: secure-persistent-pvc
+  namespace: data-protection
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: secure-luks-storage
+  volumeName: secure-persistent-pv
+  resources:
+    requests:
+      storage: 500Mi

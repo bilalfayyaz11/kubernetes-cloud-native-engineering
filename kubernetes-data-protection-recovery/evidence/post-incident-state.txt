@@ -1,0 +1,9 @@
+===== NAMESPACE RESOURCES AFTER INCIDENT =====
+NAME                                     READY   STATUS      RESTARTS   AGE
+pod/recovery-workload-6c9674df88-6lq29   0/1     Completed   0          67s
+pod/recovery-workload-6c9674df88-jlwvf   0/1     Completed   0          67s
+
+===== CONFIGMAPS AFTER INCIDENT =====
+NAME               DATA   AGE
+kube-root-ca.crt   1      68s
+post-backup-only   1      1s

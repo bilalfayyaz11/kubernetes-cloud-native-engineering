@@ -1,0 +1,11 @@
+NAMESPACE            NAME                                                    READY   STATUS    RESTARTS   AGE
+data-protection      storage-validation                                      1/1     Running   0          100s
+kube-system          coredns-559f6c778d-4xpfw                                1/1     Running   0          2m4s
+kube-system          coredns-559f6c778d-9gqwc                                1/1     Running   0          2m4s
+kube-system          etcd-data-protection-control-plane                      1/1     Running   0          2m14s
+kube-system          kindnet-s7kgq                                           1/1     Running   0          2m5s
+kube-system          kube-apiserver-data-protection-control-plane            1/1     Running   0          2m14s
+kube-system          kube-controller-manager-data-protection-control-plane   1/1     Running   0          2m14s
+kube-system          kube-proxy-g2ls7                                        1/1     Running   0          2m5s
+kube-system          kube-scheduler-data-protection-control-plane            1/1     Running   0          2m14s
+local-path-storage   local-path-provisioner-75f7fc7dc5-hdt4d                 1/1     Running   0          2m4s

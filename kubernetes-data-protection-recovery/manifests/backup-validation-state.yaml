@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: recovery-validation
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recovery-marker
+  namespace: recovery-validation
+data:
+  environment: secure-platform
+  recoveryMarker: PRE_INCIDENT_STATE
+  storageClass: luks2-backed
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recovery-workload
+  namespace: recovery-validation
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: recovery-workload
+  template:
+    metadata:
+      labels:
+        app: recovery-workload
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: app
+        image: nginx:1.27-alpine
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi

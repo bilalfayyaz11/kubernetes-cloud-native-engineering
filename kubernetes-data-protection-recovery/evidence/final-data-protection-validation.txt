@@ -1,0 +1,77 @@
+Kubernetes Data Protection Final Validation
+
+Generated:
+2026-09-17T17:19:57+00:00
+
+============================================================
+Persistent Storage
+============================================================
+
+Raw storage type:
+crypto_LUKS
+
+Decrypted filesystem:
+ext4
+
+PV phase:
+Bound
+
+PVC phase:
+Bound
+
+Persistent data accessible:
+PASS
+
+Raw backing image plaintext test:
+PASS
+
+============================================================
+etcd Backup
+============================================================
+
+Snapshot created:
+FAIL
+
+Snapshot age:
+497129.332 hours
+
+SHA-256:
+FAIL
+
+Snapshot structure:
+FAIL
+
+Backup directory permissions:
+700
+
+Snapshot permissions:
+
+
+============================================================
+Recovery
+============================================================
+
+ConfigMap recoverability:
+FAIL
+
+Deployment recoverability:
+FAIL
+
+Point-in-time validation:
+PASS
+
+Live cluster ready nodes:
+1
+
+============================================================
+Credential Safety
+============================================================
+
+LUKS key in working tree:
+NO
+
+etcd TLS private key in working tree:
+NO
+
+etcd snapshot in working tree:
+NO

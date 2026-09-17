@@ -1,0 +1,6 @@
+===== ETCD BACKUP =====
+Timestamp: 20260917T171515Z
+Control plane: data-protection-control-plane
+
+Checking etcd endpoint...
+ERROR: etcd endpoint unhealthy

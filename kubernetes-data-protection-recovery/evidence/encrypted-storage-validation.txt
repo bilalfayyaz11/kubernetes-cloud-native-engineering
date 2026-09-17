@@ -1,0 +1,82 @@
+Kubernetes Persistent Storage Encryption Validation
+
+Generated:
+2026-09-17T17:14:59+00:00
+
+============================================================
+Storage Architecture
+============================================================
+
+Backing storage:
+1 GiB image file
+
+Raw storage type:
+crypto_LUKS
+
+Encryption:
+LUKS2
+
+Unlocked mapper:
+k8s-secure-storage
+
+Decrypted filesystem:
+ext4
+
+Filesystem mount:
+/mnt/k8s-secure-storage
+
+Kubernetes access:
+Static PersistentVolume + PersistentVolumeClaim
+
+============================================================
+Encryption Validation
+============================================================
+
+Application can read data through PVC:
+YES
+
+Data exists inside unlocked filesystem:
+YES
+
+Plaintext marker visible in raw encrypted image:
+NO
+
+Raw block layer reports crypto_LUKS:
+YES
+
+============================================================
+Credential Handling
+============================================================
+
+LUKS key stored inside project:
+NO
+
+LUKS key printed:
+NO
+
+Key location:
+External protected directory
+
+============================================================
+Security Boundary
+============================================================
+
+Kubernetes Pod
+      |
+      v
+PersistentVolumeClaim
+      |
+      v
+PersistentVolume
+      |
+      v
+Kind node mount
+      |
+      v
+Unlocked LUKS filesystem
+      |
+      v
+LUKS2 encryption
+      |
+      v
+Raw backing image

@@ -1,0 +1,25 @@
+===== NAMESPACE =====
+NAME                  STATUS   AGE
+recovery-validation   Active   5s
+
+===== CONFIGMAP =====
+{
+  "name": "recovery-marker",
+  "namespace": "recovery-validation",
+  "data": {
+    "environment": "secure-platform",
+    "recoveryMarker": "PRE_INCIDENT_STATE",
+    "storageClass": "luks2-backed"
+  }
+}
+
+===== DEPLOYMENT =====
+{
+  "name": "recovery-workload",
+  "replicas": 2,
+  "readyReplicas": 2
+}
+
+===== ENCRYPTED PVC =====
+NAME                    STATUS   VOLUME                 CAPACITY   ACCESS MODES   STORAGECLASS          VOLUMEATTRIBUTESCLASS   AGE
+secure-persistent-pvc   Bound    secure-persistent-pv   750Mi      RWO            secure-luks-storage   <unset>                 33s

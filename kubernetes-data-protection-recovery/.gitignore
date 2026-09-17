@@ -1,0 +1,32 @@
+# Encryption keys
+*.key
+*luks*key*
+
+# Kubernetes / etcd secrets
+*.kubeconfig
+*.token
+*.crt
+*.pem
+*.p12
+*.pfx
+
+# etcd snapshots
+etcd-snapshot-*.db
+etcd-snapshot-*.db.sha256
+
+# Disk / storage images
+*.img
+*.raw
+
+# Credentials
+.env
+.env.*
+credentials*
+password*
+secret*
+
+# Runtime
+*.log
+*.tmp
+*.bak
+*.swp

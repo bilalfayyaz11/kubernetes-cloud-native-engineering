@@ -1,0 +1,21 @@
+===== STORAGE ENCRYPTION VERIFICATION =====
+
+Raw image:
+-rw------- 1 ubuntu ubuntu 1.0G Sep 17 17:14 /home/ubuntu/.kubernetes-data-protection-storage.img
+
+Mapper:
+PASS: mapper available
+
+Mount:
+PASS: encrypted filesystem mounted
+
+Kubernetes PVC:
+NAME                    STATUS   VOLUME                 CAPACITY   ACCESS MODES   STORAGECLASS          VOLUMEATTRIBUTESCLASS   AGE
+secure-persistent-pvc   Bound    secure-persistent-pv   750Mi      RWO            secure-luks-storage   <unset>                 18s
+
+Kubernetes workload:
+NAME                 READY   STATUS    RESTARTS   AGE
+storage-validation   1/1     Running   0          12s
+
+Raw block type:
+/dev/loop10: UUID="5b476ed3-5193-4355-b173-e03deb3f159b" TYPE="crypto_LUKS"

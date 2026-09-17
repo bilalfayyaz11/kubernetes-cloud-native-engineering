@@ -1,0 +1,3 @@
+PRESENT: /etc/kubernetes/pki/etcd/ca.crt
+PRESENT: /etc/kubernetes/pki/etcd/server.crt
+PRESENT: /etc/kubernetes/pki/etcd/server.key
