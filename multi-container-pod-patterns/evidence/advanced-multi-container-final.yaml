@@ -1,0 +1,414 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"advanced-multi-container","pattern":"multi-sidecar"},"name":"advanced-multi-container","namespace":"pod-patterns"},"spec":{"containers":[{"args":["set -e\n\necho \"Main application starting...\"\n\nwhile true; do\n\n    if [ -f /data/input/sample.txt ]; then\n\n        {\n            echo \"Processing: $(cat /data/input/sample.txt)\"\n            echo \"Processed at: $(date -u +%Y-%m-%dT%H:%M:%SZ)\"\n        } \u003e /data/output/processed.txt\n\n    fi\n\n    sleep 15\n\ndone\n"],"command":["/bin/sh","-c"],"image":"busybox:stable","name":"main-app","resources":{"limits":{"cpu":"100m","memory":"64Mi"},"requests":{"cpu":"10m","memory":"16Mi"}},"volumeMounts":[{"mountPath":"/data","name":"shared-data"}]},{"args":["set -e\n\necho \"Monitor sidecar starting...\"\n\nwhile true; do\n\n    echo \"=== Monitoring shared data $(date -u +%Y-%m-%dT%H:%M:%SZ) ===\"\n\n    echo \"Input files:\"\n    ls -lah /data/input 2\u003e/dev/null || true\n\n    echo\n    echo \"Output files:\"\n    ls -lah /data/output 2\u003e/dev/null || true\n\n    if [ -f /data/output/processed.txt ]; then\n        echo\n        echo \"Latest processed result:\"\n        cat /data/output/processed.txt\n    fi\n\n    echo\n    echo \"---\"\n\n    sleep 10\n\ndone\n"],"command":["/bin/sh","-c"],"image":"busybox:stable","name":"monitor-sidecar","resources":{"limits":{"cpu":"100m","memory":"64Mi"},"requests":{"cpu":"10m","memory":"16Mi"}},"volumeMounts":[{"mountPath":"/data","name":"shared-data"}]},{"args":["set -e\n\necho \"Cleanup sidecar starting...\"\n\nwhile true; do\n\n    echo \"Running cleanup at $(date -u +%Y-%m-%dT%H:%M:%SZ)\"\n\n    find /data/tmp \\\n      -type f \\\n      -name '*.tmp' \\\n      -mmin +1 \\\n      -delete \\\n      2\u003e/dev/null || true\n\n    sleep 20\n\ndone\n"],"command":["/bin/sh","-c"],"image":"busybox:stable","name":"cleanup-sidecar","resources":{"limits":{"cpu":"50m","memory":"32Mi"},"requests":{"cpu":"5m","memory":"8Mi"}},"volumeMounts":[{"mountPath":"/data","name":"shared-data"}]}],"initContainers":[{"args":["set -e\n\necho \"Initializing shared data...\"\n\nmkdir -p /data/input\nmkdir -p /data/output\nmkdir -p /data/tmp\n\necho \"Sample data for processing\" \\\n  \u003e /data/input/sample.txt\n\necho \"timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)\" \\\n  \u003e /data/input/metadata.txt\n\necho \"temporary artifact\" \\\n  \u003e /data/tmp/sample.tmp\n\necho\necho \"Initial data:\"\nfind /data -maxdepth 2 -type f -print\n\necho\necho \"Data initialization complete.\"\n"],"command":["/bin/sh","-c"],"image":"busybox:stable","name":"data-initializer","volumeMounts":[{"mountPath":"/data","name":"shared-data"}]}],"volumes":[{"emptyDir":{},"name":"shared-data"}]}}
+  creationTimestamp: "2026-09-18T15:53:50Z"
+  generation: 1
+  labels:
+    app: advanced-multi-container
+    pattern: multi-sidecar
+  name: advanced-multi-container
+  namespace: pod-patterns
+  resourceVersion: "787"
+  uid: 17892376-8cd2-4294-8392-367fca798cae
+spec:
+  containers:
+  - args:
+    - |
+      set -e
+
+      echo "Main application starting..."
+
+      while true; do
+
+          if [ -f /data/input/sample.txt ]; then
+
+              {
+                  echo "Processing: $(cat /data/input/sample.txt)"
+                  echo "Processed at: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              } > /data/output/processed.txt
+
+          fi
+
+          sleep 15
+
+      done
+    command:
+    - /bin/sh
+    - -c
+    image: busybox:stable
+    imagePullPolicy: IfNotPresent
+    name: main-app
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+  - args:
+    - |
+      set -e
+
+      echo "Monitor sidecar starting..."
+
+      while true; do
+
+          echo "=== Monitoring shared data $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+
+          echo "Input files:"
+          ls -lah /data/input 2>/dev/null || true
+
+          echo
+          echo "Output files:"
+          ls -lah /data/output 2>/dev/null || true
+
+          if [ -f /data/output/processed.txt ]; then
+              echo
+              echo "Latest processed result:"
+              cat /data/output/processed.txt
+          fi
+
+          echo
+          echo "---"
+
+          sleep 10
+
+      done
+    command:
+    - /bin/sh
+    - -c
+    image: busybox:stable
+    imagePullPolicy: IfNotPresent
+    name: monitor-sidecar
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+  - args:
+    - |
+      set -e
+
+      echo "Cleanup sidecar starting..."
+
+      while true; do
+
+          echo "Running cleanup at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          find /data/tmp \
+            -type f \
+            -name '*.tmp' \
+            -mmin +1 \
+            -delete \
+            2>/dev/null || true
+
+          sleep 20
+
+      done
+    command:
+    - /bin/sh
+    - -c
+    image: busybox:stable
+    imagePullPolicy: IfNotPresent
+    name: cleanup-sidecar
+    resources:
+      limits:
+        cpu: 50m
+        memory: 32Mi
+      requests:
+        cpu: 5m
+        memory: 8Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  initContainers:
+  - args:
+    - |
+      set -e
+
+      echo "Initializing shared data..."
+
+      mkdir -p /data/input
+      mkdir -p /data/output
+      mkdir -p /data/tmp
+
+      echo "Sample data for processing" \
+        > /data/input/sample.txt
+
+      echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+        > /data/input/metadata.txt
+
+      echo "temporary artifact" \
+        > /data/tmp/sample.tmp
+
+      echo
+      echo "Initial data:"
+      find /data -maxdepth 2 -type f -print
+
+      echo
+      echo "Data initialization complete."
+    command:
+    - /bin/sh
+    - -c
+    image: busybox:stable
+    imagePullPolicy: IfNotPresent
+    name: data-initializer
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - emptyDir: {}
+    name: shared-data
+  - name: kube-api-access-q7bvh
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  allocatedResources:
+    cpu: 25m
+    memory: 40Mi
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:53:51Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:53:51Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:53:52Z"
+    observedGeneration: 1
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:53:52Z"
+    observedGeneration: 1
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:53:50Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - allocatedResources:
+      cpu: 5m
+      memory: 8Mi
+    containerID: containerd://7681b17bdb950355a4e8f5afb8a4e9243d37cf07d127f67aa7e3ff7ca2b26665
+    image: docker.io/library/busybox:stable
+    imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    lastState: {}
+    name: cleanup-sidecar
+    ready: true
+    resources:
+      limits:
+        cpu: 50m
+        memory: 32Mi
+      requests:
+        cpu: 5m
+        memory: 8Mi
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-09-18T15:53:52Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 10
+        uid: 0
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+      recursiveReadOnly: Disabled
+  - allocatedResources:
+      cpu: 10m
+      memory: 16Mi
+    containerID: containerd://998e9a749e7a9ecfab5c08a646e9b0bbd111c5aa5a5b61a73f35bb0930b237cc
+    image: docker.io/library/busybox:stable
+    imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    lastState: {}
+    name: main-app
+    ready: true
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-09-18T15:53:51Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 10
+        uid: 0
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+      recursiveReadOnly: Disabled
+  - allocatedResources:
+      cpu: 10m
+      memory: 16Mi
+    containerID: containerd://21f2903955c9b3f5a8f41c909b8b0d5dada182d861d637b0d7e190d3ad6ece9f
+    image: docker.io/library/busybox:stable
+    imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    lastState: {}
+    name: monitor-sidecar
+    ready: true
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-09-18T15:53:51Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 10
+        uid: 0
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  initContainerStatuses:
+  - containerID: containerd://d4008adfe9731f3fd94d8dfc0f0c8a76a5c4b8bdb40a6f9832ec8c66f91c4146
+    image: docker.io/library/busybox:stable
+    imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    lastState: {}
+    name: data-initializer
+    ready: true
+    resources: {}
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://d4008adfe9731f3fd94d8dfc0f0c8a76a5c4b8bdb40a6f9832ec8c66f91c4146
+        exitCode: 0
+        finishedAt: "2026-09-18T15:53:51Z"
+        reason: Completed
+        startedAt: "2026-09-18T15:53:51Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 10
+        uid: 0
+    volumeMounts:
+    - mountPath: /data
+      name: shared-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q7bvh
+      readOnly: true
+      recursiveReadOnly: Disabled
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.5
+  podIPs:
+  - ip: 10.244.0.5
+  qosClass: Burstable
+  resources:
+    limits:
+      cpu: 250m
+      memory: 160Mi
+    requests:
+      memory: 40Mi
+  startTime: "2026-09-18T15:53:50Z"

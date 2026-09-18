@@ -1,0 +1,4 @@
+POD                        NAME              CPU(cores)   MEMORY(bytes)   
+advanced-multi-container   cleanup-sidecar   1m           0Mi             
+advanced-multi-container   main-app          1m           0Mi             
+advanced-multi-container   monitor-sidecar   1m           0Mi             

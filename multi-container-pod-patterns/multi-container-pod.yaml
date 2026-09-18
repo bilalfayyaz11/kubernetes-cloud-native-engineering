@@ -1,0 +1,149 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container-app
+  namespace: pod-patterns
+  labels:
+    app: multi-container-app
+    pattern: sidecar
+spec:
+
+  volumes:
+    - name: shared-logs
+      emptyDir: {}
+
+    - name: config-volume
+      emptyDir: {}
+
+  initContainers:
+
+    - name: config-setup
+      image: busybox:stable
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - |
+          set -e
+
+          echo "Initializing application configuration..."
+
+          cat > /config/app.conf << 'CONFIG'
+          server_name=web-app
+          log_level=info
+          port=8080
+          CONFIG
+
+          echo "Configuration created:"
+          cat /config/app.conf
+
+          echo "Preparing shared log files..."
+
+          touch /logs/access.log
+          touch /logs/error.log
+
+          chmod 666 /logs/access.log
+          chmod 666 /logs/error.log
+
+          echo "Initialization complete."
+
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+
+        - name: shared-logs
+          mountPath: /logs
+
+  containers:
+
+    - name: web-app
+      image: nginx:alpine
+
+      ports:
+        - name: http
+          containerPort: 80
+
+      volumeMounts:
+        - name: shared-logs
+          mountPath: /var/log/nginx
+
+        - name: config-volume
+          mountPath: /etc/app-config
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - |
+          set -e
+
+          echo "Starting web application..."
+          echo
+          echo "Configuration available to main container:"
+          cat /etc/app-config/app.conf
+
+          echo
+          echo "Starting Nginx..."
+
+          exec nginx -g 'daemon off;'
+
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 2
+        periodSeconds: 5
+
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 10
+        periodSeconds: 10
+
+      resources:
+        requests:
+          cpu: 25m
+          memory: 32Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
+
+
+    - name: log-sidecar
+      image: busybox:stable
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - |
+          set -e
+
+          echo "Logging sidecar starting..."
+          echo "Waiting for Nginx access log..."
+
+          while [ ! -f /var/log/nginx/access.log ]; do
+              sleep 1
+          done
+
+          echo "Access log detected."
+          echo "Following application requests..."
+
+          exec tail -n 0 -F /var/log/nginx/access.log
+
+      volumeMounts:
+        - name: shared-logs
+          mountPath: /var/log/nginx
+
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          cpu: 100m
+          memory: 64Mi

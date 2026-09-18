@@ -1,0 +1,360 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"multi-container-app","pattern":"sidecar"},"name":"multi-container-app","namespace":"pod-patterns"},"spec":{"containers":[{"args":["set -e\n\necho \"Starting web application...\"\necho\necho \"Configuration available to main container:\"\ncat /etc/app-config/app.conf\n\necho\necho \"Starting Nginx...\"\n\nexec nginx -g 'daemon off;'\n"],"command":["/bin/sh","-c"],"image":"nginx:alpine","livenessProbe":{"httpGet":{"path":"/","port":80},"initialDelaySeconds":10,"periodSeconds":10},"name":"web-app","ports":[{"containerPort":80,"name":"http"}],"readinessProbe":{"httpGet":{"path":"/","port":80},"initialDelaySeconds":2,"periodSeconds":5},"resources":{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"25m","memory":"32Mi"}},"volumeMounts":[{"mountPath":"/var/log/nginx","name":"shared-logs"},{"mountPath":"/etc/app-config","name":"config-volume"}]},{"args":["set -e\n\necho \"Logging sidecar starting...\"\necho \"Waiting for Nginx access log...\"\n\nwhile [ ! -f /var/log/nginx/access.log ]; do\n    sleep 1\ndone\n\necho \"Access log detected.\"\necho \"Following application requests...\"\n\nexec tail -n 0 -F /var/log/nginx/access.log\n"],"command":["/bin/sh","-c"],"image":"busybox:stable","name":"log-sidecar","resources":{"limits":{"cpu":"100m","memory":"64Mi"},"requests":{"cpu":"10m","memory":"16Mi"}},"volumeMounts":[{"mountPath":"/var/log/nginx","name":"shared-logs"}]}],"initContainers":[{"args":["set -e\n\necho \"Initializing application configuration...\"\n\ncat \u003e /config/app.conf \u003c\u003c 'CONFIG'\nserver_name=web-app\nlog_level=info\nport=8080\nCONFIG\n\necho \"Configuration created:\"\ncat /config/app.conf\n\necho \"Preparing shared log files...\"\n\ntouch /logs/access.log\ntouch /logs/error.log\n\nchmod 666 /logs/access.log\nchmod 666 /logs/error.log\n\necho \"Initialization complete.\"\n"],"command":["/bin/sh","-c"],"image":"busybox:stable","name":"config-setup","volumeMounts":[{"mountPath":"/config","name":"config-volume"},{"mountPath":"/logs","name":"shared-logs"}]}],"volumes":[{"emptyDir":{},"name":"shared-logs"},{"emptyDir":{},"name":"config-volume"}]}}
+  creationTimestamp: "2026-09-18T15:51:03Z"
+  generation: 1
+  labels:
+    app: multi-container-app
+    pattern: sidecar
+  name: multi-container-app
+  namespace: pod-patterns
+  resourceVersion: "505"
+  uid: 873f07fc-5e34-49cf-a52e-545a257599bd
+spec:
+  containers:
+  - args:
+    - |
+      set -e
+
+      echo "Starting web application..."
+      echo
+      echo "Configuration available to main container:"
+      cat /etc/app-config/app.conf
+
+      echo
+      echo "Starting Nginx..."
+
+      exec nginx -g 'daemon off;'
+    command:
+    - /bin/sh
+    - -c
+    image: nginx:alpine
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 80
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: web-app
+    ports:
+    - containerPort: 80
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 80
+        scheme: HTTP
+      initialDelaySeconds: 2
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: 200m
+        memory: 128Mi
+      requests:
+        cpu: 25m
+        memory: 32Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log/nginx
+      name: shared-logs
+    - mountPath: /etc/app-config
+      name: config-volume
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ll7hs
+      readOnly: true
+  - args:
+    - |
+      set -e
+
+      echo "Logging sidecar starting..."
+      echo "Waiting for Nginx access log..."
+
+      while [ ! -f /var/log/nginx/access.log ]; do
+          sleep 1
+      done
+
+      echo "Access log detected."
+      echo "Following application requests..."
+
+      exec tail -n 0 -F /var/log/nginx/access.log
+    command:
+    - /bin/sh
+    - -c
+    image: busybox:stable
+    imagePullPolicy: IfNotPresent
+    name: log-sidecar
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log/nginx
+      name: shared-logs
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ll7hs
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  initContainers:
+  - args:
+    - |
+      set -e
+
+      echo "Initializing application configuration..."
+
+      cat > /config/app.conf << 'CONFIG'
+      server_name=web-app
+      log_level=info
+      port=8080
+      CONFIG
+
+      echo "Configuration created:"
+      cat /config/app.conf
+
+      echo "Preparing shared log files..."
+
+      touch /logs/access.log
+      touch /logs/error.log
+
+      chmod 666 /logs/access.log
+      chmod 666 /logs/error.log
+
+      echo "Initialization complete."
+    command:
+    - /bin/sh
+    - -c
+    image: busybox:stable
+    imagePullPolicy: IfNotPresent
+    name: config-setup
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /config
+      name: config-volume
+    - mountPath: /logs
+      name: shared-logs
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ll7hs
+      readOnly: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - emptyDir: {}
+    name: shared-logs
+  - emptyDir: {}
+    name: config-volume
+  - name: kube-api-access-ll7hs
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  allocatedResources:
+    cpu: 35m
+    memory: 48Mi
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:51:04Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:51:06Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:51:11Z"
+    observedGeneration: 1
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:51:11Z"
+    observedGeneration: 1
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T15:51:04Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - allocatedResources:
+      cpu: 10m
+      memory: 16Mi
+    containerID: containerd://9be60d2331052dcd4def27103db10466c9eb41b157259f39b7ed2af2bd35a3e7
+    image: docker.io/library/busybox:stable
+    imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    lastState: {}
+    name: log-sidecar
+    ready: true
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-09-18T15:51:10Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 10
+        uid: 0
+    volumeMounts:
+    - mountPath: /var/log/nginx
+      name: shared-logs
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ll7hs
+      readOnly: true
+      recursiveReadOnly: Disabled
+  - allocatedResources:
+      cpu: 25m
+      memory: 32Mi
+    containerID: containerd://c51cb2a22a260a20a8c84ad037d7bcd5ce5b09c3b8fe63dea6fcb623b7af8ab2
+    image: docker.io/library/nginx:alpine
+    imageID: docker.io/library/nginx@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    lastState: {}
+    name: web-app
+    ready: true
+    resources:
+      limits:
+        cpu: 200m
+        memory: 128Mi
+      requests:
+        cpu: 25m
+        memory: 32Mi
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-09-18T15:51:09Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 6
+        - 10
+        - 11
+        - 20
+        - 26
+        - 27
+        uid: 0
+    volumeMounts:
+    - mountPath: /var/log/nginx
+      name: shared-logs
+    - mountPath: /etc/app-config
+      name: config-volume
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ll7hs
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  initContainerStatuses:
+  - containerID: containerd://0e32de1a8cfdf6c39c5e39eece1ad2ddbfd5e797e1af8f6a1611caaf8cbf69b3
+    image: docker.io/library/busybox:stable
+    imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    lastState: {}
+    name: config-setup
+    ready: true
+    resources: {}
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://0e32de1a8cfdf6c39c5e39eece1ad2ddbfd5e797e1af8f6a1611caaf8cbf69b3
+        exitCode: 0
+        finishedAt: "2026-09-18T15:51:05Z"
+        reason: Completed
+        startedAt: "2026-09-18T15:51:05Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 10
+        uid: 0
+    volumeMounts:
+    - mountPath: /config
+      name: config-volume
+    - mountPath: /logs
+      name: shared-logs
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ll7hs
+      readOnly: true
+      recursiveReadOnly: Disabled
+  observedGeneration: 1
+  phase: Running
+  podIP: 10.244.0.3
+  podIPs:
+  - ip: 10.244.0.3
+  qosClass: Burstable
+  resources:
+    limits:
+      cpu: 300m
+      memory: 192Mi
+    requests:
+      cpu: 28m
+      memory: 48Mi
+  startTime: "2026-09-18T15:51:04Z"

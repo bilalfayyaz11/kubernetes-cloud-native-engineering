@@ -1,0 +1,3 @@
+POD                   NAME          CPU(cores)   MEMORY(bytes)   
+multi-container-app   log-sidecar   1m           0Mi             
+multi-container-app   web-app       1m           3Mi             

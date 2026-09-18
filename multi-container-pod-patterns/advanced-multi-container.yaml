@@ -1,0 +1,185 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: advanced-multi-container
+  namespace: pod-patterns
+  labels:
+    app: advanced-multi-container
+    pattern: multi-sidecar
+spec:
+
+  volumes:
+    - name: shared-data
+      emptyDir: {}
+
+  initContainers:
+
+    - name: data-initializer
+      image: busybox:stable
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - |
+          set -e
+
+          echo "Initializing shared data..."
+
+          mkdir -p /data/input
+          mkdir -p /data/output
+          mkdir -p /data/tmp
+
+          echo "Sample data for processing" \
+            > /data/input/sample.txt
+
+          echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            > /data/input/metadata.txt
+
+          echo "temporary artifact" \
+            > /data/tmp/sample.tmp
+
+          echo
+          echo "Initial data:"
+          find /data -maxdepth 2 -type f -print
+
+          echo
+          echo "Data initialization complete."
+
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+
+  containers:
+
+    - name: main-app
+      image: busybox:stable
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - |
+          set -e
+
+          echo "Main application starting..."
+
+          while true; do
+
+              if [ -f /data/input/sample.txt ]; then
+
+                  {
+                      echo "Processing: $(cat /data/input/sample.txt)"
+                      echo "Processed at: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                  } > /data/output/processed.txt
+
+              fi
+
+              sleep 15
+
+          done
+
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          cpu: 100m
+          memory: 64Mi
+
+
+    - name: monitor-sidecar
+      image: busybox:stable
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - |
+          set -e
+
+          echo "Monitor sidecar starting..."
+
+          while true; do
+
+              echo "=== Monitoring shared data $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+
+              echo "Input files:"
+              ls -lah /data/input 2>/dev/null || true
+
+              echo
+              echo "Output files:"
+              ls -lah /data/output 2>/dev/null || true
+
+              if [ -f /data/output/processed.txt ]; then
+                  echo
+                  echo "Latest processed result:"
+                  cat /data/output/processed.txt
+              fi
+
+              echo
+              echo "---"
+
+              sleep 10
+
+          done
+
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          cpu: 100m
+          memory: 64Mi
+
+
+    - name: cleanup-sidecar
+      image: busybox:stable
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - |
+          set -e
+
+          echo "Cleanup sidecar starting..."
+
+          while true; do
+
+              echo "Running cleanup at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+              find /data/tmp \
+                -type f \
+                -name '*.tmp' \
+                -mmin +1 \
+                -delete \
+                2>/dev/null || true
+
+              sleep 20
+
+          done
+
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+
+      resources:
+        requests:
+          cpu: 5m
+          memory: 8Mi
+        limits:
+          cpu: 50m
+          memory: 32Mi

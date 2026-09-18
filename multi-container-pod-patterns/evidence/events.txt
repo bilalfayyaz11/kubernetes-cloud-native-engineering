@@ -1,0 +1,30 @@
+LAST SEEN   TYPE     REASON      OBJECT                         MESSAGE
+4m53s       Normal   Scheduled   pod/multi-container-app        Successfully assigned pod-patterns/multi-container-app to minikube
+4m53s       Normal   Pulling     pod/multi-container-app        Pulling image "busybox:stable"
+4m52s       Normal   Started     pod/multi-container-app        Container started
+4m52s       Normal   Created     pod/multi-container-app        Container created
+4m52s       Normal   Pulled      pod/multi-container-app        Successfully pulled image "busybox:stable" in 815ms (815ms including waiting). Image size: 2217006 bytes.
+4m51s       Normal   Pulling     pod/multi-container-app        Pulling image "nginx:alpine"
+4m48s       Normal   Started     pod/multi-container-app        Container started
+4m48s       Normal   Pulled      pod/multi-container-app        Successfully pulled image "nginx:alpine" in 3.01s (3.01s including waiting). Image size: 26335703 bytes.
+4m48s       Normal   Pulled      pod/multi-container-app        Container image "busybox:stable" already present on machine and can be accessed by the pod
+4m48s       Normal   Created     pod/multi-container-app        Container created
+4m47s       Normal   Started     pod/multi-container-app        Container started
+4m47s       Normal   Created     pod/multi-container-app        Container created
+3m5s        Normal   Started     pod/test-client                Container started
+3m5s        Normal   Created     pod/test-client                Container created
+3m5s        Normal   Pulled      pod/test-client                Container image "busybox:stable" already present on machine and can be accessed by the pod
+3m5s        Normal   Scheduled   pod/test-client                Successfully assigned pod-patterns/test-client to minikube
+2m7s        Normal   Scheduled   pod/advanced-multi-container   Successfully assigned pod-patterns/advanced-multi-container to minikube
+2m6s        Normal   Created     pod/advanced-multi-container   Container created
+2m6s        Normal   Pulled      pod/advanced-multi-container   Container image "busybox:stable" already present on machine and can be accessed by the pod
+2m6s        Normal   Pulled      pod/advanced-multi-container   Container image "busybox:stable" already present on machine and can be accessed by the pod
+2m6s        Normal   Started     pod/advanced-multi-container   Container started
+2m6s        Normal   Pulled      pod/advanced-multi-container   Container image "busybox:stable" already present on machine and can be accessed by the pod
+2m6s        Normal   Created     pod/advanced-multi-container   Container created
+2m6s        Normal   Started     pod/advanced-multi-container   Container started
+2m6s        Normal   Created     pod/advanced-multi-container   Container created
+2m6s        Normal   Pulled      pod/advanced-multi-container   Container image "busybox:stable" already present on machine and can be accessed by the pod
+2m6s        Normal   Started     pod/advanced-multi-container   Container started
+2m6s        Normal   Created     pod/advanced-multi-container   Container created
+2m5s        Normal   Started     pod/advanced-multi-container   Container started

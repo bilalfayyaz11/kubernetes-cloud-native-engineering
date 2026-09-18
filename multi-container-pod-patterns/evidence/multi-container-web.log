@@ -1,0 +1,8 @@
+Starting web application...
+
+Configuration available to main container:
+server_name=web-app
+log_level=info
+port=8080
+
+Starting Nginx...

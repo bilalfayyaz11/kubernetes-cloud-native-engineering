@@ -1,0 +1,7 @@
+Initializing application configuration...
+Configuration created:
+server_name=web-app
+log_level=info
+port=8080
+Preparing shared log files...
+Initialization complete.
