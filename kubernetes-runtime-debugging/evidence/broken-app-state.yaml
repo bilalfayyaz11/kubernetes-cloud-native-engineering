@@ -1,0 +1,157 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"debug-demo"},"name":"broken-app","namespace":"runtime-debugging"},"spec":{"containers":[{"env":[{"name":"CONFIG_FILE","value":"/etc/config/app.conf"}],"image":"nginx:alpine","name":"web-server","ports":[{"containerPort":80}],"resources":{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"25m","memory":"32Mi"}},"volumeMounts":[{"mountPath":"/etc/config","name":"config-volume"},{"mountPath":"/var/app-data","name":"app-data"}]}],"restartPolicy":"Always","volumes":[{"configMap":{"name":"app-config"},"name":"config-volume"},{"emptyDir":{},"name":"app-data"}]}}
+  creationTimestamp: "2026-09-18T17:07:55Z"
+  generation: 1
+  labels:
+    app: debug-demo
+  name: broken-app
+  namespace: runtime-debugging
+  resourceVersion: "517"
+  uid: c0967769-1e10-4f6e-94d4-f516fabb8c0d
+spec:
+  containers:
+  - env:
+    - name: CONFIG_FILE
+      value: /etc/config/app.conf
+    image: nginx:alpine
+    imagePullPolicy: IfNotPresent
+    name: web-server
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 200m
+        memory: 128Mi
+      requests:
+        cpu: 25m
+        memory: 32Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/config
+      name: config-volume
+    - mountPath: /var/app-data
+      name: app-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-n7z5v
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: app-config
+    name: config-volume
+  - emptyDir: {}
+    name: app-data
+  - name: kube-api-access-n7z5v
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  allocatedResources:
+    cpu: 25m
+    memory: 32Mi
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:07:55Z"
+    message: no pod sandbox exists
+    observedGeneration: 1
+    reason: PodSandboxNotReady
+    status: "False"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:07:55Z"
+    observedGeneration: 1
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:07:55Z"
+    message: 'containers with unready status: [web-server]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:07:55Z"
+    message: 'containers with unready status: [web-server]'
+    observedGeneration: 1
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:07:55Z"
+    observedGeneration: 1
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - image: nginx:alpine
+    imageID: ""
+    lastState: {}
+    name: web-server
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      waiting:
+        reason: ContainerCreating
+    volumeMounts:
+    - mountPath: /etc/config
+      name: config-volume
+    - mountPath: /var/app-data
+      name: app-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-n7z5v
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  observedGeneration: 1
+  phase: Pending
+  qosClass: Burstable
+  resources:
+    limits:
+      cpu: 200m
+      memory: 128Mi
+    requests:
+      cpu: 25m
+      memory: 32Mi
+  startTime: "2026-09-18T17:07:55Z"

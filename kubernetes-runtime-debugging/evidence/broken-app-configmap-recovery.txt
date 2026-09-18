@@ -1,0 +1,10 @@
+--- mounted files ---
+total 16
+drwxrwxrwx    3 root     root          4096 Sep 18 17:18 .
+drwxr-xr-x    1 root     root          4096 Sep 18 17:18 ..
+drwxr-xr-x    2 root     root          4096 Sep 18 17:18 ..2026_09_18_17_18_18.1077950842
+lrwxrwxrwx    1 root     root            32 Sep 18 17:18 ..data -> ..2026_09_18_17_18_18.1077950842
+lrwxrwxrwx    1 root     root            15 Sep 18 17:18 app.conf -> ..data/app.conf
+
+--- app.conf ---
+server_name=debug-app

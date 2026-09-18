@@ -1,0 +1,22 @@
+total 80
+drwxr-xr-x    1 root     root          4096 Sep 18 17:08 .
+drwxr-xr-x    1 root     root          4096 Sep 18 17:08 ..
+drwxr-xr-x    2 root     root          4096 Sep 17 17:32 bin
+drwxr-xr-x    5 root     root           360 Sep 18 17:08 dev
+drwxr-xr-x    1 root     root          4096 Sep 17 21:16 docker-entrypoint.d
+-rwxr-xr-x    1 root     root          1620 Sep 17 21:16 docker-entrypoint.sh
+drwxr-xr-x    1 root     root          4096 Sep 18 17:08 etc
+drwxr-xr-x    2 root     root          4096 Sep 17 17:32 home
+drwxr-xr-x    1 root     root          4096 Sep 17 17:32 lib
+drwxr-xr-x    5 root     root          4096 Sep 17 17:32 media
+drwxr-xr-x    2 root     root          4096 Sep 17 17:32 mnt
+drwxr-xr-x    2 root     root          4096 Sep 17 17:32 opt
+dr-xr-xr-x  314 root     root             0 Sep 18 17:08 proc
+drwx------    2 root     root          4096 Sep 17 17:32 root
+drwxr-xr-x    1 root     root          4096 Sep 18 17:08 run
+drwxr-xr-x    2 root     root          4096 Sep 17 17:32 sbin
+drwxr-xr-x    2 root     root          4096 Sep 17 17:32 srv
+dr-xr-xr-x   13 root     root             0 Sep 18 17:07 sys
+drwxrwxrwt    2 root     root          4096 Sep 17 17:32 tmp
+drwxr-xr-x    1 root     root          4096 Sep 17 17:32 usr
+drwxr-xr-x    1 root     root          4096 Sep 18 17:08 var

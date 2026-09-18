@@ -1,0 +1,47 @@
+LAST SEEN   TYPE      REASON             OBJECT                   MESSAGE
+87s         Warning   FailedMount        pod/broken-app           MountVolume.SetUp failed for volume "config-volume" : configmap "app-config" not found
+11m         Normal    Scheduled          pod/broken-app           Successfully assigned runtime-debugging/broken-app to minikube
+11m         Normal    Scheduled          pod/working-app          Successfully assigned runtime-debugging/working-app to minikube
+11m         Normal    Pulling            pod/working-app          Pulling image "nginx:alpine"
+11m         Normal    Started            pod/working-app          Container started
+11m         Normal    Created            pod/working-app          Container created
+11m         Normal    Pulled             pod/working-app          Successfully pulled image "nginx:alpine" in 3.421s (3.421s including waiting). Image size: 26335703 bytes.
+80s         Normal    Scheduled          pod/broken-app           Successfully assigned runtime-debugging/broken-app to minikube
+80s         Normal    Pulled             pod/broken-app           Container image "nginx:alpine" already present on machine and can be accessed by the pod
+80s         Normal    Created            pod/broken-app           Container created
+79s         Normal    Started            pod/broken-app           Container started
+78s         Normal    Scheduled          pod/problematic-app      Successfully assigned runtime-debugging/problematic-app to minikube
+77s         Normal    Pulling            pod/problematic-app      Pulling image "busybox:1.37"
+76s         Normal    Started            pod/problematic-app      Container started
+76s         Normal    Created            pod/problematic-app      Container created
+76s         Normal    Pulled             pod/problematic-app      Successfully pulled image "busybox:1.37" in 706ms (706ms including waiting). Image size: 2222111 bytes.
+75s         Normal    Pulling            pod/problematic-app      Pulling image "nicolaka/netshoot:latest"
+59s         Normal    Started            pod/problematic-app      Container started
+59s         Normal    Created            pod/problematic-app      Container created
+59s         Normal    Pulled             pod/problematic-app      Successfully pulled image "nicolaka/netshoot:latest" in 15.494s (15.494s including waiting). Image size: 218745451 bytes.
+15s         Normal    Scheduled          pod/complex-app          Successfully assigned runtime-debugging/complex-app to minikube
+14s         Normal    Created            pod/complex-app          Container created
+14s         Normal    Pulled             pod/complex-app          Container image "busybox:1.37" already present on machine and can be accessed by the pod
+14s         Normal    Started            pod/complex-app          Container started
+14s         Normal    Created            pod/complex-app          Container created
+14s         Normal    Started            pod/complex-app          Container started
+14s         Normal    Pulled             pod/complex-app          Container image "nginx:alpine" already present on machine and can be accessed by the pod
+12s         Normal    Created            pod/complex-app          Container created
+12s         Normal    Pulling            pod/complex-app          Pulling image "nicolaka/netshoot:latest"
+12s         Normal    Pulled             pod/complex-app          Successfully pulled image "nicolaka/netshoot:latest" in 167ms (167ms including waiting). Image size: 218745451 bytes.
+12s         Normal    Started            pod/complex-app          Container started
+9s          Normal    Scheduled          pod/wrong-image-pod      Successfully assigned runtime-debugging/wrong-image-pod to minikube
+8s          Normal    Pulling            pod/wrong-image-pod      Pulling image "nonexistent-image-example-xyz:latest"
+8s          Warning   Failed             pod/wrong-image-pod      Failed to pull image "nonexistent-image-example-xyz:latest": failed to pull and unpack image "docker.io/library/nonexistent-image-example-xyz:latest": failed to resolve reference "docker.io/library/nonexistent-image-example-xyz:latest": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+8s          Warning   Failed             pod/wrong-image-pod      Error: ErrImagePull
+7s          Normal    BackOff            pod/wrong-image-pod      Back-off pulling image "nonexistent-image-example-xyz:latest"
+7s          Warning   Failed             pod/wrong-image-pod      Error: ImagePullBackOff
+5s          Warning   FailedScheduling   pod/resource-issue-pod   0/1 nodes are available: 1 Insufficient cpu, 1 Insufficient memory. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+4s          Normal    Scheduled          pod/network-test         Successfully assigned runtime-debugging/network-test to minikube
+4s          Normal    Pulled             pod/network-test         Container image "busybox:1.37" already present on machine and can be accessed by the pod
+4s          Normal    Created            pod/network-test         Container created
+3s          Normal    Pulled             pod/network-test         Successfully pulled image "nicolaka/netshoot:latest" in 220ms (220ms including waiting). Image size: 218745451 bytes.
+3s          Normal    Started            pod/network-test         Container started
+3s          Normal    Pulling            pod/network-test         Pulling image "nicolaka/netshoot:latest"
+3s          Normal    Started            pod/network-test         Container started
+3s          Normal    Created            pod/network-test         Container created

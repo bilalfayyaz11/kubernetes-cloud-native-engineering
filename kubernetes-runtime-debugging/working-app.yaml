@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: working-app
+  namespace: runtime-debugging
+  labels:
+    app: debug-demo-working
+spec:
+  containers:
+    - name: web-server
+      image: nginx:alpine
+
+      ports:
+        - containerPort: 80
+
+      env:
+        - name: SERVER_NAME
+          value: "debug-server"
+
+      volumeMounts:
+        - name: app-data
+          mountPath: /var/app-data
+
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "25m"
+        limits:
+          memory: "128Mi"
+          cpu: "200m"
+
+  volumes:
+    - name: app-data
+      emptyDir: {}
+
+  restartPolicy: Always

@@ -1,0 +1,22 @@
+[
+  {
+    "command": [
+      "sleep",
+      "3600"
+    ],
+    "image": "nicolaka/netshoot:latest",
+    "imagePullPolicy": "Always",
+    "name": "runtime-debugger",
+    "resources": {},
+    "securityContext": {
+      "capabilities": {
+        "add": [
+          "SYS_PTRACE"
+        ]
+      }
+    },
+    "targetContainerName": "app-container",
+    "terminationMessagePath": "/dev/termination-log",
+    "terminationMessagePolicy": "File"
+  }
+]

@@ -1,0 +1,18 @@
+Filesystem                Size      Used Available Use% Mounted on
+overlay                  28.0G     11.3G     16.7G  40% /
+tmpfs                    64.0M         0     64.0M   0% /dev
+/dev/root                28.0G     11.3G     16.7G  40% /var/app-data
+/dev/root                28.0G     11.3G     16.7G  40% /etc/hosts
+/dev/root                28.0G     11.3G     16.7G  40% /dev/termination-log
+/dev/root                28.0G     11.3G     16.7G  40% /etc/hostname
+/dev/root                28.0G     11.3G     16.7G  40% /etc/resolv.conf
+shm                      64.0M         0     64.0M   0% /dev/shm
+tmpfs                   128.0M     12.0K    128.0M   0% /run/secrets/kubernetes.io/serviceaccount
+tmpfs                     4.0K         0      4.0K   0% /proc/acpi
+tmpfs                    64.0M         0     64.0M   0% /proc/interrupts
+tmpfs                    64.0M         0     64.0M   0% /proc/kcore
+tmpfs                    64.0M         0     64.0M   0% /proc/keys
+tmpfs                    64.0M         0     64.0M   0% /proc/latency_stats
+tmpfs                    64.0M         0     64.0M   0% /proc/timer_list
+tmpfs                     4.0K         0      4.0K   0% /proc/scsi
+tmpfs                     4.0K         0      4.0K   0% /sys/firmware

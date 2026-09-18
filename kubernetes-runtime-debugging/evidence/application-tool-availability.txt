@@ -1,0 +1,6 @@
+AVAILABLE: netstat -> /bin/netstat
+MISSING: ss
+AVAILABLE: ip -> /sbin/ip
+AVAILABLE: curl -> /usr/bin/curl
+AVAILABLE: wget -> /usr/bin/wget
+AVAILABLE: free -> /usr/bin/free

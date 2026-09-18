@@ -1,0 +1,8 @@
+Nginx container logging observation:
+
+- access.log is exposed through container stdout
+- error.log is exposed through container stderr
+- kubectl logs is therefore the appropriate Kubernetes-native inspection method
+- directly tailing the stdout/stderr log symlink can block because it is not a conventional persistent log file
+
+This behavior is expected for containerized applications.

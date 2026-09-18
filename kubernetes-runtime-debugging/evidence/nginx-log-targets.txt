@@ -1,0 +1,12 @@
+--- /var/log/nginx ---
+total 8
+drwxr-xr-x    2 root     root          4096 Sep 17 21:16 .
+drwxr-xr-x    1 root     root          4096 Sep 17 21:16 ..
+lrwxrwxrwx    1 root     root            11 Sep 17 21:16 access.log -> /dev/stdout
+lrwxrwxrwx    1 root     root            11 Sep 17 21:16 error.log -> /dev/stderr
+
+--- access.log target ---
+/dev/stdout
+
+--- error.log target ---
+/dev/stderr

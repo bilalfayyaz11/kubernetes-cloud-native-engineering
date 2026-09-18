@@ -1,0 +1,7 @@
+--- SERVER_NAME ---
+debug-server
+
+--- SELECTED ENVIRONMENT ---
+HOSTNAME=working-app
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+SERVER_NAME=debug-server

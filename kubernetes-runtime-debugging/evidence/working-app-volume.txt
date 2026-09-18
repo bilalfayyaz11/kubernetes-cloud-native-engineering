@@ -1,0 +1,4 @@
+total 16
+drwxrwxrwx    2 root     root          4096 Sep 18 17:08 .
+drwxr-xr-x    1 root     root          4096 Sep 18 17:08 ..
+-rw-r--r--    1 root     root            11 Sep 18 17:08 test.txt

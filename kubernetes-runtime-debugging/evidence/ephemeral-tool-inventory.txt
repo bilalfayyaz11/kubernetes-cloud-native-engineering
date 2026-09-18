@@ -1,0 +1,9 @@
+ps: available
+ip: available
+ss: available
+curl: available
+dig: available
+nslookup: available
+tcpdump: available
+traceroute: available
+strace: available

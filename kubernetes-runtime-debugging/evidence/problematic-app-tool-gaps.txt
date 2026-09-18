@@ -1,0 +1,9 @@
+sh: available
+bash: missing
+ps: available
+ss: missing
+netstat: available
+ip: available
+curl: missing
+tcpdump: missing
+strace: missing

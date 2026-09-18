@@ -1,0 +1,207 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"debug-demo-problem"},"name":"problematic-app","namespace":"runtime-debugging"},"spec":{"containers":[{"command":["/bin/sh","-c","while true; do\n  echo \"App running at $(date)\"\n  sleep 30\ndone\n"],"env":[{"name":"DEBUG_MODE","value":"true"},{"name":"APPLICATION_ROLE","value":"minimal-runtime"}],"image":"busybox:1.37","name":"app-container","resources":{"limits":{"cpu":"100m","memory":"64Mi"},"requests":{"cpu":"10m","memory":"16Mi"}}}],"restartPolicy":"Always"}}
+  creationTimestamp: "2026-09-18T17:18:20Z"
+  generation: 2
+  labels:
+    app: debug-demo-problem
+  name: problematic-app
+  namespace: runtime-debugging
+  resourceVersion: "1151"
+  uid: c7b574c7-b8e2-4c60-917b-2d791b7bfa8b
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - |
+      while true; do
+        echo "App running at $(date)"
+        sleep 30
+      done
+    env:
+    - name: DEBUG_MODE
+      value: "true"
+    - name: APPLICATION_ROLE
+      value: minimal-runtime
+    image: busybox:1.37
+    imagePullPolicy: IfNotPresent
+    name: app-container
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q57n2
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  ephemeralContainers:
+  - command:
+    - sleep
+    - "3600"
+    image: nicolaka/netshoot:latest
+    imagePullPolicy: Always
+    name: runtime-debugger
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_PTRACE
+    targetContainerName: app-container
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-q57n2
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  allocatedResources:
+    cpu: 10m
+    memory: 16Mi
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:18:21Z"
+    observedGeneration: 2
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:18:20Z"
+    observedGeneration: 2
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:18:22Z"
+    observedGeneration: 2
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:18:22Z"
+    observedGeneration: 2
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-09-18T17:18:20Z"
+    observedGeneration: 2
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - allocatedResources:
+      cpu: 10m
+      memory: 16Mi
+    containerID: containerd://c979178a25978cb625d6fa85781ad08ae27a94eb8bc29057c4effbd2430d7964
+    image: docker.io/library/busybox:1.37
+    imageID: docker.io/library/busybox@sha256:9db7b59979c38555a39def84a31fb98b5296952f9e3afd4f6f11f05b07adfab0
+    lastState: {}
+    name: app-container
+    ready: true
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-09-18T17:18:22Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 10
+        uid: 0
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-q57n2
+      readOnly: true
+      recursiveReadOnly: Disabled
+  ephemeralContainerStatuses:
+  - containerID: containerd://5bd346b215ec5d94e8f3fbc60ec7bd6bf9fb9ace1867eec449e6a79884bbdeba
+    image: docker.io/nicolaka/netshoot:latest
+    imageID: docker.io/nicolaka/netshoot@sha256:b09d9b21381f47a79b3cbcb30da25266dc17186ea00ae65e99fdc51396f48e70
+    lastState: {}
+    name: runtime-debugger
+    ready: false
+    resources: {}
+    restartCount: 0
+    state:
+      running:
+        startedAt: "2026-09-18T17:18:39Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 6
+        - 10
+        - 11
+        - 20
+        - 26
+        - 27
+        uid: 0
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  observedGeneration: 2
+  phase: Running
+  podIP: 10.244.0.5
+  podIPs:
+  - ip: 10.244.0.5
+  qosClass: Burstable
+  resources:
+    limits:
+      cpu: 100m
+      memory: 64Mi
+    requests:
+      memory: 16Mi
+  startTime: "2026-09-18T17:18:20Z"

@@ -1,0 +1,3 @@
+LAST SEEN   TYPE      REASON        OBJECT           MESSAGE
+1s          Normal    Scheduled     pod/broken-app   Successfully assigned runtime-debugging/broken-app to minikube
+0s          Warning   FailedMount   pod/broken-app   MountVolume.SetUp failed for volume "config-volume" : configmap "app-config" not found

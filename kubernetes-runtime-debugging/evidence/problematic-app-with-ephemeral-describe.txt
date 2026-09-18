@@ -1,0 +1,88 @@
+Name:             problematic-app
+Namespace:        runtime-debugging
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 18 Sep 2026 17:18:20 +0000
+Labels:           app=debug-demo-problem
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.5
+IPs:
+  IP:  10.244.0.5
+Containers:
+  app-container:
+    Container ID:  containerd://c979178a25978cb625d6fa85781ad08ae27a94eb8bc29057c4effbd2430d7964
+    Image:         busybox:1.37
+    Image ID:      docker.io/library/busybox@sha256:9db7b59979c38555a39def84a31fb98b5296952f9e3afd4f6f11f05b07adfab0
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -c
+      while true; do
+        echo "App running at $(date)"
+        sleep 30
+      done
+      
+    State:          Running
+      Started:      Fri, 18 Sep 2026 17:18:22 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  64Mi
+    Requests:
+      cpu:     10m
+      memory:  16Mi
+    Environment:
+      DEBUG_MODE:        true
+      APPLICATION_ROLE:  minimal-runtime
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-q57n2 (ro)
+Ephemeral Containers:
+  runtime-debugger:
+    Container ID:  containerd://5bd346b215ec5d94e8f3fbc60ec7bd6bf9fb9ace1867eec449e6a79884bbdeba
+    Image:         nicolaka/netshoot:latest
+    Image ID:      docker.io/nicolaka/netshoot@sha256:b09d9b21381f47a79b3cbcb30da25266dc17186ea00ae65e99fdc51396f48e70
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+      3600
+    State:          Running
+      Started:      Fri, 18 Sep 2026 17:18:39 +0000
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:         <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-q57n2:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  25s   default-scheduler  Successfully assigned runtime-debugging/problematic-app to minikube
+  Normal  Pulling    24s   kubelet            spec.containers{app-container}: Pulling image "busybox:1.37"
+  Normal  Pulled     23s   kubelet            spec.containers{app-container}: Successfully pulled image "busybox:1.37" in 706ms (706ms including waiting). Image size: 2222111 bytes.
+  Normal  Created    23s   kubelet            spec.containers{app-container}: Container created
+  Normal  Started    23s   kubelet            spec.containers{app-container}: Container started
+  Normal  Pulling    22s   kubelet            spec.ephemeralContainers{runtime-debugger}: Pulling image "nicolaka/netshoot:latest"
+  Normal  Pulled     6s    kubelet            spec.ephemeralContainers{runtime-debugger}: Successfully pulled image "nicolaka/netshoot:latest" in 15.494s (15.494s including waiting). Image size: 218745451 bytes.
+  Normal  Created    6s    kubelet            spec.ephemeralContainers{runtime-debugger}: Container created
+  Normal  Started    6s    kubelet            spec.ephemeralContainers{runtime-debugger}: Container started

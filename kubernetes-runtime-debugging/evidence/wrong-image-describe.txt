@@ -1,0 +1,53 @@
+Name:             wrong-image-pod
+Namespace:        runtime-debugging
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 18 Sep 2026 17:19:29 +0000
+Labels:           <none>
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.7
+IPs:
+  IP:  10.244.0.7
+Containers:
+  app:
+    Container ID:   
+    Image:          nonexistent-image-example-xyz:latest
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8f959 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-8f959:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age   From               Message
+  ----     ------     ----  ----               -------
+  Normal   Scheduled  4s    default-scheduler  Successfully assigned runtime-debugging/wrong-image-pod to minikube
+  Normal   Pulling    3s    kubelet            spec.containers{app}: Pulling image "nonexistent-image-example-xyz:latest"
+  Warning  Failed     3s    kubelet            spec.containers{app}: Failed to pull image "nonexistent-image-example-xyz:latest": failed to pull and unpack image "docker.io/library/nonexistent-image-example-xyz:latest": failed to resolve reference "docker.io/library/nonexistent-image-example-xyz:latest": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+  Warning  Failed     3s    kubelet            spec.containers{app}: Error: ErrImagePull
+  Normal   BackOff    2s    kubelet            spec.containers{app}: Back-off pulling image "nonexistent-image-example-xyz:latest"
+  Warning  Failed     2s    kubelet            spec.containers{app}: Error: ImagePullBackOff

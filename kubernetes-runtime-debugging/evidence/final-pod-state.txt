@@ -1,0 +1,8 @@
+NAME                 READY   STATUS         RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+broken-app           1/1     Running        0          80s   10.244.0.4   minikube   <none>           <none>
+complex-app          2/2     Running        0          15s   10.244.0.6   minikube   <none>           <none>
+network-test         1/1     Running        0          4s    10.244.0.8   minikube   <none>           <none>
+problematic-app      1/1     Running        0          78s   10.244.0.5   minikube   <none>           <none>
+resource-issue-pod   0/1     Pending        0          5s    <none>       <none>     <none>           <none>
+working-app          1/1     Running        0          11m   10.244.0.3   minikube   <none>           <none>
+wrong-image-pod      0/1     ErrImagePull   0          9s    10.244.0.7   minikube   <none>           <none>

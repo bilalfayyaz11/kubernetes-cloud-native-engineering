@@ -1,0 +1,7 @@
+LAST SEEN   TYPE      REASON      OBJECT                MESSAGE
+4s          Normal    Scheduled   pod/wrong-image-pod   Successfully assigned runtime-debugging/wrong-image-pod to minikube
+3s          Normal    Pulling     pod/wrong-image-pod   Pulling image "nonexistent-image-example-xyz:latest"
+3s          Warning   Failed      pod/wrong-image-pod   Failed to pull image "nonexistent-image-example-xyz:latest": failed to pull and unpack image "docker.io/library/nonexistent-image-example-xyz:latest": failed to resolve reference "docker.io/library/nonexistent-image-example-xyz:latest": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+3s          Warning   Failed      pod/wrong-image-pod   Error: ErrImagePull
+2s          Normal    BackOff     pod/wrong-image-pod   Back-off pulling image "nonexistent-image-example-xyz:latest"
+2s          Warning   Failed      pod/wrong-image-pod   Error: ImagePullBackOff

@@ -1,0 +1,1 @@
+PodIP=10.244.0.5 Node=minikube

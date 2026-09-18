@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: complex-app
+  namespace: runtime-debugging
+  labels:
+    app: complex-debug
+spec:
+  containers:
+    - name: web-app
+      image: nginx:alpine
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/nginx/html
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "25m"
+        limits:
+          memory: "128Mi"
+          cpu: "200m"
+
+    - name: data-processor
+      image: busybox:1.37
+      command:
+        - /bin/sh
+        - -c
+        - |
+          while true; do
+            echo "<h1>Data processed at $(date)</h1>" > /shared/index.html
+            sleep 30
+          done
+      volumeMounts:
+        - name: shared-data
+          mountPath: /shared
+      resources:
+        requests:
+          memory: "16Mi"
+          cpu: "10m"
+        limits:
+          memory: "64Mi"
+          cpu: "100m"
+
+  volumes:
+    - name: shared-data
+      emptyDir: {}

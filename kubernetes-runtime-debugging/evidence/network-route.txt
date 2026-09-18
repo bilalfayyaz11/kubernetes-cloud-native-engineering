@@ -1,0 +1,3 @@
+default via 10.244.0.1 dev eth0 
+10.244.0.0/24 via 10.244.0.1 dev eth0 src 10.244.0.8 
+10.244.0.1 dev eth0 scope link src 10.244.0.8 

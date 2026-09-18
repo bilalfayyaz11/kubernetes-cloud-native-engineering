@@ -1,0 +1,13 @@
+# Application Container Tool Availability
+
+sh: missing
+bash: missing
+ps: missing
+ss: missing
+netstat: missing
+ip: missing
+curl: missing
+wget: missing
+free: missing
+tcpdump: missing
+strace: missing

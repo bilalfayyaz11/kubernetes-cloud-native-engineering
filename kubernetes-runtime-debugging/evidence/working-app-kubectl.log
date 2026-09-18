@@ -1,0 +1,18 @@
+2026-09-18T17:08:02.947196993Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2026-09-18T17:08:02.947261154Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2026-09-18T17:08:02.974945746Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2026-09-18T17:08:03.010125456Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+2026-09-18T17:08:07.766985948Z 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+2026-09-18T17:08:07.767204613Z /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+2026-09-18T17:08:07.767387177Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+2026-09-18T17:08:07.788448129Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2026-09-18T17:08:07.791744983Z /docker-entrypoint.sh: Configuration complete; ready for start up
+2026-09-18T17:08:07.873782645Z 2026/09/18 17:08:07 [notice] 1#1: using the "epoll" event method
+2026-09-18T17:08:07.873811806Z 2026/09/18 17:08:07 [notice] 1#1: nginx/1.31.6
+2026-09-18T17:08:07.874104802Z 2026/09/18 17:08:07 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026-09-18T17:08:07.874116763Z 2026/09/18 17:08:07 [notice] 1#1: OS: Linux 6.14.0-1018-aws
+2026-09-18T17:08:07.874120573Z 2026/09/18 17:08:07 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026-09-18T17:08:07.874123833Z 2026/09/18 17:08:07 [notice] 1#1: start worker processes
+2026-09-18T17:08:07.874358428Z 2026/09/18 17:08:07 [notice] 1#1: start worker process 52
+2026-09-18T17:08:07.876727391Z 2026/09/18 17:08:07 [notice] 1#1: start worker process 53
+2026-09-18T17:08:55.872999061Z 127.0.0.1 - - [18/Sep/2026:17:08:55 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.22.0" "-"

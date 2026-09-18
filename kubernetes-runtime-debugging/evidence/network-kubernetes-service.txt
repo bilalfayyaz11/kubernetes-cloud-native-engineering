@@ -1,0 +1,10 @@
+HTTP/2 403 
+audit-id: 57591d27-4223-4374-a26c-b6e916d68063
+cache-control: no-cache, private
+content-type: application/json
+x-content-type-options: nosniff
+x-kubernetes-pf-flowschema-uid: ce1753aa-9551-490d-9d7f-111c6e22c0ff
+x-kubernetes-pf-prioritylevel-uid: d811cd3f-eaed-475e-bb73-9251172a307b
+content-length: 218
+date: Fri, 18 Sep 2026 17:19:38 GMT
+

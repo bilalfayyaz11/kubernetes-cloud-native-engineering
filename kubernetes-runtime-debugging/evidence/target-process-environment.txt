@@ -1,0 +1,4 @@
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=problematic-app
+DEBUG_MODE=true
+APPLICATION_ROLE=minimal-runtime

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-app
+  namespace: runtime-debugging
+  labels:
+    app: debug-demo
+spec:
+  containers:
+    - name: web-server
+      image: nginx:alpine
+
+      ports:
+        - containerPort: 80
+
+      env:
+        - name: CONFIG_FILE
+          value: "/etc/config/app.conf"
+
+      volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+
+        - name: app-data
+          mountPath: /var/app-data
+
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "25m"
+        limits:
+          memory: "128Mi"
+          cpu: "200m"
+
+  volumes:
+    - name: config-volume
+      configMap:
+        name: app-config
+
+    - name: app-data
+      emptyDir: {}
+
+  restartPolicy: Always

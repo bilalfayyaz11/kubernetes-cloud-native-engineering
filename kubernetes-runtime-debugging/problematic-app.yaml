@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: problematic-app
+  namespace: runtime-debugging
+  labels:
+    app: debug-demo-problem
+spec:
+  containers:
+    - name: app-container
+      image: busybox:1.37
+      command:
+        - /bin/sh
+        - -c
+        - |
+          while true; do
+            echo "App running at $(date)"
+            sleep 30
+          done
+      env:
+        - name: DEBUG_MODE
+          value: "true"
+        - name: APPLICATION_ROLE
+          value: "minimal-runtime"
+      resources:
+        requests:
+          memory: "16Mi"
+          cpu: "10m"
+        limits:
+          memory: "64Mi"
+          cpu: "100m"
+  restartPolicy: Always
