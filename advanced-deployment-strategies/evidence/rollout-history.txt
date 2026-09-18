@@ -1,0 +1,17 @@
+===== sample-app-v1 =====
+deployment.apps/sample-app-v1 
+REVISION  CHANGE-CAUSE
+1         <none>
+
+
+===== sample-app-v2 =====
+deployment.apps/sample-app-v2 
+REVISION  CHANGE-CAUSE
+1         <none>
+
+
+===== sample-app-v3 =====
+deployment.apps/sample-app-v3 
+REVISION  CHANGE-CAUSE
+1         <none>
+

@@ -1,0 +1,4 @@
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES         SELECTOR
+sample-app-v1   0/0     0            0           7m59s   web-server   nginx:alpine   app=sample-app,version=v1
+sample-app-v2   0/0     0            0           7m      web-server   nginx:alpine   app=sample-app,version=v2
+sample-app-v3   3/3     3            3           3m11s   web-server   nginx:alpine   app=sample-app,version=v3

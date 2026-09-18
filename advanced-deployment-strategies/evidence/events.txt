@@ -1,0 +1,160 @@
+LAST SEEN   TYPE      REASON              OBJECT                                MESSAGE
+8m          Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-5hcj6
+8m          Normal    Scheduled           pod/sample-app-v1-67cfb7b77-ndvc9     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-ndvc9 to minikube
+119s        Normal    ScalingReplicaSet   deployment/sample-app-v1              Scaled up replica set sample-app-v1-67cfb7b77 from 0 to 3
+8m          Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-7qt59
+8m          Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-ndvc9
+8m          Normal    Scheduled           pod/sample-app-v1-67cfb7b77-5hcj6     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-5hcj6 to minikube
+8m          Normal    Scheduled           pod/sample-app-v1-67cfb7b77-7qt59     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-7qt59 to minikube
+7m59s       Normal    Pulling             pod/sample-app-v1-67cfb7b77-ndvc9     Pulling image "nginx:alpine"
+7m59s       Normal    Pulling             pod/sample-app-v1-67cfb7b77-7qt59     Pulling image "nginx:alpine"
+7m58s       Normal    Pulling             pod/sample-app-v1-67cfb7b77-5hcj6     Pulling image "nginx:alpine"
+7m55s       Normal    Created             pod/sample-app-v1-67cfb7b77-5hcj6     Container created
+7m55s       Normal    Pulled              pod/sample-app-v1-67cfb7b77-ndvc9     Successfully pulled image "nginx:alpine" in 3.442s (3.443s including waiting). Image size: 26335703 bytes.
+7m55s       Normal    Started             pod/sample-app-v1-67cfb7b77-ndvc9     Container started
+7m55s       Normal    Pulled              pod/sample-app-v1-67cfb7b77-5hcj6     Successfully pulled image "nginx:alpine" in 241ms (3.345s including waiting). Image size: 26335703 bytes.
+7m55s       Normal    Pulled              pod/sample-app-v1-67cfb7b77-7qt59     Successfully pulled image "nginx:alpine" in 266ms (3.689s including waiting). Image size: 26335703 bytes.
+7m55s       Normal    Created             pod/sample-app-v1-67cfb7b77-7qt59     Container created
+7m55s       Normal    Created             pod/sample-app-v1-67cfb7b77-ndvc9     Container created
+7m54s       Normal    Started             pod/sample-app-v1-67cfb7b77-7qt59     Container started
+7m54s       Normal    Started             pod/sample-app-v1-67cfb7b77-5hcj6     Container started
+7m1s        Normal    Scheduled           pod/sample-app-v2-cfcd6bf78-7krb5     Successfully assigned deployment-strategies/sample-app-v2-cfcd6bf78-7krb5 to minikube
+7m1s        Normal    SuccessfulCreate    replicaset/sample-app-v2-cfcd6bf78    Created pod: sample-app-v2-cfcd6bf78-z2p97
+7m1s        Normal    Scheduled           pod/sample-app-v2-cfcd6bf78-nhbfh     Successfully assigned deployment-strategies/sample-app-v2-cfcd6bf78-nhbfh to minikube
+7m1s        Normal    SuccessfulCreate    replicaset/sample-app-v2-cfcd6bf78    Created pod: sample-app-v2-cfcd6bf78-7krb5
+7m1s        Normal    SuccessfulCreate    replicaset/sample-app-v2-cfcd6bf78    Created pod: sample-app-v2-cfcd6bf78-nhbfh
+7m1s        Normal    Scheduled           pod/sample-app-v2-cfcd6bf78-z2p97     Successfully assigned deployment-strategies/sample-app-v2-cfcd6bf78-z2p97 to minikube
+7m1s        Normal    ScalingReplicaSet   deployment/sample-app-v2              Scaled up replica set sample-app-v2-cfcd6bf78 from 0 to 3
+7m          Normal    Created             pod/sample-app-v2-cfcd6bf78-7krb5     Container created
+7m          Normal    Created             pod/sample-app-v2-cfcd6bf78-z2p97     Container created
+7m          Normal    Pulled              pod/sample-app-v2-cfcd6bf78-z2p97     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+7m          Normal    Pulled              pod/sample-app-v2-cfcd6bf78-nhbfh     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+7m          Normal    Pulled              pod/sample-app-v2-cfcd6bf78-7krb5     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+6m59s       Normal    Started             pod/sample-app-v2-cfcd6bf78-z2p97     Container started
+6m59s       Normal    Started             pod/sample-app-v2-cfcd6bf78-nhbfh     Container started
+6m59s       Normal    Created             pod/sample-app-v2-cfcd6bf78-nhbfh     Container created
+6m59s       Normal    Started             pod/sample-app-v2-cfcd6bf78-7krb5     Container started
+6m58s       Warning   Unhealthy           pod/sample-app-v2-cfcd6bf78-7krb5     Readiness probe failed: Get "http://10.244.0.6:80/": dial tcp 10.244.0.6:80: connect: connection refused
+3m14s       Normal    Killing             pod/sample-app-v2-cfcd6bf78-nhbfh     Stopping container web-server
+3m14s       Normal    SuccessfulDelete    replicaset/sample-app-v2-cfcd6bf78    Deleted pod: sample-app-v2-cfcd6bf78-nhbfh
+3m14s       Normal    Killing             pod/sample-app-v2-cfcd6bf78-7krb5     Stopping container web-server
+3m14s       Normal    ScalingReplicaSet   deployment/sample-app-v2              Scaled down replica set sample-app-v2-cfcd6bf78 from 3 to 0
+3m14s       Normal    Killing             pod/sample-app-v2-cfcd6bf78-z2p97     Stopping container web-server
+3m14s       Warning   Unhealthy           pod/sample-app-v2-cfcd6bf78-nhbfh     Readiness probe failed: Get "http://10.244.0.7:80/": dial tcp 10.244.0.7:80: connect: connection refused
+3m14s       Normal    SuccessfulDelete    replicaset/sample-app-v2-cfcd6bf78    Deleted pod: sample-app-v2-cfcd6bf78-z2p97
+3m14s       Normal    SuccessfulDelete    replicaset/sample-app-v2-cfcd6bf78    Deleted pod: sample-app-v2-cfcd6bf78-7krb5
+3m12s       Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-6nztn
+3m12s       Normal    ScalingReplicaSet   deployment/sample-app-v3              Scaled up replica set sample-app-v3-74c96d599b from 0 to 1
+3m12s       Normal    Pulled              pod/sample-app-v3-74c96d599b-6nztn    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m12s       Normal    Scheduled           pod/sample-app-v3-74c96d599b-6nztn    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-6nztn to minikube
+3m11s       Normal    Started             pod/sample-app-v3-74c96d599b-6nztn    Container started
+3m11s       Normal    Created             pod/sample-app-v3-74c96d599b-6nztn    Container created
+3m5s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-k98ch     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-k98ch to minikube
+3m5s        Normal    ScalingReplicaSet   deployment/sample-app-v1              Scaled up replica set sample-app-v1-67cfb7b77 from 3 to 9
+3m5s        Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-k98ch
+3m5s        Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-2zrfm
+3m5s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-2zrfm     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-2zrfm to minikube
+3m4s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-pdv2z     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-pdv2z to minikube
+3m4s        Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-pdv2z
+3m4s        Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-9c4pn
+3m5s        Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-9kmjc
+3m4s        Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    Created pod: sample-app-v1-67cfb7b77-rg9qt
+3m4s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-9kmjc     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-9kmjc to minikube
+3m4s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-9c4pn     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-9c4pn to minikube
+3m4s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-rg9qt     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-rg9qt to minikube
+3m3s        Normal    Started             pod/sample-app-v1-67cfb7b77-9kmjc     Container started
+3m3s        Normal    Created             pod/sample-app-v1-67cfb7b77-9kmjc     Container created
+3m3s        Normal    Started             pod/sample-app-v1-67cfb7b77-k98ch     Container started
+3m3s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-9kmjc     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m3s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-pdv2z     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m3s        Normal    Started             pod/sample-app-v1-67cfb7b77-2zrfm     Container started
+3m3s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-k98ch     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m3s        Normal    Created             pod/sample-app-v1-67cfb7b77-k98ch     Container created
+3m3s        Normal    Created             pod/sample-app-v1-67cfb7b77-2zrfm     Container created
+3m3s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-2zrfm     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m3s        Normal    Created             pod/sample-app-v1-67cfb7b77-pdv2z     Container created
+3m2s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-9c4pn     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m2s        Normal    Created             pod/sample-app-v1-67cfb7b77-9c4pn     Container created
+3m2s        Normal    Started             pod/sample-app-v1-67cfb7b77-9c4pn     Container started
+3m2s        Normal    Started             pod/sample-app-v1-67cfb7b77-rg9qt     Container started
+3m2s        Normal    Created             pod/sample-app-v1-67cfb7b77-rg9qt     Container created
+3m2s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-rg9qt     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m2s        Normal    Started             pod/sample-app-v1-67cfb7b77-pdv2z     Container started
+2m58s       Warning   Unhealthy           pod/sample-app-v1-67cfb7b77-k98ch     Readiness probe failed: Get "http://10.244.0.10:80/": dial tcp 10.244.0.10:80: connect: connection refused
+2m58s       Warning   Unhealthy           pod/sample-app-v1-67cfb7b77-9kmjc     Readiness probe failed: Get "http://10.244.0.12:80/": dial tcp 10.244.0.12:80: connect: connection refused
+2m58s       Warning   Unhealthy           pod/sample-app-v1-67cfb7b77-2zrfm     Readiness probe failed: Get "http://10.244.0.11:80/": dial tcp 10.244.0.11:80: connect: connection refused
+2m45s       Normal    Killing             pod/sample-app-v1-67cfb7b77-rg9qt     Stopping container web-server
+2m45s       Normal    ScalingReplicaSet   deployment/sample-app-v1              Scaled down replica set sample-app-v1-67cfb7b77 from 9 to 3
+2m44s       Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-9kmjc
+2m44s       Normal    Killing             pod/sample-app-v1-67cfb7b77-9kmjc     Stopping container web-server
+2m45s       Normal    Killing             pod/sample-app-v1-67cfb7b77-9c4pn     Stopping container web-server
+2m45s       Normal    Killing             pod/sample-app-v1-67cfb7b77-k98ch     Stopping container web-server
+2m45s       Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-rg9qt
+2m44s       Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-k98ch
+2m44s       Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-pdv2z
+2m44s       Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-9c4pn
+2m44s       Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-2zrfm
+2m44s       Normal    Killing             pod/sample-app-v1-67cfb7b77-2zrfm     Stopping container web-server
+2m44s       Normal    Killing             pod/sample-app-v1-67cfb7b77-pdv2z     Stopping container web-server
+2m32s       Normal    Scheduled           pod/sample-app-v3-74c96d599b-757f2    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-757f2 to minikube
+2m32s       Normal    ScalingReplicaSet   deployment/sample-app-v1              Scaled down replica set sample-app-v1-67cfb7b77 from 3 to 2
+2m32s       Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-ndvc9
+2m32s       Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-757f2
+2m32s       Normal    Killing             pod/sample-app-v1-67cfb7b77-ndvc9     Stopping container web-server
+2m32s       Normal    ScalingReplicaSet   deployment/sample-app-v3              Scaled up replica set sample-app-v3-74c96d599b from 1 to 2
+2m31s       Normal    Started             pod/sample-app-v3-74c96d599b-757f2    Container started
+2m31s       Normal    Created             pod/sample-app-v3-74c96d599b-757f2    Container created
+2m31s       Normal    Pulled              pod/sample-app-v3-74c96d599b-757f2    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m15s       Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-znq6g
+2m15s       Normal    Scheduled           pod/sample-app-v3-74c96d599b-znq6g    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-znq6g to minikube
+2m15s       Normal    ScalingReplicaSet   deployment/sample-app-v3              Scaled up replica set sample-app-v3-74c96d599b from 2 to 3
+2m14s       Normal    Created             pod/sample-app-v3-74c96d599b-znq6g    Container created
+2m14s       Normal    Started             pod/sample-app-v3-74c96d599b-znq6g    Container started
+2m14s       Normal    Pulled              pod/sample-app-v3-74c96d599b-znq6g    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m8s        Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-5hcj6
+2m8s        Normal    ScalingReplicaSet   deployment/sample-app-v1              Scaled down replica set sample-app-v1-67cfb7b77 from 2 to 0
+2m8s        Normal    Killing             pod/sample-app-v1-67cfb7b77-5hcj6     Stopping container web-server
+2m8s        Normal    Killing             pod/sample-app-v1-67cfb7b77-7qt59     Stopping container web-server
+2m8s        Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    Deleted pod: sample-app-v1-67cfb7b77-7qt59
+119s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-v8m7c     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-v8m7c to minikube
+119s        Normal    SuccessfulCreate    replicaset/sample-app-v1-67cfb7b77    (combined from similar events): Created pod: sample-app-v1-67cfb7b77-r7dft
+119s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-bngpq     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-bngpq to minikube
+118s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-r7dft     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+118s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-bngpq     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+118s        Normal    Created             pod/sample-app-v1-67cfb7b77-bngpq     Container created
+118s        Normal    Pulled              pod/sample-app-v1-67cfb7b77-v8m7c     Container image "nginx:alpine" already present on machine and can be accessed by the pod
+118s        Normal    Created             pod/sample-app-v1-67cfb7b77-v8m7c     Container created
+118s        Normal    Created             pod/sample-app-v1-67cfb7b77-r7dft     Container created
+119s        Normal    Scheduled           pod/sample-app-v1-67cfb7b77-r7dft     Successfully assigned deployment-strategies/sample-app-v1-67cfb7b77-r7dft to minikube
+117s        Normal    Started             pod/sample-app-v1-67cfb7b77-r7dft     Container started
+117s        Normal    Started             pod/sample-app-v1-67cfb7b77-v8m7c     Container started
+117s        Normal    Started             pod/sample-app-v1-67cfb7b77-bngpq     Container started
+112s        Normal    ScalingReplicaSet   deployment/sample-app-v3              Scaled down replica set sample-app-v3-74c96d599b from 3 to 0
+112s        Normal    SuccessfulDelete    replicaset/sample-app-v3-74c96d599b   Deleted pod: sample-app-v3-74c96d599b-6nztn
+112s        Normal    Killing             pod/sample-app-v3-74c96d599b-6nztn    Stopping container web-server
+112s        Normal    Killing             pod/sample-app-v3-74c96d599b-znq6g    Stopping container web-server
+112s        Normal    SuccessfulDelete    replicaset/sample-app-v3-74c96d599b   Deleted pod: sample-app-v3-74c96d599b-757f2
+112s        Normal    SuccessfulDelete    replicaset/sample-app-v3-74c96d599b   Deleted pod: sample-app-v3-74c96d599b-znq6g
+112s        Normal    Killing             pod/sample-app-v3-74c96d599b-757f2    Stopping container web-server
+104s        Normal    Scheduled           pod/sample-app-v3-74c96d599b-xbvzk    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-xbvzk to minikube
+104s        Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-6pvj8
+104s        Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-xbvzk
+104s        Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-bn9cm
+104s        Normal    ScalingReplicaSet   deployment/sample-app-v3              Scaled up replica set sample-app-v3-74c96d599b from 0 to 3
+104s        Normal    Scheduled           pod/sample-app-v3-74c96d599b-6pvj8    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-6pvj8 to minikube
+104s        Normal    Scheduled           pod/sample-app-v3-74c96d599b-bn9cm    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-bn9cm to minikube
+103s        Normal    Created             pod/sample-app-v3-74c96d599b-xbvzk    Container created
+103s        Normal    Pulled              pod/sample-app-v3-74c96d599b-bn9cm    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+103s        Normal    Started             pod/sample-app-v3-74c96d599b-xbvzk    Container started
+103s        Normal    Pulled              pod/sample-app-v3-74c96d599b-6pvj8    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+103s        Normal    Pulled              pod/sample-app-v3-74c96d599b-xbvzk    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+103s        Normal    Started             pod/sample-app-v3-74c96d599b-bn9cm    Container started
+103s        Normal    Created             pod/sample-app-v3-74c96d599b-bn9cm    Container created
+103s        Normal    Created             pod/sample-app-v3-74c96d599b-6pvj8    Container created
+103s        Normal    Started             pod/sample-app-v3-74c96d599b-6pvj8    Container started
+101s        Warning   Unhealthy           pod/sample-app-v3-74c96d599b-6pvj8    Readiness probe failed: Get "http://10.244.0.22:80/": dial tcp 10.244.0.22:80: connect: connection refused
+96s         Normal    ScalingReplicaSet   deployment/sample-app-v1              Scaled down replica set sample-app-v1-67cfb7b77 from 3 to 0
+95s         Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    (combined from similar events): Deleted pod: sample-app-v1-67cfb7b77-r7dft
+96s         Normal    Killing             pod/sample-app-v1-67cfb7b77-bngpq     Stopping container web-server
+96s         Normal    Killing             pod/sample-app-v1-67cfb7b77-r7dft     Stopping container web-server
+96s         Normal    Killing             pod/sample-app-v1-67cfb7b77-v8m7c     Stopping container web-server

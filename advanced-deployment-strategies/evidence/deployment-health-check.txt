@@ -1,0 +1,88 @@
+======================================
+ Deployment Health Check
+======================================
+
+===== DEPLOYMENTS =====
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES         SELECTOR
+sample-app-v1   0/0     0            0           8m1s    web-server   nginx:alpine   app=sample-app,version=v1
+sample-app-v2   0/0     0            0           7m2s    web-server   nginx:alpine   app=sample-app,version=v2
+sample-app-v3   3/3     3            3           3m13s   web-server   nginx:alpine   app=sample-app,version=v3
+
+===== PODS =====
+NAME                             READY   STATUS    RESTARTS   AGE    IP            NODE       NOMINATED NODE   READINESS GATES
+sample-app-v3-74c96d599b-6pvj8   1/1     Running   0          105s   10.244.0.22   minikube   <none>           <none>
+sample-app-v3-74c96d599b-bn9cm   1/1     Running   0          105s   10.244.0.21   minikube   <none>           <none>
+sample-app-v3-74c96d599b-xbvzk   1/1     Running   0          105s   10.244.0.23   minikube   <none>           <none>
+
+===== SERVICES =====
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+sample-app-blue      ClusterIP   10.101.49.166    <none>        80/TCP    7m1s
+sample-app-green     ClusterIP   10.106.128.243   <none>        80/TCP    7m1s
+sample-app-service   ClusterIP   10.110.143.64    <none>        80/TCP    8m
+
+===== PRODUCTION SERVICE SELECTOR =====
+{"app":"sample-app"}
+
+===== ENDPOINTSLICE =====
+NAME                       ADDRESSTYPE   PORTS   ENDPOINTS                             AGE
+sample-app-service-5q9cc   IPv4          80      10.244.0.21,10.244.0.22,10.244.0.23   8m1s
+
+===== RECENT EVENTS =====
+106s        Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-xbvzk
+106s        Normal    SuccessfulCreate    replicaset/sample-app-v3-74c96d599b   Created pod: sample-app-v3-74c96d599b-bn9cm
+106s        Normal    ScalingReplicaSet   deployment/sample-app-v3              Scaled up replica set sample-app-v3-74c96d599b from 0 to 3
+106s        Normal    Scheduled           pod/sample-app-v3-74c96d599b-6pvj8    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-6pvj8 to minikube
+106s        Normal    Scheduled           pod/sample-app-v3-74c96d599b-bn9cm    Successfully assigned deployment-strategies/sample-app-v3-74c96d599b-bn9cm to minikube
+105s        Normal    Created             pod/sample-app-v3-74c96d599b-xbvzk    Container created
+105s        Normal    Pulled              pod/sample-app-v3-74c96d599b-bn9cm    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+105s        Normal    Started             pod/sample-app-v3-74c96d599b-xbvzk    Container started
+105s        Normal    Pulled              pod/sample-app-v3-74c96d599b-6pvj8    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+105s        Normal    Pulled              pod/sample-app-v3-74c96d599b-xbvzk    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+105s        Normal    Started             pod/sample-app-v3-74c96d599b-bn9cm    Container started
+105s        Normal    Created             pod/sample-app-v3-74c96d599b-bn9cm    Container created
+105s        Normal    Created             pod/sample-app-v3-74c96d599b-6pvj8    Container created
+105s        Normal    Started             pod/sample-app-v3-74c96d599b-6pvj8    Container started
+103s        Warning   Unhealthy           pod/sample-app-v3-74c96d599b-6pvj8    Readiness probe failed: Get "http://10.244.0.22:80/": dial tcp 10.244.0.22:80: connect: connection refused
+98s         Normal    ScalingReplicaSet   deployment/sample-app-v1              Scaled down replica set sample-app-v1-67cfb7b77 from 3 to 0
+97s         Normal    SuccessfulDelete    replicaset/sample-app-v1-67cfb7b77    (combined from similar events): Deleted pod: sample-app-v1-67cfb7b77-r7dft
+98s         Normal    Killing             pod/sample-app-v1-67cfb7b77-bngpq     Stopping container web-server
+98s         Normal    Killing             pod/sample-app-v1-67cfb7b77-r7dft     Stopping container web-server
+98s         Normal    Killing             pod/sample-app-v1-67cfb7b77-v8m7c     Stopping container web-server
+
+===== RESOURCE USAGE =====
+POD                              NAME         CPU(cores)   MEMORY(bytes)   
+sample-app-v3-74c96d599b-6pvj8   web-server   1m           3Mi             
+sample-app-v3-74c96d599b-bn9cm   web-server   1m           3Mi             
+sample-app-v3-74c96d599b-xbvzk   web-server   1m           3Mi             
+
+===== ROLLOUT HISTORY — V1 =====
+deployment.apps/sample-app-v1 
+REVISION  CHANGE-CAUSE
+1         <none>
+
+
+===== ROLLOUT HISTORY — V2 =====
+deployment.apps/sample-app-v2 
+REVISION  CHANGE-CAUSE
+1         <none>
+
+
+===== ROLLOUT HISTORY — V3 =====
+deployment.apps/sample-app-v3 
+REVISION  CHANGE-CAUSE
+1         <none>
+
+
+===== CURRENT DEPLOYMENT CONDITIONS =====
+
+--- sample-app-v1 ---
+Progressing=True reason=NewReplicaSetAvailable
+Available=True reason=MinimumReplicasAvailable
+
+--- sample-app-v2 ---
+Available=True reason=MinimumReplicasAvailable
+Progressing=True reason=NewReplicaSetAvailable
+
+--- sample-app-v3 ---
+Progressing=True reason=NewReplicaSetAvailable
+Available=True reason=MinimumReplicasAvailable

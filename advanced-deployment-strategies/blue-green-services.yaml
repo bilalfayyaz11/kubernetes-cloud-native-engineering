@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-app-blue
+  namespace: deployment-strategies
+  labels:
+    app: sample-app
+    version: v1
+spec:
+  type: ClusterIP
+
+  selector:
+    app: sample-app
+    version: v1
+
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-app-green
+  namespace: deployment-strategies
+  labels:
+    app: sample-app
+    version: v2
+spec:
+  type: ClusterIP
+
+  selector:
+    app: sample-app
+    version: v2
+
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

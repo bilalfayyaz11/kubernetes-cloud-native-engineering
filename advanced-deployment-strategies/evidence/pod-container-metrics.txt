@@ -1,0 +1,4 @@
+POD                              NAME         CPU(cores)   MEMORY(bytes)   
+sample-app-v3-74c96d599b-6pvj8   web-server   1m           3Mi             
+sample-app-v3-74c96d599b-bn9cm   web-server   1m           3Mi             
+sample-app-v3-74c96d599b-xbvzk   web-server   1m           3Mi             

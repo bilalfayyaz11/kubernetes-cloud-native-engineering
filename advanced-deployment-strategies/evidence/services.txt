@@ -1,0 +1,4 @@
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+sample-app-blue      ClusterIP   10.101.49.166    <none>        80/TCP    6m59s   app=sample-app,version=v1
+sample-app-green     ClusterIP   10.106.128.243   <none>        80/TCP    6m59s   app=sample-app,version=v2
+sample-app-service   ClusterIP   10.110.143.64    <none>        80/TCP    7m58s   app=sample-app
