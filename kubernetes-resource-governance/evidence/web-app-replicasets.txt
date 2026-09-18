@@ -1,0 +1,2 @@
+NAME                 DESIRED   CURRENT   READY   AGE   CONTAINERS      IMAGES         SELECTOR
+web-app-59bbd74d77   8         7         7       74s   web-container   nginx:alpine   app=web-app,pod-template-hash=59bbd74d77

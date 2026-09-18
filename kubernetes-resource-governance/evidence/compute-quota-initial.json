@@ -1,0 +1,21 @@
+{
+  "name": "compute-quota",
+  "hard": {
+    "limits.cpu": "2",
+    "limits.memory": "2Gi",
+    "persistentvolumeclaims": "4",
+    "pods": "10",
+    "requests.cpu": "1",
+    "requests.memory": "1Gi",
+    "services": "5"
+  },
+  "used": {
+    "limits.cpu": "500m",
+    "limits.memory": "128Mi",
+    "persistentvolumeclaims": "0",
+    "pods": "1",
+    "requests.cpu": "250m",
+    "requests.memory": "64Mi",
+    "services": "0"
+  }
+}

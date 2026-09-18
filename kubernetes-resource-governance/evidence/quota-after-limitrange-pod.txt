@@ -1,0 +1,11 @@
+Name:                   compute-quota
+Namespace:              resource-governance
+Resource                Used   Hard
+--------                ----   ----
+limits.cpu              1300m  2
+limits.memory           448Mi  2Gi
+persistentvolumeclaims  0      4
+pods                    5      10
+requests.cpu            650m   1
+requests.memory         224Mi  1Gi
+services                0      5

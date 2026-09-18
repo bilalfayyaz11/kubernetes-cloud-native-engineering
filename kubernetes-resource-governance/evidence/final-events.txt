@@ -1,0 +1,71 @@
+LAST SEEN   TYPE      REASON              OBJECT                          MESSAGE
+4m13s       Normal    Scheduled           pod/resource-demo-pod           Successfully assigned resource-governance/resource-demo-pod to minikube
+4m12s       Normal    Pulling             pod/resource-demo-pod           Pulling image "nginx:alpine"
+4m10s       Normal    Started             pod/resource-demo-pod           Container started
+4m10s       Normal    Created             pod/resource-demo-pod           Container created
+4m10s       Normal    Pulled              pod/resource-demo-pod           Successfully pulled image "nginx:alpine" in 2.024s (2.024s including waiting). Image size: 26335703 bytes.
+2m31s       Normal    Scheduled           pod/web-app-59bbd74d77-d46g4    Successfully assigned resource-governance/web-app-59bbd74d77-d46g4 to minikube
+2m31s       Normal    ScalingReplicaSet   deployment/web-app              Scaled up replica set web-app-59bbd74d77 from 0 to 3
+2m31s       Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-5bm57
+2m31s       Normal    Scheduled           pod/web-app-59bbd74d77-5bm57    Successfully assigned resource-governance/web-app-59bbd74d77-5bm57 to minikube
+2m31s       Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-d46g4
+2m31s       Normal    Scheduled           pod/web-app-59bbd74d77-6j8px    Successfully assigned resource-governance/web-app-59bbd74d77-6j8px to minikube
+2m31s       Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-6j8px
+2m30s       Normal    Created             pod/web-app-59bbd74d77-d46g4    Container created
+2m30s       Normal    Pulled              pod/web-app-59bbd74d77-d46g4    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m30s       Normal    Created             pod/web-app-59bbd74d77-6j8px    Container created
+2m30s       Normal    Pulled              pod/web-app-59bbd74d77-6j8px    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m30s       Normal    Started             pod/web-app-59bbd74d77-d46g4    Container started
+2m30s       Normal    Created             pod/web-app-59bbd74d77-5bm57    Container created
+2m30s       Normal    Pulled              pod/web-app-59bbd74d77-5bm57    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m29s       Normal    Started             pod/web-app-59bbd74d77-6j8px    Container started
+2m29s       Normal    Started             pod/web-app-59bbd74d77-5bm57    Container started
+2m28s       Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-4lvsj
+2m28s       Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-7q7cx
+2m28s       Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-4kkwb
+2m28s       Normal    Scheduled           pod/web-app-59bbd74d77-4lvsj    Successfully assigned resource-governance/web-app-59bbd74d77-4lvsj to minikube
+2m28s       Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-6nc4s
+2m28s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-8wlqd" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m28s       Normal    ScalingReplicaSet   deployment/web-app              Scaled up replica set web-app-59bbd74d77 from 3 to 8
+2m28s       Normal    Scheduled           pod/web-app-59bbd74d77-7q7cx    Successfully assigned resource-governance/web-app-59bbd74d77-7q7cx to minikube
+2m28s       Normal    Scheduled           pod/web-app-59bbd74d77-4kkwb    Successfully assigned resource-governance/web-app-59bbd74d77-4kkwb to minikube
+2m28s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-d7qr4" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m27s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-v7lm5" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m28s       Normal    Scheduled           pod/web-app-59bbd74d77-6nc4s    Successfully assigned resource-governance/web-app-59bbd74d77-6nc4s to minikube
+2m27s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-w25jz" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m27s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-8rzpk" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m27s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-pw88x" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m27s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-4l4m9" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m27s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-kbhwb" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+76s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   (combined from similar events): Error creating: pods "web-app-59bbd74d77-m5thw" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m27s       Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-hsb6b" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+2m26s       Normal    Created             pod/web-app-59bbd74d77-6nc4s    Container created
+2m26s       Normal    Created             pod/web-app-59bbd74d77-4kkwb    Container created
+2m26s       Normal    Pulled              pod/web-app-59bbd74d77-4kkwb    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m26s       Normal    Created             pod/web-app-59bbd74d77-7q7cx    Container created
+2m26s       Normal    Pulled              pod/web-app-59bbd74d77-7q7cx    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m26s       Normal    Pulled              pod/web-app-59bbd74d77-4lvsj    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m26s       Normal    Created             pod/web-app-59bbd74d77-4lvsj    Container created
+2m26s       Normal    Started             pod/web-app-59bbd74d77-4lvsj    Container started
+2m26s       Normal    Pulled              pod/web-app-59bbd74d77-6nc4s    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2m25s       Normal    Started             pod/web-app-59bbd74d77-4kkwb    Container started
+2m25s       Normal    Started             pod/web-app-59bbd74d77-7q7cx    Container started
+2m25s       Normal    Started             pod/web-app-59bbd74d77-6nc4s    Container started
+75s         Normal    SuccessfulDelete    replicaset/web-app-59bbd74d77   Deleted pod: web-app-59bbd74d77-7q7cx
+75s         Normal    SuccessfulDelete    replicaset/web-app-59bbd74d77   Deleted pod: web-app-59bbd74d77-6j8px
+75s         Normal    Killing             pod/web-app-59bbd74d77-d46g4    Stopping container web-container
+75s         Normal    Killing             pod/web-app-59bbd74d77-7q7cx    Stopping container web-container
+75s         Normal    ScalingReplicaSet   deployment/web-app              Scaled down replica set web-app-59bbd74d77 from 8 to 3
+75s         Normal    SuccessfulDelete    replicaset/web-app-59bbd74d77   Deleted pod: web-app-59bbd74d77-d46g4
+75s         Normal    Killing             pod/web-app-59bbd74d77-6j8px    Stopping container web-container
+75s         Normal    Killing             pod/web-app-59bbd74d77-4kkwb    Stopping container web-container
+75s         Normal    SuccessfulDelete    replicaset/web-app-59bbd74d77   Deleted pod: web-app-59bbd74d77-4kkwb
+49s         Normal    Scheduled           pod/default-resources-pod       Successfully assigned resource-governance/default-resources-pod to minikube
+48s         Normal    Started             pod/default-resources-pod       Container started
+48s         Normal    Created             pod/default-resources-pod       Container created
+48s         Normal    Pulled              pod/default-resources-pod       Successfully pulled image "busybox:1.37" in 703ms (703ms including waiting). Image size: 2222111 bytes.
+48s         Normal    Pulling             pod/default-resources-pod       Pulling image "busybox:1.37"
+3s          Normal    Scheduled           pod/fixed-pod                   Successfully assigned resource-governance/fixed-pod to minikube
+2s          Normal    Pulled              pod/fixed-pod                   Container image "nginx:alpine" already present on machine and can be accessed by the pod
+2s          Normal    Created             pod/fixed-pod                   Container created
+2s          Normal    Started             pod/fixed-pod                   Container started

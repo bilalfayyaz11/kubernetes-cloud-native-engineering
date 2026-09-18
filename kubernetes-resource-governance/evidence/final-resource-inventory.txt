@@ -1,0 +1,19 @@
+NAME                           READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+pod/default-resources-pod      1/1     Running   0          49s     10.244.0.12   minikube   <none>           <none>
+pod/fixed-pod                  1/1     Running   0          3s      10.244.0.13   minikube   <none>           <none>
+pod/resource-demo-pod          1/1     Running   0          4m13s   10.244.0.4    minikube   <none>           <none>
+pod/web-app-59bbd74d77-4lvsj   1/1     Running   0          2m28s   10.244.0.8    minikube   <none>           <none>
+pod/web-app-59bbd74d77-5bm57   1/1     Running   0          2m31s   10.244.0.7    minikube   <none>           <none>
+pod/web-app-59bbd74d77-6nc4s   1/1     Running   0          2m28s   10.244.0.11   minikube   <none>           <none>
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS      IMAGES         SELECTOR
+deployment.apps/web-app   3/3     3            3           2m31s   web-container   nginx:alpine   app=web-app
+
+NAME                                 DESIRED   CURRENT   READY   AGE     CONTAINERS      IMAGES         SELECTOR
+replicaset.apps/web-app-59bbd74d77   3         3         3       2m31s   web-container   nginx:alpine   app=web-app,pod-template-hash=59bbd74d77
+
+NAME                          REQUEST                                                                                                    LIMIT                                           AGE
+resourcequota/compute-quota   persistentvolumeclaims: 0/4, pods: 6/10, requests.cpu: 700m/1, requests.memory: 256Mi/1Gi, services: 0/5   limits.cpu: 1400m/2, limits.memory: 512Mi/2Gi   3m23s
+
+NAME                        CREATED AT
+limitrange/default-limits   2026-09-18T18:50:58Z

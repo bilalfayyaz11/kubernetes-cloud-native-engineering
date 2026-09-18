@@ -1,0 +1,2 @@
+NAME            REQ_CPU_USED   REQ_CPU_HARD   REQ_MEM_USED   REQ_MEM_HARD   LIM_CPU_USED   LIM_CPU_HARD   LIM_MEM_USED   LIM_MEM_HARD   PODS_USED   PODS_HARD
+compute-quota   250m           1              64Mi           1Gi            500m           2              128Mi          2Gi            1           10

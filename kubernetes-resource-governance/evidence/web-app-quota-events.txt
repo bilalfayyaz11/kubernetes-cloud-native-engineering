@@ -1,0 +1,47 @@
+75s         Normal    Scheduled           pod/web-app-59bbd74d77-5bm57    Successfully assigned resource-governance/web-app-59bbd74d77-5bm57 to minikube
+75s         Normal    ScalingReplicaSet   deployment/web-app              Scaled up replica set web-app-59bbd74d77 from 0 to 3
+75s         Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-5bm57
+75s         Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-6j8px
+75s         Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-d46g4
+75s         Normal    Scheduled           pod/web-app-59bbd74d77-d46g4    Successfully assigned resource-governance/web-app-59bbd74d77-d46g4 to minikube
+75s         Normal    Scheduled           pod/web-app-59bbd74d77-6j8px    Successfully assigned resource-governance/web-app-59bbd74d77-6j8px to minikube
+74s         Normal    Started             pod/web-app-59bbd74d77-d46g4    Container started
+74s         Normal    Pulled              pod/web-app-59bbd74d77-d46g4    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+74s         Normal    Pulled              pod/web-app-59bbd74d77-5bm57    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+74s         Normal    Created             pod/web-app-59bbd74d77-5bm57    Container created
+74s         Normal    Created             pod/web-app-59bbd74d77-d46g4    Container created
+74s         Normal    Pulled              pod/web-app-59bbd74d77-6j8px    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+74s         Normal    Created             pod/web-app-59bbd74d77-6j8px    Container created
+73s         Normal    Started             pod/web-app-59bbd74d77-5bm57    Container started
+73s         Normal    Started             pod/web-app-59bbd74d77-6j8px    Container started
+72s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-d7qr4" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+72s         Normal    Scheduled           pod/web-app-59bbd74d77-4lvsj    Successfully assigned resource-governance/web-app-59bbd74d77-4lvsj to minikube
+72s         Normal    ScalingReplicaSet   deployment/web-app              Scaled up replica set web-app-59bbd74d77 from 3 to 8
+72s         Normal    Scheduled           pod/web-app-59bbd74d77-4kkwb    Successfully assigned resource-governance/web-app-59bbd74d77-4kkwb to minikube
+72s         Normal    Scheduled           pod/web-app-59bbd74d77-7q7cx    Successfully assigned resource-governance/web-app-59bbd74d77-7q7cx to minikube
+72s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-8wlqd" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+72s         Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-6nc4s
+72s         Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-7q7cx
+72s         Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-4kkwb
+72s         Normal    SuccessfulCreate    replicaset/web-app-59bbd74d77   Created pod: web-app-59bbd74d77-4lvsj
+72s         Normal    Scheduled           pod/web-app-59bbd74d77-6nc4s    Successfully assigned resource-governance/web-app-59bbd74d77-6nc4s to minikube
+71s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-pw88x" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+0s          Warning   FailedCreate        replicaset/web-app-59bbd74d77   (combined from similar events): Error creating: pods "web-app-59bbd74d77-m5thw" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+71s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-kbhwb" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+71s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-8rzpk" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+71s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-w25jz" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+71s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-v7lm5" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+71s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-4l4m9" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+71s         Warning   FailedCreate        replicaset/web-app-59bbd74d77   Error creating: pods "web-app-59bbd74d77-hsb6b" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+70s         Normal    Created             pod/web-app-59bbd74d77-7q7cx    Container created
+70s         Normal    Pulled              pod/web-app-59bbd74d77-7q7cx    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+70s         Normal    Pulled              pod/web-app-59bbd74d77-4kkwb    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+70s         Normal    Pulled              pod/web-app-59bbd74d77-6nc4s    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+70s         Normal    Started             pod/web-app-59bbd74d77-4lvsj    Container started
+70s         Normal    Created             pod/web-app-59bbd74d77-4kkwb    Container created
+70s         Normal    Pulled              pod/web-app-59bbd74d77-4lvsj    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+70s         Normal    Created             pod/web-app-59bbd74d77-4lvsj    Container created
+70s         Normal    Created             pod/web-app-59bbd74d77-6nc4s    Container created
+69s         Normal    Started             pod/web-app-59bbd74d77-7q7cx    Container started
+69s         Normal    Started             pod/web-app-59bbd74d77-4kkwb    Container started
+69s         Normal    Started             pod/web-app-59bbd74d77-6nc4s    Container started

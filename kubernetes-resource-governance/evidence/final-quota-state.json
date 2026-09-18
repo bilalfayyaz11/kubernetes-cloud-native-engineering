@@ -1,0 +1,20 @@
+{
+  "hard": {
+    "limits.cpu": "2",
+    "limits.memory": "2Gi",
+    "persistentvolumeclaims": "4",
+    "pods": "10",
+    "requests.cpu": "1",
+    "requests.memory": "1Gi",
+    "services": "5"
+  },
+  "used": {
+    "limits.cpu": "1400m",
+    "limits.memory": "512Mi",
+    "persistentvolumeclaims": "0",
+    "pods": "6",
+    "requests.cpu": "700m",
+    "requests.memory": "256Mi",
+    "services": "0"
+  }
+}

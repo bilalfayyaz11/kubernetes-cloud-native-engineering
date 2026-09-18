@@ -1,0 +1,8 @@
+NAME                       STATUS    READY   CPU_REQ   MEM_REQ
+web-app-59bbd74d77-4kkwb   Running   true    100m      32Mi
+web-app-59bbd74d77-4lvsj   Running   true    100m      32Mi
+web-app-59bbd74d77-5bm57   Running   true    100m      32Mi
+web-app-59bbd74d77-6j8px   Running   true    100m      32Mi
+web-app-59bbd74d77-6nc4s   Running   true    100m      32Mi
+web-app-59bbd74d77-7q7cx   Running   true    100m      32Mi
+web-app-59bbd74d77-d46g4   Running   true    100m      32Mi

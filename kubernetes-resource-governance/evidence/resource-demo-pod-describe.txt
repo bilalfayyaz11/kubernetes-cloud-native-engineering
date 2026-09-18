@@ -1,0 +1,59 @@
+Name:             resource-demo-pod
+Namespace:        resource-governance
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 18 Sep 2026 18:47:35 +0000
+Labels:           app=resource-demo
+                  component=resource-governance
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.4
+IPs:
+  IP:  10.244.0.4
+Containers:
+  demo-container:
+    Container ID:   containerd://e908d6002a2d4488b21e1f5c8cfaa276133421e2ab9ed56b05ee3d44c419b384
+    Image:          nginx:alpine
+    Image ID:       docker.io/library/nginx@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 18 Sep 2026 18:47:38 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  128Mi
+    Requests:
+      cpu:        250m
+      memory:     64Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-976zd (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-976zd:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  4s    default-scheduler  Successfully assigned resource-governance/resource-demo-pod to minikube
+  Normal  Pulling    3s    kubelet            spec.containers{demo-container}: Pulling image "nginx:alpine"
+  Normal  Pulled     1s    kubelet            spec.containers{demo-container}: Successfully pulled image "nginx:alpine" in 2.024s (2.024s including waiting). Image size: 26335703 bytes.
+  Normal  Created    1s    kubelet            spec.containers{demo-container}: Container created
+  Normal  Started    1s    kubelet            spec.containers{demo-container}: Container started

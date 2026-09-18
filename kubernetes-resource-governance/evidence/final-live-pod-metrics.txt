@@ -1,0 +1,6 @@
+NAME                       CPU(cores)   MEMORY(bytes)   
+default-resources-pod      3m           0Mi             
+resource-demo-pod          0m           3Mi             
+web-app-59bbd74d77-4lvsj   0m           3Mi             
+web-app-59bbd74d77-5bm57   0m           3Mi             
+web-app-59bbd74d77-6nc4s   0m           3Mi             

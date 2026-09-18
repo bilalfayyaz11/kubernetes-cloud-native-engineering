@@ -1,0 +1,7 @@
+NAME                       STATUS    QOS         CPU_REQ   CPU_LIMIT   MEM_REQ   MEM_LIMIT
+default-resources-pod      Running   Burstable   100m      200m        64Mi      128Mi
+fixed-pod                  Running   Burstable   50m       100m        32Mi      64Mi
+resource-demo-pod          Running   Burstable   250m      500m        64Mi      128Mi
+web-app-59bbd74d77-4lvsj   Running   Burstable   100m      200m        32Mi      64Mi
+web-app-59bbd74d77-5bm57   Running   Burstable   100m      200m        32Mi      64Mi
+web-app-59bbd74d77-6nc4s   Running   Burstable   100m      200m        32Mi      64Mi

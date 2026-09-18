@@ -1,0 +1,2 @@
+NAME       CPU_CAPACITY   MEMORY_CAPACITY   CPU_ALLOCATABLE   MEMORY_ALLOCATABLE
+minikube   2              3941336Ki         2                 3941336Ki

@@ -1,0 +1,15 @@
+Capacity:
+  cpu:                2
+  ephemeral-storage:  30083776512
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3941336Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  30083776512
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             3941336Ki
+  pods:               110
+System Info:

@@ -1,0 +1,2 @@
+NAME                    QOS         CPU_REQ   CPU_LIMIT   MEM_REQ   MEM_LIMIT
+default-resources-pod   Burstable   100m      200m        64Mi      128Mi

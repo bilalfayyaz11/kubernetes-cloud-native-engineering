@@ -1,0 +1,2 @@
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+fixed-pod   1/1     Running   0          2s    10.244.0.13   minikube   <none>           <none>

@@ -1,0 +1,1 @@
+Error from server (Forbidden): error when creating "problematic-pod.yaml": pods "problematic-pod" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=1200m,requests.cpu=800m,requests.memory=1Gi, used: limits.cpu=1300m,requests.cpu=650m,requests.memory=224Mi, limited: limits.cpu=2,requests.cpu=1,requests.memory=1Gi

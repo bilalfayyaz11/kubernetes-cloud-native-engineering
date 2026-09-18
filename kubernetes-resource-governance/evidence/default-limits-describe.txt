@@ -1,0 +1,6 @@
+Name:       default-limits
+Namespace:  resource-governance
+Type        Resource  Min  Max  Default Request  Default Limit  Max Limit/Request Ratio
+----        --------  ---  ---  ---------------  -------------  -----------------------
+Container   cpu       -    -    100m             200m           -
+Container   memory    -    -    64Mi             128Mi          -

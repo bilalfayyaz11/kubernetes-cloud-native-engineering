@@ -1,0 +1,30 @@
+{
+  "resource": "compute-quota",
+  "usage": [
+    {
+      "resource": "requests.cpu",
+      "used": "250m",
+      "hard": "1"
+    },
+    {
+      "resource": "requests.memory",
+      "used": "64Mi",
+      "hard": "1Gi"
+    },
+    {
+      "resource": "limits.cpu",
+      "used": "500m",
+      "hard": "2"
+    },
+    {
+      "resource": "limits.memory",
+      "used": "128Mi",
+      "hard": "2Gi"
+    },
+    {
+      "resource": "pods",
+      "used": "1",
+      "hard": "10"
+    }
+  ]
+}

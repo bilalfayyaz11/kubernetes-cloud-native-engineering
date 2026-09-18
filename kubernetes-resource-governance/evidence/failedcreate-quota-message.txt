@@ -1,0 +1,5 @@
+Error creating: pods "web-app-59bbd74d77-d7qr4" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+Error creating: pods "web-app-59bbd74d77-8wlqd" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+Error creating: pods "web-app-59bbd74d77-hsb6b" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+Error creating: pods "web-app-59bbd74d77-4l4m9" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1
+Error creating: pods "web-app-59bbd74d77-v7lm5" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1

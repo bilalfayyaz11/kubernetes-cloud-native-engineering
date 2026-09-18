@@ -1,0 +1,2 @@
+NAME                STATUS    QOS         CPU_REQ   CPU_LIMIT   MEM_REQ   MEM_LIMIT
+resource-demo-pod   Running   Burstable   250m      500m        64Mi      128Mi

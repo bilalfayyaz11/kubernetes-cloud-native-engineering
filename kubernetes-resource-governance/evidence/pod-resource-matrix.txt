@@ -1,0 +1,6 @@
+NAME                       CPU_REQ   MEM_REQ   CPU_LIMIT   MEM_LIMIT   QOS
+default-resources-pod      100m      64Mi      200m        128Mi       Burstable
+resource-demo-pod          250m      64Mi      500m        128Mi       Burstable
+web-app-59bbd74d77-4lvsj   100m      32Mi      200m        64Mi        Burstable
+web-app-59bbd74d77-5bm57   100m      32Mi      200m        64Mi        Burstable
+web-app-59bbd74d77-6nc4s   100m      32Mi      200m        64Mi        Burstable

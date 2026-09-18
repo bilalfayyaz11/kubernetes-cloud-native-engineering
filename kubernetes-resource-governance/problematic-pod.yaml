@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: problematic-pod
+  namespace: resource-governance
+  labels:
+    app: problematic-resource-test
+spec:
+  containers:
+    - name: problem-container
+      image: nginx:alpine
+
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: "800m"
+
+        limits:
+          memory: "1536Mi"
+          cpu: "1200m"

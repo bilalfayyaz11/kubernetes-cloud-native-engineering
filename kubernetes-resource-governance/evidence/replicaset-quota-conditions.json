@@ -1,0 +1,17 @@
+[
+  {
+    "name": "web-app-59bbd74d77",
+    "desired": 8,
+    "replicas": 7,
+    "ready": 7,
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-09-18T18:49:20Z",
+        "message": "pods \"web-app-59bbd74d77-d7qr4\" is forbidden: exceeded quota: compute-quota, requested: limits.cpu=200m,requests.cpu=100m, used: limits.cpu=1900m,requests.cpu=950m, limited: limits.cpu=2,requests.cpu=1",
+        "reason": "FailedCreate",
+        "status": "True",
+        "type": "ReplicaFailure"
+      }
+    ]
+  }
+]

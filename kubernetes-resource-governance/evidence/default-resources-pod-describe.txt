@@ -1,0 +1,63 @@
+Name:             default-resources-pod
+Namespace:        resource-governance
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 18 Sep 2026 18:50:59 +0000
+Labels:           app=default-resources
+Annotations:      kubernetes.io/limit-ranger:
+                    LimitRanger plugin set: cpu, memory request for container default-container; cpu, memory limit for container default-container
+Status:           Running
+IP:               10.244.0.12
+IPs:
+  IP:  10.244.0.12
+Containers:
+  default-container:
+    Container ID:  containerd://49e3d28ec1e890757bc728181c9fd8aa4f4fcb7541ecac6d885047fb44e76161
+    Image:         busybox:1.37
+    Image ID:      docker.io/library/busybox@sha256:9db7b59979c38555a39def84a31fb98b5296952f9e3afd4f6f11f05b07adfab0
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -c
+      sleep 3600
+    State:          Running
+      Started:      Fri, 18 Sep 2026 18:51:00 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     64Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-btrjt (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-btrjt:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  3s    default-scheduler  Successfully assigned resource-governance/default-resources-pod to minikube
+  Normal  Pulling    2s    kubelet            spec.containers{default-container}: Pulling image "busybox:1.37"
+  Normal  Pulled     2s    kubelet            spec.containers{default-container}: Successfully pulled image "busybox:1.37" in 703ms (703ms including waiting). Image size: 2222111 bytes.
+  Normal  Created    2s    kubelet            spec.containers{default-container}: Container created
+  Normal  Started    2s    kubelet            spec.containers{default-container}: Container started

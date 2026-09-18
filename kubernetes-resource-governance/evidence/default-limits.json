@@ -1,0 +1,12 @@
+{
+  "name": "default-limits",
+  "type": "Container",
+  "defaultRequest": {
+    "cpu": "100m",
+    "memory": "64Mi"
+  },
+  "defaultLimit": {
+    "cpu": "200m",
+    "memory": "128Mi"
+  }
+}
