@@ -1,0 +1,11 @@
+service:
+  type: ClusterIP
+
+image:
+  registry: docker.io
+  repository: bitnamilegacy/apache
+  tag: 2.4.65-debian-12-r2
+
+global:
+  security:
+    allowInsecureImages: true

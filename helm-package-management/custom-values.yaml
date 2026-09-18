@@ -1,0 +1,18 @@
+replicaCount: 3
+
+service:
+  type: ClusterIP
+
+extraEnvVars:
+  - name: APACHE_SERVER_NAME
+    value: "my-custom-server"
+  - name: ENVIRONMENT
+    value: "development"
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "50m"
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
