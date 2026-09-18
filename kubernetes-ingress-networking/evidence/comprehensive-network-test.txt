@@ -1,0 +1,12 @@
+=== Kubernetes Networking Validation ===
+
+FAIL | NodePort | No Minikube service URL
+PASS | HTTP Ingress | HTTP 200
+PASS | HTTPS Ingress | HTTP 200
+FAIL | TLS Certificate | subject=O = Acme Co, CN = Kubernetes Ingress Controller Fake Certificate
+PASS | Backend Endpoints | 3 ready endpoints
+
+=== Result Summary ===
+PASS: 3
+FAIL: 2
+OVERALL: REVIEW

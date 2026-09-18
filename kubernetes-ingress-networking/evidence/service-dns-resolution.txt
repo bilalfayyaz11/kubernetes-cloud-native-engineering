@@ -1,0 +1,19 @@
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+Name:	web-app-nodeport.ingress-networking.svc.cluster.local
+Address: 10.98.216.215
+
+** server can't find web-app-nodeport.svc.cluster.local: NXDOMAIN
+
+** server can't find web-app-nodeport.cluster.local: NXDOMAIN
+
+** server can't find web-app-nodeport.svc.cluster.local: NXDOMAIN
+
+
+** server can't find web-app-nodeport.ec2.internal: NXDOMAIN
+
+** server can't find web-app-nodeport.ec2.internal: NXDOMAIN
+
+** server can't find web-app-nodeport.cluster.local: NXDOMAIN
+

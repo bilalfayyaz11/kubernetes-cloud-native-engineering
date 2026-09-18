@@ -1,0 +1,8 @@
+{
+  "service": "web-app-nodeport",
+  "readyEndpoints": [
+    "10.244.0.7",
+    "10.244.0.6",
+    "10.244.0.8"
+  ]
+}

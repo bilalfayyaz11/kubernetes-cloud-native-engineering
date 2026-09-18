@@ -1,0 +1,9 @@
+3m44s       Normal   Scheduled           pod/web-app-9c4697989-rdhnm    Successfully assigned ingress-networking/web-app-9c4697989-rdhnm to minikube
+3m44s       Normal   Scheduled           pod/web-app-9c4697989-9twv8    Successfully assigned ingress-networking/web-app-9c4697989-9twv8 to minikube
+3m44s       Normal   Scheduled           pod/web-app-9c4697989-zkct2    Successfully assigned ingress-networking/web-app-9c4697989-zkct2 to minikube
+3m35s       Normal   Scheduled           pod/service-client             Successfully assigned ingress-networking/service-client to minikube
+3m34s       Normal   Pulling             pod/service-client             Pulling image "busybox:1.37"
+3m33s       Normal   Started             pod/service-client             Container started
+3m33s       Normal   Created             pod/service-client             Container created
+3m33s       Normal   Pulled              pod/service-client             Successfully pulled image "busybox:1.37" in 840ms (840ms including waiting). Image size: 2222111 bytes.
+2m6s        Normal   Sync                ingress/web-app-ingress        Scheduled for sync

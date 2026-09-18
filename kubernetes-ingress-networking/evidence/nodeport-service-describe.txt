@@ -1,0 +1,18 @@
+Name:                     web-app-nodeport
+Namespace:                ingress-networking
+Labels:                   app=web-app
+Annotations:              <none>
+Selector:                 app=web-app
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.98.216.215
+IPs:                      10.98.216.215
+Port:                     http  80/TCP
+TargetPort:               80/TCP
+NodePort:                 http  30080/TCP
+Endpoints:                10.244.0.7:80,10.244.0.6:80,10.244.0.8:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>

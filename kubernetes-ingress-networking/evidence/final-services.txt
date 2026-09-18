@@ -1,0 +1,3 @@
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+web-app-nodeport   NodePort    10.98.216.215    <none>        80:30080/TCP   3m38s   app=web-app
+web-app-service    ClusterIP   10.103.193.236   <none>        80/TCP         2m30s   app=web-app

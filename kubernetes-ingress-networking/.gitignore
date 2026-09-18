@@ -1,0 +1,13 @@
+# TLS private material
+*.key
+*.csr
+
+# Runtime certificate material if generated locally
+webapp-*.crt
+
+# Temporary port-forward files
+*.pid
+*.log
+
+# Local test state
+hosts-backup*

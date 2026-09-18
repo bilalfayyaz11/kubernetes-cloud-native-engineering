@@ -1,0 +1,15 @@
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES         SELECTOR
+deployment.apps/web-app   3/3     3            3           3m43s   nginx        nginx:alpine   app=web-app
+
+NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+service/web-app-nodeport   NodePort    10.98.216.215    <none>        80:30080/TCP   3m35s   app=web-app
+service/web-app-service    ClusterIP   10.103.193.236   <none>        80/TCP         2m27s   app=web-app
+
+NAME                                        CLASS   HOSTS                             ADDRESS        PORTS   AGE
+ingress.networking.k8s.io/web-app-ingress   nginx   webapp.local,webapp.example.com   192.168.49.2   80      2m25s
+
+NAME                          READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+pod/service-client            1/1     Running   0          3m34s   10.244.0.9   minikube   <none>           <none>
+pod/web-app-9c4697989-9twv8   1/1     Running   0          3m43s   10.244.0.7   minikube   <none>           <none>
+pod/web-app-9c4697989-rdhnm   1/1     Running   0          3m43s   10.244.0.8   minikube   <none>           <none>
+pod/web-app-9c4697989-zkct2   1/1     Running   0          3m43s   10.244.0.6   minikube   <none>           <none>

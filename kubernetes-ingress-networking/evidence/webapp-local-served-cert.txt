@@ -1,0 +1,6 @@
+subject=O = Acme Co, CN = Kubernetes Ingress Controller Fake Certificate
+issuer=O = Acme Co, CN = Kubernetes Ingress Controller Fake Certificate
+notBefore=Sep 18 19:00:58 2026 GMT
+notAfter=Sep 18 19:00:58 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:ingress.local

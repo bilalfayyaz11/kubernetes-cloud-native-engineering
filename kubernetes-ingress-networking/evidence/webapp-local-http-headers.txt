@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Date: Fri, 18 Sep 2026 19:04:52 GMT
+Content-Type: text/html
+Content-Length: 300
+Connection: keep-alive
+Last-Modified: Fri, 18 Sep 2026 19:01:22 GMT
+ETag: "6aad8a82-12c"
+Accept-Ranges: bytes
+

@@ -1,0 +1,2 @@
+NAME              CLASS   HOSTS                             ADDRESS        PORTS   AGE
+web-app-ingress   nginx   webapp.local,webapp.example.com   192.168.49.2   80      20s

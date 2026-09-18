@@ -1,0 +1,8 @@
+{
+  "name": "webapp-example-tls",
+  "type": "kubernetes.io/tls",
+  "keys": [
+    "tls.crt",
+    "tls.key"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "webapp-local-tls",
+  "type": "kubernetes.io/tls",
+  "keys": [
+    "tls.crt",
+    "tls.key"
+  ]
+}

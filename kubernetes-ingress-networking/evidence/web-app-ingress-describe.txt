@@ -1,0 +1,18 @@
+Name:             web-app-ingress
+Labels:           <none>
+Namespace:        ingress-networking
+Address:          192.168.49.2
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host                Path  Backends
+  ----                ----  --------
+  webapp.local        
+                      /   web-app-service:80 (10.244.0.8:80,10.244.0.7:80,10.244.0.6:80)
+  webapp.example.com  
+                      /   web-app-service:80 (10.244.0.8:80,10.244.0.7:80,10.244.0.6:80)
+Annotations:          nginx.ingress.kubernetes.io/ssl-redirect: false
+Events:
+  Type    Reason  Age               From                      Message
+  ----    ------  ----              ----                      -------
+  Normal  Sync    0s (x2 over 20s)  nginx-ingress-controller  Scheduled for sync

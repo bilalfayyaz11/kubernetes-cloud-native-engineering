@@ -1,0 +1,5 @@
+3m30s       Normal   Scheduled           pod/web-app-9c4697989-rdhnm    Successfully assigned ingress-networking/web-app-9c4697989-rdhnm to minikube
+3m30s       Normal   Scheduled           pod/web-app-9c4697989-9twv8    Successfully assigned ingress-networking/web-app-9c4697989-9twv8 to minikube
+3m30s       Normal   Scheduled           pod/web-app-9c4697989-zkct2    Successfully assigned ingress-networking/web-app-9c4697989-zkct2 to minikube
+3m21s       Normal   Scheduled           pod/service-client             Successfully assigned ingress-networking/service-client to minikube
+112s        Normal   Sync                ingress/web-app-ingress        Scheduled for sync

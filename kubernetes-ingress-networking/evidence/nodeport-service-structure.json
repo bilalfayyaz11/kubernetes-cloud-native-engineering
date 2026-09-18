@@ -1,0 +1,16 @@
+{
+  "selector": {
+    "app": "web-app"
+  },
+  "type": "NodePort",
+  "clusterIP": "10.98.216.215",
+  "ports": [
+    {
+      "name": "http",
+      "nodePort": 30080,
+      "port": 80,
+      "protocol": "TCP",
+      "targetPort": 80
+    }
+  ]
+}

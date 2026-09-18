@@ -1,0 +1,27 @@
+{
+  "ingressClassName": "nginx",
+  "rules": [
+    {
+      "host": "webapp.local",
+      "paths": [
+        {
+          "path": "/",
+          "pathType": "Prefix",
+          "service": "web-app-service",
+          "port": 80
+        }
+      ]
+    },
+    {
+      "host": "webapp.example.com",
+      "paths": [
+        {
+          "path": "/",
+          "pathType": "Prefix",
+          "service": "web-app-service",
+          "port": 80
+        }
+      ]
+    }
+  ]
+}

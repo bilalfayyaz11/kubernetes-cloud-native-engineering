@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"web-app"},"name":"web-app-service","namespace":"ingress-networking"},"spec":{"ports":[{"name":"http","port":80,"protocol":"TCP","targetPort":80}],"selector":{"app":"web-app"},"type":"ClusterIP"}}
+  creationTimestamp: "2026-09-18T19:02:38Z"
+  labels:
+    app: web-app
+  name: web-app-service
+  namespace: ingress-networking
+  resourceVersion: "780"
+  uid: 462341e8-2cba-40bd-be2b-d6813b320c8d
+spec:
+  clusterIP: 10.103.193.236
+  clusterIPs:
+  - 10.103.193.236
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web-app
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

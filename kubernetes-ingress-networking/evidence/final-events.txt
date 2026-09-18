@@ -1,0 +1,26 @@
+LAST SEEN   TYPE     REASON              OBJECT                         MESSAGE
+3m47s       Normal   Scheduled           pod/web-app-9c4697989-rdhnm    Successfully assigned ingress-networking/web-app-9c4697989-rdhnm to minikube
+3m47s       Normal   ScalingReplicaSet   deployment/web-app             Scaled up replica set web-app-9c4697989 from 0 to 3
+3m47s       Normal   SuccessfulCreate    replicaset/web-app-9c4697989   Created pod: web-app-9c4697989-9twv8
+3m47s       Normal   SuccessfulCreate    replicaset/web-app-9c4697989   Created pod: web-app-9c4697989-rdhnm
+3m47s       Normal   SuccessfulCreate    replicaset/web-app-9c4697989   Created pod: web-app-9c4697989-zkct2
+3m47s       Normal   Scheduled           pod/web-app-9c4697989-9twv8    Successfully assigned ingress-networking/web-app-9c4697989-9twv8 to minikube
+3m47s       Normal   Scheduled           pod/web-app-9c4697989-zkct2    Successfully assigned ingress-networking/web-app-9c4697989-zkct2 to minikube
+3m46s       Normal   Pulling             pod/web-app-9c4697989-9twv8    Pulling image "nginx:alpine"
+3m46s       Normal   Pulling             pod/web-app-9c4697989-zkct2    Pulling image "nginx:alpine"
+3m46s       Normal   Pulling             pod/web-app-9c4697989-rdhnm    Pulling image "nginx:alpine"
+3m43s       Normal   Pulled              pod/web-app-9c4697989-rdhnm    Successfully pulled image "nginx:alpine" in 224ms (2.989s including waiting). Image size: 26335703 bytes.
+3m43s       Normal   Created             pod/web-app-9c4697989-zkct2    Container created
+3m43s       Normal   Started             pod/web-app-9c4697989-zkct2    Container started
+3m43s       Normal   Created             pod/web-app-9c4697989-rdhnm    Container created
+3m43s       Normal   Started             pod/web-app-9c4697989-9twv8    Container started
+3m43s       Normal   Created             pod/web-app-9c4697989-9twv8    Container created
+3m43s       Normal   Pulled              pod/web-app-9c4697989-9twv8    Successfully pulled image "nginx:alpine" in 212ms (2.899s including waiting). Image size: 26335703 bytes.
+3m43s       Normal   Pulled              pod/web-app-9c4697989-zkct2    Successfully pulled image "nginx:alpine" in 2.784s (2.785s including waiting). Image size: 26335703 bytes.
+3m42s       Normal   Started             pod/web-app-9c4697989-rdhnm    Container started
+3m38s       Normal   Scheduled           pod/service-client             Successfully assigned ingress-networking/service-client to minikube
+3m37s       Normal   Pulling             pod/service-client             Pulling image "busybox:1.37"
+3m36s       Normal   Started             pod/service-client             Container started
+3m36s       Normal   Created             pod/service-client             Container created
+3m36s       Normal   Pulled              pod/service-client             Successfully pulled image "busybox:1.37" in 840ms (840ms including waiting). Image size: 2222111 bytes.
+2m9s        Normal   Sync                ingress/web-app-ingress        Scheduled for sync
