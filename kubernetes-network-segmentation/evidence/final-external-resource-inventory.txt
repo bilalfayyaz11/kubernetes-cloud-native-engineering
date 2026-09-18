@@ -1,0 +1,6 @@
+NAME                  READY   STATUS    RESTARTS   AGE     IP              NODE       NOMINATED NODE   READINESS GATES
+pod/external-client   1/1     Running   0          3m30s   10.244.120.70   minikube   <none>           <none>
+pod/external-web      1/1     Running   0          44s     10.244.120.71   minikube   <none>           <none>
+
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/external-web   ClusterIP   10.106.57.148   <none>        80/TCP    44s   app=external-web

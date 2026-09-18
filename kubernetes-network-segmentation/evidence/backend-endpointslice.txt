@@ -1,0 +1,2 @@
+NAME               ADDRESSTYPE   PORTS   ENDPOINTS       AGE
+backend-db-zztn6   IPv4          5432    10.244.120.68   1s

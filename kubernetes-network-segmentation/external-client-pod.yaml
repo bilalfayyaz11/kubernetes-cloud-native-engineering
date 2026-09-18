@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: external-client
+  namespace: external-segmentation
+  labels:
+    app: external-client
+    tier: external
+spec:
+  containers:
+    - name: external-client
+      image: busybox:1.37
+      command:
+        - sh
+        - -c
+        - sleep 3600
+      resources:
+        requests:
+          memory: "16Mi"
+          cpu: "10m"
+        limits:
+          memory: "64Mi"
+          cpu: "50m"

@@ -1,0 +1,4 @@
+NAME                        POD-SELECTOR   AGE
+allow-frontend-to-backend   app=backend    2m19s
+deny-backend-ingress        app=backend    2m42s
+restrict-backend-egress     app=backend    39s

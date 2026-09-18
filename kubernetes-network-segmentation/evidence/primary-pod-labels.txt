@@ -1,0 +1,4 @@
+NAME          READY   STATUS    RESTARTS   AGE   LABELS
+backend       1/1     Running   0          35s   app=backend,tier=database
+frontend      1/1     Running   0          36s   app=frontend,tier=web
+test-client   1/1     Running   0          33s   app=test-client,tier=testing

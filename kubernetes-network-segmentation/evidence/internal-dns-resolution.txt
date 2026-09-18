@@ -1,0 +1,19 @@
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+** server can't find backend-db.svc.cluster.local: NXDOMAIN
+
+Name:	backend-db.network-segmentation.svc.cluster.local
+Address: 10.97.232.76
+
+** server can't find backend-db.cluster.local: NXDOMAIN
+
+
+** server can't find backend-db.ec2.internal: NXDOMAIN
+
+** server can't find backend-db.ec2.internal: NXDOMAIN
+
+** server can't find backend-db.svc.cluster.local: NXDOMAIN
+
+** server can't find backend-db.cluster.local: NXDOMAIN
+

@@ -1,0 +1,7 @@
+Frontend -> Backend Pod IP status:        0
+Test-client -> Backend Pod IP status:     0
+External -> Backend Pod IP status:        0
+Frontend -> Backend Service status:       0
+Test-client -> Backend Service status:    0
+External -> Backend Service status:       0
+NetworkPolicy count:                      0

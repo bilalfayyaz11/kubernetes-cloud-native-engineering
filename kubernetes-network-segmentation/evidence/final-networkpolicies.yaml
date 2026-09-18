@@ -1,0 +1,87 @@
+apiVersion: v1
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"NetworkPolicy","metadata":{"annotations":{},"name":"allow-frontend-to-backend","namespace":"network-segmentation"},"spec":{"ingress":[{"from":[{"podSelector":{"matchLabels":{"app":"frontend"}}}],"ports":[{"port":5432,"protocol":"TCP"}]}],"podSelector":{"matchLabels":{"app":"backend"}},"policyTypes":["Ingress"]}}
+    creationTimestamp: "2026-09-18T19:15:10Z"
+    generation: 1
+    name: allow-frontend-to-backend
+    namespace: network-segmentation
+    resourceVersion: "812"
+    uid: 75c791da-c108-474e-85fb-35053f5883d7
+  spec:
+    ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: frontend
+      ports:
+      - port: 5432
+        protocol: TCP
+    podSelector:
+      matchLabels:
+        app: backend
+    policyTypes:
+    - Ingress
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"NetworkPolicy","metadata":{"annotations":{},"name":"deny-backend-ingress","namespace":"network-segmentation"},"spec":{"podSelector":{"matchLabels":{"app":"backend"}},"policyTypes":["Ingress"]}}
+    creationTimestamp: "2026-09-18T19:14:47Z"
+    generation: 1
+    name: deny-backend-ingress
+    namespace: network-segmentation
+    resourceVersion: "790"
+    uid: 7a395b7f-21e6-4e1c-a3af-dcd16b2e9787
+  spec:
+    podSelector:
+      matchLabels:
+        app: backend
+    policyTypes:
+    - Ingress
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"NetworkPolicy","metadata":{"annotations":{},"name":"restrict-backend-egress","namespace":"network-segmentation"},"spec":{"egress":[{"ports":[{"port":80,"protocol":"TCP"}],"to":[{"podSelector":{"matchLabels":{"app":"frontend"}}}]},{"ports":[{"port":53,"protocol":"UDP"},{"port":53,"protocol":"TCP"}],"to":[{"namespaceSelector":{"matchLabels":{"kubernetes.io/metadata.name":"kube-system"}},"podSelector":{"matchLabels":{"k8s-app":"kube-dns"}}}]}],"podSelector":{"matchLabels":{"app":"backend"}},"policyTypes":["Egress"]}}
+    creationTimestamp: "2026-09-18T19:16:50Z"
+    generation: 1
+    name: restrict-backend-egress
+    namespace: network-segmentation
+    resourceVersion: "931"
+    uid: e04af2f1-435b-44f7-a804-569146233e86
+  spec:
+    egress:
+    - ports:
+      - port: 80
+        protocol: TCP
+      to:
+      - podSelector:
+          matchLabels:
+            app: frontend
+    - ports:
+      - port: 53
+        protocol: UDP
+      - port: 53
+        protocol: TCP
+      to:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: kube-system
+        podSelector:
+          matchLabels:
+            k8s-app: kube-dns
+    podSelector:
+      matchLabels:
+        app: backend
+    policyTypes:
+    - Egress
+kind: List
+metadata:
+  resourceVersion: ""

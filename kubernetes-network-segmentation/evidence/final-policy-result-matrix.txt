@@ -1,0 +1,15 @@
+Ingress:
+  frontend -> backend TCP/5432           : 0
+  test-client -> backend TCP/5432        : 1
+  external-client -> backend TCP/5432    : 1
+
+Live modification:
+  test-client allowed after update       : 0
+  test-client blocked after removal      : 1
+
+Egress:
+  backend -> frontend before policy      : 0
+  backend -> external before policy      : 0
+  backend DNS after policy               : 0
+  backend -> frontend after policy       : 0
+  backend -> external after policy       : 1

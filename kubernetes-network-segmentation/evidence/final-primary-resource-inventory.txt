@@ -1,0 +1,13 @@
+NAME              READY   STATUS    RESTARTS   AGE     IP              NODE       NOMINATED NODE   READINESS GATES
+pod/backend       1/1     Running   0          3m34s   10.244.120.68   minikube   <none>           <none>
+pod/frontend      1/1     Running   0          3m35s   10.244.120.67   minikube   <none>           <none>
+pod/test-client   1/1     Running   0          3m32s   10.244.120.69   minikube   <none>           <none>
+
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE     SELECTOR
+service/backend-db     ClusterIP   10.97.232.76    <none>        5432/TCP   3m16s   app=backend
+service/frontend-web   ClusterIP   10.98.174.145   <none>        80/TCP     44s     app=frontend
+
+NAME                                                        POD-SELECTOR   AGE
+networkpolicy.networking.k8s.io/allow-frontend-to-backend   app=backend    2m20s
+networkpolicy.networking.k8s.io/deny-backend-ingress        app=backend    2m43s
+networkpolicy.networking.k8s.io/restrict-backend-egress     app=backend    40s

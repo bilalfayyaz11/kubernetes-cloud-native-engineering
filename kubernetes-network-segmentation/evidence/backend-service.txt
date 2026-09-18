@@ -1,0 +1,2 @@
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+backend-db   ClusterIP   10.97.232.76   <none>        5432/TCP   1s    app=backend

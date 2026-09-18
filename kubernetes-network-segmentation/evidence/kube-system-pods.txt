@@ -1,0 +1,10 @@
+NAME                                      READY   STATUS    RESTARTS   AGE   IP              NODE       NOMINATED NODE   READINESS GATES
+calico-kube-controllers-db57f7644-kd6bp   1/1     Running   0          37s   10.244.120.65   minikube   <none>           <none>
+calico-node-2b2lc                         1/1     Running   0          38s   192.168.49.2    minikube   <none>           <none>
+coredns-559f6c778d-mwvt6                  1/1     Running   0          40s   10.244.120.66   minikube   <none>           <none>
+etcd-minikube                             1/1     Running   0          45s   192.168.49.2    minikube   <none>           <none>
+kube-apiserver-minikube                   1/1     Running   0          45s   192.168.49.2    minikube   <none>           <none>
+kube-controller-manager-minikube          1/1     Running   0          45s   192.168.49.2    minikube   <none>           <none>
+kube-proxy-2qdks                          1/1     Running   0          40s   192.168.49.2    minikube   <none>           <none>
+kube-scheduler-minikube                   1/1     Running   0          49s   192.168.49.2    minikube   <none>           <none>
+storage-provisioner                       1/1     Running   0          33s   192.168.49.2    minikube   <none>           <none>

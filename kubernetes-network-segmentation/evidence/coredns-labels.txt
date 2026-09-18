@@ -1,0 +1,1 @@
+coredns-559f6c778d-mwvt6                  1/1     Running   0          3m48s   k8s-app=kube-dns,pod-template-hash=559f6c778d

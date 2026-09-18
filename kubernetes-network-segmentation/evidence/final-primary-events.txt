@@ -1,0 +1,16 @@
+LAST SEEN   TYPE     REASON      OBJECT            MESSAGE
+3m35s       Normal   Scheduled   pod/frontend      Successfully assigned network-segmentation/frontend to minikube
+3m34s       Normal   Scheduled   pod/backend       Successfully assigned network-segmentation/backend to minikube
+3m33s       Normal   Pulling     pod/frontend      Pulling image "nginx:alpine"
+3m32s       Normal   Pulling     pod/backend       Pulling image "postgres:17-alpine"
+3m31s       Normal   Scheduled   pod/test-client   Successfully assigned network-segmentation/test-client to minikube
+3m30s       Normal   Pulled      pod/frontend      Successfully pulled image "nginx:alpine" in 3.175s (3.175s including waiting). Image size: 26335703 bytes.
+3m30s       Normal   Created     pod/frontend      Container created
+3m29s       Normal   Started     pod/frontend      Container started
+3m28s       Normal   Pulling     pod/test-client   Pulling image "busybox:1.37"
+3m20s       Normal   Pulled      pod/backend       Successfully pulled image "postgres:17-alpine" in 10.415s (12.602s including waiting). Image size: 117212703 bytes.
+3m19s       Normal   Started     pod/backend       Container started
+3m20s       Normal   Created     pod/backend       Container created
+3m19s       Normal   Pulled      pod/test-client   Successfully pulled image "busybox:1.37" in 965ms (9.596s including waiting). Image size: 2222111 bytes.
+3m18s       Normal   Created     pod/test-client   Container created
+3m18s       Normal   Started     pod/test-client   Container started

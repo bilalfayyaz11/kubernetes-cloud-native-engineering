@@ -1,0 +1,2 @@
+calico-kube-controllers-db57f7644-kd6bp   1/1     Running   0          4m26s   10.244.120.65   minikube   <none>           <none>
+calico-node-2b2lc                         1/1     Running   0          4m27s   192.168.49.2    minikube   <none>           <none>

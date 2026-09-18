@@ -1,0 +1,2 @@
+NAME              READY   STATUS    RESTARTS   AGE   IP              NODE       NOMINATED NODE   READINESS GATES
+external-client   1/1     Running   0          13s   10.244.120.70   minikube   <none>           <none>

@@ -1,0 +1,3 @@
+NAME                    STATUS   AGE   LABELS
+network-segmentation    Active   3s    access-zone=trusted,kubernetes.io/metadata.name=network-segmentation,purpose=segmented-app
+external-segmentation   Active   3s    access-zone=untrusted,kubernetes.io/metadata.name=external-segmentation,purpose=external-client

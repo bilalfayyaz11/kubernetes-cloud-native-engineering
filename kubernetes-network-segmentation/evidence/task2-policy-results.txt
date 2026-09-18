@@ -1,0 +1,13 @@
+Default deny:
+  frontend blocked status:          1
+  test-client blocked status:       1
+  external blocked status:          1
+
+Frontend allow:
+  frontend allowed status:          0
+  test-client blocked status:       1
+  external blocked status:          1
+
+Trusted namespace allow:
+  internal test-client status:      0
+  external namespace status:        1

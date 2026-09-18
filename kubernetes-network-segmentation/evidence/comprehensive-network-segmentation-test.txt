@@ -1,0 +1,12 @@
+=== Kubernetes Network Segmentation Validation ===
+
+PASS | frontend -> backend:5432 | allowed
+PASS | test-client -> backend:5432 | blocked
+PASS | external-client -> backend:5432 | blocked
+PASS | backend -> frontend:80 | allowed
+PASS | backend -> external-web:80 | blocked
+PASS | backend DNS resolution | allowed
+
+PASS: 6
+FAIL: 0
+OVERALL: PASS

@@ -1,0 +1,11 @@
+# Runtime credentials
+*.secret
+*.password
+*.env
+
+# Temporary outputs
+*.pid
+*.log
+
+# Local runtime-only artifacts
+postgres-password.txt

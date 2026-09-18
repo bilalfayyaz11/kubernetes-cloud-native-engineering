@@ -1,0 +1,2 @@
+NAME                 ADDRESSTYPE   PORTS   ENDPOINTS       AGE
+external-web-fqd4h   IPv4          80      10.244.120.71   43s

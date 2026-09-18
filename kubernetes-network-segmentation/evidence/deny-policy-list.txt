@@ -1,0 +1,2 @@
+NAME                   POD-SELECTOR   AGE
+deny-backend-ingress   app=backend    1s

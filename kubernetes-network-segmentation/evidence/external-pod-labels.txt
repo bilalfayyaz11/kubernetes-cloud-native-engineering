@@ -1,0 +1,2 @@
+NAME              READY   STATUS    RESTARTS   AGE   LABELS
+external-client   1/1     Running   0          31s   app=external-client,tier=external

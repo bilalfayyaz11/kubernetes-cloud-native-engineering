@@ -1,0 +1,11 @@
+Name:         deny-backend-ingress
+Namespace:    network-segmentation
+Created on:   2026-09-18 19:14:47 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=backend
+  Allowing ingress traffic:
+    <none> (Selected pods are isolated for ingress connectivity)
+  Not affecting egress traffic
+  Policy Types: Ingress
