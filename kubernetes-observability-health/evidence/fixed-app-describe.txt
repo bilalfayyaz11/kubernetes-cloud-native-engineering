@@ -1,0 +1,60 @@
+Name:             fixed-app
+Namespace:        observability-health
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 18 Sep 2026 16:54:54 +0000
+Labels:           app=debug-test-fixed
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.10
+IPs:
+  IP:  10.244.0.10
+Containers:
+  working-container:
+    Container ID:   containerd://7919c2abe6cecc71a6736f6919658c217536122a2f914c700bf305443e12c511
+    Image:          nginx:alpine
+    Image ID:       docker.io/library/nginx@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 18 Sep 2026 16:54:55 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  128Mi
+    Requests:
+      cpu:        25m
+      memory:     32Mi
+    Liveness:     http-get http://:80/ delay=5s timeout=2s period=5s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=2s timeout=2s period=3s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rfh8b (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-rfh8b:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age   From               Message
+  ----     ------     ----  ----               -------
+  Normal   Scheduled  9s    default-scheduler  Successfully assigned observability-health/fixed-app to minikube
+  Normal   Pulled     8s    kubelet            spec.containers{working-container}: Container image "nginx:alpine" already present on machine and can be accessed by the pod
+  Normal   Created    8s    kubelet            spec.containers{working-container}: Container created
+  Normal   Started    8s    kubelet            spec.containers{working-container}: Container started
+  Warning  Unhealthy  4s    kubelet            spec.containers{working-container}: Readiness probe failed: Get "http://10.244.0.10:80/": dial tcp 10.244.0.10:80: connect: connection refused

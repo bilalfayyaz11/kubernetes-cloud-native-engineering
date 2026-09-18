@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: failing-app
+  namespace: observability-health
+  labels:
+    app: debug-test
+spec:
+  containers:
+    - name: failing-container
+      image: nginx:alpine
+
+      ports:
+        - containerPort: 80
+
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "25m"
+        limits:
+          memory: "128Mi"
+          cpu: "200m"
+
+      livenessProbe:
+        httpGet:
+          path: /nonexistent-path
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        timeoutSeconds: 2
+        failureThreshold: 2
+
+      readinessProbe:
+        httpGet:
+          path: /also-nonexistent
+          port: 80
+        initialDelaySeconds: 2
+        periodSeconds: 3
+        timeoutSeconds: 2
+        failureThreshold: 2

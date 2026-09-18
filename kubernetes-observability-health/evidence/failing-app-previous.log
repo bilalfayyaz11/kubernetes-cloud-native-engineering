@@ -1,0 +1,38 @@
+2026-09-18T16:54:42.890410539Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2026-09-18T16:54:42.890462420Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2026-09-18T16:54:42.893953407Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2026-09-18T16:54:42.960043814Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+2026-09-18T16:54:46.859874504Z 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+2026-09-18T16:54:46.860331648Z /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+2026-09-18T16:54:46.860640222Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+2026-09-18T16:54:46.947439898Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2026-09-18T16:54:46.951279409Z /docker-entrypoint.sh: Configuration complete; ready for start up
+2026-09-18T16:54:47.042943466Z 2026/09/18 16:54:46 [notice] 1#1: using the "epoll" event method
+2026-09-18T16:54:47.043085798Z 2026/09/18 16:54:46 [notice] 1#1: nginx/1.31.6
+2026-09-18T16:54:47.043094188Z 2026/09/18 16:54:46 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026-09-18T16:54:47.043098028Z 2026/09/18 16:54:46 [notice] 1#1: OS: Linux 6.14.0-1018-aws
+2026-09-18T16:54:47.043101418Z 2026/09/18 16:54:46 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026-09-18T16:54:47.043104428Z 2026/09/18 16:54:46 [notice] 1#1: start worker processes
+2026-09-18T16:54:47.044420192Z 2026/09/18 16:54:46 [notice] 1#1: start worker process 30
+2026-09-18T16:54:47.044618034Z 2026/09/18 16:54:46 [notice] 1#1: start worker process 31
+2026-09-18T16:54:47.379731412Z 2026/09/18 16:54:47 [error] 30#30: *1 open() "/usr/share/nginx/html/nonexistent-path" failed (2: No such file or directory), client: 10.244.0.1, server: localhost, request: "GET /nonexistent-path HTTP/1.1", host: "10.244.0.9:80"
+2026-09-18T16:54:47.383941046Z 10.244.0.1 - - [18/Sep/2026:16:54:47 +0000] "GET /nonexistent-path HTTP/1.1" 404 153 "-" "kube-probe/1.37" "-"
+2026-09-18T16:54:49.681569472Z 2026/09/18 16:54:49 [error] 31#31: *2 open() "/usr/share/nginx/html/also-nonexistent" failed (2: No such file or directory), client: 10.244.0.1, server: localhost, request: "GET /also-nonexistent HTTP/1.1", host: "10.244.0.9:80"
+2026-09-18T16:54:49.682634854Z 10.244.0.1 - - [18/Sep/2026:16:54:49 +0000] "GET /also-nonexistent HTTP/1.1" 404 153 "-" "kube-probe/1.37" "-"
+2026-09-18T16:54:52.378271360Z 2026/09/18 16:54:52 [error] 30#30: *3 open() "/usr/share/nginx/html/nonexistent-path" failed (2: No such file or directory), client: 10.244.0.1, server: localhost, request: "GET /nonexistent-path HTTP/1.1", host: "10.244.0.9:80"
+2026-09-18T16:54:52.378313751Z 10.244.0.1 - - [18/Sep/2026:16:54:52 +0000] "GET /nonexistent-path HTTP/1.1" 404 153 "-" "kube-probe/1.37" "-"
+2026-09-18T16:54:52.383841839Z 2026/09/18 16:54:52 [error] 30#30: *4 open() "/usr/share/nginx/html/also-nonexistent" failed (2: No such file or directory), client: 10.244.0.1, server: localhost, request: "GET /also-nonexistent HTTP/1.1", host: "10.244.0.9:80"
+2026-09-18T16:54:52.385669689Z 10.244.0.1 - - [18/Sep/2026:16:54:52 +0000] "GET /also-nonexistent HTTP/1.1" 404 153 "-" "kube-probe/1.37" "-"
+2026-09-18T16:54:52.397013048Z 2026/09/18 16:54:52 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2026-09-18T16:54:52.400413704Z 2026/09/18 16:54:52 [notice] 30#30: gracefully shutting down
+2026-09-18T16:54:52.400433014Z 2026/09/18 16:54:52 [notice] 30#30: exiting
+2026-09-18T16:54:52.401113442Z 2026/09/18 16:54:52 [notice] 31#31: gracefully shutting down
+2026-09-18T16:54:52.407470239Z 2026/09/18 16:54:52 [notice] 31#31: exiting
+2026-09-18T16:54:52.407902943Z 2026/09/18 16:54:52 [notice] 30#30: exit
+2026-09-18T16:54:52.408456419Z 2026/09/18 16:54:52 [notice] 31#31: exit
+2026-09-18T16:54:52.427109526Z 2026/09/18 16:54:52 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2026-09-18T16:54:52.427137446Z 2026/09/18 16:54:52 [notice] 1#1: worker process 30 exited with code 0
+2026-09-18T16:54:52.427141626Z 2026/09/18 16:54:52 [notice] 1#1: signal 29 (SIGIO) received
+2026-09-18T16:54:52.427154677Z 2026/09/18 16:54:52 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2026-09-18T16:54:52.427158477Z 2026/09/18 16:54:52 [notice] 1#1: worker process 31 exited with code 0
+2026-09-18T16:54:52.427414759Z 2026/09/18 16:54:52 [notice] 1#1: exit

@@ -1,0 +1,4 @@
+2026-09-18T16:57:30.424721298Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2026-09-18T16:57:30.424823989Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2026-09-18T16:57:30.624389769Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2026-09-18T16:57:30.829692359Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf

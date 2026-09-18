@@ -1,0 +1,14 @@
+NAME                              READY   STATUS             RESTARTS        AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+app-with-all-probes               1/1     Running            0               8m39s   10.244.0.6    minikube   <none>           <none>
+app-with-liveness                 1/1     Running            0               8m41s   10.244.0.4    minikube   <none>           <none>
+app-with-readiness                1/1     Running            0               8m40s   10.244.0.5    minikube   <none>           <none>
+basic-web-app                     1/1     Running            0               8m41s   10.244.0.3    minikube   <none>           <none>
+failing-app                       0/1     CrashLoopBackOff   6 (2m20s ago)   5m25s   10.244.0.9    minikube   <none>           <none>
+fixed-app                         1/1     Running            0               5m13s   10.244.0.10   minikube   <none>           <none>
+resource-constrained-app          0/1     CrashLoopBackOff   4 (13s ago)     2m43s   10.244.0.16   minikube   <none>           <none>
+resource-intensive-app            1/1     Running            0               6m32s   10.244.0.8    minikube   <none>           <none>
+web-deployment-5b8d4fbd68-fmsn2   1/1     Running            0               3m17s   10.244.0.14   minikube   <none>           <none>
+web-deployment-5b8d4fbd68-hs8vp   1/1     Running            0               4m36s   10.244.0.12   minikube   <none>           <none>
+web-deployment-5b8d4fbd68-hxgxz   1/1     Running            0               4m36s   10.244.0.11   minikube   <none>           <none>
+web-deployment-5b8d4fbd68-prv7m   1/1     Running            0               4m36s   10.244.0.13   minikube   <none>           <none>
+web-deployment-5b8d4fbd68-sldx8   1/1     Running            0               3m16s   10.244.0.15   minikube   <none>           <none>

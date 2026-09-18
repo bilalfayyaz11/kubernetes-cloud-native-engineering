@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: basic-web-app
+  namespace: observability-health
+  labels:
+    app: web-server
+spec:
+  containers:
+    - name: web-container
+      image: nginx:alpine
+      ports:
+        - containerPort: 80
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "25m"
+        limits:
+          memory: "128Mi"
+          cpu: "200m"

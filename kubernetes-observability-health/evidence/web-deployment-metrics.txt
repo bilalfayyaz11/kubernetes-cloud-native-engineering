@@ -1,0 +1,6 @@
+NAME                              CPU(cores)   MEMORY(bytes)   
+web-deployment-5b8d4fbd68-fmsn2   1m           3Mi             
+web-deployment-5b8d4fbd68-hs8vp   1m           3Mi             
+web-deployment-5b8d4fbd68-hxgxz   1m           3Mi             
+web-deployment-5b8d4fbd68-prv7m   1m           3Mi             
+web-deployment-5b8d4fbd68-sldx8   1m           3Mi             

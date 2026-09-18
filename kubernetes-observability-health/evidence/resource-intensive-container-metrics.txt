@@ -1,0 +1,2 @@
+POD                      NAME                  CPU(cores)   MEMORY(bytes)   
+resource-intensive-app   monitored-container   19m          3Mi             

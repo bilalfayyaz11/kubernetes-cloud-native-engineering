@@ -1,0 +1,58 @@
+Name:             resource-constrained-app
+Namespace:        observability-health
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 18 Sep 2026 16:57:24 +0000
+Labels:           app=constrained-resource-test
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.16
+IPs:
+  IP:  10.244.0.16
+Containers:
+  constrained-container:
+    Container ID:   containerd://6550dccb1a6fbd77ed237285cc231ad60d1c9666d9944e453d7d04f293d4c040
+    Image:          nginx:alpine
+    Image ID:       docker.io/library/nginx@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 18 Sep 2026 16:57:30 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     20m
+      memory:  20Mi
+    Requests:
+      cpu:        10m
+      memory:     10Mi
+    Liveness:     http-get http://:80/ delay=5s timeout=2s period=5s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-bdv7g (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-bdv7g:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  8s    default-scheduler  Successfully assigned observability-health/resource-constrained-app to minikube
+  Normal  Pulled     4s    kubelet            spec.containers{constrained-container}: Container image "nginx:alpine" already present on machine and can be accessed by the pod
+  Normal  Created    4s    kubelet            spec.containers{constrained-container}: Container created
+  Normal  Started    2s    kubelet            spec.containers{constrained-container}: Container started

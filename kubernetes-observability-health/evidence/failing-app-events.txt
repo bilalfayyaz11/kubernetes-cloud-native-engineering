@@ -1,0 +1,9 @@
+LAST SEEN   TYPE      REASON      OBJECT            MESSAGE
+11s         Normal    Scheduled   pod/failing-app   Successfully assigned observability-health/failing-app to minikube
+1s          Normal    Pulled      pod/failing-app   Container image "nginx:alpine" already present on machine and can be accessed by the pod
+1s          Normal    Created     pod/failing-app   Container created
+1s          Normal    Started     pod/failing-app   Container started
+7s          Warning   Unhealthy   pod/failing-app   Readiness probe failed: Get "http://10.244.0.9:80/also-nonexistent": dial tcp 10.244.0.9:80: connect: connection refused
+1s          Warning   Unhealthy   pod/failing-app   Liveness probe failed: HTTP probe failed with statuscode: 404
+1s          Warning   Unhealthy   pod/failing-app   Readiness probe failed: HTTP probe failed with statuscode: 404
+1s          Normal    Killing     pod/failing-app   Container failing-container failed liveness probe, will be restarted

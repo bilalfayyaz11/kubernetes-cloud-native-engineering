@@ -1,0 +1,2 @@
+NAME                              READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+metrics-server-768f9f6999-trgfr   1/1     Running   0          2m11s   10.244.0.7   minikube   <none>           <none>

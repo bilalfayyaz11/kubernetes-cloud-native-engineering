@@ -1,0 +1,79 @@
+LAST SEEN   TYPE      REASON              OBJECT                                 MESSAGE
+8m41s       Normal    Scheduled           pod/basic-web-app                      Successfully assigned observability-health/basic-web-app to minikube
+8m41s       Normal    Scheduled           pod/app-with-liveness                  Successfully assigned observability-health/app-with-liveness to minikube
+8m40s       Normal    Scheduled           pod/app-with-readiness                 Successfully assigned observability-health/app-with-readiness to minikube
+8m40s       Normal    Pulling             pod/basic-web-app                      Pulling image "nginx:alpine"
+8m40s       Normal    Pulling             pod/app-with-liveness                  Pulling image "nginx:alpine"
+8m39s       Normal    Scheduled           pod/app-with-all-probes                Successfully assigned observability-health/app-with-all-probes to minikube
+8m39s       Normal    Pulling             pod/app-with-readiness                 Pulling image "nginx:alpine"
+8m37s       Normal    Pulled              pod/app-with-readiness                 Successfully pulled image "nginx:alpine" in 258ms (2.4s including waiting). Image size: 26335703 bytes.
+8m37s       Normal    Created             pod/app-with-all-probes                Container created
+8m37s       Normal    Created             pod/basic-web-app                      Container created
+8m37s       Normal    Pulled              pod/app-with-liveness                  Successfully pulled image "nginx:alpine" in 260ms (2.715s including waiting). Image size: 26335703 bytes.
+8m37s       Normal    Pulled              pod/basic-web-app                      Successfully pulled image "nginx:alpine" in 3.269s (3.269s including waiting). Image size: 26335703 bytes.
+8m37s       Normal    Started             pod/app-with-all-probes                Container started
+8m37s       Normal    Created             pod/app-with-readiness                 Container created
+8m37s       Normal    Pulled              pod/app-with-all-probes                Container image "nginx:alpine" already present on machine and can be accessed by the pod
+8m37s       Normal    Created             pod/app-with-liveness                  Container created
+8m36s       Normal    Started             pod/app-with-readiness                 Container started
+8m32s       Warning   Unhealthy           pod/app-with-all-probes                Startup probe failed: Get "http://10.244.0.6:80/": dial tcp 10.244.0.6:80: connect: connection refused
+8m36s       Normal    Started             pod/app-with-liveness                  Container started
+8m36s       Normal    Started             pod/basic-web-app                      Container started
+8m33s       Warning   Unhealthy           pod/app-with-readiness                 Readiness probe failed: Get "http://10.244.0.5:80/": dial tcp 10.244.0.5:80: connect: connection refused
+6m32s       Normal    Pulled              pod/resource-intensive-app             Container image "nginx:alpine" already present on machine and can be accessed by the pod
+6m32s       Normal    Created             pod/resource-intensive-app             Container created
+6m32s       Normal    Scheduled           pod/resource-intensive-app             Successfully assigned observability-health/resource-intensive-app to minikube
+6m32s       Normal    Started             pod/resource-intensive-app             Container started
+2m34s       Normal    Pulled              pod/failing-app                        Container image "nginx:alpine" already present on machine and can be accessed by the pod
+5m25s       Normal    Scheduled           pod/failing-app                        Successfully assigned observability-health/failing-app to minikube
+4m5s        Normal    Created             pod/failing-app                        Container created
+4m5s        Normal    Started             pod/failing-app                        Container started
+4m16s       Warning   Unhealthy           pod/failing-app                        Readiness probe failed: Get "http://10.244.0.9:80/also-nonexistent": dial tcp 10.244.0.9:80: connect: connection refused
+4m45s       Warning   Unhealthy           pod/failing-app                        Liveness probe failed: HTTP probe failed with statuscode: 404
+4m13s       Warning   Unhealthy           pod/failing-app                        Readiness probe failed: HTTP probe failed with statuscode: 404
+3m55s       Normal    Killing             pod/failing-app                        Container failing-container failed liveness probe, will be restarted
+5m13s       Normal    Scheduled           pod/fixed-app                          Successfully assigned observability-health/fixed-app to minikube
+5m12s       Normal    Pulled              pod/fixed-app                          Container image "nginx:alpine" already present on machine and can be accessed by the pod
+5m12s       Normal    Created             pod/fixed-app                          Container created
+5m12s       Normal    Started             pod/fixed-app                          Container started
+5m8s        Warning   Unhealthy           pod/fixed-app                          Readiness probe failed: Get "http://10.244.0.10:80/": dial tcp 10.244.0.10:80: connect: connection refused
+4m45s       Warning   BackOff             pod/failing-app                        Back-off restarting failed container failing-container in pod failing-app_observability-health(8e95c2e0-65b2-4f22-b0e1-2999be59c367)
+4m36s       Normal    SuccessfulCreate    replicaset/web-deployment-5b8d4fbd68   Created pod: web-deployment-5b8d4fbd68-hxgxz
+4m36s       Normal    SuccessfulCreate    replicaset/web-deployment-5b8d4fbd68   Created pod: web-deployment-5b8d4fbd68-hs8vp
+4m36s       Normal    Scheduled           pod/web-deployment-5b8d4fbd68-hxgxz    Successfully assigned observability-health/web-deployment-5b8d4fbd68-hxgxz to minikube
+4m36s       Normal    SuccessfulCreate    replicaset/web-deployment-5b8d4fbd68   Created pod: web-deployment-5b8d4fbd68-prv7m
+4m36s       Normal    ScalingReplicaSet   deployment/web-deployment              Scaled up replica set web-deployment-5b8d4fbd68 from 0 to 3
+4m35s       Normal    Pulled              pod/web-deployment-5b8d4fbd68-hxgxz    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+4m35s       Normal    Scheduled           pod/web-deployment-5b8d4fbd68-hs8vp    Successfully assigned observability-health/web-deployment-5b8d4fbd68-hs8vp to minikube
+4m35s       Normal    Scheduled           pod/web-deployment-5b8d4fbd68-prv7m    Successfully assigned observability-health/web-deployment-5b8d4fbd68-prv7m to minikube
+4m35s       Normal    Started             pod/web-deployment-5b8d4fbd68-hxgxz    Container started
+4m35s       Normal    Created             pod/web-deployment-5b8d4fbd68-hxgxz    Container created
+4m35s       Normal    Pulled              pod/web-deployment-5b8d4fbd68-hs8vp    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+4m34s       Normal    Created             pod/web-deployment-5b8d4fbd68-hs8vp    Container created
+4m35s       Normal    Pulled              pod/web-deployment-5b8d4fbd68-prv7m    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+4m34s       Normal    Started             pod/web-deployment-5b8d4fbd68-prv7m    Container started
+4m34s       Normal    Created             pod/web-deployment-5b8d4fbd68-prv7m    Container created
+4m34s       Normal    Started             pod/web-deployment-5b8d4fbd68-hs8vp    Container started
+4m31s       Warning   Unhealthy           pod/web-deployment-5b8d4fbd68-hs8vp    Startup probe failed: Get "http://10.244.0.12:80/": dial tcp 10.244.0.12:80: connect: connection refused
+4m31s       Warning   Unhealthy           pod/web-deployment-5b8d4fbd68-hxgxz    Startup probe failed: Get "http://10.244.0.11:80/": dial tcp 10.244.0.11:80: connect: connection refused
+4m31s       Warning   Unhealthy           pod/web-deployment-5b8d4fbd68-prv7m    Startup probe failed: Get "http://10.244.0.13:80/": dial tcp 10.244.0.13:80: connect: connection refused
+3m17s       Normal    ScalingReplicaSet   deployment/web-deployment              Scaled up replica set web-deployment-5b8d4fbd68 from 3 to 5
+3m16s       Normal    SuccessfulCreate    replicaset/web-deployment-5b8d4fbd68   Created pod: web-deployment-5b8d4fbd68-fmsn2
+3m16s       Normal    Created             pod/web-deployment-5b8d4fbd68-sldx8    Container created
+3m16s       Normal    Created             pod/web-deployment-5b8d4fbd68-fmsn2    Container created
+3m16s       Normal    Pulled              pod/web-deployment-5b8d4fbd68-fmsn2    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m16s       Normal    Scheduled           pod/web-deployment-5b8d4fbd68-fmsn2    Successfully assigned observability-health/web-deployment-5b8d4fbd68-fmsn2 to minikube
+3m16s       Normal    Pulled              pod/web-deployment-5b8d4fbd68-sldx8    Container image "nginx:alpine" already present on machine and can be accessed by the pod
+3m16s       Normal    SuccessfulCreate    replicaset/web-deployment-5b8d4fbd68   Created pod: web-deployment-5b8d4fbd68-sldx8
+3m16s       Normal    Scheduled           pod/web-deployment-5b8d4fbd68-sldx8    Successfully assigned observability-health/web-deployment-5b8d4fbd68-sldx8 to minikube
+3m15s       Normal    Started             pod/web-deployment-5b8d4fbd68-sldx8    Container started
+3m15s       Normal    Started             pod/web-deployment-5b8d4fbd68-fmsn2    Container started
+3m12s       Warning   Unhealthy           pod/web-deployment-5b8d4fbd68-fmsn2    Startup probe failed: Get "http://10.244.0.14:80/": dial tcp 10.244.0.14:80: connect: connection refused
+3m12s       Warning   Unhealthy           pod/web-deployment-5b8d4fbd68-sldx8    Startup probe failed: Get "http://10.244.0.15:80/": dial tcp 10.244.0.15:80: connect: connection refused
+2m43s       Normal    Scheduled           pod/resource-constrained-app           Successfully assigned observability-health/resource-constrained-app to minikube
+33s         Normal    Created             pod/resource-constrained-app           Container created
+33s         Normal    Pulled              pod/resource-constrained-app           Container image "nginx:alpine" already present on machine and can be accessed by the pod
+32s         Normal    Started             pod/resource-constrained-app           Container started
+13s         Warning   Unhealthy           pod/resource-constrained-app           Liveness probe failed: Get "http://10.244.0.16:80/": dial tcp 10.244.0.16:80: connect: connection refused
+13s         Normal    Killing             pod/resource-constrained-app           Container constrained-container failed liveness probe, will be restarted
+12s         Warning   BackOff             pod/resource-constrained-app           Back-off restarting failed container constrained-container in pod resource-constrained-app_observability-health(c7a0c8e0-66e7-4a46-b109-cbbe4389c219)

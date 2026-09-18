@@ -1,0 +1,6 @@
+NAME                     CPU(cores)   MEMORY(bytes)   
+app-with-all-probes      1m           3Mi             
+app-with-liveness        1m           3Mi             
+app-with-readiness       1m           3Mi             
+basic-web-app            0m           3Mi             
+resource-intensive-app   19m          3Mi             
