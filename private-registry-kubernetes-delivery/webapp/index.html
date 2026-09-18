@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Containerized Web Application</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Containerized Web Application</h1>
+
+        <p>
+            This application is being served from an Nginx container.
+        </p>
+
+        <p>
+            Host:
+            <span id="hostname"></span>
+        </p>
+
+        <p>
+            Current Time:
+            <span id="time"></span>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('hostname').textContent =
+            window.location.hostname;
+
+        document.getElementById('time').textContent =
+            new Date().toLocaleString();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "containerized-webapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static web application built through a multi-stage container workflow",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r public/* dist/ && node build.js"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.19.3"
+  }
+}

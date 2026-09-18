@@ -1,0 +1,4 @@
+NAME                     CPU(cores)   MEMORY(bytes)   
+webapp-b65f97754-2ssv8   1m           3Mi             
+webapp-b65f97754-fntvj   1m           3Mi             
+webapp-b65f97754-sfgrr   1m           3Mi             

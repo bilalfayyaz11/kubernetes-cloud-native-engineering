@@ -1,0 +1,4 @@
+NAME                     READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+webapp-b65f97754-2ssv8   1/1     Running   0          4m14s   10.244.0.7   minikube   <none>           <none>
+webapp-b65f97754-fntvj   1/1     Running   0          4m14s   10.244.0.6   minikube   <none>           <none>
+webapp-b65f97754-sfgrr   1/1     Running   0          4m6s    10.244.0.8   minikube   <none>           <none>

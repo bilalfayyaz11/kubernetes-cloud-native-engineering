@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Native Web Application</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Cloud Native Web Application</h1>
+
+    <div class="badge">
+        Version 1.1
+    </div>
+
+    <p>
+        Securely delivered from a private registry into Kubernetes.
+    </p>
+
+    <p>
+        Host:
+        <span id="hostname"></span>
+    </p>
+
+    <p>
+        Current Time:
+        <span id="currentTime"></span>
+    </p>
+
+    <p>
+        Uptime:
+        <span id="uptime"></span>
+    </p>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
