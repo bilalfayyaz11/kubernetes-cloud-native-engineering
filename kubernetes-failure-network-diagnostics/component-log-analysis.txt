@@ -1,0 +1,33 @@
+=== Kubernetes Troubleshooting Log Collection ===
+Timestamp: Sat Sep 19 13:02:44 UTC 2026
+
+=== Cluster Info ===
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+Cluster info unavailable
+
+=== Node Status ===
+Node information unavailable
+
+=== System Pods Status ===
+kube-system unavailable
+
+=== Recent Events ===
+
+=== Recent kubelet Logs ===
+-- No entries --
+
+=== API Server Logs ===
+API server pod not found
+
+=== Controller Manager Logs ===
+Controller manager pod not found
+
+=== Scheduler Logs ===
+Scheduler pod not found
+
+=== Error Pattern Summary ===
+
+--- Kubelet Errors ---
+
+=== Collection Complete ===

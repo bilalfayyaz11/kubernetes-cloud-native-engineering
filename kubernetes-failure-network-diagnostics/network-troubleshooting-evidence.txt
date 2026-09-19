@@ -1,0 +1,30 @@
+=== Kubernetes Network Troubleshooting ===
+Timestamp: Sat Sep 19 13:02:45 UTC 2026
+
+=== Node Status ===
+
+=== Pod Information ===
+
+=== Services ===
+
+=== EndpointSlices ===
+
+=== Pod-to-Pod Connectivity ===
+
+=== Service Connectivity ===
+
+=== Service DNS ===
+Service DNS resolution failed
+
+=== Kubernetes DNS ===
+Cluster DNS resolution failed
+
+=== Pod Resolver Configuration ===
+
+=== CoreDNS Status ===
+
+=== Service Backend ===
+
+=== Routing ===
+
+=== Network Troubleshooting Complete ===

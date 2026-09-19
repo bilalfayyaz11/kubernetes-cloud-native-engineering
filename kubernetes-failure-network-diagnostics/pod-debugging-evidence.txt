@@ -1,0 +1,25 @@
+=== Kubernetes Pod Failure Diagnosis ===
+Timestamp: Sat Sep 19 13:02:46 UTC 2026
+
+Failure reproduced:
+  Image: nginx:nonexistent-tag
+  Expected state: ErrImagePull / ImagePullBackOff
+
+Root cause:
+  The configured image tag does not exist in the container registry.
+
+Corrected image:
+  nginx:1.27
+
+=== Current Healthy Comparison ===
+working-app is no longer present in the active cluster
+
+=== Current Fixed Workload ===
+fixed-app is no longer present in the active cluster
+
+Diagnostic workflow used:
+  kubectl get
+  kubectl describe
+  Kubernetes Events
+  container waiting state
+  healthy workload comparison
