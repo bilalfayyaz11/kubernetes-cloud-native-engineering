@@ -1,0 +1,5 @@
+NAME                          REVISION   DESIRED   CURRENT   READY    IMAGE
+nginx-deployment-584f76d4cc   9          6         6         6        nginx:1.29.4-alpine
+nginx-deployment-5b64f84df5   7          0         0         <none>   nginx:1.29.2-alpine
+nginx-deployment-645b7d474d   8          0         0         <none>   nginx:1.29.3-alpine
+nginx-deployment-6b74b9886    6          0         0         <none>   nginx:1.29.1-alpine

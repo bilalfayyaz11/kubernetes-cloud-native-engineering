@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"nginx"},"name":"nginx-service","namespace":"rollout-demo"},"spec":{"ports":[{"name":"http","port":80,"protocol":"TCP","targetPort":80}],"selector":{"app":"nginx"},"type":"ClusterIP"}}
+  creationTimestamp: "2026-09-19T04:31:22Z"
+  labels:
+    app: nginx
+  name: nginx-service
+  namespace: rollout-demo
+  resourceVersion: "615"
+  uid: 01d66dfe-da53-4680-8032-15a23f9fd80f
+spec:
+  clusterIP: 10.43.27.197
+  clusterIPs:
+  - 10.43.27.197
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,0 +1,34 @@
+.
+├── analyze-deployment.sh
+├── deployment-after-conservative-update.txt
+├── deployment-after-first-update.txt
+├── deployment-after-rollback.txt
+├── deployment-conditions.json
+├── deployment-probe-state.yaml
+├── deployment-resources.json
+├── deployment-revision-analysis.txt
+├── failed-rollout-deployment.txt
+├── failed-rollout-events.txt
+├── final-deployment-analysis.txt
+├── final-deployment.yaml
+├── final-events.txt
+├── final-pods.txt
+├── final-replicasets.txt
+├── final-rollout-history.txt
+├── final-service.yaml
+├── namespace.yaml
+├── nginx-deployment-probes.yaml
+├── nginx-deployment.yaml
+├── nginx-service.yaml
+├── replicasets-after-first-update.txt
+├── replicasets-after-probes.txt
+├── replicasets-after-rollback.txt
+├── replicasets-revision-limit.txt
+├── rollout-history-after-conservative-update.txt
+├── rollout-history-after-first-update.txt
+├── rollout-history-after-probes.txt
+├── rollout-history-after-rollback.txt
+├── rollout-history-before-rollback.txt
+└── rollout-history-revision-limit.txt
+
+1 directory, 31 files

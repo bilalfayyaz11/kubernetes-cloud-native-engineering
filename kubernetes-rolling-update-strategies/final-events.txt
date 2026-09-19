@@ -1,0 +1,40 @@
+47s         Normal    SuccessfulDelete    replicaset/nginx-deployment-584f76d4cc   Deleted pod: nginx-deployment-584f76d4cc-fjc5r
+47s         Normal    Scheduled           pod/nginx-deployment-db8c9fdd6-tb9ch     Successfully assigned rollout-demo/nginx-deployment-db8c9fdd6-tb9ch to ip-172-31-10-101
+45s         Normal    Created             pod/nginx-deployment-db8c9fdd6-g86gc     Container created
+45s         Normal    Created             pod/nginx-deployment-db8c9fdd6-tb9ch     Container created
+45s         Normal    Started             pod/nginx-deployment-db8c9fdd6-tb9ch     Container started
+45s         Normal    Pulled              pod/nginx-deployment-db8c9fdd6-tb9ch     Container image "nginx:1.29.4-alpine" already present on machine and can be accessed by the pod
+45s         Normal    Pulled              pod/nginx-deployment-db8c9fdd6-g86gc     Container image "nginx:1.29.4-alpine" already present on machine and can be accessed by the pod
+45s         Normal    Started             pod/nginx-deployment-db8c9fdd6-g86gc     Container started
+39s         Normal    Killing             pod/nginx-deployment-584f76d4cc-sgj7b    Stopping container nginx
+39s         Normal    SuccessfulDelete    replicaset/nginx-deployment-584f76d4cc   Deleted pod: nginx-deployment-584f76d4cc-sgj7b
+37s         Normal    Killing             pod/nginx-deployment-db8c9fdd6-tb9ch     Stopping container nginx
+37s         Normal    SuccessfulDelete    replicaset/nginx-deployment-db8c9fdd6    Deleted pod: nginx-deployment-db8c9fdd6-tb9ch
+37s         Normal    Scheduled           pod/nginx-deployment-74f9477997-dqbsb    Successfully assigned rollout-demo/nginx-deployment-74f9477997-dqbsb to ip-172-31-10-101
+37s         Normal    SuccessfulCreate    replicaset/nginx-deployment-74f9477997   Created pod: nginx-deployment-74f9477997-rpb2t
+37s         Normal    SuccessfulCreate    replicaset/nginx-deployment-74f9477997   Created pod: nginx-deployment-74f9477997-dqbsb
+37s         Normal    Scheduled           pod/nginx-deployment-74f9477997-rpb2t    Successfully assigned rollout-demo/nginx-deployment-74f9477997-rpb2t to ip-172-31-10-101
+36s         Normal    Pulling             pod/nginx-deployment-74f9477997-rpb2t    Pulling image "nginx:1.29.5-alpine"
+36s         Normal    Pulling             pod/nginx-deployment-74f9477997-dqbsb    Pulling image "nginx:1.29.5-alpine"
+34s         Normal    Created             pod/nginx-deployment-74f9477997-rpb2t    Container created
+34s         Normal    Started             pod/nginx-deployment-74f9477997-rpb2t    Container started
+34s         Normal    Pulled              pod/nginx-deployment-74f9477997-rpb2t    Successfully pulled image "nginx:1.29.5-alpine" in 1.507s (1.507s including waiting). Image size: 25988295 bytes.
+34s         Normal    Started             pod/nginx-deployment-74f9477997-dqbsb    Container started
+34s         Normal    Created             pod/nginx-deployment-74f9477997-dqbsb    Container created
+34s         Normal    Pulled              pod/nginx-deployment-74f9477997-dqbsb    Successfully pulled image "nginx:1.29.5-alpine" in 1.748s (1.749s including waiting). Image size: 25988295 bytes.
+27s         Normal    SuccessfulDelete    replicaset/nginx-deployment-db8c9fdd6    Deleted pod: nginx-deployment-db8c9fdd6-nvlr5
+27s         Normal    Scheduled           pod/nginx-deployment-74f9477997-2t28c    Successfully assigned rollout-demo/nginx-deployment-74f9477997-2t28c to ip-172-31-10-101
+27s         Normal    Killing             pod/nginx-deployment-db8c9fdd6-g86gc     Stopping container nginx
+27s         Normal    Killing             pod/nginx-deployment-db8c9fdd6-nvlr5     Stopping container nginx
+27s         Normal    SuccessfulCreate    replicaset/nginx-deployment-74f9477997   Created pod: nginx-deployment-74f9477997-2t28c
+27s         Normal    SuccessfulDelete    replicaset/nginx-deployment-db8c9fdd6    Deleted pod: nginx-deployment-db8c9fdd6-g86gc
+26s         Normal    SuccessfulCreate    replicaset/nginx-deployment-74f9477997   Created pod: nginx-deployment-74f9477997-9gnm9
+26s         Normal    Scheduled           pod/nginx-deployment-74f9477997-9gnm9    Successfully assigned rollout-demo/nginx-deployment-74f9477997-9gnm9 to ip-172-31-10-101
+25s         Normal    Pulled              pod/nginx-deployment-74f9477997-9gnm9    Container image "nginx:1.29.5-alpine" already present on machine and can be accessed by the pod
+25s         Normal    Pulled              pod/nginx-deployment-74f9477997-2t28c    Container image "nginx:1.29.5-alpine" already present on machine and can be accessed by the pod
+25s         Normal    Created             pod/nginx-deployment-74f9477997-2t28c    Container created
+25s         Normal    Started             pod/nginx-deployment-74f9477997-2t28c    Container started
+24s         Normal    Created             pod/nginx-deployment-74f9477997-9gnm9    Container created
+24s         Normal    Started             pod/nginx-deployment-74f9477997-9gnm9    Container started
+19s         Normal    Killing             pod/nginx-deployment-db8c9fdd6-m7xtn     Stopping container nginx
+19s         Normal    SuccessfulDelete    replicaset/nginx-deployment-db8c9fdd6    Deleted pod: nginx-deployment-db8c9fdd6-m7xtn

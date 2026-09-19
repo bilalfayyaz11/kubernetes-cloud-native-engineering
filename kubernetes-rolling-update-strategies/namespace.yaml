@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rollout-demo
+  labels:
+    purpose: rolling-update-validation
+    managed-by: kubectl

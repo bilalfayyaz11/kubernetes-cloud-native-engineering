@@ -1,0 +1,48 @@
+Name:                   nginx-deployment
+Namespace:              rollout-demo
+CreationTimestamp:      Sat, 19 Sep 2026 04:31:13 +0000
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               app=nginx
+Replicas:               6 desired | 6 updated | 6 total | 6 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  2 max unavailable, 2 max surge
+Pod Template:
+  Labels:  app=nginx
+           version=v1
+  Containers:
+   nginx:
+    Image:      nginx:1.29.2-alpine
+    Port:       80/TCP (http)
+    Host Port:  0/TCP (http)
+    Limits:
+      cpu:     150m
+      memory:  64Mi
+    Requests:
+      cpu:         50m
+      memory:      32Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  nginx-deployment-6b74b9886 (0/0 replicas created)
+NewReplicaSet:   nginx-deployment-5b64f84df5 (6/6 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  93s   deployment-controller  Scaled up replica set nginx-deployment-6b74b9886 from 0 to 6
+  Normal  ScalingReplicaSet  14s   deployment-controller  Scaled up replica set nginx-deployment-5b64f84df5 from 0 to 2
+  Normal  ScalingReplicaSet  14s   deployment-controller  Scaled down replica set nginx-deployment-6b74b9886 from 6 to 4
+  Normal  ScalingReplicaSet  14s   deployment-controller  Scaled up replica set nginx-deployment-5b64f84df5 from 2 to 4
+  Normal  ScalingReplicaSet  7s    deployment-controller  Scaled down replica set nginx-deployment-6b74b9886 from 4 to 3
+  Normal  ScalingReplicaSet  7s    deployment-controller  Scaled up replica set nginx-deployment-5b64f84df5 from 4 to 5
+  Normal  ScalingReplicaSet  7s    deployment-controller  Scaled down replica set nginx-deployment-6b74b9886 from 3 to 2
+  Normal  ScalingReplicaSet  7s    deployment-controller  Scaled up replica set nginx-deployment-5b64f84df5 from 5 to 6
+  Normal  ScalingReplicaSet  6s    deployment-controller  Scaled down replica set nginx-deployment-6b74b9886 from 2 to 0

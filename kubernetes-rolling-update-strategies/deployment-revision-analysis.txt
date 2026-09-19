@@ -1,0 +1,48 @@
+==================================================
+ DEPLOYMENT REVISION ANALYSIS
+==================================================
+
+===== DEPLOYMENT STATUS =====
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                SELECTOR
+nginx-deployment   6/6     6            6           5m22s   nginx        nginx:1.29.4-alpine   app=nginx
+
+===== ROLLOUT HISTORY =====
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+6         <none>
+7         <none>
+8         <none>
+9         <none>
+
+
+===== REPLICASETS =====
+NAME                          REVISION   DESIRED   READY    IMAGE
+nginx-deployment-584f76d4cc   9          6         6        nginx:1.29.4-alpine
+nginx-deployment-5b64f84df5   7          0         <none>   nginx:1.29.2-alpine
+nginx-deployment-645b7d474d   8          0         <none>   nginx:1.29.3-alpine
+nginx-deployment-6b74b9886    6          0         <none>   nginx:1.29.1-alpine
+
+===== PODS =====
+NAME                                READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+nginx-deployment-584f76d4cc-668lr   1/1     Running   0          5s    10.42.0.49   ip-172-31-10-101   <none>           <none>
+nginx-deployment-584f76d4cc-7tvsg   1/1     Running   0          12s   10.42.0.45   ip-172-31-10-101   <none>           <none>
+nginx-deployment-584f76d4cc-9rw6f   1/1     Running   0          8s    10.42.0.47   ip-172-31-10-101   <none>           <none>
+nginx-deployment-584f76d4cc-f9vk7   1/1     Running   0          8s    10.42.0.48   ip-172-31-10-101   <none>           <none>
+nginx-deployment-584f76d4cc-fjc5r   1/1     Running   0          12s   10.42.0.46   ip-172-31-10-101   <none>           <none>
+nginx-deployment-584f76d4cc-sgj7b   1/1     Running   0          5s    10.42.0.50   ip-172-31-10-101   <none>           <none>
+
+===== UPDATE STRATEGY =====
+{
+  "rollingUpdate": {
+    "maxSurge": 1,
+    "maxUnavailable": 1
+  },
+  "type": "RollingUpdate"
+}
+
+===== REVISION HISTORY LIMIT =====
+revisionHistoryLimit=3
+
+==================================================
+ ANALYSIS COMPLETE
+==================================================

@@ -1,0 +1,46 @@
+==================================================
+ DEPLOYMENT REVISION ANALYSIS
+==================================================
+
+===== DEPLOYMENT STATUS =====
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                SELECTOR
+nginx-deployment   4/4     4            4           6m27s   nginx        nginx:1.29.5-alpine   app=nginx
+
+===== ROLLOUT HISTORY =====
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+8         <none>
+9         <none>
+10        <none>
+11        <none>
+
+
+===== REPLICASETS =====
+NAME                          REVISION   DESIRED   READY    IMAGE
+nginx-deployment-584f76d4cc   9          0         <none>   nginx:1.29.4-alpine
+nginx-deployment-645b7d474d   8          0         <none>   nginx:1.29.3-alpine
+nginx-deployment-74f9477997   11         4         4        nginx:1.29.5-alpine
+nginx-deployment-db8c9fdd6    10         0         <none>   nginx:1.29.4-alpine
+
+===== PODS =====
+NAME                                READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+nginx-deployment-74f9477997-2t28c   1/1     Running   0          27s   10.42.0.57   ip-172-31-10-101   <none>           <none>
+nginx-deployment-74f9477997-9gnm9   1/1     Running   0          26s   10.42.0.58   ip-172-31-10-101   <none>           <none>
+nginx-deployment-74f9477997-dqbsb   1/1     Running   0          37s   10.42.0.55   ip-172-31-10-101   <none>           <none>
+nginx-deployment-74f9477997-rpb2t   1/1     Running   0          37s   10.42.0.56   ip-172-31-10-101   <none>           <none>
+
+===== UPDATE STRATEGY =====
+{
+  "rollingUpdate": {
+    "maxSurge": 1,
+    "maxUnavailable": 1
+  },
+  "type": "RollingUpdate"
+}
+
+===== REVISION HISTORY LIMIT =====
+revisionHistoryLimit=3
+
+==================================================
+ ANALYSIS COMPLETE
+==================================================

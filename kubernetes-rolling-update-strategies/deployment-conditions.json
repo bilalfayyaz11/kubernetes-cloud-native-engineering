@@ -1,0 +1,18 @@
+[
+  {
+    "lastTransitionTime": "2026-09-19T04:31:20Z",
+    "lastUpdateTime": "2026-09-19T04:31:20Z",
+    "message": "Deployment has minimum availability.",
+    "reason": "MinimumReplicasAvailable",
+    "status": "True",
+    "type": "Available"
+  },
+  {
+    "lastTransitionTime": "2026-09-19T04:31:13Z",
+    "lastUpdateTime": "2026-09-19T04:37:23Z",
+    "message": "ReplicaSet \"nginx-deployment-74f9477997\" has successfully progressed.",
+    "reason": "NewReplicaSetAvailable",
+    "status": "True",
+    "type": "Progressing"
+  }
+]

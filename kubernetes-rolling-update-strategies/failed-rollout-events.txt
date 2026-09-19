@@ -1,0 +1,30 @@
+86s         Normal    Started             pod/nginx-deployment-6c4bf8b6d7-f69sw    Container started
+86s         Normal    SuccessfulDelete    replicaset/nginx-deployment-5b64f84df5   Deleted pod: nginx-deployment-5b64f84df5-bhsxh
+85s         Normal    SuccessfulDelete    replicaset/nginx-deployment-5b64f84df5   Deleted pod: nginx-deployment-5b64f84df5-gz9p2
+85s         Normal    Killing             pod/nginx-deployment-5b64f84df5-gz9p2    Stopping container nginx
+85s         Normal    Scheduled           pod/nginx-deployment-6c4bf8b6d7-qwtp6    Successfully assigned rollout-demo/nginx-deployment-6c4bf8b6d7-qwtp6 to ip-172-31-10-101
+85s         Normal    SuccessfulCreate    replicaset/nginx-deployment-6c4bf8b6d7   Created pod: nginx-deployment-6c4bf8b6d7-qwtp6
+84s         Normal    Pulled              pod/nginx-deployment-6c4bf8b6d7-f75kx    Container image "nginx:1.29.3-alpine" already present on machine and can be accessed by the pod
+84s         Normal    SuccessfulDelete    replicaset/nginx-deployment-5b64f84df5   Deleted pod: nginx-deployment-5b64f84df5-88bf9
+84s         Normal    Killing             pod/nginx-deployment-5b64f84df5-88bf9    Stopping container nginx
+84s         Normal    Created             pod/nginx-deployment-6c4bf8b6d7-f75kx    Container created
+84s         Normal    Started             pod/nginx-deployment-6c4bf8b6d7-f75kx    Container started
+83s         Normal    Pulled              pod/nginx-deployment-6c4bf8b6d7-qwtp6    Container image "nginx:1.29.3-alpine" already present on machine and can be accessed by the pod
+83s         Normal    Started             pod/nginx-deployment-6c4bf8b6d7-qwtp6    Container started
+83s         Normal    Created             pod/nginx-deployment-6c4bf8b6d7-qwtp6    Container created
+61s         Normal    SuccessfulDelete    replicaset/nginx-deployment-6c4bf8b6d7   Deleted pod: nginx-deployment-6c4bf8b6d7-f75kx
+61s         Normal    Killing             pod/nginx-deployment-6c4bf8b6d7-f75kx    Stopping container nginx
+60s         Normal    SuccessfulCreate    replicaset/nginx-deployment-fc86587b4    Created pod: nginx-deployment-fc86587b4-vqmdl
+60s         Normal    Scheduled           pod/nginx-deployment-fc86587b4-vqmdl     Successfully assigned rollout-demo/nginx-deployment-fc86587b4-vqmdl to ip-172-31-10-101
+60s         Normal    SuccessfulCreate    replicaset/nginx-deployment-fc86587b4    Created pod: nginx-deployment-fc86587b4-b88kd
+60s         Normal    Scheduled           pod/nginx-deployment-fc86587b4-b88kd     Successfully assigned rollout-demo/nginx-deployment-fc86587b4-b88kd to ip-172-31-10-101
+23s         Warning   Failed              pod/nginx-deployment-fc86587b4-vqmdl     Error: ErrImagePull
+23s         Warning   Failed              pod/nginx-deployment-fc86587b4-vqmdl     Failed to pull image "nginx:invalid-tag": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:invalid-tag": failed to resolve reference "docker.io/library/nginx:invalid-tag": docker.io/library/nginx:invalid-tag: not found
+23s         Normal    Pulling             pod/nginx-deployment-fc86587b4-vqmdl     Pulling image "nginx:invalid-tag"
+9s          Warning   Failed              pod/nginx-deployment-fc86587b4-vqmdl     Error: ImagePullBackOff
+8s          Warning   Failed              pod/nginx-deployment-fc86587b4-b88kd     Error: ImagePullBackOff
+8s          Normal    BackOff             pod/nginx-deployment-fc86587b4-b88kd     Back-off pulling image "nginx:invalid-tag"
+19s         Warning   Failed              pod/nginx-deployment-fc86587b4-b88kd     Error: ErrImagePull
+19s         Warning   Failed              pod/nginx-deployment-fc86587b4-b88kd     Failed to pull image "nginx:invalid-tag": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:invalid-tag": failed to resolve reference "docker.io/library/nginx:invalid-tag": docker.io/library/nginx:invalid-tag: not found
+19s         Normal    Pulling             pod/nginx-deployment-fc86587b4-b88kd     Pulling image "nginx:invalid-tag"
+9s          Normal    BackOff             pod/nginx-deployment-fc86587b4-vqmdl     Back-off pulling image "nginx:invalid-tag"

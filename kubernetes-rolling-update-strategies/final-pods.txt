@@ -1,0 +1,5 @@
+NAME                                READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+nginx-deployment-74f9477997-2t28c   1/1     Running   0          27s   10.42.0.57   ip-172-31-10-101   <none>           <none>
+nginx-deployment-74f9477997-9gnm9   1/1     Running   0          26s   10.42.0.58   ip-172-31-10-101   <none>           <none>
+nginx-deployment-74f9477997-dqbsb   1/1     Running   0          37s   10.42.0.55   ip-172-31-10-101   <none>           <none>
+nginx-deployment-74f9477997-rpb2t   1/1     Running   0          37s   10.42.0.56   ip-172-31-10-101   <none>           <none>

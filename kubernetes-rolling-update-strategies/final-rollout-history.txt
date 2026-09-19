@@ -1,0 +1,7 @@
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+8         <none>
+9         <none>
+10        <none>
+11        <none>
+

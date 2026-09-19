@@ -1,0 +1,5 @@
+NAME                          DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES                SELECTOR
+nginx-deployment-584f76d4cc   0         0         0       64s   nginx        nginx:1.29.4-alpine   app=nginx,pod-template-hash=584f76d4cc
+nginx-deployment-645b7d474d   0         0         0       73s   nginx        nginx:1.29.3-alpine   app=nginx,pod-template-hash=645b7d474d
+nginx-deployment-74f9477997   4         4         4       24s   nginx        nginx:1.29.5-alpine   app=nginx,pod-template-hash=74f9477997
+nginx-deployment-db8c9fdd6    0         0         0       42s   nginx        nginx:1.29.4-alpine   app=nginx,pod-template-hash=db8c9fdd6
