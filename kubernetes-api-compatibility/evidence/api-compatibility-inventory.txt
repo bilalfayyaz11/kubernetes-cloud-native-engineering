@@ -1,0 +1,27 @@
+KUBERNETES API COMPATIBILITY INVENTORY
+Generated: 2026-09-19T04:48:34Z
+
+===== CLUSTER VERSION =====
+{
+  "clientVersion": "v1.36.2",
+  "serverVersion": "v1.36.4+k3s1"
+}
+
+===== RELEVANT SERVED APIS =====
+apiextensions.k8s.io/v1
+apps/v1
+networking.k8s.io/v1
+policy/v1
+
+===== LIVE DEPLOYMENT API =====
+apps/v1
+
+===== LIVE INGRESS API =====
+networking.k8s.io/v1
+
+===== POD SECURITY ENFORCEMENT =====
+{
+  "pod-security.kubernetes.io/audit": "restricted",
+  "pod-security.kubernetes.io/enforce": "restricted",
+  "pod-security.kubernetes.io/warn": "restricted"
+}

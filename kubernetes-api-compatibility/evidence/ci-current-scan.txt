@@ -1,0 +1,27 @@
+==================================================
+ KUBERNETES API COMPATIBILITY CHECK
+==================================================
+Target: current-manifests
+
+Checking: removed extensions/v1beta1 API
+PASS: removed extensions/v1beta1 API not detected.
+
+Checking: removed policy/v1beta1 API
+PASS: removed policy/v1beta1 API not detected.
+
+Checking: removed apps/v1beta1 API
+PASS: removed apps/v1beta1 API not detected.
+
+Checking: removed apps/v1beta2 API
+PASS: removed apps/v1beta2 API not detected.
+
+Checking: removed networking.k8s.io/v1beta1 API
+PASS: removed networking.k8s.io/v1beta1 API not detected.
+
+===== API VERSION INVENTORY =====
+      1 apiVersion: apps/v1
+      1 apiVersion: networking.k8s.io/v1
+      4 apiVersion: v1
+
+RESULT: PASSED
+No configured removed API references detected.

@@ -1,0 +1,2 @@
+error: resource mapping not found for name: "restricted-psp" namespace: "" from "deprecated-psp.yaml": no matches for kind "PodSecurityPolicy" in version "policy/v1beta1"
+ensure CRDs are installed first

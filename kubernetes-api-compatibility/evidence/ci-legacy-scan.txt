@@ -1,0 +1,29 @@
+==================================================
+ KUBERNETES API COMPATIBILITY CHECK
+==================================================
+Target: legacy-samples
+
+Checking: removed extensions/v1beta1 API
+legacy-samples/deprecated-deployment.yaml:1:apiVersion: extensions/v1beta1
+legacy-samples/deprecated-deployment.yaml:23:apiVersion: extensions/v1beta1
+FAIL: removed extensions/v1beta1 API detected.
+
+Checking: removed policy/v1beta1 API
+legacy-samples/deprecated-psp.yaml:1:apiVersion: policy/v1beta1
+FAIL: removed policy/v1beta1 API detected.
+
+Checking: removed apps/v1beta1 API
+PASS: removed apps/v1beta1 API not detected.
+
+Checking: removed apps/v1beta2 API
+PASS: removed apps/v1beta2 API not detected.
+
+Checking: removed networking.k8s.io/v1beta1 API
+PASS: removed networking.k8s.io/v1beta1 API not detected.
+
+===== API VERSION INVENTORY =====
+      2 apiVersion: extensions/v1beta1
+      1 apiVersion: policy/v1beta1
+
+RESULT: FAILED
+Removed/deprecated API references require migration.

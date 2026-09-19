@@ -1,0 +1,6 @@
+LAST SEEN   TYPE     REASON      OBJECT               MESSAGE
+7s          Normal   Scheduled   pod/compliant-test   Successfully assigned restricted-namespace/compliant-test to ip-172-31-10-55
+4s          Normal   Pulling     pod/compliant-test   Pulling image "busybox:1.37.0"
+4s          Normal   Pulled      pod/compliant-test   Successfully pulled image "busybox:1.37.0" in 798ms (798ms including waiting). Image size: 2222111 bytes.
+4s          Normal   Created     pod/compliant-test   Container created
+1s          Normal   Started     pod/compliant-test   Container started

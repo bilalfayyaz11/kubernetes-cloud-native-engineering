@@ -1,0 +1,17 @@
+KUBERNETES DEPRECATION ALERT REPORT
+Generated: 2026-09-19T04:52:26Z
+
+
+===== API SERVER CHECKS =====
+OK: API not served: extensions/v1beta1
+OK: API not served: policy/v1beta1
+OK: API not served: networking.k8s.io/v1beta1
+
+===== MIGRATED MANIFEST CHECKS =====
+OK: extensions/v1beta1 absent from migrated manifests
+OK: policy/v1beta1 absent from migrated manifests
+OK: networking.k8s.io/v1beta1 absent from migrated manifests
+
+===== RESULT =====
+ALERTS: 0
+Current migrated manifests passed configured deprecation checks.

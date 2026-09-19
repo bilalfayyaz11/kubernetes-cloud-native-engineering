@@ -1,0 +1,20 @@
+KUBERNETES API MIGRATION VALIDATION
+Generated: 2026-09-19T04:47:39Z
+
+Deployment API:
+apps/v1
+
+Ingress API:
+networking.k8s.io/v1
+
+Ready replicas:
+3
+
+Service connectivity:
+HTTP 200
+
+Privileged Pod admission:
+DENIED
+
+Restricted-compliant Pod:
+Running

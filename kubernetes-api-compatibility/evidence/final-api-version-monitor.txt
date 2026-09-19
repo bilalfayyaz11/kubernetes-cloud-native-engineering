@@ -1,0 +1,35 @@
+==================================================
+ KUBERNETES API VERSION MONITOR
+==================================================
+
+===== CLIENT VERSION =====
+Client Version: v1.36.2
+Kustomize Version: v5.8.1
+
+===== SERVER VERSION =====
+v1.36.4+k3s1
+
+===== RELEVANT AVAILABLE API VERSIONS =====
+apps/v1
+networking.k8s.io/v1
+policy/v1
+
+===== REMOVED API CAPABILITY CHECK =====
+PASS: extensions/v1beta1 is not served
+PASS: policy/v1beta1 is not served
+
+===== LIVE DEPLOYMENT APIS =====
+api-compatibility/nginx-deployment -> apps/v1
+kube-system/coredns -> apps/v1
+kube-system/local-path-provisioner -> apps/v1
+kube-system/metrics-server -> apps/v1
+
+===== LIVE INGRESS APIS =====
+api-compatibility/nginx-ingress -> networking.k8s.io/v1
+
+===== POD SECURITY NAMESPACE LABELS =====
+restricted-namespace -> enforce=restricted
+
+==================================================
+ MONITOR COMPLETE
+==================================================

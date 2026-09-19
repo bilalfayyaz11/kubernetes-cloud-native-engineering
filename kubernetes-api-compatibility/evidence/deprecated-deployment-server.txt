@@ -1,0 +1,4 @@
+resource mapping not found for name: "nginx-deployment" namespace: "" from "deprecated-deployment.yaml": no matches for kind "Deployment" in version "extensions/v1beta1"
+ensure CRDs are installed first
+resource mapping not found for name: "nginx-ingress" namespace: "" from "deprecated-deployment.yaml": no matches for kind "Ingress" in version "extensions/v1beta1"
+ensure CRDs are installed first

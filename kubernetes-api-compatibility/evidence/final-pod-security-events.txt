@@ -1,0 +1,5 @@
+LAST SEEN   TYPE     REASON      OBJECT               MESSAGE
+6s          Normal   Scheduled   pod/compliant-test   Successfully assigned restricted-namespace/compliant-test to ip-172-31-10-55
+4s          Normal   Pulled      pod/compliant-test   Container image "busybox:1.37.0" already present on machine and can be accessed by the pod
+4s          Normal   Created     pod/compliant-test   Container created
+1s          Normal   Started     pod/compliant-test   Container started
