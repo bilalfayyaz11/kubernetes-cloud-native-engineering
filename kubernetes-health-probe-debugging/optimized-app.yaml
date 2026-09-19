@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimized-app
+  labels:
+    app: optimized-app
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: optimized-app
+
+  template:
+    metadata:
+      labels:
+        app: optimized-app
+
+    spec:
+      terminationGracePeriodSeconds: 30
+
+      containers:
+        - name: web-app
+          image: nginx:1.29-alpine
+
+          ports:
+            - name: http
+              containerPort: 80
+
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 12
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+            successThreshold: 1
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 25m
+            limits:
+              memory: 128Mi
+              cpu: 100m

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: probe-demo-config
+data:
+  default.conf: |
+    server {
+        listen 8080;
+        server_name localhost;
+
+        location = / {
+            default_type text/plain;
+            return 200 "Probe demo application is running\n";
+        }
+
+        location = /startup {
+            root /usr/share/nginx/html;
+            try_files /startup =503;
+        }
+
+        location = /ready {
+            root /usr/share/nginx/html;
+            try_files /ready =503;
+        }
+
+        location = /health {
+            root /usr/share/nginx/html;
+            try_files /health =500;
+        }
+    }

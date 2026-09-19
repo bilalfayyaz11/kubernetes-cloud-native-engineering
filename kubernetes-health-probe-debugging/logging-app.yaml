@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logging-nginx-config
+data:
+  default.conf: |
+    log_format probe '$remote_addr - $time_iso8601 '
+                     '"$request" $status '
+                     'ua="$http_user_agent"';
+
+    server {
+        listen 8080;
+        server_name localhost;
+
+        access_log /dev/stdout probe;
+        error_log /dev/stderr notice;
+
+        location = / {
+            default_type text/plain;
+            return 200 "Logging application healthy\n";
+        }
+
+        location = /ready {
+            default_type text/plain;
+            return 200 "ready\n";
+        }
+
+        location = /health {
+            default_type text/plain;
+            return 200 "healthy\n";
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-app
+  labels:
+    app: logging-app
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: logging-app
+
+  template:
+    metadata:
+      labels:
+        app: logging-app
+
+    spec:
+      containers:
+        - name: logging-container
+          image: nginx:1.29-alpine
+
+          ports:
+            - name: http
+              containerPort: 8080
+
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 2
+            timeoutSeconds: 2
+            failureThreshold: 20
+
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    echo "Container started at $(date -u +'%Y-%m-%dT%H:%M:%SZ')" > /tmp/startup-event.txt
+
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 25m
+            limits:
+              memory: 64Mi
+              cpu: 100m
+
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+              readOnly: true
+
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: logging-nginx-config

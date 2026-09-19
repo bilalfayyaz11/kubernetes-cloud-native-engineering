@@ -1,0 +1,93 @@
+KUBERNETES PROBE LOG ANALYSIS
+Generated: 2026-09-19T03:50:10Z
+
+===== PYTHON CURRENT LOGS =====
+2026-09-19T03:48:33.294318352Z Server running on port 8080
+2026-09-19T03:48:33.379991653Z 10.42.0.1 GET / "GET / HTTP/1.1" 200 -
+2026-09-19T03:48:33.383496868Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:48:34.710398219Z 127.0.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:48:34.712736043Z 127.0.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:48:35.378908630Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:48:38.383602206Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:48:40.379435860Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:48:43.382814771Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:48:45.378252782Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:48:48.382751016Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:48:50.380663271Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:48:53.382745388Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:48:55.377868704Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:48:58.383401441Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:00.377563846Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:03.384360534Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:05.377802052Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:08.384333788Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:10.379530994Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:13.384416124Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:15.380658600Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:18.383833974Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:20.378340274Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:23.383451655Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:25.377327908Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:28.382603459Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:30.378279951Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:33.383337629Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:35.379593327Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:38.383133130Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:40.379927253Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:43.384278875Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:45.377860776Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:48.384743084Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:50.377610157Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:53.384869629Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:49:55.377938314Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:49:58.383467874Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:50:00.377742400Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:50:03.383324950Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:50:05.378287683Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+2026-09-19T03:50:08.387026215Z 10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+2026-09-19T03:50:10.381937917Z 10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+
+===== PYTHON PREVIOUS LOGS =====
+2026-09-19T03:47:45.504843236Z Traceback (most recent call last):
+2026-09-19T03:47:45.696020908Z   File "/app.py", line 42, in <module>
+2026-09-19T03:47:45.696163339Z     with socketserver.TCPServer(
+2026-09-19T03:47:45.696168769Z          ~~~~~~~~~~~~~~~~~~~~~~^
+2026-09-19T03:47:45.696172509Z         ("0.0.0.0", 8080),
+2026-09-19T03:47:45.696176229Z         ^^^^^^^^^^^^^^^^^^
+2026-09-19T03:47:45.696180859Z         HealthHandler
+2026-09-19T03:47:45.696184739Z         ^^^^^^^^^^^^^
+2026-09-19T03:47:45.696188109Z     ) as httpd:
+2026-09-19T03:47:45.696191619Z     ^
+2026-09-19T03:47:45.696195589Z   File "/usr/local/lib/python3.13/socketserver.py", line 457, in __init__
+2026-09-19T03:47:45.696198989Z     self.server_bind()
+2026-09-19T03:47:45.696203100Z     ~~~~~~~~~~~~~~~~^^
+2026-09-19T03:47:45.696206960Z   File "/usr/local/lib/python3.13/socketserver.py", line 478, in server_bind
+2026-09-19T03:47:45.696210460Z     self.socket.bind(self.server_address)
+2026-09-19T03:47:45.696213720Z     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+2026-09-19T03:47:45.696217210Z OSError: [Errno 98] Address already in use
+
+===== LOGGING APP =====
+2026-09-19T03:49:45.465132713Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2026-09-19T03:49:45.466330585Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2026-09-19T03:49:45.538629942Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2026-09-19T03:49:45.543085207Z 10-listen-on-ipv6-by-default.sh: info: can not modify /etc/nginx/conf.d/default.conf (read-only file system?)
+2026-09-19T03:49:45.638110412Z /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+2026-09-19T03:49:45.638587667Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+2026-09-19T03:49:45.739048087Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2026-09-19T03:49:45.742045547Z /docker-entrypoint.sh: Configuration complete; ready for start up
+2026-09-19T03:49:45.950542443Z 2026/09/19 03:49:45 [notice] 1#1: using the "epoll" event method
+2026-09-19T03:49:45.950625364Z 2026/09/19 03:49:45 [notice] 1#1: nginx/1.29.8
+2026-09-19T03:49:45.950631904Z 2026/09/19 03:49:45 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026-09-19T03:49:45.950635164Z 2026/09/19 03:49:45 [notice] 1#1: OS: Linux 6.14.0-1018-aws
+2026-09-19T03:49:45.950638404Z 2026/09/19 03:49:45 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026-09-19T03:49:45.950641444Z 2026/09/19 03:49:45 [notice] 1#1: start worker processes
+2026-09-19T03:49:45.950658754Z 2026/09/19 03:49:45 [notice] 1#1: start worker process 29
+2026-09-19T03:49:45.951943557Z 2026/09/19 03:49:45 [notice] 1#1: start worker process 30
+2026-09-19T03:49:46.264464009Z 10.42.0.1 - 2026-09-19T03:49:46+00:00 "GET / HTTP/1.1" 200 ua="kube-probe/1.36"
+2026-09-19T03:49:46.299265239Z 10.42.0.1 - 2026-09-19T03:49:46+00:00 "GET /ready HTTP/1.1" 200 ua="kube-probe/1.36"
+2026-09-19T03:49:51.299637946Z 10.42.0.1 - 2026-09-19T03:49:51+00:00 "GET /ready HTTP/1.1" 200 ua="kube-probe/1.36"
+2026-09-19T03:49:54.264356729Z 10.42.0.1 - 2026-09-19T03:49:54+00:00 "GET /health HTTP/1.1" 200 ua="kube-probe/1.36"
+2026-09-19T03:49:56.299213504Z 10.42.0.1 - 2026-09-19T03:49:56+00:00 "GET /ready HTTP/1.1" 200 ua="kube-probe/1.36"
+2026-09-19T03:50:01.300150690Z 10.42.0.1 - 2026-09-19T03:50:01+00:00 "GET /ready HTTP/1.1" 200 ua="kube-probe/1.36"
+2026-09-19T03:50:04.264828421Z 10.42.0.1 - 2026-09-19T03:50:04+00:00 "GET /health HTTP/1.1" 200 ua="kube-probe/1.36"
+2026-09-19T03:50:06.299591363Z 10.42.0.1 - 2026-09-19T03:50:06+00:00 "GET /ready HTTP/1.1" 200 ua="kube-probe/1.36"

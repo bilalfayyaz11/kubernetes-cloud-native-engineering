@@ -1,0 +1,200 @@
+==================================================
+ KUBERNETES PROBE DEBUG REPORT
+==================================================
+Pod       : optimized-app-d498587c5-5lwxf
+Namespace : default
+
+===== 1. POD STATUS =====
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+optimized-app-d498587c5-5lwxf   1/1     Running   0          7s    10.42.0.12   ip-172-31-10-244   <none>           <none>
+
+===== 2. CONDITIONS =====
+[
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:50:31Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "PodReadyToStartContainers"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:50:30Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "Initialized"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:50:35Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "Ready"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:50:35Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "ContainersReady"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:50:30Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "PodScheduled"
+  }
+]
+
+===== 3. CONTAINER STATUS =====
+[
+  {
+    "allocatedResources": {
+      "cpu": "25m",
+      "memory": "32Mi"
+    },
+    "containerID": "containerd://f33fb55388dc4c8cb7a5198179d698b8d4015d4d33bb612e8f46838c3a49cfd5",
+    "image": "docker.io/library/nginx:1.29-alpine",
+    "imageID": "docker.io/library/nginx@sha256:5616878291a2eed594aee8db4dade5878cf7edcb475e59193904b198d9b830de",
+    "lastState": {},
+    "name": "web-app",
+    "ready": true,
+    "resources": {
+      "limits": {
+        "cpu": "100m",
+        "memory": "128Mi"
+      },
+      "requests": {
+        "cpu": "25m",
+        "memory": "32Mi"
+      }
+    },
+    "restartCount": 0,
+    "started": true,
+    "state": {
+      "running": {
+        "startedAt": "2026-09-19T03:50:31Z"
+      }
+    },
+    "user": {
+      "linux": {
+        "gid": 0,
+        "supplementalGroups": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          10,
+          11,
+          20,
+          26,
+          27
+        ],
+        "uid": 0
+      }
+    },
+    "volumeMounts": [
+      {
+        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+        "name": "kube-api-access-zh87j",
+        "readOnly": true,
+        "recursiveReadOnly": "Disabled"
+      }
+    ]
+  }
+]
+
+===== 4. PROBE CONFIGURATION =====
+{
+  "container": "web-app",
+  "startupProbe": {
+    "failureThreshold": 12,
+    "httpGet": {
+      "path": "/",
+      "port": "http",
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 5,
+    "successThreshold": 1,
+    "timeoutSeconds": 3
+  },
+  "readinessProbe": {
+    "failureThreshold": 3,
+    "httpGet": {
+      "path": "/",
+      "port": "http",
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 10,
+    "successThreshold": 1,
+    "timeoutSeconds": 3
+  },
+  "livenessProbe": {
+    "failureThreshold": 3,
+    "httpGet": {
+      "path": "/",
+      "port": "http",
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 30,
+    "successThreshold": 1,
+    "timeoutSeconds": 5
+  }
+}
+
+===== 5. RECENT EVENTS =====
+LAST SEEN   TYPE     REASON      OBJECT                              MESSAGE
+7s          Normal   Scheduled   pod/optimized-app-d498587c5-5lwxf   Successfully assigned default/optimized-app-d498587c5-5lwxf to ip-172-31-10-244
+6s          Normal   Pulled      pod/optimized-app-d498587c5-5lwxf   Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+6s          Normal   Created     pod/optimized-app-d498587c5-5lwxf   Container created
+6s          Normal   Started     pod/optimized-app-d498587c5-5lwxf   Container started
+
+===== 6. CURRENT LOGS =====
+
+--- Container: web-app ---
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/09/19 03:50:32 [notice] 1#1: using the "epoll" event method
+2026/09/19 03:50:32 [notice] 1#1: nginx/1.29.8
+2026/09/19 03:50:32 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/09/19 03:50:32 [notice] 1#1: OS: Linux 6.14.0-1018-aws
+2026/09/19 03:50:32 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/09/19 03:50:32 [notice] 1#1: start worker processes
+2026/09/19 03:50:32 [notice] 1#1: start worker process 30
+2026/09/19 03:50:32 [notice] 1#1: start worker process 31
+10.42.0.1 - - [19/Sep/2026:03:50:35 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.36" "-"
+10.42.0.1 - - [19/Sep/2026:03:50:35 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.36" "-"
+127.0.0.1 - - [19/Sep/2026:03:50:36 +0000] "GET / HTTP/1.1" 200 896 "-" "Wget" "-"
+127.0.0.1 - - [19/Sep/2026:03:50:37 +0000] "GET / HTTP/1.1" 200 896 "-" "Wget" "-"
+
+===== 7. PREVIOUS CONTAINER LOGS =====
+
+--- Previous: web-app ---
+No previous container logs available.
+
+===== 8. RESTART SUMMARY =====
+{
+  "container": "web-app",
+  "ready": true,
+  "restartCount": 0,
+  "state": {
+    "running": {
+      "startedAt": "2026-09-19T03:50:31Z"
+    }
+  },
+  "lastState": {}
+}
+
+==================================================
+ DEBUG REPORT COMPLETE
+==================================================

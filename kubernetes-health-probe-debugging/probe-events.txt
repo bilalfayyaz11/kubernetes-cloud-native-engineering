@@ -1,0 +1,92 @@
+LAST SEEN   TYPE      REASON                           OBJECT                                   MESSAGE
+8s          Normal    Scheduled                        pod/final-test-5475545d4f-p2hnm          Successfully assigned default/final-test-5475545d4f-p2hnm to ip-172-31-10-244
+93s         Normal    Scheduled                        pod/debug-app-68b77f5fc7-sg5dj           Successfully assigned default/debug-app-68b77f5fc7-sg5dj to ip-172-31-10-244
+64s         Normal    Scheduled                        pod/logging-app-5d579c986d-9gffb         Successfully assigned default/logging-app-5d579c986d-9gffb to ip-172-31-10-244
+6m46s       Normal    Scheduled                        pod/readiness-app-75cb7cf7dc-87gvd       Successfully assigned default/readiness-app-75cb7cf7dc-87gvd to ip-172-31-10-244
+4m52s       Normal    Scheduled                        pod/python-probe-app-5d954db8d4-988wm    Successfully assigned default/python-probe-app-5d954db8d4-988wm to ip-172-31-10-244
+7m41s       Normal    Starting                         node/ip-172-31-10-244                    
+17s         Normal    Scheduled                        pod/optimized-app-d498587c5-5lwxf        Successfully assigned default/optimized-app-d498587c5-5lwxf to ip-172-31-10-244
+6m46s       Normal    Scheduled                        pod/readiness-app-75cb7cf7dc-tqvjg       Successfully assigned default/readiness-app-75cb7cf7dc-tqvjg to ip-172-31-10-244
+119s        Normal    Scheduled                        pod/debug-app-658d77b6b9-dwwb6           Successfully assigned default/debug-app-658d77b6b9-dwwb6 to ip-172-31-10-244
+5m45s       Normal    Scheduled                        pod/probe-demo-app-866d9fcbfc-kj95g      Successfully assigned default/probe-demo-app-866d9fcbfc-kj95g to ip-172-31-10-244
+17s         Normal    Scheduled                        pod/optimized-app-d498587c5-tmjgm        Successfully assigned default/optimized-app-d498587c5-tmjgm to ip-172-31-10-244
+7m44s       Normal    CertificateExpirationOK          node/ip-172-31-10-244                    Node and Certificate Authority certificates managed by k3s are OK
+7m44s       Normal    Starting                         node/ip-172-31-10-244                    Starting kubelet.
+7m44s       Warning   InvalidDiskCapacity              node/ip-172-31-10-244                    invalid capacity 0 on image filesystem
+7m42s       Normal    NodeHasNoDiskPressure            node/ip-172-31-10-244                    Node ip-172-31-10-244 status is now: NodeHasNoDiskPressure
+7m42s       Normal    NodeHasSufficientMemory          node/ip-172-31-10-244                    Node ip-172-31-10-244 status is now: NodeHasSufficientMemory
+7m42s       Normal    NodeAllocatableEnforced          node/ip-172-31-10-244                    Updated Node Allocatable limit across pods
+7m42s       Normal    NodeHasSufficientPID             node/ip-172-31-10-244                    Node ip-172-31-10-244 status is now: NodeHasSufficientPID
+7m41s       Normal    NodeReady                        node/ip-172-31-10-244                    Node ip-172-31-10-244 status is now: NodeReady
+7m38s       Normal    NodePasswordValidationComplete   node/ip-172-31-10-244                    Deferred node password secret validation complete
+7m37s       Normal    RegisteredNode                   node/ip-172-31-10-244                    Node ip-172-31-10-244 event: Registered Node ip-172-31-10-244 in Controller
+7m36s       Normal    Synced                           node/ip-172-31-10-244                    Node synced successfully
+6m46s       Normal    ScalingReplicaSet                deployment/readiness-app                 Scaled up replica set readiness-app-75cb7cf7dc from 0 to 2
+6m46s       Normal    SuccessfulCreate                 replicaset/readiness-app-75cb7cf7dc      Created pod: readiness-app-75cb7cf7dc-87gvd
+6m46s       Normal    SuccessfulCreate                 replicaset/readiness-app-75cb7cf7dc      Created pod: readiness-app-75cb7cf7dc-tqvjg
+6m44s       Normal    Pulling                          pod/readiness-app-75cb7cf7dc-87gvd       Pulling image "nginx:1.29-alpine"
+6m44s       Normal    Pulling                          pod/readiness-app-75cb7cf7dc-tqvjg       Pulling image "nginx:1.29-alpine"
+6m41s       Normal    Created                          pod/readiness-app-75cb7cf7dc-tqvjg       Container created
+6m41s       Normal    Pulled                           pod/readiness-app-75cb7cf7dc-87gvd       Successfully pulled image "nginx:1.29-alpine" in 3.228s (3.228s including waiting). Image size: 26013346 bytes.
+6m41s       Normal    Pulled                           pod/readiness-app-75cb7cf7dc-tqvjg       Successfully pulled image "nginx:1.29-alpine" in 3.319s (3.319s including waiting). Image size: 26013346 bytes.
+6m40s       Normal    Started                          pod/readiness-app-75cb7cf7dc-87gvd       Container started
+6m40s       Normal    Created                          pod/readiness-app-75cb7cf7dc-87gvd       Container created
+6m40s       Normal    Started                          pod/readiness-app-75cb7cf7dc-tqvjg       Container started
+6m23s       Warning   Unhealthy                        pod/readiness-app-75cb7cf7dc-87gvd       Readiness probe failed: HTTP probe failed with statuscode: 503
+5m45s       Normal    ScalingReplicaSet                deployment/probe-demo-app                Scaled up replica set probe-demo-app-866d9fcbfc from 0 to 1
+5m45s       Normal    SuccessfulCreate                 replicaset/probe-demo-app-866d9fcbfc     Created pod: probe-demo-app-866d9fcbfc-kj95g
+5m31s       Warning   Unhealthy                        pod/probe-demo-app-866d9fcbfc-kj95g      Readiness probe failed: HTTP probe failed with statuscode: 503
+5m15s       Normal    Killing                          pod/probe-demo-app-866d9fcbfc-kj95g      Container web-app failed liveness probe, will be restarted
+5m15s       Normal    Pulled                           pod/probe-demo-app-866d9fcbfc-kj95g      Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+5m15s       Warning   Unhealthy                        pod/probe-demo-app-866d9fcbfc-kj95g      Liveness probe failed: HTTP probe failed with statuscode: 500
+5m15s       Normal    Created                          pod/probe-demo-app-866d9fcbfc-kj95g      Container created
+5m14s       Normal    Started                          pod/probe-demo-app-866d9fcbfc-kj95g      Container started
+5m14s       Warning   Unhealthy                        pod/probe-demo-app-866d9fcbfc-kj95g      Readiness probe failed: Get "http://10.42.0.7:8080/ready": dial tcp 10.42.0.7:8080: connect: connection refused
+4m53s       Normal    ScalingReplicaSet                deployment/python-probe-app              Scaled up replica set python-probe-app-5d954db8d4 from 0 to 1
+4m52s       Normal    SuccessfulCreate                 replicaset/python-probe-app-5d954db8d4   Created pod: python-probe-app-5d954db8d4-988wm
+4m52s       Normal    Pulling                          pod/python-probe-app-5d954db8d4-988wm    Pulling image "python:3.13-slim"
+4m48s       Normal    Pulled                           pod/python-probe-app-5d954db8d4-988wm    Successfully pulled image "python:3.13-slim" in 3.352s (3.352s including waiting). Image size: 43050487 bytes.
+4m34s       Warning   Unhealthy                        pod/python-probe-app-5d954db8d4-988wm    Readiness probe failed: HTTP probe failed with statuscode: 503
+4m22s       Warning   Unhealthy                        pod/python-probe-app-5d954db8d4-988wm    Liveness probe failed: HTTP probe failed with statuscode: 500
+4m22s       Normal    Killing                          pod/python-probe-app-5d954db8d4-988wm    Container python-app failed liveness probe, will be restarted
+3m52s       Warning   Unhealthy                        pod/python-probe-app-5d954db8d4-988wm    Readiness probe failed: Get "http://10.42.0.8:8080/ready": dial tcp 10.42.0.8:8080: connect: connection refused
+2m57s       Warning   BackOff                          pod/python-probe-app-5d954db8d4-988wm    Back-off restarting failed container python-app in pod python-probe-app-5d954db8d4-988wm_default(5f356734-d424-458e-afff-04fdc654d917)
+2m17s       Normal    Created                          pod/python-probe-app-5d954db8d4-988wm    Container created
+2m17s       Normal    Started                          pod/python-probe-app-5d954db8d4-988wm    Container started
+2m17s       Normal    Pulled                           pod/python-probe-app-5d954db8d4-988wm    Container image "python:3.13-slim" already present on machine and can be accessed by the pod
+2m16s       Warning   Unhealthy                        pod/python-probe-app-5d954db8d4-988wm    Startup probe failed: Get "http://10.42.0.8:8080/": dial tcp 10.42.0.8:8080: connect: connection refused
+2m          Normal    ScalingReplicaSet                deployment/debug-app                     Scaled up replica set debug-app-658d77b6b9 from 0 to 1
+119s        Normal    SuccessfulCreate                 replicaset/debug-app-658d77b6b9          Created pod: debug-app-658d77b6b9-dwwb6
+94s         Normal    Started                          pod/debug-app-658d77b6b9-dwwb6           Container started
+94s         Normal    SuccessfulCreate                 replicaset/debug-app-68b77f5fc7          Created pod: debug-app-68b77f5fc7-sg5dj
+94s         Normal    Created                          pod/debug-app-658d77b6b9-dwwb6           Container created
+94s         Normal    Killing                          pod/debug-app-658d77b6b9-dwwb6           Container debug-container failed liveness probe, will be restarted
+94s         Warning   Unhealthy                        pod/debug-app-658d77b6b9-dwwb6           Liveness probe failed: HTTP probe failed with statuscode: 404
+94s         Normal    ScalingReplicaSet                deployment/debug-app                     Scaled up replica set debug-app-68b77f5fc7 from 0 to 1
+94s         Normal    Pulled                           pod/debug-app-658d77b6b9-dwwb6           Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+92s         Normal    Pulled                           pod/debug-app-68b77f5fc7-sg5dj           Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+92s         Normal    Created                          pod/debug-app-68b77f5fc7-sg5dj           Container created
+92s         Normal    Started                          pod/debug-app-68b77f5fc7-sg5dj           Container started
+90s         Normal    SuccessfulDelete                 replicaset/debug-app-658d77b6b9          Deleted pod: debug-app-658d77b6b9-dwwb6
+90s         Normal    Killing                          pod/debug-app-658d77b6b9-dwwb6           Stopping container debug-container
+90s         Normal    ScalingReplicaSet                deployment/debug-app                     Scaled down replica set debug-app-658d77b6b9 from 1 to 0
+90s         Warning   Unhealthy                        pod/debug-app-658d77b6b9-dwwb6           Readiness probe failed: HTTP probe failed with statuscode: 404
+65s         Normal    ScalingReplicaSet                deployment/logging-app                   Scaled up replica set logging-app-5d579c986d from 0 to 1
+64s         Normal    SuccessfulCreate                 replicaset/logging-app-5d579c986d        Created pod: logging-app-5d579c986d-9gffb
+62s         Normal    Pulled                           pod/logging-app-5d579c986d-9gffb         Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+62s         Normal    Created                          pod/logging-app-5d579c986d-9gffb         Container created
+62s         Normal    Started                          pod/logging-app-5d579c986d-9gffb         Container started
+18s         Normal    ScalingReplicaSet                deployment/optimized-app                 Scaled up replica set optimized-app-d498587c5 from 0 to 2
+17s         Normal    SuccessfulCreate                 replicaset/optimized-app-d498587c5       Created pod: optimized-app-d498587c5-5lwxf
+17s         Normal    SuccessfulCreate                 replicaset/optimized-app-d498587c5       Created pod: optimized-app-d498587c5-tmjgm
+16s         Normal    Created                          pod/optimized-app-d498587c5-5lwxf        Container created
+16s         Normal    Started                          pod/optimized-app-d498587c5-tmjgm        Container started
+16s         Normal    Created                          pod/optimized-app-d498587c5-tmjgm        Container created
+16s         Normal    Pulled                           pod/optimized-app-d498587c5-tmjgm        Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+16s         Normal    Started                          pod/optimized-app-d498587c5-5lwxf        Container started
+16s         Normal    Pulled                           pod/optimized-app-d498587c5-5lwxf        Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+9s          Normal    ScalingReplicaSet                deployment/final-test                    Scaled up replica set final-test-5475545d4f from 0 to 1
+9s          Normal    SuccessfulCreate                 replicaset/final-test-5475545d4f         Created pod: final-test-5475545d4f-p2hnm
+7s          Normal    Started                          pod/final-test-5475545d4f-p2hnm          Container started
+7s          Normal    Created                          pod/final-test-5475545d4f-p2hnm          Container created
+7s          Normal    Pulled                           pod/final-test-5475545d4f-p2hnm          Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod

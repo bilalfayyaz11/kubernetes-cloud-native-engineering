@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-test
+  labels:
+    app: final-test
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: final-test
+
+  template:
+    metadata:
+      labels:
+        app: final-test
+
+    spec:
+      containers:
+        - name: test-container
+          image: nginx:1.29-alpine
+
+          ports:
+            - name: http
+              containerPort: 80
+
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 6
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 25m
+            limits:
+              memory: 64Mi
+              cpu: 100m

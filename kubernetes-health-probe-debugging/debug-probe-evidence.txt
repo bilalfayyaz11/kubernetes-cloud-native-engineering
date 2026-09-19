@@ -1,0 +1,127 @@
+KUBERNETES PROBE DEBUGGING EVIDENCE
+Generated: 2026-09-19T03:49:12Z
+
+Pod:
+NAME                         READY   STATUS    RESTARTS     AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+debug-app-658d77b6b9-dwwb6   0/1     Running   1 (9s ago)   24s   10.42.0.9   ip-172-31-10-244   <none>           <none>
+
+Conditions:
+[
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:48:49Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "PodReadyToStartContainers"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:48:48Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "Initialized"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:48:48Z",
+    "message": "containers with unready status: [debug-container]",
+    "observedGeneration": 1,
+    "reason": "ContainersNotReady",
+    "status": "False",
+    "type": "Ready"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:48:48Z",
+    "message": "containers with unready status: [debug-container]",
+    "observedGeneration": 1,
+    "reason": "ContainersNotReady",
+    "status": "False",
+    "type": "ContainersReady"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:48:48Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "PodScheduled"
+  }
+]
+
+Container Status:
+[
+  {
+    "allocatedResources": {
+      "cpu": "25m",
+      "memory": "32Mi"
+    },
+    "containerID": "containerd://e01b33ffa55be7316455dfdd5a82d4c3f1452a405754d59fdbdf0e7964fe6ff8",
+    "image": "docker.io/library/nginx:1.29-alpine",
+    "imageID": "docker.io/library/nginx@sha256:5616878291a2eed594aee8db4dade5878cf7edcb475e59193904b198d9b830de",
+    "lastState": {
+      "terminated": {
+        "containerID": "containerd://e394ad70101932a89dca40a627107c9825187f651fd28514c2fcaba87f2f3053",
+        "exitCode": 0,
+        "finishedAt": "2026-09-19T03:49:03Z",
+        "reason": "Completed",
+        "startedAt": "2026-09-19T03:48:49Z"
+      }
+    },
+    "name": "debug-container",
+    "ready": false,
+    "resources": {
+      "limits": {
+        "cpu": "100m",
+        "memory": "64Mi"
+      },
+      "requests": {
+        "cpu": "25m",
+        "memory": "32Mi"
+      }
+    },
+    "restartCount": 1,
+    "started": true,
+    "state": {
+      "running": {
+        "startedAt": "2026-09-19T03:49:03Z"
+      }
+    },
+    "user": {
+      "linux": {
+        "gid": 0,
+        "supplementalGroups": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          10,
+          11,
+          20,
+          26,
+          27
+        ],
+        "uid": 0
+      }
+    },
+    "volumeMounts": [
+      {
+        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+        "name": "kube-api-access-mwb4l",
+        "readOnly": true,
+        "recursiveReadOnly": "Disabled"
+      }
+    ]
+  }
+]
+
+Events:
+LAST SEEN   TYPE      REASON      OBJECT                           MESSAGE
+25s         Normal    Scheduled   pod/debug-app-658d77b6b9-dwwb6   Successfully assigned default/debug-app-658d77b6b9-dwwb6 to ip-172-31-10-244
+10s         Normal    Pulled      pod/debug-app-658d77b6b9-dwwb6   Container image "nginx:1.29-alpine" already present on machine and can be accessed by the pod
+10s         Normal    Created     pod/debug-app-658d77b6b9-dwwb6   Container created
+10s         Normal    Started     pod/debug-app-658d77b6b9-dwwb6   Container started
+10s         Normal    Killing     pod/debug-app-658d77b6b9-dwwb6   Container debug-container failed liveness probe, will be restarted
+5s          Warning   Unhealthy   pod/debug-app-658d77b6b9-dwwb6   Liveness probe failed: HTTP probe failed with statuscode: 404
+4s          Warning   Unhealthy   pod/debug-app-658d77b6b9-dwwb6   Readiness probe failed: HTTP probe failed with statuscode: 404

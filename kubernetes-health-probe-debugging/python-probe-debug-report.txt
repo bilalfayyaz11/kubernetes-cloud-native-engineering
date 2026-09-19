@@ -1,0 +1,239 @@
+==================================================
+ KUBERNETES PROBE DEBUG REPORT
+==================================================
+Pod       : python-probe-app-5d954db8d4-988wm
+Namespace : default
+
+===== 1. POD STATUS =====
+NAME                                READY   STATUS    RESTARTS        AGE     IP          NODE               NOMINATED NODE   READINESS GATES
+python-probe-app-5d954db8d4-988wm   1/1     Running   5 (2m23s ago)   4m13s   10.42.0.8   ip-172-31-10-244   <none>           <none>
+
+===== 2. CONDITIONS =====
+[
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:45:55Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "PodReadyToStartContainers"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:45:55Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "Initialized"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:48:33Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "Ready"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:48:33Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "ContainersReady"
+  },
+  {
+    "lastProbeTime": null,
+    "lastTransitionTime": "2026-09-19T03:45:55Z",
+    "observedGeneration": 1,
+    "status": "True",
+    "type": "PodScheduled"
+  }
+]
+
+===== 3. CONTAINER STATUS =====
+[
+  {
+    "allocatedResources": {
+      "cpu": "25m",
+      "memory": "32Mi"
+    },
+    "containerID": "containerd://467a4327fc591bc91c97e950096af83cf094a936ae564a38044d80707a276801",
+    "image": "docker.io/library/python:3.13-slim",
+    "imageID": "docker.io/library/python@sha256:59d365aafe9c497e90af2caf4affe3e57f677328b251945b0327807887ed3772",
+    "lastState": {
+      "terminated": {
+        "containerID": "containerd://342b94a1f2d8f3f9291eceb22b54e9ec4181d34315226328527d3985c327afb9",
+        "exitCode": 1,
+        "finishedAt": "2026-09-19T03:47:45Z",
+        "reason": "Error",
+        "startedAt": "2026-09-19T03:47:42Z"
+      }
+    },
+    "name": "python-app",
+    "ready": true,
+    "resources": {
+      "limits": {
+        "cpu": "200m",
+        "memory": "96Mi"
+      },
+      "requests": {
+        "cpu": "25m",
+        "memory": "32Mi"
+      }
+    },
+    "restartCount": 5,
+    "started": true,
+    "state": {
+      "running": {
+        "startedAt": "2026-09-19T03:48:30Z"
+      }
+    },
+    "user": {
+      "linux": {
+        "gid": 0,
+        "supplementalGroups": [
+          0
+        ],
+        "uid": 0
+      }
+    },
+    "volumeMounts": [
+      {
+        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+        "name": "kube-api-access-r89ls",
+        "readOnly": true,
+        "recursiveReadOnly": "Disabled"
+      }
+    ]
+  }
+]
+
+===== 4. PROBE CONFIGURATION =====
+{
+  "container": "python-app",
+  "startupProbe": {
+    "failureThreshold": 30,
+    "httpGet": {
+      "path": "/",
+      "port": "http",
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 2,
+    "successThreshold": 1,
+    "timeoutSeconds": 2
+  },
+  "readinessProbe": {
+    "failureThreshold": 2,
+    "httpGet": {
+      "path": "/ready",
+      "port": "http",
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 5,
+    "successThreshold": 1,
+    "timeoutSeconds": 2
+  },
+  "livenessProbe": {
+    "failureThreshold": 2,
+    "httpGet": {
+      "path": "/health",
+      "port": "http",
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 5,
+    "successThreshold": 1,
+    "timeoutSeconds": 2
+  }
+}
+
+===== 5. RECENT EVENTS =====
+LAST SEEN   TYPE      REASON      OBJECT                                  MESSAGE
+4m13s       Normal    Scheduled   pod/python-probe-app-5d954db8d4-988wm   Successfully assigned default/python-probe-app-5d954db8d4-988wm to ip-172-31-10-244
+4m13s       Normal    Pulling     pod/python-probe-app-5d954db8d4-988wm   Pulling image "python:3.13-slim"
+4m9s        Normal    Pulled      pod/python-probe-app-5d954db8d4-988wm   Successfully pulled image "python:3.13-slim" in 3.352s (3.352s including waiting). Image size: 43050487 bytes.
+3m55s       Warning   Unhealthy   pod/python-probe-app-5d954db8d4-988wm   Readiness probe failed: HTTP probe failed with statuscode: 503
+3m43s       Warning   Unhealthy   pod/python-probe-app-5d954db8d4-988wm   Liveness probe failed: HTTP probe failed with statuscode: 500
+3m43s       Normal    Killing     pod/python-probe-app-5d954db8d4-988wm   Container python-app failed liveness probe, will be restarted
+3m13s       Warning   Unhealthy   pod/python-probe-app-5d954db8d4-988wm   Readiness probe failed: Get "http://10.42.0.8:8080/ready": dial tcp 10.42.0.8:8080: connect: connection refused
+2m18s       Warning   BackOff     pod/python-probe-app-5d954db8d4-988wm   Back-off restarting failed container python-app in pod python-probe-app-5d954db8d4-988wm_default(5f356734-d424-458e-afff-04fdc654d917)
+98s         Normal    Created     pod/python-probe-app-5d954db8d4-988wm   Container created
+98s         Normal    Started     pod/python-probe-app-5d954db8d4-988wm   Container started
+98s         Normal    Pulled      pod/python-probe-app-5d954db8d4-988wm   Container image "python:3.13-slim" already present on machine and can be accessed by the pod
+97s         Warning   Unhealthy   pod/python-probe-app-5d954db8d4-988wm   Startup probe failed: Get "http://10.42.0.8:8080/": dial tcp 10.42.0.8:8080: connect: connection refused
+
+===== 6. CURRENT LOGS =====
+
+--- Container: python-app ---
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+10.42.0.1 GET /health "GET /health HTTP/1.1" 200 -
+10.42.0.1 GET /ready "GET /ready HTTP/1.1" 200 -
+
+===== 7. PREVIOUS CONTAINER LOGS =====
+
+--- Previous: python-app ---
+Traceback (most recent call last):
+  File "/app.py", line 42, in <module>
+    with socketserver.TCPServer(
+         ~~~~~~~~~~~~~~~~~~~~~~^
+        ("0.0.0.0", 8080),
+        ^^^^^^^^^^^^^^^^^^
+        HealthHandler
+        ^^^^^^^^^^^^^
+    ) as httpd:
+    ^
+  File "/usr/local/lib/python3.13/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 98] Address already in use
+
+===== 8. RESTART SUMMARY =====
+{
+  "container": "python-app",
+  "ready": true,
+  "restartCount": 5,
+  "state": {
+    "running": {
+      "startedAt": "2026-09-19T03:48:30Z"
+    }
+  },
+  "lastState": {
+    "terminated": {
+      "containerID": "containerd://342b94a1f2d8f3f9291eceb22b54e9ec4181d34315226328527d3985c327afb9",
+      "exitCode": 1,
+      "finishedAt": "2026-09-19T03:47:45Z",
+      "reason": "Error",
+      "startedAt": "2026-09-19T03:47:42Z"
+    }
+  }
+}
+
+==================================================
+ DEBUG REPORT COMPLETE
+==================================================

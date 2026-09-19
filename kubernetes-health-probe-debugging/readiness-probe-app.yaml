@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: readiness-nginx-config
+data:
+  default.conf: |
+    server {
+        listen 8080;
+        server_name localhost;
+
+        location = / {
+            default_type text/plain;
+            return 200 "Application is running\n";
+        }
+
+        location = /ready {
+            root /usr/share/nginx/html;
+            try_files /ready =503;
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readiness-app
+  labels:
+    app: readiness-app
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: readiness-app
+
+  template:
+    metadata:
+      labels:
+        app: readiness-app
+
+    spec:
+      containers:
+        - name: web-server
+          image: nginx:1.29-alpine
+
+          command:
+            - /bin/sh
+            - -c
+
+          args:
+            - |
+              echo "ready" > /usr/share/nginx/html/ready
+              exec nginx -g 'daemon off;'
+
+          ports:
+            - name: http
+              containerPort: 8080
+
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 2
+
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 25m
+            limits:
+              memory: 64Mi
+              cpu: 100m
+
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+              readOnly: true
+
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: readiness-nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: readiness-service
+spec:
+  selector:
+    app: readiness-app
+
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+
+  type: ClusterIP

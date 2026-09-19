@@ -1,0 +1,32 @@
+KUBERNETES PROBE VALIDATION SUMMARY
+Generated: 2026-09-19T03:50:46Z
+
+===== READINESS WORKLOAD =====
+NAME                             READY   STATUS    RESTARTS   AGE     IP          NODE               NOMINATED NODE   READINESS GATES
+readiness-app-75cb7cf7dc-87gvd   1/1     Running   0          6m45s   10.42.0.6   ip-172-31-10-244   <none>           <none>
+readiness-app-75cb7cf7dc-tqvjg   1/1     Running   0          6m45s   10.42.0.5   ip-172-31-10-244   <none>           <none>
+
+===== COMBINED PROBE WORKLOAD =====
+NAME                              READY   STATUS    RESTARTS        AGE     IP          NODE               NOMINATED NODE   READINESS GATES
+probe-demo-app-866d9fcbfc-kj95g   1/1     Running   1 (5m14s ago)   5m44s   10.42.0.7   ip-172-31-10-244   <none>           <none>
+
+===== CONTROLLED PYTHON WORKLOAD =====
+NAME                                READY   STATUS    RESTARTS       AGE     IP          NODE               NOMINATED NODE   READINESS GATES
+python-probe-app-5d954db8d4-988wm   1/1     Running   5 (3m2s ago)   4m52s   10.42.0.8   ip-172-31-10-244   <none>           <none>
+
+===== DEBUG WORKLOAD =====
+NAME                         READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+debug-app-68b77f5fc7-sg5dj   1/1     Running   0          94s   10.42.0.10   ip-172-31-10-244   <none>           <none>
+
+===== LOGGING WORKLOAD =====
+NAME                           READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+logging-app-5d579c986d-9gffb   1/1     Running   0          64s   10.42.0.11   ip-172-31-10-244   <none>           <none>
+
+===== OPTIMIZED WORKLOAD =====
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+optimized-app-d498587c5-5lwxf   1/1     Running   0          17s   10.42.0.12   ip-172-31-10-244   <none>           <none>
+optimized-app-d498587c5-tmjgm   1/1     Running   0          17s   10.42.0.13   ip-172-31-10-244   <none>           <none>
+
+===== FINAL TEST =====
+NAME                          READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+final-test-5475545d4f-p2hnm   1/1     Running   0          9s    10.42.0.14   ip-172-31-10-244   <none>           <none>
