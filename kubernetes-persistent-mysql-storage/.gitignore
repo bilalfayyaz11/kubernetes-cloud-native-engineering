@@ -1,0 +1,4 @@
+mysql-secret.yaml
+*.sql
+*.log
+*.tmp
