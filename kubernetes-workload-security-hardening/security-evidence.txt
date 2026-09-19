@@ -1,0 +1,64 @@
+KUBERNETES SECURITYCONTEXT EVIDENCE
+Generated: 2026-09-19T02:53:31Z
+
+===== BASIC POD =====
+NAME        READY   STATUS    RESTARTS   AGE    IP          NODE               NOMINATED NODE   READINESS GATES
+basic-pod   1/1     Running   0          6m2s   10.42.0.6   ip-172-31-10-204   <none>           <none>
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
+CapEff:	00000000a80425fb
+NoNewPrivs:	0
+Seccomp:	0
+
+===== RESTRICTED POD =====
+NAME             READY   STATUS    RESTARTS   AGE     IP          NODE               NOMINATED NODE   READINESS GATES
+restricted-pod   1/1     Running   0          5m34s   10.42.0.7   ip-172-31-10-204   <none>           <none>
+uid=1000 gid=1000 groups=1000
+CapEff:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+
+===== SECURE WEBAPP =====
+NAME            READY   STATUS    RESTARTS   AGE    IP          NODE               NOMINATED NODE   READINESS GATES
+secure-webapp   1/1     Running   0          5m2s   10.42.0.8   ip-172-31-10-204   <none>           <none>
+uid=1001 gid=1001 groups=1001
+CapEff:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+
+===== NET_ADMIN POD =====
+NAME           READY   STATUS    RESTARTS   AGE    IP           NODE               NOMINATED NODE   READINESS GATES
+netadmin-pod   1/1     Running   0          115s   10.42.0.12   ip-172-31-10-204   <none>           <none>
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
+CapEff:	0000000000001000
+CapBnd:	0000000000001000
+NoNewPrivs:	1
+Seccomp:	2
+
+===== NO-NET_ADMIN POD =====
+NAME              READY   STATUS    RESTARTS   AGE    IP           NODE               NOMINATED NODE   READINESS GATES
+no-netadmin-pod   1/1     Running   0          4m7s   10.42.0.11   ip-172-31-10-204   <none>           <none>
+uid=1000 gid=1000 groups=1000
+CapEff:	0000000000000000
+CapBnd:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+
+===== FIXED POD =====
+NAME        READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+fixed-pod   1/1     Running   0          30s   10.42.0.15   ip-172-31-10-204   <none>           <none>
+uid=1000 gid=1000 groups=1000
+CapEff:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+
+===== RESTRICTED PSS POD =====
+NAME                 READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+pss-restricted-pod   1/1     Running   0          71s   10.42.0.13   ip-172-31-10-204   <none>           <none>
+uid=1000 gid=1000 groups=1000
+CapEff:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+
+===== RESTRICTED NAMESPACE LABELS =====
+NAME                  STATUS   AGE   LABELS
+restricted-security   Active   72s   kubernetes.io/metadata.name=restricted-security,pod-security.kubernetes.io/audit-version=latest,pod-security.kubernetes.io/audit=restricted,pod-security.kubernetes.io/enforce-version=latest,pod-security.kubernetes.io/enforce=restricted,pod-security.kubernetes.io/warn-version=latest,pod-security.kubernetes.io/warn=restricted

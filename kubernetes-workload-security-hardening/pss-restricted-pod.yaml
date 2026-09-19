@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pss-nginx-config
+  namespace: restricted-security
+data:
+  nginx.conf: |
+    worker_processes 1;
+    pid /tmp/nginx.pid;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        access_log /tmp/access.log;
+        error_log /tmp/error.log;
+
+        server {
+            listen 8080;
+
+            location / {
+                return 200 'Restricted PSS workload is running\n';
+                add_header Content-Type text/plain;
+            }
+        }
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pss-restricted-pod
+  namespace: restricted-security
+  labels:
+    app: pss-restricted
+spec:
+  restartPolicy: Never
+
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+    seccompProfile:
+      type: RuntimeDefault
+
+  containers:
+    - name: secure-app
+      image: nginx:1.29-alpine
+
+      ports:
+        - containerPort: 8080
+
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 1000
+
+        capabilities:
+          drop:
+            - ALL
+
+        seccompProfile:
+          type: RuntimeDefault
+
+      volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
+
+        - name: tmp-volume
+          mountPath: /tmp
+
+        - name: var-cache-nginx
+          mountPath: /var/cache/nginx
+
+        - name: var-run
+          mountPath: /var/run
+
+  volumes:
+    - name: nginx-config
+      configMap:
+        name: pss-nginx-config
+
+    - name: tmp-volume
+      emptyDir: {}
+
+    - name: var-cache-nginx
+      emptyDir: {}
+
+    - name: var-run
+      emptyDir: {}

@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fixed-pod
+  labels:
+    app: fixed-security
+spec:
+  restartPolicy: Never
+
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+
+    seccompProfile:
+      type: RuntimeDefault
+
+  containers:
+    - name: fixed-container
+      image: nginx:1.29-alpine
+
+      command:
+        - /bin/sh
+        - -c
+
+      args:
+        - sleep 3600
+
+      securityContext:
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1000
+
+        capabilities:
+          drop:
+            - ALL
+
+        seccompProfile:
+          type: RuntimeDefault
+
+      volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+
+        - name: cache-volume
+          mountPath: /var/cache/nginx
+
+        - name: run-volume
+          mountPath: /var/run
+
+  volumes:
+    - name: tmp-volume
+      emptyDir: {}
+
+    - name: cache-volume
+      emptyDir: {}
+
+    - name: run-volume
+      emptyDir: {}

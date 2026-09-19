@@ -1,0 +1,31 @@
+==================================================
+ SECURITY VALIDATION
+==================================================
+Pod       : pss-restricted-pod
+Namespace : restricted-security
+
+===== NON-ROOT CHECK =====
+PASS: Running as non-root UID 1000.
+
+===== READ-ONLY ROOT FILESYSTEM =====
+PASS: Root filesystem is read-only.
+
+===== EFFECTIVE CAPABILITIES =====
+CapEff: 0000000000000000
+PASS: No effective Linux capabilities.
+
+===== PRIVILEGE ESCALATION =====
+NoNewPrivs: 1
+PASS: Privilege escalation is blocked.
+
+===== SECCOMP =====
+Seccomp mode: 2
+PASS: Seccomp filter mode is active.
+
+===== DECLARED SECURITYCONTEXT =====
+PodSecurityContext={"fsGroup":1000,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000,"seccompProfile":{"type":"RuntimeDefault"}}
+ContainerSecurityContext={"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":1000,"seccompProfile":{"type":"RuntimeDefault"}}
+
+==================================================
+ VALIDATION COMPLETE
+==================================================
