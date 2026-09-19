@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - configmap.yaml
+
+labels:
+  - pairs:
+      version: v1.0.0
+      managed-by: kustomize
+    includeSelectors: false
+    includeTemplates: true
+
+commonAnnotations:
+  description: "Reusable web application base configuration"
+
+configMapGenerator:
+  - name: runtime-settings
+    literals:
+      - feature_mode=standard
+      - telemetry_enabled=true
+
+secretGenerator:
+  - name: runtime-credentials
+    literals:
+      - auth_mode=external
+      - credential_source=runtime-injection
+
+generatorOptions:
+  disableNameSuffixHash: false

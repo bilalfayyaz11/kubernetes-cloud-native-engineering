@@ -1,0 +1,106 @@
+KUSTOMIZE MULTI-ENVIRONMENT COMPARISON
+Generated: 2026-09-19T04:09:16Z
+
+===== STAGING =====
+{
+  "replicas": 1,
+  "image": "nginx:1.29.1-alpine",
+  "resources": {
+    "limits": {
+      "cpu": "150m",
+      "memory": "64Mi"
+    },
+    "requests": {
+      "cpu": "50m",
+      "memory": "32Mi"
+    }
+  },
+  "env": [
+    {
+      "name": "ENVIRONMENT",
+      "value": "staging"
+    }
+  ]
+}
+
+===== PRODUCTION =====
+{
+  "replicas": 3,
+  "image": "nginx:1.29.1-alpine",
+  "resources": {
+    "limits": {
+      "cpu": "750m",
+      "memory": "256Mi"
+    },
+    "requests": {
+      "cpu": "250m",
+      "memory": "128Mi"
+    }
+  },
+  "strategy": {
+    "rollingUpdate": {
+      "maxSurge": 1,
+      "maxUnavailable": 0
+    },
+    "type": "RollingUpdate"
+  },
+  "env": [
+    {
+      "name": "ENVIRONMENT",
+      "value": "production"
+    }
+  ],
+  "startupProbe": {
+    "failureThreshold": 12,
+    "httpGet": {
+      "path": "/",
+      "port": 80,
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 5,
+    "successThreshold": 1,
+    "timeoutSeconds": 3
+  },
+  "readinessProbe": {
+    "failureThreshold": 3,
+    "httpGet": {
+      "path": "/",
+      "port": 80,
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 5,
+    "successThreshold": 1,
+    "timeoutSeconds": 3
+  },
+  "livenessProbe": {
+    "failureThreshold": 3,
+    "httpGet": {
+      "path": "/",
+      "port": 80,
+      "scheme": "HTTP"
+    },
+    "periodSeconds": 15,
+    "successThreshold": 1,
+    "timeoutSeconds": 5
+  }
+}
+
+===== STAGING CONFIGMAP =====
+{
+  "database_host": "staging-db.internal",
+  "database_port": "5432",
+  "debug_mode": "true",
+  "environment": "staging",
+  "log_level": "debug"
+}
+
+===== PRODUCTION CONFIGMAP =====
+{
+  "cache_enabled": "true",
+  "database_host": "prod-db.internal",
+  "database_port": "5432",
+  "debug_mode": "false",
+  "environment": "production",
+  "log_level": "warn",
+  "max_connections": "100"
+}

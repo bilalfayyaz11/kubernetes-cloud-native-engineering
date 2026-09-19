@@ -1,0 +1,150 @@
+apiVersion: v1
+data:
+  feature_mode: standard
+  telemetry_enabled: "true"
+kind: ConfigMap
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    environment: production
+    managed-by: kustomize
+    tier: production
+    version: v1.0.0
+  name: prod-runtime-settings-8t6k276k56
+  namespace: production
+---
+apiVersion: v1
+data:
+  cache_enabled: "true"
+  database_host: prod-db.internal
+  database_port: "5432"
+  debug_mode: "false"
+  environment: production
+  log_level: warn
+  max_connections: "100"
+kind: ConfigMap
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    environment: production
+    managed-by: kustomize
+    tier: production
+    version: v1.0.0
+  name: prod-web-app-config
+  namespace: production
+---
+apiVersion: v1
+data:
+  auth_mode: ZXh0ZXJuYWw=
+  credential_source: cnVudGltZS1pbmplY3Rpb24=
+kind: Secret
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    environment: production
+    managed-by: kustomize
+    tier: production
+    version: v1.0.0
+  name: prod-runtime-credentials-hf4cc4fgg4
+  namespace: production
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    environment: production
+    managed-by: kustomize
+    tier: production
+    version: v1.0.0
+  name: prod-web-app-service
+  namespace: production
+spec:
+  ports:
+  - name: https-simulated
+    port: 443
+    protocol: TCP
+    targetPort: 80
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web-app
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    environment: production
+    managed-by: kustomize
+    tier: production
+    version: v1.0.0
+  name: prod-web-app
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        description: Reusable web application base configuration
+      labels:
+        app: web-app
+        environment: production
+        managed-by: kustomize
+        tier: production
+        version: v1.0.0
+    spec:
+      containers:
+      - env:
+        - name: ENVIRONMENT
+          value: production
+        image: nginx:1.29.1-alpine
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 15
+          timeoutSeconds: 5
+        name: web-app
+        ports:
+        - containerPort: 80
+          name: http
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 5
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 750m
+            memory: 256Mi
+          requests:
+            cpu: 250m
+            memory: 128Mi
+        startupProbe:
+          failureThreshold: 12
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 5
+          timeoutSeconds: 3

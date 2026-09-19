@@ -1,0 +1,97 @@
+apiVersion: v1
+data:
+  feature_mode: standard
+  telemetry_enabled: "true"
+kind: ConfigMap
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    managed-by: kustomize
+    version: v1.0.0
+  name: runtime-settings-8t6k276k56
+---
+apiVersion: v1
+data:
+  database_host: localhost
+  database_port: "5432"
+  environment: base
+  log_level: info
+kind: ConfigMap
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    managed-by: kustomize
+    version: v1.0.0
+  name: web-app-config
+---
+apiVersion: v1
+data:
+  auth_mode: ZXh0ZXJuYWw=
+  credential_source: cnVudGltZS1pbmplY3Rpb24=
+kind: Secret
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    managed-by: kustomize
+    version: v1.0.0
+  name: runtime-credentials-hf4cc4fgg4
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    managed-by: kustomize
+    version: v1.0.0
+  name: web-app-service
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web-app
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    description: Reusable web application base configuration
+  labels:
+    managed-by: kustomize
+    version: v1.0.0
+  name: web-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      annotations:
+        description: Reusable web application base configuration
+      labels:
+        app: web-app
+        managed-by: kustomize
+        version: v1.0.0
+    spec:
+      containers:
+      - image: nginx:1.29.1-alpine
+        name: web-app
+        ports:
+        - containerPort: 80
+          name: http
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi

@@ -1,0 +1,31 @@
+.
+├── base
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   ├── kustomization.yaml
+│   └── service.yaml
+├── base-generated-rendered.yaml
+├── base-rendered-final.yaml
+├── base-rendered.yaml
+├── environment-comparison.txt
+├── kustomize-tree.txt
+├── overlays
+│   ├── production
+│   │   ├── configmap-patch.yaml
+│   │   ├── cpu-limit-patch.json
+│   │   ├── deployment-patch.yaml
+│   │   ├── kustomization.yaml
+│   │   ├── namespace.yaml
+│   │   └── service-patch.yaml
+│   └── staging
+│       ├── configmap-patch.yaml
+│       ├── deployment-patch.yaml
+│       ├── kustomization.yaml
+│       └── namespace.yaml
+├── production-advanced-rendered.yaml
+├── production-rendered-final.yaml
+├── production-rendered.yaml
+├── staging-rendered-final.yaml
+└── staging-rendered.yaml
+
+5 directories, 24 files
