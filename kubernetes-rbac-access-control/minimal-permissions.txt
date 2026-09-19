@@ -1,0 +1,11 @@
+MINIMAL RBAC EVIDENCE
+Generated: 2026-09-19T04:22:25Z
+
+get restricted-target:
+yes
+
+list pods:
+no
+
+get secrets:
+no

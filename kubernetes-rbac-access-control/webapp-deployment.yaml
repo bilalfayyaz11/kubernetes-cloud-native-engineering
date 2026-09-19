@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  namespace: access-control
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      serviceAccountName: webapp-service-account
+      automountServiceAccountToken: true
+      containers:
+        - name: webapp
+          image: nginx:1.29.1-alpine
+          ports:
+            - containerPort: 80
+          env:
+            - name: SERVICE_ACCOUNT
+              value: webapp-service-account
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi

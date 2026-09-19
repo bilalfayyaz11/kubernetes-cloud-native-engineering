@@ -1,0 +1,17 @@
+==================================================
+ WEBAPP SERVICEACCOUNT
+==================================================
+Can get pods       : yes
+Can list services  : yes
+Can get configmaps : yes
+Can get secrets    : no
+Can create pods    : no
+
+==================================================
+ DATABASE SERVICEACCOUNT
+==================================================
+Can get secrets    : yes
+Can get pods       : yes
+Can get PVCs       : yes
+Can get services   : no
+Can create pods    : no

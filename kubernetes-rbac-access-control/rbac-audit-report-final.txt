@@ -1,0 +1,155 @@
+==================================================
+ RBAC AUDIT REPORT
+==================================================
+Generated: 2026-09-19T04:22:19Z
+Namespace: access-control
+
+===== SERVICEACCOUNTS =====
+NAME                         AUTOMOUNT
+database-service-account     false
+default                      <none>
+minimal-service-account      false
+monitoring-service-account   false
+webapp-service-account       false
+
+===== ROLES =====
+NAME            CREATED AT
+database-role   2026-09-19T04:17:22Z
+minimal-role    2026-09-19T04:21:26Z
+webapp-role     2026-09-19T04:17:22Z
+
+----- ROLE: database-role -----
+Name:         database-role
+Labels:       app.kubernetes.io/name=database
+              security.kubernetes.io/purpose=least-privilege
+Annotations:  <none>
+PolicyRule:
+  Resources               Non-Resource URLs  Resource Names  Verbs
+  ---------               -----------------  --------------  -----
+  persistentvolumeclaims  []                 []              [get list watch]
+  pods                    []                 []              [get list watch]
+  statefulsets.apps       []                 []              [get list watch]
+  secrets                 []                 []              [get]
+
+----- ROLE: minimal-role -----
+Name:         minimal-role
+Labels:       security.kubernetes.io/purpose=least-privilege
+Annotations:  <none>
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names       Verbs
+  ---------  -----------------  --------------       -----
+  pods       []                 [restricted-target]  [get]
+
+----- ROLE: webapp-role -----
+Name:         webapp-role
+Labels:       app.kubernetes.io/name=webapp
+              security.kubernetes.io/purpose=least-privilege
+Annotations:  <none>
+PolicyRule:
+  Resources         Non-Resource URLs  Resource Names  Verbs
+  ---------         -----------------  --------------  -----
+  configmaps        []                 []              [get list watch]
+  pods              []                 []              [get list watch]
+  deployments.apps  []                 []              [get list watch]
+  services          []                 []              [get list]
+
+
+===== ROLEBINDINGS =====
+NAME                   ROLE            SUBJECTS
+database-rolebinding   database-role   database-service-account
+minimal-rolebinding    minimal-role    minimal-service-account
+webapp-rolebinding     webapp-role     webapp-service-account
+
+===== CUSTOM CLUSTERROLE =====
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"labels":{"security.kubernetes.io/purpose":"cluster-read-only"},"name":"monitoring-readonly"},"rules":[{"apiGroups":[""],"resources":["pods","services","endpoints","namespaces"],"verbs":["get","list","watch"]},{"apiGroups":["apps"],"resources":["deployments","replicasets","statefulsets"],"verbs":["get","list","watch"]}]}
+  creationTimestamp: "2026-09-19T04:20:34Z"
+  labels:
+    security.kubernetes.io/purpose: cluster-read-only
+  name: monitoring-readonly
+  resourceVersion: "674"
+  uid: d3d5a759-8869-483c-9b4c-7538bdaecb5c
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  - endpoints
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  - statefulsets
+  verbs:
+  - get
+  - list
+  - watch
+
+===== CUSTOM CLUSTERROLEBINDING =====
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"monitoring-readonly-binding"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"monitoring-readonly"},"subjects":[{"kind":"ServiceAccount","name":"monitoring-service-account","namespace":"access-control"}]}
+  creationTimestamp: "2026-09-19T04:20:34Z"
+  name: monitoring-readonly-binding
+  resourceVersion: "676"
+  uid: 7f19becb-b135-444e-b501-bab4dbc46d97
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: monitoring-readonly
+subjects:
+- kind: ServiceAccount
+  name: monitoring-service-account
+  namespace: access-control
+
+===== AUTHORIZATION MATRIX =====
+
+--- webapp-service-account ---
+get pods                  yes
+list pods                 yes
+create pods               no
+get services              yes
+get configmaps            yes
+get secrets               no
+
+--- database-service-account ---
+get pods                  yes
+list pods                 yes
+create pods               no
+get services              no
+get configmaps            no
+get secrets               yes
+
+--- monitoring-service-account ---
+get pods                  yes
+list pods                 yes
+create pods               no
+get services              yes
+get configmaps            no
+get secrets               no
+
+--- minimal-service-account ---
+get pods                  no
+list pods                 no
+create pods               no
+get services              no
+get configmaps            no
+get secrets               no
+
+==================================================
+ RBAC AUDIT COMPLETE
+==================================================

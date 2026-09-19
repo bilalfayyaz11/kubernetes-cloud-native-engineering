@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restricted-target
+  namespace: access-control
+  labels:
+    security.kubernetes.io/purpose: resource-name-test
+spec:
+  containers:
+    - name: target
+      image: nginx:1.29.1-alpine
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          cpu: 50m
+          memory: 32Mi

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: access-control
+  labels:
+    purpose: access-control
+    managed-by: kubectl

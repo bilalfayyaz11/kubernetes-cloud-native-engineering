@@ -1,0 +1,28 @@
+.
+├── audit-rbac.sh
+├── database-deployment.yaml
+├── database-permissions.txt
+├── database-role.yaml
+├── database-rolebinding.yaml
+├── database-service-account.yaml
+├── final-permission-matrix.txt
+├── minimal-access.yaml
+├── minimal-permissions.txt
+├── monitoring-clusterrole.yaml
+├── monitoring-clusterrolebinding.yaml
+├── monitoring-permissions.txt
+├── monitoring-service-account.yaml
+├── namespace.yaml
+├── rbac-audit-report-final.txt
+├── rbac-audit-report.txt
+├── rbac-resource-inventory.txt
+├── rbac-tree.txt
+├── restricted-target-pod.yaml
+├── test-permissions.sh
+├── webapp-deployment.yaml
+├── webapp-permissions.txt
+├── webapp-role.yaml
+├── webapp-rolebinding.yaml
+└── webapp-service-account.yaml
+
+1 directory, 25 files

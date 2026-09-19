@@ -1,0 +1,9 @@
+WEBAPP RBAC EVIDENCE
+Generated: 2026-09-19T04:22:23Z
+
+get pods                  yes
+list pods                 yes
+get services              yes
+get configmaps            yes
+get secrets               no
+create pods               no

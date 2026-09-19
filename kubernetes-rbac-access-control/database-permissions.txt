@@ -1,0 +1,14 @@
+DATABASE RBAC EVIDENCE
+Generated: 2026-09-19T04:22:24Z
+
+get named secret:
+yes
+
+list secrets:
+no
+
+get pods:
+yes
+
+get services:
+no
