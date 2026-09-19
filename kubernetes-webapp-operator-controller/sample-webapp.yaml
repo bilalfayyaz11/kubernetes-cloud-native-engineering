@@ -1,0 +1,13 @@
+apiVersion: example.com/v1
+kind: WebApp
+metadata:
+  name: my-webapp
+  namespace: default
+spec:
+  replicas: 3
+  image: nginx:1.29-alpine
+  port: 80
+
+  resources:
+    cpu: "100m"
+    memory: "128Mi"
