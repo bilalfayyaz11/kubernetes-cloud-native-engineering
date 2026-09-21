@@ -1,0 +1,86 @@
+=== Kubernetes RBAC Final Security Evidence ===
+Timestamp: Mon Sep 21 17:02:51 UTC 2026
+
+Namespaces:
+NAME          STATUS   AGE     LABELS
+development   Active   7m26s   environment=development,kubernetes.io/metadata.name=development,name=development
+production    Active   7m26s   environment=production,kubernetes.io/metadata.name=production,name=production
+testing       Active   7m26s   environment=testing,kubernetes.io/metadata.name=testing,name=testing
+
+Service Accounts:
+NAME              AGE
+config-operator   3m8s
+default           7m26s
+dev-team          6m36s
+NAME        AGE
+default     7m26s
+prod-team   6m36s
+NAME            AGE
+default         7m26s
+readonly-user   6m36s
+
+Namespace Roles:
+NAMESPACE     NAME                                             CREATED AT
+development   dev-full-access                                  2026-09-21T16:56:16Z
+development   specific-resource-access                         2026-09-21T16:59:43Z
+kube-public   kubeadm:bootstrap-signer-clusterinfo             2026-09-21T16:54:42Z
+kube-public   system:controller:bootstrap-signer               2026-09-21T16:54:42Z
+kube-system   extension-apiserver-authentication-reader        2026-09-21T16:54:42Z
+kube-system   kube-proxy                                       2026-09-21T16:54:44Z
+kube-system   kubeadm:kubelet-config                           2026-09-21T16:54:42Z
+kube-system   kubeadm:nodes-kubeadm-config                     2026-09-21T16:54:42Z
+kube-system   system::leader-locking-kube-controller-manager   2026-09-21T16:54:42Z
+kube-system   system::leader-locking-kube-scheduler            2026-09-21T16:54:42Z
+kube-system   system:controller:bootstrap-signer               2026-09-21T16:54:42Z
+kube-system   system:controller:cloud-provider                 2026-09-21T16:54:42Z
+kube-system   system:controller:token-cleaner                  2026-09-21T16:54:42Z
+production    prod-limited-access                              2026-09-21T16:56:16Z
+testing       readonly-access                                  2026-09-21T16:56:16Z
+
+RoleBindings:
+NAMESPACE     NAME                                                ROLE                                                  AGE
+development   dev-team-binding                                    Role/dev-full-access                                  6m34s
+development   specific-resource-binding                           Role/specific-resource-access                         3m8s
+kube-public   kubeadm:bootstrap-signer-clusterinfo                Role/kubeadm:bootstrap-signer-clusterinfo             8m8s
+kube-public   system:controller:bootstrap-signer                  Role/system:controller:bootstrap-signer               8m9s
+kube-system   kube-proxy                                          Role/kube-proxy                                       8m7s
+kube-system   kubeadm:kubelet-config                              Role/kubeadm:kubelet-config                           8m9s
+kube-system   kubeadm:nodes-kubeadm-config                        Role/kubeadm:nodes-kubeadm-config                     8m9s
+kube-system   system::extension-apiserver-authentication-reader   Role/extension-apiserver-authentication-reader        8m9s
+kube-system   system::leader-locking-kube-controller-manager      Role/system::leader-locking-kube-controller-manager   8m9s
+kube-system   system::leader-locking-kube-scheduler               Role/system::leader-locking-kube-scheduler            8m9s
+kube-system   system:controller:bootstrap-signer                  Role/system:controller:bootstrap-signer               8m9s
+kube-system   system:controller:cloud-provider                    Role/system:controller:cloud-provider                 8m9s
+kube-system   system:controller:token-cleaner                     Role/system:controller:token-cleaner                  8m9s
+production    prod-team-binding                                   Role/prod-limited-access                              6m34s
+testing       readonly-binding                                    Role/readonly-access                                  6m34s
+
+ClusterRole:
+NAME             CREATED AT
+cluster-viewer   2026-09-21T16:56:18Z
+
+ClusterRoleBinding:
+NAME                     ROLE                         AGE
+cluster-viewer-binding   ClusterRole/cluster-viewer   6m34s
+
+Access Matrix:
+IDENTITY|NAMESPACE|ACTION|RESOURCE|EXPECTED|ACTUAL
+dev-team|development|create|pods|yes|yes
+dev-team|production|get|pods|no|no
+prod-team|production|list|pods|yes|yes
+prod-team|production|patch|deployments|yes|yes
+prod-team|production|delete|deployments|no|no
+prod-team|production|create|secrets|no|no
+readonly-user|cluster|list|nodes|yes|yes
+readonly-user|development|list|pods|yes|yes
+readonly-user|testing|create|pods|no|no
+config-operator|development|get|configmap/app-config|yes|yes
+config-operator|development|get|configmap/unrelated-config|no|no
+
+NetworkPolicy:
+NAME                         POD-SELECTOR   AGE
+development-network-policy   app=dev-app    3m6s
+
+Temporary privilege state:
+temp-admin service account: absent
+temp-admin-binding: absent

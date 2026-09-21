@@ -1,0 +1,63 @@
+=== Kubernetes RBAC Baseline ===
+Timestamp: Mon Sep 21 16:56:20 UTC 2026
+
+Service Accounts:
+NAME       AGE
+default    55s
+dev-team   5s
+NAME        AGE
+default     56s
+prod-team   6s
+NAME            AGE
+default         56s
+readonly-user   6s
+
+Roles:
+NAMESPACE     NAME                                             CREATED AT
+development   dev-full-access                                  2026-09-21T16:56:16Z
+kube-public   kubeadm:bootstrap-signer-clusterinfo             2026-09-21T16:54:42Z
+kube-public   system:controller:bootstrap-signer               2026-09-21T16:54:42Z
+kube-system   extension-apiserver-authentication-reader        2026-09-21T16:54:42Z
+kube-system   kube-proxy                                       2026-09-21T16:54:44Z
+kube-system   kubeadm:kubelet-config                           2026-09-21T16:54:42Z
+kube-system   kubeadm:nodes-kubeadm-config                     2026-09-21T16:54:42Z
+kube-system   system::leader-locking-kube-controller-manager   2026-09-21T16:54:42Z
+kube-system   system::leader-locking-kube-scheduler            2026-09-21T16:54:42Z
+kube-system   system:controller:bootstrap-signer               2026-09-21T16:54:42Z
+kube-system   system:controller:cloud-provider                 2026-09-21T16:54:42Z
+kube-system   system:controller:token-cleaner                  2026-09-21T16:54:42Z
+production    prod-limited-access                              2026-09-21T16:56:16Z
+testing       readonly-access                                  2026-09-21T16:56:16Z
+
+RoleBindings:
+NAMESPACE     NAME                                                ROLE                                                  AGE
+development   dev-team-binding                                    Role/dev-full-access                                  4s
+kube-public   kubeadm:bootstrap-signer-clusterinfo                Role/kubeadm:bootstrap-signer-clusterinfo             98s
+kube-public   system:controller:bootstrap-signer                  Role/system:controller:bootstrap-signer               99s
+kube-system   kube-proxy                                          Role/kube-proxy                                       97s
+kube-system   kubeadm:kubelet-config                              Role/kubeadm:kubelet-config                           99s
+kube-system   kubeadm:nodes-kubeadm-config                        Role/kubeadm:nodes-kubeadm-config                     99s
+kube-system   system::extension-apiserver-authentication-reader   Role/extension-apiserver-authentication-reader        99s
+kube-system   system::leader-locking-kube-controller-manager      Role/system::leader-locking-kube-controller-manager   99s
+kube-system   system::leader-locking-kube-scheduler               Role/system::leader-locking-kube-scheduler            99s
+kube-system   system:controller:bootstrap-signer                  Role/system:controller:bootstrap-signer               99s
+kube-system   system:controller:cloud-provider                    Role/system:controller:cloud-provider                 99s
+kube-system   system:controller:token-cleaner                     Role/system:controller:token-cleaner                  99s
+production    prod-team-binding                                   Role/prod-limited-access                              4s
+testing       readonly-binding                                    Role/readonly-access                                  4s
+
+ClusterRole:
+NAME             CREATED AT
+cluster-viewer   2026-09-21T16:56:18Z
+
+ClusterRoleBinding:
+NAME                     ROLE                         AGE
+cluster-viewer-binding   ClusterRole/cluster-viewer   3s
+
+Authorization checks:
+dev create pods development: yes
+dev list pods production: no
+prod list pods production: yes
+prod delete deployments production: no
+readonly list nodes: yes
+readonly create pods testing: no

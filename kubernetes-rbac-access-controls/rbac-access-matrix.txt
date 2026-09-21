@@ -1,0 +1,12 @@
+IDENTITY|NAMESPACE|ACTION|RESOURCE|EXPECTED|ACTUAL
+dev-team|development|create|pods|yes|yes
+dev-team|production|get|pods|no|no
+prod-team|production|list|pods|yes|yes
+prod-team|production|patch|deployments|yes|yes
+prod-team|production|delete|deployments|no|no
+prod-team|production|create|secrets|no|no
+readonly-user|cluster|list|nodes|yes|yes
+readonly-user|development|list|pods|yes|yes
+readonly-user|testing|create|pods|no|no
+config-operator|development|get|configmap/app-config|yes|yes
+config-operator|development|get|configmap/unrelated-config|no|no

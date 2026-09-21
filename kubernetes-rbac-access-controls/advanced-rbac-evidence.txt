@@ -1,0 +1,46 @@
+=== Advanced Kubernetes RBAC Evidence ===
+Timestamp: Mon Sep 21 16:59:46 UTC 2026
+
+Specific resource Role:
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"name":"specific-resource-access","namespace":"development"},"rules":[{"apiGroups":[""],"resourceNames":["app-config","database-config"],"resources":["configmaps"],"verbs":["get","update","patch"]},{"apiGroups":[""],"resources":["configmaps"],"verbs":["create"]}]}
+  creationTimestamp: "2026-09-21T16:59:43Z"
+  name: specific-resource-access
+  namespace: development
+  resourceVersion: "1120"
+  uid: 0c361129-381c-4461-a4f7-e8302dc26502
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - app-config
+  - database-config
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+
+Exact-name authorization:
+app-config: yes
+database-config: yes
+unrelated-config: no
+
+Temporary privileged access:
+Grant verified: yes
+Revocation verified: yes
+
+NetworkPolicy:
+NAME                         POD-SELECTOR   AGE
+development-network-policy   app=dev-app    1s

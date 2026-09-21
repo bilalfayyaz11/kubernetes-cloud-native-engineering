@@ -1,0 +1,96 @@
+==============================================
+ Kubernetes RBAC Permission Validation
+==============================================
+
+=== DEVELOPMENT TEAM ===
+
+TEST: dev-team can list Pods in development
+NAME                       READY   STATUS    RESTARTS   AGE
+dev-app-5876777c4f-8nhgw   1/1     Running   0          3m12s
+dev-app-5876777c4f-t2cjl   1/1     Running   0          3m12s
+dev-pod                    1/1     Running   0          78s
+PASS: dev-team can list Pods in development
+
+TEST: dev-team can create ConfigMaps in development
+configmap/rbac-dev-test created
+PASS: dev-team can create ConfigMaps in development
+
+TEST: dev-team can create Deployments in development
+deployment.apps/rbac-dev-deploy created
+PASS: dev-team can create Deployments in development
+
+TEST: dev-team cannot list Pods in production
+PASS: dev-team cannot list Pods in production
+
+=== PRODUCTION TEAM ===
+
+TEST: prod-team can list Pods in production
+NAME                        READY   STATUS    RESTARTS   AGE
+prod-app-5885dcb87f-9hcfh   1/1     Running   0          3m20s
+prod-app-5885dcb87f-t4c2w   1/1     Running   0          3m20s
+prod-app-5885dcb87f-xd4vb   1/1     Running   0          3m20s
+prod-pod                    1/1     Running   0          87s
+PASS: prod-team can list Pods in production
+
+TEST: prod-team can view Deployments in production
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+prod-app   3/3     3            3           3m22s
+PASS: prod-team can view Deployments in production
+
+TEST: prod-team can patch Deployments in production
+deployment.apps/prod-app patched
+PASS: prod-team can patch Deployments in production
+
+TEST: prod-team cannot create Secrets in production
+PASS: prod-team cannot create Secrets in production
+
+TEST: prod-team cannot delete Deployments in production
+PASS: prod-team cannot delete Deployments in production
+
+TEST: prod-team cannot list Pods in development
+PASS: prod-team cannot list Pods in development
+
+=== READ-ONLY IDENTITY ===
+
+TEST: readonly-user can list Pods in testing
+NAME           READY   STATUS    RESTARTS   AGE
+readonly-pod   1/1     Running   0          98s
+PASS: readonly-user can list Pods in testing
+
+TEST: readonly-user can list namespaces
+NAME              STATUS   AGE
+default           Active   4m22s
+development       Active   3m37s
+kube-flannel      Active   4m17s
+kube-node-lease   Active   4m22s
+kube-public       Active   4m22s
+kube-system       Active   4m22s
+production        Active   3m37s
+testing           Active   3m37s
+PASS: readonly-user can list namespaces
+
+TEST: readonly-user can list nodes
+NAME               STATUS   ROLES           AGE     VERSION
+ip-172-31-10-149   Ready    control-plane   4m24s   v1.36.4
+PASS: readonly-user can list nodes
+
+TEST: readonly-user can view Pods in development through ClusterRole
+NAME                              READY   STATUS        RESTARTS   AGE
+dev-app-5876777c4f-8nhgw          1/1     Running       0          3m39s
+dev-app-5876777c4f-t2cjl          1/1     Running       0          3m39s
+dev-pod                           1/1     Running       0          105s
+rbac-dev-deploy-696cfdb9d-22jj9   1/1     Terminating   0          23s
+PASS: readonly-user can view Pods in development through ClusterRole
+
+TEST: readonly-user cannot create Pods in testing
+PASS: readonly-user cannot create Pods in testing
+
+TEST: readonly-user cannot create Secrets in testing
+PASS: readonly-user cannot create Secrets in testing
+
+==============================================
+ RESULT SUMMARY
+==============================================
+Passed: 16
+Failed: 0
+OVERALL RESULT: PASS

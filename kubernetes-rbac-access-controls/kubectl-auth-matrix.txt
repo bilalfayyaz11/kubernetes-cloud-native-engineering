@@ -1,0 +1,17 @@
+=== kubectl auth can-i Matrix ===
+
+Development:
+create pods in development: yes
+list pods in production: no
+
+Production:
+list pods in production: yes
+patch deployments in production: yes
+delete deployments in production: no
+create secrets in production: no
+
+Read-only:
+list nodes: yes
+list pods in development: yes
+create pods in testing: no
+create secrets in testing: no

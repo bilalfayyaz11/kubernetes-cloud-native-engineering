@@ -1,0 +1,261 @@
+==================================================
+ Kubernetes RBAC Audit Report
+==================================================
+
+=== SERVICE ACCOUNTS ===
+NAMESPACE         NAME                                          AGE
+default           default                                       7m56s
+development       config-operator                               3m2s
+development       default                                       7m20s
+development       dev-team                                      6m30s
+kube-flannel      default                                       7m56s
+kube-flannel      flannel                                       8m
+kube-node-lease   default                                       7m56s
+kube-public       default                                       7m56s
+kube-system       attachdetach-controller                       7m59s
+kube-system       bootstrap-signer                              8m2s
+kube-system       certificate-controller                        8m2s
+kube-system       clusterrole-aggregation-controller            8m1s
+kube-system       coredns                                       8m1s
+kube-system       cronjob-controller                            8m2s
+kube-system       daemon-set-controller                         8m1s
+kube-system       default                                       7m56s
+kube-system       deployment-controller                         7m59s
+kube-system       device-taint-eviction-controller              8m2s
+kube-system       disruption-controller                         7m58s
+kube-system       endpoint-controller                           7m59s
+kube-system       endpointslice-controller                      8m1s
+kube-system       endpointslicemirroring-controller             8m2s
+kube-system       ephemeral-volume-controller                   7m58s
+kube-system       expand-controller                             7m59s
+kube-system       generic-garbage-collector                     8m2s
+kube-system       horizontal-pod-autoscaler                     8m
+kube-system       job-controller                                8m1s
+kube-system       kube-proxy                                    8m1s
+kube-system       legacy-service-account-token-cleaner          8m2s
+kube-system       namespace-controller                          8m
+kube-system       node-controller                               8m
+kube-system       persistent-volume-binder                      8m
+kube-system       pod-garbage-collector                         7m58s
+kube-system       pv-protection-controller                      8m2s
+kube-system       pvc-protection-controller                     7m57s
+kube-system       replicaset-controller                         7m59s
+kube-system       replication-controller                        8m
+kube-system       resource-claim-controller                     8m
+kube-system       resourcequota-controller                      7m58s
+kube-system       root-ca-cert-publisher                        8m1s
+kube-system       service-account-controller                    7m58s
+kube-system       service-cidrs-controller                      8m2s
+kube-system       statefulset-controller                        7m59s
+kube-system       token-cleaner                                 8m2s
+kube-system       ttl-after-finished-controller                 8m2s
+kube-system       ttl-controller                                7m59s
+kube-system       validatingadmissionpolicy-status-controller   8m2s
+kube-system       volumeattributesclass-protection-controller   8m1s
+production        default                                       7m20s
+production        prod-team                                     6m30s
+testing           default                                       7m20s
+testing           readonly-user                                 6m30s
+
+=== NAMESPACE ROLES ===
+NAMESPACE     NAME                                             CREATED AT
+development   dev-full-access                                  2026-09-21T16:56:16Z
+development   specific-resource-access                         2026-09-21T16:59:43Z
+kube-public   kubeadm:bootstrap-signer-clusterinfo             2026-09-21T16:54:42Z
+kube-public   system:controller:bootstrap-signer               2026-09-21T16:54:42Z
+kube-system   extension-apiserver-authentication-reader        2026-09-21T16:54:42Z
+kube-system   kube-proxy                                       2026-09-21T16:54:44Z
+kube-system   kubeadm:kubelet-config                           2026-09-21T16:54:42Z
+kube-system   kubeadm:nodes-kubeadm-config                     2026-09-21T16:54:42Z
+kube-system   system::leader-locking-kube-controller-manager   2026-09-21T16:54:42Z
+kube-system   system::leader-locking-kube-scheduler            2026-09-21T16:54:42Z
+kube-system   system:controller:bootstrap-signer               2026-09-21T16:54:42Z
+kube-system   system:controller:cloud-provider                 2026-09-21T16:54:42Z
+kube-system   system:controller:token-cleaner                  2026-09-21T16:54:42Z
+production    prod-limited-access                              2026-09-21T16:56:16Z
+testing       readonly-access                                  2026-09-21T16:56:16Z
+
+=== ROLEBINDINGS ===
+NAMESPACE     NAME                                                ROLE                                                  AGE
+development   dev-team-binding                                    Role/dev-full-access                                  6m28s
+development   specific-resource-binding                           Role/specific-resource-access                         3m2s
+kube-public   kubeadm:bootstrap-signer-clusterinfo                Role/kubeadm:bootstrap-signer-clusterinfo             8m2s
+kube-public   system:controller:bootstrap-signer                  Role/system:controller:bootstrap-signer               8m3s
+kube-system   kube-proxy                                          Role/kube-proxy                                       8m1s
+kube-system   kubeadm:kubelet-config                              Role/kubeadm:kubelet-config                           8m3s
+kube-system   kubeadm:nodes-kubeadm-config                        Role/kubeadm:nodes-kubeadm-config                     8m3s
+kube-system   system::extension-apiserver-authentication-reader   Role/extension-apiserver-authentication-reader        8m3s
+kube-system   system::leader-locking-kube-controller-manager      Role/system::leader-locking-kube-controller-manager   8m3s
+kube-system   system::leader-locking-kube-scheduler               Role/system::leader-locking-kube-scheduler            8m3s
+kube-system   system:controller:bootstrap-signer                  Role/system:controller:bootstrap-signer               8m3s
+kube-system   system:controller:cloud-provider                    Role/system:controller:cloud-provider                 8m3s
+kube-system   system:controller:token-cleaner                     Role/system:controller:token-cleaner                  8m3s
+production    prod-team-binding                                   Role/prod-limited-access                              6m28s
+testing       readonly-binding                                    Role/readonly-access                                  6m28s
+
+=== CUSTOM CLUSTERROLE ===
+NAME             CREATED AT
+cluster-viewer   2026-09-21T16:56:18Z
+
+=== CUSTOM CLUSTERROLEBINDING ===
+NAME                     ROLE                         AGE
+cluster-viewer-binding   ClusterRole/cluster-viewer   6m27s
+
+=== DEVELOPMENT TEAM - EFFECTIVE PERMISSIONS ===
+Resources                                       Non-Resource URLs                      Resource Names   Verbs
+selfsubjectreviews.authentication.k8s.io        []                                     []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                                     []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                                     []               [create]
+configmaps                                      []                                     []               [get list watch create update patch delete]
+persistentvolumeclaims                          []                                     []               [get list watch create update patch delete]
+pods/log                                        []                                     []               [get list watch create update patch delete]
+pods                                            []                                     []               [get list watch create update patch delete]
+secrets                                         []                                     []               [get list watch create update patch delete]
+services                                        []                                     []               [get list watch create update patch delete]
+deployments.apps                                []                                     []               [get list watch create update patch delete]
+replicasets.apps                                []                                     []               [get list watch create update patch delete]
+ingresses.networking.k8s.io                     []                                     []               [get list watch create update patch delete]
+                                                [/.well-known/openid-configuration/]   []               [get]
+                                                [/.well-known/openid-configuration]    []               [get]
+                                                [/api/*]                               []               [get]
+                                                [/api]                                 []               [get]
+                                                [/apis/*]                              []               [get]
+                                                [/apis]                                []               [get]
+                                                [/healthz]                             []               [get]
+                                                [/healthz]                             []               [get]
+                                                [/livez]                               []               [get]
+                                                [/livez]                               []               [get]
+                                                [/openapi/*]                           []               [get]
+                                                [/openapi]                             []               [get]
+                                                [/openid/v1/jwks/]                     []               [get]
+                                                [/openid/v1/jwks]                      []               [get]
+                                                [/readyz]                              []               [get]
+                                                [/readyz]                              []               [get]
+                                                [/version/]                            []               [get]
+                                                [/version/]                            []               [get]
+                                                [/version]                             []               [get]
+                                                [/version]                             []               [get]
+
+=== PRODUCTION TEAM - EFFECTIVE PERMISSIONS ===
+Resources                                       Non-Resource URLs                      Resource Names   Verbs
+selfsubjectreviews.authentication.k8s.io        []                                     []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                                     []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                                     []               [create]
+deployments.apps                                []                                     []               [get list watch update patch]
+replicasets.apps                                []                                     []               [get list watch update patch]
+configmaps                                      []                                     []               [get list watch]
+pods/log                                        []                                     []               [get list watch]
+pods                                            []                                     []               [get list watch]
+services                                        []                                     []               [get list watch]
+                                                [/.well-known/openid-configuration/]   []               [get]
+                                                [/.well-known/openid-configuration]    []               [get]
+                                                [/api/*]                               []               [get]
+                                                [/api]                                 []               [get]
+                                                [/apis/*]                              []               [get]
+                                                [/apis]                                []               [get]
+                                                [/healthz]                             []               [get]
+                                                [/healthz]                             []               [get]
+                                                [/livez]                               []               [get]
+                                                [/livez]                               []               [get]
+                                                [/openapi/*]                           []               [get]
+                                                [/openapi]                             []               [get]
+                                                [/openid/v1/jwks/]                     []               [get]
+                                                [/openid/v1/jwks]                      []               [get]
+                                                [/readyz]                              []               [get]
+                                                [/readyz]                              []               [get]
+                                                [/version/]                            []               [get]
+                                                [/version/]                            []               [get]
+                                                [/version]                             []               [get]
+                                                [/version]                             []               [get]
+
+=== READONLY USER - EFFECTIVE PERMISSIONS ===
+Resources                                       Non-Resource URLs                      Resource Names   Verbs
+selfsubjectreviews.authentication.k8s.io        []                                     []               [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                                     []               [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                                     []               [create]
+configmaps                                      []                                     []               [get list watch]
+namespaces                                      []                                     []               [get list watch]
+nodes                                           []                                     []               [get list watch]
+pods/log                                        []                                     []               [get list watch]
+pods                                            []                                     []               [get list watch]
+services                                        []                                     []               [get list watch]
+deployments.apps                                []                                     []               [get list watch]
+replicasets.apps                                []                                     []               [get list watch]
+                                                [/.well-known/openid-configuration/]   []               [get]
+                                                [/.well-known/openid-configuration]    []               [get]
+                                                [/api/*]                               []               [get]
+                                                [/api]                                 []               [get]
+                                                [/apis/*]                              []               [get]
+                                                [/apis]                                []               [get]
+                                                [/healthz]                             []               [get]
+                                                [/healthz]                             []               [get]
+                                                [/livez]                               []               [get]
+                                                [/livez]                               []               [get]
+                                                [/openapi/*]                           []               [get]
+                                                [/openapi]                             []               [get]
+                                                [/openid/v1/jwks/]                     []               [get]
+                                                [/openid/v1/jwks]                      []               [get]
+                                                [/readyz]                              []               [get]
+                                                [/readyz]                              []               [get]
+                                                [/version/]                            []               [get]
+                                                [/version/]                            []               [get]
+                                                [/version]                             []               [get]
+                                                [/version]                             []               [get]
+
+=== CONFIG OPERATOR - EFFECTIVE PERMISSIONS ===
+Resources                                       Non-Resource URLs                      Resource Names      Verbs
+configmaps                                      []                                     []                  [create]
+selfsubjectreviews.authentication.k8s.io        []                                     []                  [create]
+selfsubjectaccessreviews.authorization.k8s.io   []                                     []                  [create]
+selfsubjectrulesreviews.authorization.k8s.io    []                                     []                  [create]
+configmaps                                      []                                     [app-config]        [get update patch]
+configmaps                                      []                                     [database-config]   [get update patch]
+                                                [/.well-known/openid-configuration/]   []                  [get]
+                                                [/.well-known/openid-configuration]    []                  [get]
+                                                [/api/*]                               []                  [get]
+                                                [/api]                                 []                  [get]
+                                                [/apis/*]                              []                  [get]
+                                                [/apis]                                []                  [get]
+                                                [/healthz]                             []                  [get]
+                                                [/healthz]                             []                  [get]
+                                                [/livez]                               []                  [get]
+                                                [/livez]                               []                  [get]
+                                                [/openapi/*]                           []                  [get]
+                                                [/openapi]                             []                  [get]
+                                                [/openid/v1/jwks/]                     []                  [get]
+                                                [/openid/v1/jwks]                      []                  [get]
+                                                [/readyz]                              []                  [get]
+                                                [/readyz]                              []                  [get]
+                                                [/version/]                            []                  [get]
+                                                [/version/]                            []                  [get]
+                                                [/version]                             []                  [get]
+                                                [/version]                             []                  [get]
+
+=== TARGETED AUTHORIZATION CHECKS ===
+
+--- Development identity ---
+create pods in development: yes
+delete deployments in development: yes
+get pods in production: no
+
+--- Production identity ---
+list pods in production: yes
+patch deployments in production: yes
+delete deployments in production: no
+create secrets in production: no
+
+--- Readonly identity ---
+list namespaces: yes
+list nodes: yes
+list pods in development: yes
+create pods in testing: no
+create secrets in testing: no
+
+--- Exact resource identity ---
+get app-config: yes
+get database-config: yes
+get unrelated-config: no
+
+==================================================
+ RBAC Audit Complete
+==================================================

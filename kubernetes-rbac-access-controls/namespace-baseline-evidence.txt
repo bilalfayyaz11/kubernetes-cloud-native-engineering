@@ -1,0 +1,33 @@
+=== Kubernetes Namespace Isolation Baseline ===
+Timestamp: Mon Sep 21 16:55:43 UTC 2026
+
+Namespaces:
+NAME          STATUS   AGE   LABELS
+development   Active   18s   environment=development,kubernetes.io/metadata.name=development,name=development
+production    Active   18s   environment=production,kubernetes.io/metadata.name=production,name=production
+testing       Active   18s   environment=testing,kubernetes.io/metadata.name=testing,name=testing
+
+Development:
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES       SELECTOR
+deployment.apps/dev-app   2/2     2            2           16s   nginx        nginx:1.27   app=dev-app
+
+NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/dev-app-service   ClusterIP   10.110.151.153   <none>        80/TCP    16s   app=dev-app
+
+NAME                           READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+pod/dev-app-5876777c4f-8nhgw   1/1     Running   0          16s   10.244.0.5   ip-172-31-10-149   <none>           <none>
+pod/dev-app-5876777c4f-t2cjl   1/1     Running   0          16s   10.244.0.4   ip-172-31-10-149   <none>           <none>
+
+Production:
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES       SELECTOR
+deployment.apps/prod-app   3/3     3            3           15s   nginx        nginx:1.27   app=prod-app
+
+NAME                       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/prod-app-service   ClusterIP   10.97.9.27   <none>        80/TCP    15s   app=prod-app
+
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+pod/prod-app-5885dcb87f-9hcfh   1/1     Running   0          15s   10.244.0.7   ip-172-31-10-149   <none>           <none>
+pod/prod-app-5885dcb87f-t4c2w   1/1     Running   0          15s   10.244.0.8   ip-172-31-10-149   <none>           <none>
+pod/prod-app-5885dcb87f-xd4vb   1/1     Running   0          15s   10.244.0.6   ip-172-31-10-149   <none>           <none>
+
+Testing:
