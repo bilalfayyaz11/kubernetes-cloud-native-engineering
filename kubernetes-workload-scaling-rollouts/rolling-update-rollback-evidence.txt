@@ -1,0 +1,36 @@
+=== Kubernetes Rolling Update and Rollback Evidence ===
+Timestamp: Mon Sep 21 16:43:49 UTC 2026
+
+Baseline:
+nginx:1.27
+
+Successful rolling update:
+nginx:1.28
+
+Intentional failed release:
+nginx:1.28-invalid
+
+Rollback recovery:
+Restored nginx:1.28
+
+Specific revision rollback:
+Restored revision 1 -> nginx:1.27
+
+Final deployment:
+NAME     READY   UP-TO-DATE   AVAILABLE   AGE
+webapp   4/4     4            4           2m12s
+
+Final pods:
+NAME                     READY   STATUS    RESTARTS   AGE   IP            NODE               NOMINATED NODE   READINESS GATES
+webapp-f9f47df75-c6m69   1/1     Running   0          10s   10.244.0.44   ip-172-31-10-168   <none>           <none>
+webapp-f9f47df75-kgpwb   1/1     Running   0          17s   10.244.0.43   ip-172-31-10-168   <none>           <none>
+webapp-f9f47df75-l9tj4   1/1     Running   0          9s    10.244.0.45   ip-172-31-10-168   <none>           <none>
+webapp-f9f47df75-lz7q6   1/1     Running   0          17s   10.244.0.42   ip-172-31-10-168   <none>           <none>
+
+Rollout history:
+deployment.apps/webapp 
+REVISION  CHANGE-CAUSE
+3         Intentional failed release nginx 1.28-invalid
+4         Rolling update to nginx 1.28
+5         Baseline nginx 1.27
+

@@ -1,0 +1,18 @@
+=== Kubernetes Manual Scaling Evidence ===
+Timestamp: Mon Sep 21 16:28:46 UTC 2026
+
+Scaling sequence:
+3 replicas -> 5 replicas -> 2 replicas
+
+Final deployment:
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   2/2     2            2           20s
+
+Final pods:
+NAME                               READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+nginx-deployment-dddb44659-fbmrq   1/1     Running   0          20s   10.244.0.7   ip-172-31-10-168   <none>           <none>
+nginx-deployment-dddb44659-g4k8r   1/1     Running   0          20s   10.244.0.8   ip-172-31-10-168   <none>           <none>
+
+Service:
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+nginx-service   ClusterIP   10.96.147.124   <none>        80/TCP    11s   app=nginx

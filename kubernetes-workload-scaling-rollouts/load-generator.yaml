@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: load-generator
+spec:
+  restartPolicy: Never
+  containers:
+    - name: load-generator
+      image: busybox:1.36
+      command:
+        - sh
+        - -c
+        - |
+          end=$((SECONDS+180))
+          while [ "$SECONDS" -lt "$end" ]; do
+            for i in 1 2 3 4 5 6 7 8; do
+              wget -q -O- http://cpu-demo-service >/dev/null 2>&1 &
+            done
+            wait
+          done

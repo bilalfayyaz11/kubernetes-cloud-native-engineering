@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resource-limited-app
+  namespace: resource-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: resource-limited-app
+  template:
+    metadata:
+      labels:
+        app: resource-limited-app
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.27
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

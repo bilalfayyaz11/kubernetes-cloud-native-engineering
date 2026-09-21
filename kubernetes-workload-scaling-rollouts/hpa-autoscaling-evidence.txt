@@ -1,0 +1,28 @@
+=== Kubernetes HPA Autoscaling Evidence ===
+Timestamp: Mon Sep 21 16:40:05 UTC 2026
+
+Metric: CPU utilization
+CPU request per pod: 100m
+Target utilization: 30%
+Minimum replicas: 1
+Maximum replicas: 6
+Peak replicas observed: 6
+
+Scale-out mechanism:
+Deterministic CPU pressure inside cpu-demo Pods
+
+Scale-down mechanism:
+CPU pressure removed and workload returned to idle
+
+Final HPA:
+NAME       REFERENCE             TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+cpu-demo   Deployment/cpu-demo   cpu: 0%/30%   1         6         2          10m
+
+Final Deployment:
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+cpu-demo   1/1     1            1           10m
+
+Final metrics:
+NAME                        CPU(cores)   MEMORY(bytes)   
+cpu-demo-6fcb6c9cd8-2cvj9   0m           0Mi             
+cpu-demo-6fcb6c9cd8-fm2pv   0m           0Mi             
