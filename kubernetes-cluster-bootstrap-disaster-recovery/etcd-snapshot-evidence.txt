@@ -1,0 +1,16 @@
+=== etcd Snapshot Metadata ===
+Timestamp: Mon Sep 21 17:16:11 UTC 2026
+etcd version: 3.6.8
+Snapshot filename: kubernetes-etcd-20260921-171611.db
+Snapshot SHA256: 8ebcf3cb53915ce81d0f207fb5270247f4368a0593241ac3948198958d510fff
+
+Snapshot status:
++----------+----------+------------+------------+---------+
+|   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE | VERSION |
++----------+----------+------------+------------+---------+
+| 2aca550a |      853 |        397 |     1.6 MB |   3.6.0 |
++----------+----------+------------+------------+---------+
+
+NOTE:
+The actual snapshot contains Kubernetes cluster state and
+is intentionally stored outside the Git repository.

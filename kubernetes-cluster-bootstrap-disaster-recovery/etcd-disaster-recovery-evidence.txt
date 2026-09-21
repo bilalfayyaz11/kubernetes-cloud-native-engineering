@@ -1,0 +1,45 @@
+=== Kubernetes etcd Disaster Recovery Evidence ===
+Timestamp: Mon Sep 21 17:17:14 UTC 2026
+
+etcd version: 3.6.8
+Snapshot SHA256: 8ebcf3cb53915ce81d0f207fb5270247f4368a0593241ac3948198958d510fff
+
+Recovery sequence:
+1. Created backup-test namespace and workload
+2. Captured live etcd snapshot
+3. Validated snapshot with etcdutl
+4. Deleted backup-test namespace
+5. Stopped kube-apiserver and etcd static Pods
+6. Restored snapshot with etcdutl
+7. Restarted etcd and API server
+8. Verified deleted Kubernetes state returned
+
+Original namespace UID:
+7d6e6b55-6efa-4bc1-ae9c-0c586d9f3743
+
+Restored namespace UID:
+7d6e6b55-6efa-4bc1-ae9c-0c586d9f3743
+
+Recovered ConfigMap marker:
+present
+
+Restored resources:
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/recovery-app   1/1     1            1           66s
+
+NAME                               READY   STATUS    RESTARTS   AGE
+pod/recovery-app-9f9ff677c-f7gc9   1/1     Running   0          66s
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      66s
+configmap/recovery-marker    2      66s
+
+NAME                     TYPE     DATA   AGE
+secret/recovery-secret   Opaque   1      66s
+
+etcd health:
+https://127.0.0.1:2379 is healthy: successfully committed proposal: took = 11.473145ms
+
+SECURITY NOTE:
+The actual etcd snapshot is not included because it contains
+the complete Kubernetes backing store and potentially sensitive data.

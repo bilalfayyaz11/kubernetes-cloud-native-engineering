@@ -1,0 +1,51 @@
+=== Kubernetes Worker Join and Scheduling Evidence ===
+Timestamp: Mon Sep 21 17:14:12 UTC 2026
+
+Environment topology:
+Cluster topology detected:
+Control-plane host: ip-172-31-10-12
+Control-plane IP: 172.31.10.12
+Available worker hosts: none detected
+
+The provided environment contains one VM only.
+A genuine multi-node kubeadm join requires additional independent hosts.
+Worker join procedures will be generated and validated syntactically,
+but no worker-node membership will be falsely claimed.
+
+Worker join validation:
+Worker Join Validation
+
+Endpoint: 172.31.10.12:6443
+Bootstrap token: REDACTED
+Token format: valid
+Token active in kubeadm: yes
+Discovery CA hash validated: yes
+CRI socket required on worker:
+unix:///run/containerd/containerd.sock
+
+No worker machines were available in this environment.
+The join command was therefore validated without executing
+a worker join on the existing control-plane node.
+
+Node inventory:
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME    LABELS
+ip-172-31-10-12   Ready    control-plane   76s   v1.36.4   172.31.10.12   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=ip-172-31-10-12,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+
+Pod CIDR:
+NODE              POD-CIDR
+ip-172-31-10-12   10.244.0.0/24
+
+Scheduling test:
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+scheduling-test   3/3     3            3           3s
+
+NAME                               READY   STATUS    RESTARTS   AGE   IP           NODE              NOMINATED NODE   READINESS GATES
+scheduling-test-668f4d8f88-6x8r8   1/1     Running   0          3s    10.244.0.5   ip-172-31-10-12   <none>           <none>
+scheduling-test-668f4d8f88-dzclf   1/1     Running   0          2s    10.244.0.7   ip-172-31-10-12   <none>           <none>
+scheduling-test-668f4d8f88-wnlsm   1/1     Running   0          2s    10.244.0.6   ip-172-31-10-12   <none>           <none>
+
+Distinct scheduling nodes: 1
+
+Interpretation:
+The control plane is schedulable because no worker hosts are available.
+No multi-node distribution claim is made.

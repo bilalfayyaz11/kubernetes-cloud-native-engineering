@@ -1,0 +1,22 @@
+Worker join procedure
+
+Prerequisites on each worker:
+- independent Linux host
+- kubeadm and kubelet installed
+- compatible container runtime configured
+- network connectivity to 172.31.10.12:6443
+- swap disabled
+- matching CNI prerequisites
+
+Join pattern:
+
+sudo kubeadm join 172.31.10.12:6443 \
+  --token <bootstrap-token> \
+  --discovery-token-ca-cert-hash sha256:<ca-cert-hash> \
+  --cri-socket=unix:///run/containerd/containerd.sock
+
+The actual short-lived join command is stored locally in:
+worker-join-command.txt
+
+No worker nodes were available in this environment, so no worker
+membership is claimed.

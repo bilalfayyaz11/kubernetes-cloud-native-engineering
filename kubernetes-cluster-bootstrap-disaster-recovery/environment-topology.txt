@@ -1,0 +1,9 @@
+Cluster topology detected:
+Control-plane host: ip-172-31-10-12
+Control-plane IP: 172.31.10.12
+Available worker hosts: none detected
+
+The provided environment contains one VM only.
+A genuine multi-node kubeadm join requires additional independent hosts.
+Worker join procedures will be generated and validated syntactically,
+but no worker-node membership will be falsely claimed.

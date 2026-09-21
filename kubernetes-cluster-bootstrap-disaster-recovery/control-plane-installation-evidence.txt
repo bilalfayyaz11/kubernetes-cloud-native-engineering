@@ -1,0 +1,47 @@
+=== Kubernetes kubeadm Control Plane Evidence ===
+Timestamp: Mon Sep 21 17:13:35 UTC 2026
+
+Topology:
+Cluster topology detected:
+Control-plane host: ip-172-31-10-12
+Control-plane IP: 172.31.10.12
+Available worker hosts: none detected
+
+The provided environment contains one VM only.
+A genuine multi-node kubeadm join requires additional independent hosts.
+Worker join procedures will be generated and validated syntactically,
+but no worker-node membership will be falsely claimed.
+
+Cluster:
+Kubernetes control plane is running at https://172.31.10.12:6443
+CoreDNS is running at https://172.31.10.12:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+Nodes:
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-12   Ready    control-plane   39s   v1.36.4   172.31.10.12   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+System Pods:
+NAMESPACE      NAME                                      READY   STATUS        RESTARTS   AGE   IP             NODE              NOMINATED NODE   READINESS GATES
+default        control-plane-test-76c9fc97bf-kb856       1/1     Terminating   0          8s    10.244.0.4     ip-172-31-10-12   <none>           <none>
+kube-flannel   kube-flannel-ds-4q2mr                     1/1     Running       0          30s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+kube-system    coredns-589f44dc88-7xjbs                  1/1     Running       0          30s   10.244.0.2     ip-172-31-10-12   <none>           <none>
+kube-system    coredns-589f44dc88-nzcnw                  1/1     Running       0          30s   10.244.0.3     ip-172-31-10-12   <none>           <none>
+kube-system    etcd-ip-172-31-10-12                      1/1     Running       0          33s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+kube-system    kube-apiserver-ip-172-31-10-12            1/1     Running       0          33s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+kube-system    kube-controller-manager-ip-172-31-10-12   1/1     Running       0          33s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+kube-system    kube-proxy-dbwkx                          1/1     Running       0          30s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+kube-system    kube-scheduler-ip-172-31-10-12            1/1     Running       0          36s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+
+Flannel:
+NAME                    READY   STATUS    RESTARTS   AGE   IP             NODE              NOMINATED NODE   READINESS GATES
+kube-flannel-ds-4q2mr   1/1     Running   0          31s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+
+etcd:
+NAME                   READY   STATUS    RESTARTS   AGE   IP             NODE              NOMINATED NODE   READINESS GATES
+etcd-ip-172-31-10-12   1/1     Running   0          34s   172.31.10.12   ip-172-31-10-12   <none>           <none>
+
+Join capability:
+Fresh worker join command generated successfully.
+Actual bootstrap token intentionally omitted from evidence.
