@@ -1,0 +1,96 @@
+LAST SEEN   TYPE      REASON                    OBJECT                                               MESSAGE
+5m5s        Normal    NodeHasNoDiskPressure     node/ip-172-31-10-114                                Node ip-172-31-10-114 status is now: NodeHasNoDiskPressure
+5m5s        Normal    NodeHasSufficientMemory   node/ip-172-31-10-114                                Node ip-172-31-10-114 status is now: NodeHasSufficientMemory
+5m5s        Normal    NodeHasSufficientPID      node/ip-172-31-10-114                                Node ip-172-31-10-114 status is now: NodeHasSufficientPID
+5m5s        Normal    NodeAllocatableEnforced   node/ip-172-31-10-114                                Updated Node Allocatable limit across pods
+4m50s       Normal    Starting                  node/ip-172-31-10-114                                Starting kubelet.
+4m50s       Normal    NodeHasNoDiskPressure     node/ip-172-31-10-114                                Node ip-172-31-10-114 status is now: NodeHasNoDiskPressure
+4m50s       Normal    NodeHasSufficientMemory   node/ip-172-31-10-114                                Node ip-172-31-10-114 status is now: NodeHasSufficientMemory
+4m50s       Normal    NodeAllocatableEnforced   node/ip-172-31-10-114                                Updated Node Allocatable limit across pods
+4m50s       Warning   InvalidDiskCapacity       node/ip-172-31-10-114                                invalid capacity 0 on image filesystem
+4m50s       Normal    NodeHasSufficientPID      node/ip-172-31-10-114                                Node ip-172-31-10-114 status is now: NodeHasSufficientPID
+4m46s       Normal    RegisteredNode            node/ip-172-31-10-114                                Node ip-172-31-10-114 event: Registered Node ip-172-31-10-114 in Controller
+4m42s       Normal    Starting                  node/ip-172-31-10-114                                
+4m39s       Normal    NodeReady                 node/ip-172-31-10-114                                Node ip-172-31-10-114 status is now: NodeReady
+3m42s       Normal    Pulling                   pod/observability-bootstrap-test-764fd685b5-vzlsq    Pulling image "nginx:1.27"
+3m42s       Normal    SuccessfulCreate          replicaset/observability-bootstrap-test-764fd685b5   Created pod: observability-bootstrap-test-764fd685b5-vzlsq
+3m42s       Normal    Scheduled                 pod/observability-bootstrap-test-764fd685b5-vzlsq    Successfully assigned default/observability-bootstrap-test-764fd685b5-vzlsq to ip-172-31-10-114
+3m42s       Normal    ScalingReplicaSet         deployment/observability-bootstrap-test              Scaled up replica set observability-bootstrap-test-764fd685b5 from 0 to 1
+3m36s       Normal    Pulled                    pod/observability-bootstrap-test-764fd685b5-vzlsq    Successfully pulled image "nginx:1.27" in 5.833s (5.833s including waiting). Image size: 72406859 bytes.
+3m36s       Normal    Created                   pod/observability-bootstrap-test-764fd685b5-vzlsq    Container created
+3m35s       Normal    Started                   pod/observability-bootstrap-test-764fd685b5-vzlsq    Container started
+3m15s       Normal    Killing                   pod/observability-bootstrap-test-764fd685b5-vzlsq    Stopping container nginx
+2m56s       Normal    Scheduled                 pod/webapp-with-probes-6cc76bb77-2z2tk               Successfully assigned default/webapp-with-probes-6cc76bb77-2z2tk to ip-172-31-10-114
+2m56s       Normal    Scheduled                 pod/webapp-with-probes-6cc76bb77-jv22b               Successfully assigned default/webapp-with-probes-6cc76bb77-jv22b to ip-172-31-10-114
+2m56s       Normal    SuccessfulCreate          replicaset/webapp-with-probes-6cc76bb77              Created pod: webapp-with-probes-6cc76bb77-2z2tk
+2m56s       Normal    SuccessfulCreate          replicaset/webapp-with-probes-6cc76bb77              Created pod: webapp-with-probes-6cc76bb77-jv22b
+2m56s       Normal    ScalingReplicaSet         deployment/webapp-with-probes                        Scaled up replica set webapp-with-probes-6cc76bb77 from 0 to 2
+2m55s       Normal    Pulled                    pod/webapp-with-probes-6cc76bb77-2z2tk               Container image "nginx:1.27" already present on machine and can be accessed by the pod
+2m55s       Normal    Created                   pod/webapp-with-probes-6cc76bb77-2z2tk               Container created
+2m55s       Normal    Pulled                    pod/webapp-with-probes-6cc76bb77-jv22b               Container image "nginx:1.27" already present on machine and can be accessed by the pod
+2m54s       Normal    Started                   pod/webapp-with-probes-6cc76bb77-2z2tk               Container started
+2m54s       Normal    Started                   pod/webapp-with-probes-6cc76bb77-jv22b               Container started
+2m54s       Normal    Created                   pod/webapp-with-probes-6cc76bb77-jv22b               Container created
+2m50s       Normal    Scheduled                 pod/probe-connectivity-test                          Successfully assigned default/probe-connectivity-test to ip-172-31-10-114
+2m49s       Normal    Pulling                   pod/probe-connectivity-test                          Pulling image "busybox:1.36"
+2m48s       Normal    Pulled                    pod/probe-connectivity-test                          Successfully pulled image "busybox:1.36" in 656ms (656ms including waiting). Image size: 2217006 bytes.
+2m48s       Normal    Started                   pod/probe-connectivity-test                          Container started
+2m48s       Normal    Created                   pod/probe-connectivity-test                          Container created
+2m45s       Normal    Scheduled                 pod/failing-webapp                                   Successfully assigned default/failing-webapp to ip-172-31-10-114
+67s         Normal    Pulled                    pod/failing-webapp                                   Container image "nginx:1.27" already present on machine and can be accessed by the pod
+67s         Normal    Created                   pod/failing-webapp                                   Container created
+67s         Normal    Started                   pod/failing-webapp                                   Container started
+109s        Warning   Unhealthy                 pod/failing-webapp                                   Readiness probe failed: HTTP probe failed with statuscode: 404
+111s        Warning   Unhealthy                 pod/failing-webapp                                   Liveness probe failed: HTTP probe failed with statuscode: 404
+57s         Normal    Killing                   pod/failing-webapp                                   Container webapp failed liveness probe, will be restarted
+2m17s       Warning   BackOff                   pod/failing-webapp                                   Back-off restarting failed container webapp in pod failing-webapp_default(c2d28529-90e1-4821-8ad2-1b5c857e269b)
+2m5s        Normal    Scheduled                 pod/cpu-intensive                                    Successfully assigned default/cpu-intensive to ip-172-31-10-114
+2m4s        Normal    Pulled                    pod/cpu-intensive                                    Container image "busybox:1.36" already present on machine and can be accessed by the pod
+2m4s        Normal    Created                   pod/cpu-intensive                                    Container created
+2m4s        Normal    Started                   pod/cpu-intensive                                    Container started
+74s         Normal    Scheduled                 pod/log-client-1                                     Successfully assigned default/log-client-1 to ip-172-31-10-114
+73s         Normal    Started                   pod/log-client-1                                     Container started
+73s         Normal    Created                   pod/log-client-1                                     Container created
+73s         Normal    Pulled                    pod/log-client-1                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+70s         Normal    Scheduled                 pod/log-client-2                                     Successfully assigned default/log-client-2 to ip-172-31-10-114
+69s         Normal    Pulled                    pod/log-client-2                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+69s         Normal    Created                   pod/log-client-2                                     Container created
+69s         Normal    Started                   pod/log-client-2                                     Container started
+67s         Normal    Scheduled                 pod/log-client-3                                     Successfully assigned default/log-client-3 to ip-172-31-10-114
+66s         Normal    Pulled                    pod/log-client-3                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+66s         Normal    Created                   pod/log-client-3                                     Container created
+66s         Normal    Started                   pod/log-client-3                                     Container started
+63s         Normal    Scheduled                 pod/log-client-4                                     Successfully assigned default/log-client-4 to ip-172-31-10-114
+62s         Normal    Pulled                    pod/log-client-4                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+62s         Normal    Created                   pod/log-client-4                                     Container created
+62s         Normal    Started                   pod/log-client-4                                     Container started
+60s         Normal    Scheduled                 pod/log-client-5                                     Successfully assigned default/log-client-5 to ip-172-31-10-114
+59s         Normal    Started                   pod/log-client-5                                     Container started
+59s         Normal    Created                   pod/log-client-5                                     Container created
+59s         Normal    Pulled                    pod/log-client-5                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+57s         Normal    Scheduled                 pod/log-client-6                                     Successfully assigned default/log-client-6 to ip-172-31-10-114
+56s         Normal    Started                   pod/log-client-6                                     Container started
+56s         Normal    Created                   pod/log-client-6                                     Container created
+56s         Normal    Pulled                    pod/log-client-6                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+54s         Normal    Scheduled                 pod/log-client-7                                     Successfully assigned default/log-client-7 to ip-172-31-10-114
+53s         Normal    Started                   pod/log-client-7                                     Container started
+53s         Normal    Pulled                    pod/log-client-7                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+53s         Normal    Created                   pod/log-client-7                                     Container created
+51s         Normal    Scheduled                 pod/log-client-8                                     Successfully assigned default/log-client-8 to ip-172-31-10-114
+50s         Normal    Pulled                    pod/log-client-8                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+50s         Normal    Started                   pod/log-client-8                                     Container started
+50s         Normal    Created                   pod/log-client-8                                     Container created
+47s         Normal    Scheduled                 pod/log-client-9                                     Successfully assigned default/log-client-9 to ip-172-31-10-114
+46s         Normal    Started                   pod/log-client-9                                     Container started
+46s         Normal    Created                   pod/log-client-9                                     Container created
+46s         Normal    Pulled                    pod/log-client-9                                     Container image "busybox:1.36" already present on machine and can be accessed by the pod
+44s         Normal    Scheduled                 pod/log-client-10                                    Successfully assigned default/log-client-10 to ip-172-31-10-114
+43s         Normal    Started                   pod/log-client-10                                    Container started
+43s         Normal    Created                   pod/log-client-10                                    Container created
+43s         Normal    Pulled                    pod/log-client-10                                    Container image "busybox:1.36" already present on machine and can be accessed by the pod
+37s         Normal    Scheduled                 pod/logging-app                                      Successfully assigned default/logging-app to ip-172-31-10-114
+35s         Normal    Created                   pod/logging-app                                      Container created
+35s         Normal    Pulled                    pod/logging-app                                      Container image "busybox:1.36" already present on machine and can be accessed by the pod
+35s         Normal    Started                   pod/logging-app                                      Container started
+1s          Warning   FailedMount               pod/problematic-app                                  MountVolume.SetUp failed for volume "config-volume" : configmap "nonexistent-config" not found
+8s          Normal    Scheduled                 pod/problematic-app                                  Successfully assigned default/problematic-app to ip-172-31-10-114

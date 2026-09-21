@@ -1,0 +1,29 @@
+=== Kubernetes Logging and Debugging Evidence ===
+Timestamp: Mon Sep 21 17:31:48 UTC 2026
+
+Healthy webapp selected Pod:
+webapp-with-probes-6cc76bb77-2z2tk
+
+Custom logging application:
+WARNING count: 2
+ERROR count: 1
+
+Broken workload:
+NAME              READY   STATUS              RESTARTS   AGE   IP       NODE               NOMINATED NODE   READINESS GATES
+problematic-app   0/1     ContainerCreating   0          8s    <none>   ip-172-31-10-114   <none>           <none>
+
+Detected failure evidence:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      nonexistent-config
+    ConfigMapName:           kube-root-ca.crt
+  Warning  FailedMount  1s (x5 over 8s)  kubelet            MountVolume.SetUp failed for volume "config-volume" : configmap "nonexistent-config" not found
+
+Debugging techniques validated:
+- kubectl logs
+- kubectl logs --previous
+- timestamped logs
+- log filtering
+- kubectl exec
+- container file extraction
+- kubectl describe
+- Kubernetes event analysis

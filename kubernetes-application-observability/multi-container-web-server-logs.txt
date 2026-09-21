@@ -1,0 +1,25 @@
+2026-09-21T17:31:58.102045048Z /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2026-09-21T17:31:58.102092179Z /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2026-09-21T17:31:58.108013832Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2026-09-21T17:31:58.243187882Z 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+2026-09-21T17:31:58.429920894Z 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+2026-09-21T17:31:58.429952045Z /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+2026-09-21T17:31:58.430276182Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+2026-09-21T17:31:58.528748172Z /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2026-09-21T17:31:58.533974629Z /docker-entrypoint.sh: Configuration complete; ready for start up
+2026-09-21T17:31:58.646060293Z 2026/09/21 17:31:58 [notice] 1#1: using the "epoll" event method
+2026-09-21T17:31:58.646545574Z 2026/09/21 17:31:58 [notice] 1#1: nginx/1.27.5
+2026-09-21T17:31:58.646808680Z 2026/09/21 17:31:58 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2026-09-21T17:31:58.647058005Z 2026/09/21 17:31:58 [notice] 1#1: OS: Linux 6.14.0-1018-aws
+2026-09-21T17:31:58.647367252Z 2026/09/21 17:31:58 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:524288
+2026-09-21T17:31:58.647811292Z 2026/09/21 17:31:58 [notice] 1#1: start worker processes
+2026-09-21T17:31:58.648973228Z 2026/09/21 17:31:58 [notice] 1#1: start worker process 29
+2026-09-21T17:31:58.656050176Z 2026/09/21 17:31:58 [notice] 1#1: start worker process 30
+2026-09-21T17:32:00.572195128Z 10.244.0.24 - - [21/Sep/2026:17:32:00 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"
+2026-09-21T17:32:04.099327733Z 10.244.0.25 - - [21/Sep/2026:17:32:04 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"
+2026-09-21T17:32:07.141753967Z 10.244.0.26 - - [21/Sep/2026:17:32:07 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"
+2026-09-21T17:32:10.153681270Z 10.244.0.27 - - [21/Sep/2026:17:32:10 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"
+2026-09-21T17:32:13.328774792Z 10.244.0.28 - - [21/Sep/2026:17:32:13 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"
+2026-09-21T17:32:17.364478024Z 10.244.0.29 - - [21/Sep/2026:17:32:17 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"
+2026-09-21T17:32:21.252336568Z 10.244.0.30 - - [21/Sep/2026:17:32:21 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"
+2026-09-21T17:32:24.296317354Z 10.244.0.31 - - [21/Sep/2026:17:32:24 +0000] "GET / HTTP/1.1" 200 615 "-" "Wget" "-"

@@ -1,0 +1,41 @@
+=== Nginx Container Debug Evidence ===
+Pod: webapp-with-probes-6cc76bb77-2z2tk
+
+--- Identity ---
+root
+
+--- Working Directory ---
+/
+
+--- Document Root ---
+total 16
+drwxr-xr-x 2 root root 4096 Jun 10  2025 .
+drwxr-xr-x 3 root root 4096 Jun 10  2025 ..
+-rw-r--r-- 1 root root  497 Apr 16  2025 50x.html
+-rw-r--r-- 1 root root  615 Apr 16  2025 index.html
+
+--- Nginx Version ---
+nginx version: nginx/1.27.5
+
+--- Running Processes ---
+nginx: master process nginx -g daemon off; 
+nginx: worker process 
+nginx: worker process 
+sh -c for p in /proc/[0-9]*; do [ -r "$p/cmdline" ] && tr "\0" " " < "$p/cmdline" && echo; done 
+
+--- Disk Usage ---
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          29G  9.2G   19G  33% /
+tmpfs            64M     0   64M   0% /dev
+/dev/root        29G  9.2G   19G  33% /etc/hosts
+shm              64M     0   64M   0% /dev/shm
+tmpfs           128M   12K  128M   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs           4.0K     0  4.0K   0% /proc/acpi
+
+--- Network Config ---
+search default.svc.cluster.local svc.cluster.local cluster.local ec2.internal
+nameserver 10.96.0.10
+options ndots:5
+
+webapp-with-probes-6cc76bb77-2z2tk
+10.244.0.7

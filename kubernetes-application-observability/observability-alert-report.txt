@@ -1,0 +1,9 @@
+=== Kubernetes Observability Alert Check ===
+Timestamp: Mon Sep 21 17:32:45 UTC 2026
+
+ALERT: failing-webapp is not Ready
+ALERT: failing-webapp has restarted 6 time(s)
+ALERT: problematic-app phase=Pending
+
+Warning events currently visible: 15
+Observability alerts raised: 3

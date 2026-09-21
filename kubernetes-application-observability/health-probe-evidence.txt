@@ -1,0 +1,44 @@
+=== Kubernetes Health Probe Evidence ===
+Timestamp: Mon Sep 21 17:29:20 UTC 2026
+
+Healthy Deployment:
+NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+webapp-with-probes   2/2     2            2           28s
+
+Healthy Pods:
+NAME                                 READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+webapp-with-probes-6cc76bb77-2z2tk   1/1     Running   0          28s   10.244.0.7   ip-172-31-10-114   <none>           <none>
+webapp-with-probes-6cc76bb77-jv22b   1/1     Running   0          28s   10.244.0.8   ip-172-31-10-114   <none>           <none>
+
+Healthy Pod Conditions:
+NAME                                 READY   RESTARTS
+webapp-with-probes-6cc76bb77-2z2tk   true    0
+webapp-with-probes-6cc76bb77-jv22b   true    0
+
+Service:
+NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+webapp-service   ClusterIP   10.107.10.194   <none>        80/TCP    27s
+
+Service EndpointSlices:
+NAME                   ADDRESSTYPE   PORTS   ENDPOINTS               AGE
+webapp-service-gd249   IPv4          80      10.244.0.7,10.244.0.8   27s
+
+Failing Pod:
+NAME             READY   STATUS    RESTARTS     AGE   IP            NODE               NOMINATED NODE   READINESS GATES
+failing-webapp   0/1     Running   1 (9s ago)   18s   10.244.0.10   ip-172-31-10-114   <none>           <none>
+
+Failing Pod Readiness:
+NAME             READY   RESTARTS
+failing-webapp   false   1
+
+Probe Events:
+    Liveness:     http-get http://:80/nonexistent delay=5s timeout=2s period=3s #success=1 #failure=2
+    Readiness:    http-get http://:80/nonexistent delay=2s timeout=2s period=3s #success=1 #failure=2
+  Normal   Killing    7s                kubelet            spec.containers{webapp}: Container webapp failed liveness probe, will be restarted
+  Warning  Unhealthy  2s (x4 over 11s)  kubelet            spec.containers{webapp}: Readiness probe failed: HTTP probe failed with statuscode: 404
+  Warning  Unhealthy  1s (x3 over 10s)  kubelet            spec.containers{webapp}: Liveness probe failed: HTTP probe failed with statuscode: 404
+
+Interpretation:
+- startupProbe protects slow startup from premature liveness checks
+- readinessProbe controls whether a Pod should receive Service traffic
+- livenessProbe restarts a container when its health check repeatedly fails

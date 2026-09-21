@@ -1,0 +1,206 @@
+==================================================
+ Kubernetes Application Observability Monitor
+==================================================
+Started: Mon Sep 21 17:32:31 UTC 2026
+Samples: 3
+Interval: 5s
+
+==================================================
+ SAMPLE 1/3 - Mon Sep 21 17:32:31 UTC 2026
+==================================================
+
+--- Node Metrics ---
+NAME               CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+ip-172-31-10-114   1308m        65%      1946Mi          51%         
+
+--- Top Pods by CPU ---
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+default        cpu-intensive                              461m         0Mi             
+kube-system    kube-apiserver-ip-172-31-10-114            103m         246Mi           
+kube-system    etcd-ip-172-31-10-114                      43m          42Mi            
+kube-system    kube-controller-manager-ip-172-31-10-114   22m          64Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      17m          16Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          32Mi            
+kube-system    metrics-server-6c9576559c-86t27            4m           17Mi            
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+default        logging-app                                2m           0Mi             
+default        webapp-with-probes-6cc76bb77-jv22b         1m           2Mi             
+
+--- Top Pods by Memory ---
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+kube-system    kube-apiserver-ip-172-31-10-114            103m         246Mi           
+kube-system    kube-controller-manager-ip-172-31-10-114   22m          64Mi            
+kube-system    etcd-ip-172-31-10-114                      43m          42Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          32Mi            
+kube-system    kube-proxy-24tcg                           1m           21Mi            
+kube-system    metrics-server-6c9576559c-86t27            4m           17Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      17m          16Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+default        multi-container-app                        1m           3Mi             
+default        webapp-with-probes-6cc76bb77-2z2tk         1m           3Mi             
+
+--- Webapp Health ---
+NAME                                 READY   RESTARTS
+webapp-with-probes-6cc76bb77-2z2tk   true    0
+webapp-with-probes-6cc76bb77-jv22b   true    0
+
+--- Failing Probe Pod ---
+NAME             READY   RESTARTS
+failing-webapp   false   6
+
+--- CPU Intensive Pod ---
+NAME            CPU(cores)   MEMORY(bytes)   
+cpu-intensive   461m         0Mi             
+
+--- Multi-Container Pod ---
+POD                   NAME            CPU(cores)   MEMORY(bytes)   
+multi-container-app   log-processor   1m           0Mi             
+multi-container-app   web-server      1m           3Mi             
+
+--- Warning Events ---
+kube-system   5m28s       Warning   FailedScheduling         pod/coredns-589f44dc88-fw8cc                   0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   5m29s       Warning   FailedScheduling         pod/coredns-589f44dc88-8fq4k                   0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   5m22s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-8fq4k                   Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "36ea08c0b7a787cc6fad338a79cba97ba25f7887815c173ba10ea0df6ac44130": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system   5m22s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-fw8cc                   Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "19ffe4757ab43caf77630b841fa9f0ee54eaf214b5dd08b8974950514d3e230a": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system   5m9s        Warning   Unhealthy                pod/coredns-589f44dc88-8fq4k                   Readiness probe failed: Get "http://10.244.0.2:8181/ready": dial tcp 10.244.0.2:8181: connect: connection refused
+kube-system   4m32s       Warning   Unhealthy                pod/metrics-server-687f9dc499-jtkh7            Readiness probe failed: HTTP probe failed with statuscode: 500
+default       2m33s       Warning   Unhealthy                pod/failing-webapp                             Readiness probe failed: HTTP probe failed with statuscode: 404
+default       2m35s       Warning   Unhealthy                pod/failing-webapp                             Liveness probe failed: HTTP probe failed with statuscode: 404
+default       3m1s        Warning   BackOff                  pod/failing-webapp                             Back-off restarting failed container webapp in pod failing-webapp_default(c2d28529-90e1-4821-8ad2-1b5c857e269b)
+default       21s         Warning   FailedMount              pod/problematic-app                            MountVolume.SetUp failed for volume "config-volume" : configmap "nonexistent-config" not found
+
+==================================================
+ SAMPLE 2/3 - Mon Sep 21 17:32:37 UTC 2026
+==================================================
+
+--- Node Metrics ---
+NAME               CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+ip-172-31-10-114   1308m        65%      1946Mi          51%         
+
+--- Top Pods by CPU ---
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+default        cpu-intensive                              461m         0Mi             
+kube-system    kube-apiserver-ip-172-31-10-114            103m         246Mi           
+kube-system    etcd-ip-172-31-10-114                      43m          42Mi            
+kube-system    kube-controller-manager-ip-172-31-10-114   22m          64Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      17m          16Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          32Mi            
+kube-system    metrics-server-6c9576559c-86t27            4m           17Mi            
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+default        logging-app                                2m           0Mi             
+default        webapp-with-probes-6cc76bb77-jv22b         1m           2Mi             
+
+--- Top Pods by Memory ---
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+kube-system    kube-apiserver-ip-172-31-10-114            103m         246Mi           
+kube-system    kube-controller-manager-ip-172-31-10-114   22m          64Mi            
+kube-system    etcd-ip-172-31-10-114                      43m          42Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          32Mi            
+kube-system    kube-proxy-24tcg                           1m           21Mi            
+kube-system    metrics-server-6c9576559c-86t27            4m           17Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      17m          16Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+default        multi-container-app                        1m           3Mi             
+default        webapp-with-probes-6cc76bb77-2z2tk         1m           3Mi             
+
+--- Webapp Health ---
+NAME                                 READY   RESTARTS
+webapp-with-probes-6cc76bb77-2z2tk   true    0
+webapp-with-probes-6cc76bb77-jv22b   true    0
+
+--- Failing Probe Pod ---
+NAME             READY   RESTARTS
+failing-webapp   false   6
+
+--- CPU Intensive Pod ---
+NAME            CPU(cores)   MEMORY(bytes)   
+cpu-intensive   461m         0Mi             
+
+--- Multi-Container Pod ---
+POD                   NAME            CPU(cores)   MEMORY(bytes)   
+multi-container-app   log-processor   1m           0Mi             
+multi-container-app   web-server      1m           3Mi             
+
+--- Warning Events ---
+kube-system   5m34s       Warning   FailedScheduling         pod/coredns-589f44dc88-fw8cc                   0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   5m35s       Warning   FailedScheduling         pod/coredns-589f44dc88-8fq4k                   0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   5m28s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-8fq4k                   Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "36ea08c0b7a787cc6fad338a79cba97ba25f7887815c173ba10ea0df6ac44130": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system   5m28s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-fw8cc                   Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "19ffe4757ab43caf77630b841fa9f0ee54eaf214b5dd08b8974950514d3e230a": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system   5m15s       Warning   Unhealthy                pod/coredns-589f44dc88-8fq4k                   Readiness probe failed: Get "http://10.244.0.2:8181/ready": dial tcp 10.244.0.2:8181: connect: connection refused
+kube-system   4m38s       Warning   Unhealthy                pod/metrics-server-687f9dc499-jtkh7            Readiness probe failed: HTTP probe failed with statuscode: 500
+default       2m39s       Warning   Unhealthy                pod/failing-webapp                             Readiness probe failed: HTTP probe failed with statuscode: 404
+default       2m41s       Warning   Unhealthy                pod/failing-webapp                             Liveness probe failed: HTTP probe failed with statuscode: 404
+default       3m7s        Warning   BackOff                  pod/failing-webapp                             Back-off restarting failed container webapp in pod failing-webapp_default(c2d28529-90e1-4821-8ad2-1b5c857e269b)
+default       27s         Warning   FailedMount              pod/problematic-app                            MountVolume.SetUp failed for volume "config-volume" : configmap "nonexistent-config" not found
+
+==================================================
+ SAMPLE 3/3 - Mon Sep 21 17:32:43 UTC 2026
+==================================================
+
+--- Node Metrics ---
+NAME               CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+ip-172-31-10-114   1014m        50%      1923Mi          51%         
+
+--- Top Pods by CPU ---
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+default        cpu-intensive                              497m         0Mi             
+kube-system    kube-apiserver-ip-172-31-10-114            66m          247Mi           
+kube-system    etcd-ip-172-31-10-114                      43m          42Mi            
+kube-system    kube-controller-manager-ip-172-31-10-114   20m          64Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      15m          17Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          32Mi            
+kube-system    metrics-server-6c9576559c-86t27            5m           17Mi            
+default        logging-app                                3m           0Mi             
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+default        webapp-with-probes-6cc76bb77-jv22b         1m           2Mi             
+
+--- Top Pods by Memory ---
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+kube-system    kube-apiserver-ip-172-31-10-114            66m          247Mi           
+kube-system    kube-controller-manager-ip-172-31-10-114   20m          64Mi            
+kube-system    etcd-ip-172-31-10-114                      43m          42Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          32Mi            
+kube-system    kube-proxy-24tcg                           1m           21Mi            
+kube-system    metrics-server-6c9576559c-86t27            5m           17Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      15m          17Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+default        multi-container-app                        1m           3Mi             
+default        webapp-with-probes-6cc76bb77-2z2tk         1m           3Mi             
+
+--- Webapp Health ---
+NAME                                 READY   RESTARTS
+webapp-with-probes-6cc76bb77-2z2tk   true    0
+webapp-with-probes-6cc76bb77-jv22b   true    0
+
+--- Failing Probe Pod ---
+NAME             READY   RESTARTS
+failing-webapp   false   6
+
+--- CPU Intensive Pod ---
+NAME            CPU(cores)   MEMORY(bytes)   
+cpu-intensive   497m         0Mi             
+
+--- Multi-Container Pod ---
+POD                   NAME            CPU(cores)   MEMORY(bytes)   
+multi-container-app   log-processor   1m           0Mi             
+multi-container-app   web-server      1m           3Mi             
+
+--- Warning Events ---
+kube-system   5m41s       Warning   FailedScheduling         pod/coredns-589f44dc88-fw8cc                   0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   5m42s       Warning   FailedScheduling         pod/coredns-589f44dc88-8fq4k                   0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   5m35s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-8fq4k                   Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "36ea08c0b7a787cc6fad338a79cba97ba25f7887815c173ba10ea0df6ac44130": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system   5m35s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-fw8cc                   Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "19ffe4757ab43caf77630b841fa9f0ee54eaf214b5dd08b8974950514d3e230a": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system   5m22s       Warning   Unhealthy                pod/coredns-589f44dc88-8fq4k                   Readiness probe failed: Get "http://10.244.0.2:8181/ready": dial tcp 10.244.0.2:8181: connect: connection refused
+kube-system   4m45s       Warning   Unhealthy                pod/metrics-server-687f9dc499-jtkh7            Readiness probe failed: HTTP probe failed with statuscode: 500
+default       2m46s       Warning   Unhealthy                pod/failing-webapp                             Readiness probe failed: HTTP probe failed with statuscode: 404
+default       2m48s       Warning   Unhealthy                pod/failing-webapp                             Liveness probe failed: HTTP probe failed with statuscode: 404
+default       3m14s       Warning   BackOff                  pod/failing-webapp                             Back-off restarting failed container webapp in pod failing-webapp_default(c2d28529-90e1-4821-8ad2-1b5c857e269b)
+default       2s          Warning   FailedMount              pod/problematic-app                            MountVolume.SetUp failed for volume "config-volume" : configmap "nonexistent-config" not found
+
+Monitor completed: Mon Sep 21 17:32:45 UTC 2026

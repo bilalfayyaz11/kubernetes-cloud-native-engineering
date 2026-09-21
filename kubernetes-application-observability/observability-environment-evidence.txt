@@ -1,0 +1,34 @@
+=== Kubernetes Observability Environment Evidence ===
+Timestamp: Mon Sep 21 17:28:34 UTC 2026
+
+Node:
+NAME               STATUS   ROLES           AGE    VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-114   Ready    control-plane   103s   v1.36.4   172.31.10.114   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+System Pods:
+NAME                                       READY   STATUS    RESTARTS   AGE    IP              NODE               NOMINATED NODE   READINESS GATES
+coredns-589f44dc88-8fq4k                   1/1     Running   0          92s    10.244.0.2      ip-172-31-10-114   <none>           <none>
+coredns-589f44dc88-fw8cc                   1/1     Running   0          92s    10.244.0.3      ip-172-31-10-114   <none>           <none>
+etcd-ip-172-31-10-114                      1/1     Running   0          103s   172.31.10.114   ip-172-31-10-114   <none>           <none>
+kube-apiserver-ip-172-31-10-114            1/1     Running   0          103s   172.31.10.114   ip-172-31-10-114   <none>           <none>
+kube-controller-manager-ip-172-31-10-114   1/1     Running   0          103s   172.31.10.114   ip-172-31-10-114   <none>           <none>
+kube-proxy-24tcg                           1/1     Running   0          92s    172.31.10.114   ip-172-31-10-114   <none>           <none>
+kube-scheduler-ip-172-31-10-114            1/1     Running   0          103s   172.31.10.114   ip-172-31-10-114   <none>           <none>
+metrics-server-6c9576559c-86t27            1/1     Running   0          60s    10.244.0.4      ip-172-31-10-114   <none>           <none>
+
+Flannel:
+NAME                    READY   STATUS    RESTARTS   AGE   IP              NODE               NOMINATED NODE   READINESS GATES
+kube-flannel-ds-p4gtm   1/1     Running   0          92s   172.31.10.114   ip-172-31-10-114   <none>           <none>
+
+Metrics API:
+NAME                     SERVICE                      AVAILABLE   AGE
+v1beta1.metrics.k8s.io   kube-system/metrics-server   True        61s
+
+Node metrics:
+NAME               CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+ip-172-31-10-114   1496m        74%      1865Mi          49%         
+
+Probe API support:
+livenessProbe: available
+readinessProbe: available
+startupProbe: available

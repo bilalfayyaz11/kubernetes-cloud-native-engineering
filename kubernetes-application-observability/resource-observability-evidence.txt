@@ -1,0 +1,55 @@
+=== Kubernetes Resource Observability Evidence ===
+Timestamp: Mon Sep 21 17:30:01 UTC 2026
+
+Metrics API:
+NAME                     SERVICE                      AVAILABLE   AGE
+v1beta1.metrics.k8s.io   kube-system/metrics-server   True        2m27s
+
+Node metrics:
+NAME               CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+ip-172-31-10-114   1549m        77%      1874Mi          49%         
+
+All Pods by CPU:
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+default        cpu-intensive                              492m         0Mi             
+kube-system    kube-apiserver-ip-172-31-10-114            68m          235Mi           
+kube-system    etcd-ip-172-31-10-114                      31m          39Mi            
+kube-system    kube-controller-manager-ip-172-31-10-114   19m          68Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      18m          12Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          31Mi            
+kube-system    metrics-server-6c9576559c-86t27            4m           16Mi            
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+kube-system    kube-proxy-24tcg                           2m           21Mi            
+default        webapp-with-probes-6cc76bb77-2z2tk         1m           3Mi             
+default        webapp-with-probes-6cc76bb77-jv22b         1m           2Mi             
+
+All Pods by memory:
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+kube-system    kube-apiserver-ip-172-31-10-114            68m          235Mi           
+kube-system    kube-controller-manager-ip-172-31-10-114   19m          68Mi            
+kube-system    etcd-ip-172-31-10-114                      31m          39Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          31Mi            
+kube-system    kube-proxy-24tcg                           2m           21Mi            
+kube-system    metrics-server-6c9576559c-86t27            4m           16Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      18m          12Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+default        webapp-with-probes-6cc76bb77-2z2tk         1m           3Mi             
+default        webapp-with-probes-6cc76bb77-jv22b         1m           2Mi             
+default        cpu-intensive                              492m         0Mi             
+
+Web application metrics:
+NAME                                 CPU(cores)   MEMORY(bytes)   
+webapp-with-probes-6cc76bb77-2z2tk   1m           3Mi             
+webapp-with-probes-6cc76bb77-jv22b   1m           2Mi             
+
+CPU-intensive Pod:
+NAME            CPU(cores)   MEMORY(bytes)   
+cpu-intensive   492m         0Mi             
+
+CPU-intensive resource specification:
+CPU request: 100m
+CPU limit: 500m
+Memory request: 32Mi
+Memory limit: 96Mi

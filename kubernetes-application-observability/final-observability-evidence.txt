@@ -1,0 +1,54 @@
+=== Kubernetes Application Observability Evidence ===
+Timestamp: Mon Sep 21 17:32:46 UTC 2026
+
+Health probes:
+- startupProbe configured
+- readinessProbe behavior verified
+- livenessProbe restart behavior verified
+
+Metrics:
+NAME               CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+ip-172-31-10-114   1014m        50%      1923Mi          51%         
+
+NAMESPACE      NAME                                       CPU(cores)   MEMORY(bytes)   
+default        cpu-intensive                              497m         0Mi             
+kube-system    kube-apiserver-ip-172-31-10-114            66m          247Mi           
+kube-system    etcd-ip-172-31-10-114                      43m          42Mi            
+kube-system    kube-controller-manager-ip-172-31-10-114   20m          64Mi            
+kube-flannel   kube-flannel-ds-p4gtm                      15m          17Mi            
+kube-system    kube-scheduler-ip-172-31-10-114            11m          32Mi            
+kube-system    metrics-server-6c9576559c-86t27            5m           17Mi            
+default        logging-app                                3m           0Mi             
+kube-system    coredns-589f44dc88-8fq4k                   2m           11Mi            
+kube-system    coredns-589f44dc88-fw8cc                   2m           11Mi            
+default        webapp-with-probes-6cc76bb77-jv22b         1m           2Mi             
+kube-system    kube-proxy-24tcg                           1m           21Mi            
+default        webapp-with-probes-6cc76bb77-2z2tk         1m           3Mi             
+default        multi-container-app                        1m           3Mi             
+
+Logging:
+- workload logs captured
+- previous container logs captured
+- WARNING and ERROR logs filtered
+- multi-container logs collected per container
+
+Debugging:
+- kubectl exec validated
+- nginx configuration extracted
+- missing ConfigMap mount failure diagnosed
+- Kubernetes warning events analyzed
+
+Multi-container Pod:
+NAME                  READY       RESTARTS
+multi-container-app   true,true   0,0
+
+Alert simulation:
+=== Kubernetes Observability Alert Check ===
+Timestamp: Mon Sep 21 17:32:45 UTC 2026
+
+ALERT: failing-webapp is not Ready
+ALERT: failing-webapp has restarted 6 time(s)
+ALERT: problematic-app phase=Pending
+
+Warning events currently visible: 15
+Observability alerts raised: 3

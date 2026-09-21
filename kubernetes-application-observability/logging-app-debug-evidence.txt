@@ -1,0 +1,52 @@
+=== Logging App Debug Evidence ===
+
+--- Environment ---
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=logging-app
+WEBAPP_SERVICE_PORT_80_TCP_PROTO=tcp
+KUBERNETES_PORT=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP_PORT=443
+WEBAPP_SERVICE_SERVICE_PORT=80
+WEBAPP_SERVICE_PORT=tcp://10.107.10.194:80
+WEBAPP_SERVICE_PORT_80_TCP=tcp://10.107.10.194:80
+KUBERNETES_SERVICE_PORT_HTTPS=443
+WEBAPP_SERVICE_PORT_80_TCP_PORT=80
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+WEBAPP_SERVICE_SERVICE_HOST=10.107.10.194
+WEBAPP_SERVICE_PORT_80_TCP_ADDR=10.107.10.194
+KUBERNETES_SERVICE_HOST=10.96.0.1
+KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
+HOME=/root
+
+--- Processes ---
+PID   USER     TIME  COMMAND
+    1 root      0:00 sh -c counter=1 while true; do   echo "$(date -Iseconds) INFO Log entry #${counter} application-running"   if [ $((counter % 5)) -eq 0 ]; then     echo "$(date -Iseconds) WARNING simulated-high-memory-usage"   fi   if [ $((counter % 10)) -eq 0 ]; then     echo "$(date -Iseconds) ERROR simulated-application-error" >&2   fi   counter=$((counter + 1))   sleep 2 done 
+   29 root      0:00 ps
+
+--- Filesystem ---
+Filesystem                Size      Used Available Use% Mounted on
+overlay                  28.0G      9.2G     18.8G  33% /
+tmpfs                    64.0M         0     64.0M   0% /dev
+/dev/root                28.0G      9.2G     18.8G  33% /etc/hosts
+/dev/root                28.0G      9.2G     18.8G  33% /dev/termination-log
+/dev/root                28.0G      9.2G     18.8G  33% /etc/hostname
+/dev/root                28.0G      9.2G     18.8G  33% /etc/resolv.conf
+shm                      64.0M         0     64.0M   0% /dev/shm
+tmpfs                    64.0M     12.0K     64.0M   0% /var/run/secrets/kubernetes.io/serviceaccount
+tmpfs                     4.0K         0      4.0K   0% /proc/acpi
+tmpfs                    64.0M         0     64.0M   0% /proc/interrupts
+tmpfs                    64.0M         0     64.0M   0% /proc/kcore
+tmpfs                    64.0M         0     64.0M   0% /proc/keys
+tmpfs                    64.0M         0     64.0M   0% /proc/latency_stats
+tmpfs                    64.0M         0     64.0M   0% /proc/timer_list
+tmpfs                     4.0K         0      4.0K   0% /proc/scsi
+tmpfs                     4.0K         0      4.0K   0% /sys/firmware
+
+--- Combined Debug Command ---
+Debug info:
+Mon Sep 21 17:31:39 UTC 2026
+root
+/
+logging-app
