@@ -1,0 +1,24 @@
+=== Kubernetes Etcd Snapshot Evidence ===
+Timestamp: Tue Sep 22 02:56:26 UTC 2026
+
+Endpoint health:
+https://127.0.0.1:2379 is healthy: successfully committed proposal: took = 24.522244ms
+
+Snapshot:
+Filename: etcd-snapshot-20260922-025625.db
+Size: 1728544 bytes
+SHA256: a2bb7c43d3bc86ad4f7a1eeaaf32361346e4769e659e956e12092b7512abca98
+Revision: 1067
+
+Snapshot status:
++----------+----------+------------+------------+---------+
+|   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE | VERSION |
++----------+----------+------------+------------+---------+
+| c1f8110c |     1067 |        399 |     1.7 MB |   3.6.0 |
++----------+----------+------------+------------+---------+
+
+Recovery marker:
+restore-marker-20260922-025200
+
+Security:
+Snapshot database intentionally excluded from repository artifacts.

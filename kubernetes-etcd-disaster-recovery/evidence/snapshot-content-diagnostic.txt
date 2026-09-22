@@ -1,0 +1,20 @@
+=== Etcd Snapshot Diagnostic ===
+Timestamp: Tue Sep 22 03:01:52 UTC 2026
+
+Snapshot:
+etcd-snapshot-20260922-025625.db
+
+Snapshot contains backup-test namespace:
+YES
+
+Snapshot contains test-config:
+YES
+
+Snapshot contains nginx-deployment:
+YES
+
+Snapshot contains test-secret:
+NO
+
+Expected recovery marker:
+restore-marker-20260922-025200

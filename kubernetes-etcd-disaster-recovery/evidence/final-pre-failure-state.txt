@@ -1,0 +1,35 @@
+=== Final Pre-Failure State ===
+Timestamp: Tue Sep 22 02:57:11 UTC 2026
+
+Namespaces:
+NAME              STATUS   AGE
+backup-test       Active   3m31s
+default           Active   6m53s
+kube-flannel      Active   6m45s
+kube-node-lease   Active   6m53s
+kube-public       Active   6m53s
+kube-system       Active   6m53s
+
+Test namespace:
+NAME                                   READY   STATUS    RESTARTS   AGE     IP           NODE              NOMINATED NODE   READINESS GATES
+pod/nginx-deployment-956c59c95-4tjnk   1/1     Running   0          3m31s   10.244.0.5   ip-172-31-10-60   <none>           <none>
+pod/nginx-deployment-956c59c95-bc9n6   1/1     Running   0          3m31s   10.244.0.4   ip-172-31-10-60   <none>           <none>
+pod/nginx-deployment-956c59c95-zfmv8   1/1     Running   0          3m31s   10.244.0.6   ip-172-31-10-60   <none>           <none>
+
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+service/nginx-service   ClusterIP   10.105.146.88   <none>        80/TCP    3m31s   app=nginx
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES       SELECTOR
+deployment.apps/nginx-deployment   3/3     3            3           3m31s   nginx        nginx:1.27   app=nginx
+
+NAME                                         DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES       SELECTOR
+replicaset.apps/nginx-deployment-956c59c95   3         3         3       3m31s   nginx        nginx:1.27   app=nginx,pod-template-hash=956c59c95
+
+ConfigMap:
+database.host=mysql.example.internal
+database.port=3306
+recovery.marker=restore-marker-20260922-025200
+
+Secret:
+test-secret exists
+Secret payload intentionally not printed.

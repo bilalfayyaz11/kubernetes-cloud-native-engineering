@@ -1,0 +1,19 @@
+=== Disaster Simulation Comparison ===
+
+Before failure:
+- Namespace backup-test existed
+- Deployment nginx-deployment existed
+- Service nginx-service existed
+- ConfigMap test-config existed
+- Secret test-secret existed
+- Recovery marker: restore-marker-20260922-025200
+
+After failure:
+- Namespace backup-test deleted
+- Deployment removed
+- Service removed
+- ConfigMap removed
+- Secret removed
+
+Expected recovery behavior:
+Restoring the pre-deletion etcd snapshot should return the deleted state.

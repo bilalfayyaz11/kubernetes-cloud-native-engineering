@@ -1,0 +1,40 @@
+=== Kubernetes Etcd Recovery Verification ===
+Timestamp: Tue Sep 22 03:05:30 UTC 2026
+
+1. Kubernetes API
+PASS
+
+2. Node readiness
+PASS
+
+3. Etcd endpoint health
+https://127.0.0.1:2379 is healthy: successfully committed proposal: took = 12.469491ms
+PASS
+
+4. backup-test namespace
+FAIL
+
+5. nginx deployment
+FAIL: ready replicas=0
+
+6. nginx service
+FAIL
+
+7. ConfigMap recovery marker
+FAIL
+
+8. Secret exists
+FAIL
+
+9. Service connectivity
+FAIL
+
+10. Static control-plane manifests
+PASS: etcd.yaml
+PASS: kube-apiserver.yaml
+PASS: kube-controller-manager.yaml
+PASS: kube-scheduler.yaml
+
+========================================
+RESULT: 6 CHECK(S) FAILED
+========================================

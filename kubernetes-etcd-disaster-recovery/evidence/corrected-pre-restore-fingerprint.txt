@@ -1,0 +1,7 @@
+namespace=backup-test
+deployment=nginx-deployment
+replicas=3
+service=nginx-service
+configmap=test-config
+secret=test-secret
+marker=restore-marker-20260922-025200

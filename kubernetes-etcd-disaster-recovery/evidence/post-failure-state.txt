@@ -1,0 +1,31 @@
+=== Post-Failure Kubernetes State ===
+Timestamp: Tue Sep 22 02:57:24 UTC 2026
+
+backup-test namespace:
+DELETED
+
+Pre-delete etcd revision:
+1133
+
+Post-delete etcd revision:
+1221
+
+Snapshot used for future restore:
+etcd-snapshot-20260922-025625.db
+
+Recovery marker expected after restore:
+restore-marker-20260922-025200
+
+Control plane:
+NAME              STATUS   ROLES           AGE    VERSION
+ip-172-31-10-60   Ready    control-plane   7m6s   v1.36.4
+
+System Pods:
+NAME                                      READY   STATUS    RESTARTS   AGE
+coredns-589f44dc88-c9fpz                  1/1     Running   0          6m55s
+coredns-589f44dc88-gjgks                  1/1     Running   0          6m55s
+etcd-ip-172-31-10-60                      1/1     Running   0          7m6s
+kube-apiserver-ip-172-31-10-60            1/1     Running   0          7m7s
+kube-controller-manager-ip-172-31-10-60   1/1     Running   0          7m7s
+kube-proxy-k6hb7                          1/1     Running   0          6m56s
+kube-scheduler-ip-172-31-10-60            1/1     Running   0          7m6s

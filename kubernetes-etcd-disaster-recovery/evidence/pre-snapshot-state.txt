@@ -1,0 +1,38 @@
+=== Pre-Snapshot Kubernetes State ===
+Timestamp: Tue Sep 22 02:53:52 UTC 2026
+
+Namespace:
+NAME          STATUS   AGE
+backup-test   Active   12s
+
+Deployment:
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES       SELECTOR
+nginx-deployment   3/3     3            3           11s   nginx        nginx:1.27   app=nginx
+
+Pods:
+NAME                               READY   STATUS    RESTARTS   AGE   IP           NODE              NOMINATED NODE   READINESS GATES
+nginx-deployment-956c59c95-4tjnk   1/1     Running   0          12s   10.244.0.5   ip-172-31-10-60   <none>           <none>
+nginx-deployment-956c59c95-bc9n6   1/1     Running   0          12s   10.244.0.4   ip-172-31-10-60   <none>           <none>
+nginx-deployment-956c59c95-zfmv8   1/1     Running   0          12s   10.244.0.6   ip-172-31-10-60   <none>           <none>
+
+Service:
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+nginx-service   ClusterIP   10.105.146.88   <none>        80/TCP    12s   app=nginx
+
+EndpointSlice:
+NAME                  ADDRESSTYPE   PORTS   ENDPOINTS                          AGE
+nginx-service-zlvlj   IPv4          80      10.244.0.4,10.244.0.5,10.244.0.6   12s
+
+ConfigMap:
+database.host=mysql.example.internal
+database.port=3306
+recovery.marker=restore-marker-20260922-025200
+
+Secret:
+Name: test-secret
+Type: Opaque
+Recovery marker verified: YES
+Secret payload intentionally not recorded.
+
+Service connectivity:
+PASS

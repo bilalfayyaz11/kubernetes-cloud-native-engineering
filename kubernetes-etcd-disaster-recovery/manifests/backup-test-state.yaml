@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-config
+  namespace: backup-test
+data:
+  database.host: mysql.example.internal
+  database.port: "3306"
+  recovery.marker: "restore-marker-20260922-025200"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-secret
+  namespace: backup-test
+type: Opaque
+stringData:
+  environment: disaster-recovery-demo
+  recovery.marker: "restore-marker-20260922-025200"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: backup-test
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 96Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: backup-test
+spec:
+  selector:
+    app: nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: ClusterIP

@@ -1,0 +1,26 @@
+=== Etcd Backup ===
+Timestamp: Tue Sep 22 03:05:30 UTC 2026
+
+1. Checking etcd health...
+https://127.0.0.1:2379 is healthy: successfully committed proposal: took = 13.56111ms
+
+2. Creating snapshot...
+Snapshot saved at /opt/etcd-backup/etcd-snapshot-20260922-030530.db
+Server version 3.6.0
+
+3. Verifying snapshot integrity...
++----------+----------+------------+------------+---------+
+|   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE | VERSION |
++----------+----------+------------+------------+---------+
+| 8309c319 |     2022 |        361 |     2.4 MB |   3.6.0 |
++----------+----------+------------+------------+---------+
+
+4. Applying retention policy...
+
+5. Backup summary:
+Snapshot: etcd-snapshot-20260922-030530.db
+Size:     2441248 bytes
+SHA256:   28cddcc7976258d7d534ccc9bfff19a787480655237a9b07ff0f79b4a4abb284
+Revision: 2022
+
+Backup completed successfully.

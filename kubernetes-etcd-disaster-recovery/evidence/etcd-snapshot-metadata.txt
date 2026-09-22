@@ -1,0 +1,26 @@
+=== Etcd Snapshot Metadata ===
+Timestamp: Tue Sep 22 02:56:25 UTC 2026
+
+Filename:
+etcd-snapshot-20260922-025625.db
+
+Size bytes:
+1728544
+
+SHA256:
+a2bb7c43d3bc86ad4f7a1eeaaf32361346e4769e659e956e12092b7512abca98
+
+Revision:
+1067
+
+Storage:
+/opt/etcd-backup/
+
+Security classification:
+Sensitive
+
+Reason:
+Etcd snapshots can contain Kubernetes Secret data.
+
+Repository policy:
+Snapshot database must not be committed to Git.
