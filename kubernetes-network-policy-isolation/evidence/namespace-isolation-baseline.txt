@@ -1,0 +1,24 @@
+=== Namespace Isolation Baseline ===
+Timestamp: Tue Sep 22 03:19:21 UTC 2026
+
+Cluster:
+NAME              STATUS   ROLES           AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-94   Ready    control-plane   3m44s   v1.36.4   172.31.10.94   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+Namespaces:
+NAME          STATUS   AGE   LABELS
+development   Active   1s    environment=dev,kubernetes.io/metadata.name=development,name=development,team=backend
+production    Active   1s    environment=prod,kubernetes.io/metadata.name=production,name=production,team=backend
+
+Development NetworkPolicies:
+
+Production NetworkPolicies:
+
+Calico status:
+NAME        AVAILABLE   PROGRESSING   DEGRADED   SINCE   MESSAGE
+apiserver   True        False         False      66s     All objects available
+calico      True        False         False      106s    All objects available
+goldmane    True        False         False      21s     All objects available
+ippools     True        False         False      3m6s    All objects available
+tiers       True        False         False      61s     All objects available
+whisker     True        False         False      21s     All objects available

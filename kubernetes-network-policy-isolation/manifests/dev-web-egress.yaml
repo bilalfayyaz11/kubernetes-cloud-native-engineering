@@ -1,0 +1,52 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: web-egress-policy
+  namespace: development
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+      tier: frontend
+
+  policyTypes:
+  - Egress
+
+  egress:
+
+  # Allow development web -> development database
+  - to:
+    - podSelector:
+        matchLabels:
+          app: db
+          tier: backend
+    ports:
+    - protocol: TCP
+      port: 3306
+
+  # Allow development web -> production database
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          environment: prod
+      podSelector:
+        matchLabels:
+          app: db
+          tier: backend
+    ports:
+    - protocol: TCP
+      port: 3306
+
+  # Allow DNS only to CoreDNS
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53

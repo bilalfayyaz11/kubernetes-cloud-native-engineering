@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: database
+  namespace: production
+  labels:
+    app: db
+    tier: backend
+    environment: prod
+spec:
+  containers:
+  - name: tcp-listener
+    image: busybox:1.36
+    command:
+    - sh
+    - -c
+    - |
+      while true; do
+        nc -lk -p 3306 -e echo production-db
+      done
+    ports:
+    - containerPort: 3306
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+      limits:
+        memory: "64Mi"
+        cpu: "50m"

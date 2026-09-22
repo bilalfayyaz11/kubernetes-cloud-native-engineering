@@ -1,0 +1,27 @@
+Kubernetes Network Policy Connectivity Matrix
+
+ALLOW
+-----
+development/test-client -> development/web-app:80
+development/web-app -> development/database:3306
+development/web-app -> production/database:3306
+development/web-app -> CoreDNS:53 TCP/UDP
+
+DENY
+----
+development/test-client -> development/database:3306
+development/test-client -> production/database:3306
+development/test-client -> production/web-app:80
+development/web-app -> production/web-app:80
+development/web-app -> Kubernetes API:443
+production/test-client -> production/web-app:80
+production/test-client -> production/database:3306
+production/test-client -> development/web-app:80
+
+Security Model
+--------------
+Default deny ingress is active in both application namespaces.
+Development access is granted through explicit workload selectors.
+Cross-namespace access is restricted to development web -> production database TCP/3306.
+Development web egress is restricted to approved database paths and CoreDNS.
+Advanced access-level and tier selectors further demonstrate label-based segmentation.

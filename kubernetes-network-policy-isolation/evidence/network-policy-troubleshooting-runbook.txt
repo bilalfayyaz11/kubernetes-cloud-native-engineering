@@ -1,0 +1,36 @@
+Kubernetes NetworkPolicy Troubleshooting Runbook
+
+1. Verify Kubernetes API and node health.
+
+2. Verify NetworkPolicy-capable CNI health:
+   kubectl get tigerastatus
+
+3. Inventory policies:
+   kubectl get networkpolicy -A
+
+4. Inspect specific policies:
+   kubectl describe networkpolicy <name> -n <namespace>
+
+5. Verify pod labels:
+   kubectl get pods -n <namespace> --show-labels
+
+6. Verify namespace labels:
+   kubectl get namespaces --show-labels
+
+7. Verify source and destination workloads are Running.
+
+8. Before using kubectl exec, confirm the target container exists and is Running.
+
+9. Pod container commands are immutable. If the command must change, delete and recreate the Pod rather than attempting to patch it.
+
+10. Remember selector semantics:
+    - separate from/to list entries are OR conditions
+    - namespaceSelector + podSelector inside one peer entry are AND conditions
+
+11. Test directly against Pod IPs when separating DNS failures from policy failures.
+
+12. When egress isolation is enabled, explicitly allow DNS to the cluster DNS service.
+
+13. Re-run the automated connectivity matrix after every policy modification.
+
+14. A NetworkPolicy object being accepted by the API does not prove enforcement; enforcement depends on the CNI.

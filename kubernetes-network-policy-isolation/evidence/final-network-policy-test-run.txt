@@ -1,0 +1,63 @@
+==================================================
+ NETWORK POLICY VALIDATION SUITE
+==================================================
+
+Pod IPs:
+DEV_WEB_IP=192.168.166.137
+DEV_DB_IP=192.168.166.140
+PROD_WEB_IP=192.168.166.142
+PROD_DB_IP=192.168.166.141
+
+TEST: Dev client -> Dev web:80
+Expected: ALLOW
+PASS: allowed as expected.
+
+TEST: Dev web -> Dev DB:3306
+Expected: ALLOW
+PASS: allowed as expected.
+
+TEST: Dev client -> Dev DB:3306
+Expected: DENY
+PASS: blocked as expected.
+
+TEST: Dev web -> Prod DB:3306
+Expected: ALLOW
+PASS: allowed as expected.
+
+TEST: Dev client -> Prod DB:3306
+Expected: DENY
+PASS: blocked as expected.
+
+TEST: Dev client -> Prod web:80
+Expected: DENY
+PASS: blocked as expected.
+
+TEST: Dev web -> Prod web:80
+Expected: DENY
+PASS: blocked as expected.
+
+TEST: Prod client -> Prod web:80
+Expected: DENY
+PASS: blocked as expected.
+
+TEST: Prod client -> Prod DB:3306
+Expected: DENY
+PASS: blocked as expected.
+
+TEST: Prod client -> Dev web:80
+Expected: DENY
+PASS: blocked as expected.
+
+TEST: Dev web DNS -> CoreDNS
+Expected: ALLOW
+PASS: allowed as expected.
+
+TEST: Dev web -> Kubernetes API:443
+Expected: DENY
+PASS: blocked as expected.
+
+==================================================
+TEST SUMMARY
+PASS: 12
+FAIL: 0
+==================================================

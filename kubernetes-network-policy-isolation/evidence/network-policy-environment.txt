@@ -1,0 +1,39 @@
+=== Kubernetes Network Policy Environment ===
+Timestamp: Tue Sep 22 03:19:04 UTC 2026
+
+Kubernetes:
+Client Version: v1.36.2
+Kustomize Version: v5.8.1
+Server Version: v1.36.4
+
+Nodes:
+NAME              STATUS   ROLES           AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-94   Ready    control-plane   3m27s   v1.36.4   172.31.10.94   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+Calico version:
+v3.32.2
+
+Calico status:
+NAME        AVAILABLE   PROGRESSING   DEGRADED   SINCE   MESSAGE
+apiserver   True        False         False      48s     All objects available
+calico      True        False         False      88s     All objects available
+goldmane    True        False         False      3s      All objects available
+ippools     True        False         False      2m48s   All objects available
+tiers       True        False         False      43s     All objects available
+whisker     True        False         False      3s      All objects available
+
+Calico components:
+calico-system     calico-apiserver-84fbd6bb7-4w9rh           1/1     Running   0          2m44s   192.168.166.130   ip-172-31-10-94   <none>           <none>
+calico-system     calico-apiserver-84fbd6bb7-cg9t2           1/1     Running   0          2m44s   192.168.166.135   ip-172-31-10-94   <none>           <none>
+calico-system     calico-kube-controllers-6c5df67f89-mv2bq   1/1     Running   0          2m37s   192.168.166.131   ip-172-31-10-94   <none>           <none>
+calico-system     calico-node-74dwp                          1/1     Running   0          2m39s   172.31.10.94      ip-172-31-10-94   <none>           <none>
+calico-system     calico-typha-f4d58ccff-lfhnv               1/1     Running   0          2m39s   172.31.10.94      ip-172-31-10-94   <none>           <none>
+calico-system     csi-node-driver-d5zph                      2/2     Running   0          2m38s   192.168.166.132   ip-172-31-10-94   <none>           <none>
+calico-system     goldmane-686c69bb96-rsltp                  1/1     Running   0          2m43s   192.168.166.136   ip-172-31-10-94   <none>           <none>
+calico-system     whisker-b54ff455d-2dkld                    2/2     Running   0          2m9s    192.168.166.129   ip-172-31-10-94   <none>           <none>
+tigera-operator   tigera-operator-d78bcd95d-2kdcq            1/1     Running   0          3m9s    172.31.10.94      ip-172-31-10-94   <none>           <none>
+
+NetworkPolicy API:
+networkpolicies                                                                     crd.projectcalico.org/v1            true         NetworkPolicy
+networkpolicies                     netpol                                          networking.k8s.io/v1                true         NetworkPolicy
+networkpolicies                     cnp,caliconetworkpolicy,caliconetworkpolicies   projectcalico.org/v3                true         NetworkPolicy

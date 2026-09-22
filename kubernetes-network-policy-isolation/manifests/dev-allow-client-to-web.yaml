@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-client-to-web
+  namespace: development
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+      tier: frontend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: client
+          tier: testing
+    ports:
+    - protocol: TCP
+      port: 80

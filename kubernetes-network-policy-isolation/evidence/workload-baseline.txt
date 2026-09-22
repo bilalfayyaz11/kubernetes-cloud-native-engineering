@@ -1,0 +1,28 @@
+=== Network Policy Workload Baseline ===
+Timestamp: Tue Sep 22 03:20:25 UTC 2026
+
+Development Pods:
+NAME          READY   STATUS    RESTARTS   AGE   IP                NODE              NOMINATED NODE   READINESS GATES   LABELS
+database      1/1     Running   0          14s   192.168.166.140   ip-172-31-10-94   <none>           <none>            app=db,environment=dev,tier=backend
+test-client   1/1     Running   0          14s   192.168.166.138   ip-172-31-10-94   <none>           <none>            app=client,environment=dev,tier=testing
+web-app       1/1     Running   0          14s   192.168.166.137   ip-172-31-10-94   <none>           <none>            app=web,environment=dev,tier=frontend
+
+Production Pods:
+NAME          READY   STATUS    RESTARTS   AGE   IP                NODE              NOMINATED NODE   READINESS GATES   LABELS
+database      1/1     Running   0          14s   192.168.166.141   ip-172-31-10-94   <none>           <none>            app=db,environment=prod,tier=backend
+test-client   1/1     Running   0          14s   192.168.166.139   ip-172-31-10-94   <none>           <none>            app=client,environment=prod,tier=testing
+web-app       1/1     Running   0          14s   192.168.166.142   ip-172-31-10-94   <none>           <none>            app=web,environment=prod,tier=frontend
+
+Development Web IP:
+192.168.166.137
+
+Production Web IP:
+192.168.166.142
+
+Development DB IP:
+192.168.166.140
+
+Production DB IP:
+192.168.166.141
+
+NetworkPolicies:

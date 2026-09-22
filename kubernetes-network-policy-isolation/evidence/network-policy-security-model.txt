@@ -1,0 +1,60 @@
+Kubernetes Network Segmentation Security Model
+
+Namespaces
+----------
+development
+production
+
+Default Posture
+---------------
+Both application namespaces enforce default-deny ingress.
+
+Development Ingress
+-------------------
+ALLOW:
+- test-client -> web-app TCP/80
+- web-app -> database TCP/3306
+
+DENY:
+- test-client -> database TCP/3306
+- unauthorized cross-namespace access
+
+Production Ingress
+------------------
+ALLOW:
+- development web-app -> production database TCP/3306
+
+DENY:
+- development test-client -> production database
+- development workloads -> production web
+- production test-client -> production web
+- production test-client -> production database
+
+Development Web Egress
+----------------------
+ALLOW:
+- development database TCP/3306
+- production database TCP/3306
+- CoreDNS TCP/53
+- CoreDNS UDP/53
+
+DENY:
+- production web TCP/80
+- Kubernetes API TCP/443
+- unrestricted external HTTP
+
+Advanced Selection
+------------------
+Access controls additionally demonstrate:
+- podSelector
+- namespaceSelector
+- matchLabels
+- matchExpressions
+- access-level labels
+- tier labels
+- protocol restrictions
+- port restrictions
+
+Security Principle
+------------------
+Default deny with explicit least-privilege exceptions.

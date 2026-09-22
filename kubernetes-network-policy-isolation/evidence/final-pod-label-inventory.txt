@@ -1,0 +1,14 @@
+=== Final Pod Label Inventory ===
+Timestamp: Tue Sep 22 03:29:40 UTC 2026
+
+Development:
+NAME          READY   STATUS    RESTARTS   AGE     IP                NODE              NOMINATED NODE   READINESS GATES   LABELS
+database      1/1     Running   0          9m29s   192.168.166.140   ip-172-31-10-94   <none>           <none>            access-level=restricted,app=db,environment=dev,tier=backend
+test-client   1/1     Running   0          42s     192.168.166.143   ip-172-31-10-94   <none>           <none>            access-level=testing,app=client,environment=dev,tier=testing
+web-app       1/1     Running   0          9m29s   192.168.166.137   ip-172-31-10-94   <none>           <none>            access-level=standard,app=web,environment=dev,tier=frontend
+
+Production:
+NAME          READY   STATUS    RESTARTS   AGE     IP                NODE              NOMINATED NODE   READINESS GATES   LABELS
+database      1/1     Running   0          9m29s   192.168.166.141   ip-172-31-10-94   <none>           <none>            app=db,environment=prod,tier=backend
+test-client   1/1     Running   0          42s     192.168.166.144   ip-172-31-10-94   <none>           <none>            app=client,environment=prod,tier=testing
+web-app       1/1     Running   0          9m29s   192.168.166.142   ip-172-31-10-94   <none>           <none>            app=web,environment=prod,tier=frontend

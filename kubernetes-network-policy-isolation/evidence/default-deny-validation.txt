@@ -1,0 +1,43 @@
+=== Default-Deny Ingress Validation ===
+Timestamp: Tue Sep 22 03:21:57 UTC 2026
+
+Policies:
+NAMESPACE     NAME                   POD-SELECTOR   AGE
+development   default-deny-ingress   <none>         28s
+production    default-deny-ingress   <none>         28s
+
+Development policy:
+Name:         default-deny-ingress
+Namespace:    development
+Created on:   2026-09-22 03:21:29 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     <none> (Allowing the specific traffic to all pods in this namespace)
+  Allowing ingress traffic:
+    <none> (Selected pods are isolated for ingress connectivity)
+  Not affecting egress traffic
+  Policy Types: Ingress
+
+Production policy:
+Name:         default-deny-ingress
+Namespace:    production
+Created on:   2026-09-22 03:21:29 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     <none> (Allowing the specific traffic to all pods in this namespace)
+  Allowing ingress traffic:
+    <none> (Selected pods are isolated for ingress connectivity)
+  Not affecting egress traffic
+  Policy Types: Ingress
+
+Connectivity Results:
+DENY - dev client -> dev web
+DENY - dev client -> prod web
+DENY - dev client -> dev db:3306
+DENY - dev client -> prod db:3306
+DENY - prod client -> prod web
+DENY - prod client -> dev web
+DENY - dev web -> dev db:3306
+DENY - dev web -> prod db:3306

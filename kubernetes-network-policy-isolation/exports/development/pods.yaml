@@ -1,0 +1,504 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/containerID: 2bc0f6a943ecbfde36aaa8e1f294f11c04caf44fc03b54ce87e9bdbba2ffae0e
+      cni.projectcalico.org/podIP: 192.168.166.140/32
+      cni.projectcalico.org/podIPs: 192.168.166.140/32
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"db","environment":"dev","tier":"backend"},"name":"database","namespace":"development"},"spec":{"containers":[{"command":["sh","-c","while true; do\n  nc -lk -p 3306 -e echo development-db\ndone\n"],"image":"busybox:1.36","name":"tcp-listener","ports":[{"containerPort":3306}],"resources":{"limits":{"cpu":"50m","memory":"64Mi"},"requests":{"cpu":"10m","memory":"16Mi"}}}]}}
+    creationTimestamp: "2026-09-22T03:20:11Z"
+    generation: 1
+    labels:
+      access-level: restricted
+      app: db
+      environment: dev
+      tier: backend
+    name: database
+    namespace: development
+    resourceVersion: "2277"
+    uid: c8992fb2-3dbc-4f3d-9c95-9b2610f4cee8
+  spec:
+    containers:
+    - command:
+      - sh
+      - -c
+      - |
+        while true; do
+          nc -lk -p 3306 -e echo development-db
+        done
+      image: busybox:1.36
+      imagePullPolicy: IfNotPresent
+      name: tcp-listener
+      ports:
+      - containerPort: 3306
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 50m
+          memory: 64Mi
+        requests:
+          cpu: 10m
+          memory: 16Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-p8ptv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-10-94
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-p8ptv
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    allocatedResources:
+      cpu: 10m
+      memory: 16Mi
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:16Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:11Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:20Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:20Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:11Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 10m
+        memory: 16Mi
+      containerID: containerd://275c0b77dfc492743ffc65780e4b2955a050fafc886debc39bdb4c5af08a895e
+      image: docker.io/library/busybox:1.36
+      imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+      lastState: {}
+      name: tcp-listener
+      ready: true
+      resources:
+        limits:
+          cpu: 50m
+          memory: 64Mi
+        requests:
+          cpu: 10m
+          memory: 16Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-09-22T03:20:20Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          - 10
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-p8ptv
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.10.94
+    hostIPs:
+    - ip: 172.31.10.94
+    observedGeneration: 1
+    phase: Running
+    podIP: 192.168.166.140
+    podIPs:
+    - ip: 192.168.166.140
+    qosClass: Burstable
+    resources:
+      limits:
+        cpu: 50m
+        memory: 64Mi
+      requests:
+        memory: 16Mi
+    startTime: "2026-09-22T03:20:11Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/containerID: 431d2eebf1b48c150b90e0eb68c710c5743f0d9ce022946d076ad5bc8e54165f
+      cni.projectcalico.org/podIP: 192.168.166.143/32
+      cni.projectcalico.org/podIPs: 192.168.166.143/32
+    creationTimestamp: "2026-09-22T03:28:58Z"
+    generation: 1
+    labels:
+      access-level: testing
+      app: client
+      environment: dev
+      tier: testing
+    name: test-client
+    namespace: development
+    resourceVersion: "2825"
+    uid: 627a3ead-3b38-4071-a9cb-ea944a859385
+  spec:
+    containers:
+    - command:
+      - sh
+      - -c
+      - |
+        while true; do
+          sleep 3600
+        done
+      image: busybox:1.36
+      imagePullPolicy: IfNotPresent
+      name: client
+      resources:
+        limits:
+          cpu: 50m
+          memory: 64Mi
+        requests:
+          cpu: 10m
+          memory: 16Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-zsbn6
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-10-94
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-zsbn6
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    allocatedResources:
+      cpu: 10m
+      memory: 16Mi
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:29:00Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:28:58Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:29:01Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:29:01Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:28:58Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 10m
+        memory: 16Mi
+      containerID: containerd://5f9cb92a618e7ad2dec059e17209973461a6876f70fc20bdf0e680b766e08068
+      image: docker.io/library/busybox:1.36
+      imageID: docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+      lastState: {}
+      name: client
+      ready: true
+      resources:
+        limits:
+          cpu: 50m
+          memory: 64Mi
+        requests:
+          cpu: 10m
+          memory: 16Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-09-22T03:29:01Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          - 10
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-zsbn6
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.10.94
+    hostIPs:
+    - ip: 172.31.10.94
+    observedGeneration: 1
+    phase: Running
+    podIP: 192.168.166.143
+    podIPs:
+    - ip: 192.168.166.143
+    qosClass: Burstable
+    resources:
+      limits:
+        cpu: 50m
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    startTime: "2026-09-22T03:28:58Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/containerID: afc791cd8fdab9fc5aa8ab64df9d12ef19e0870f03bf37a678f26bd0d3967648
+      cni.projectcalico.org/podIP: 192.168.166.137/32
+      cni.projectcalico.org/podIPs: 192.168.166.137/32
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"web","environment":"dev","tier":"frontend"},"name":"web-app","namespace":"development"},"spec":{"containers":[{"image":"nginx:1.27-alpine","name":"nginx","ports":[{"containerPort":80}],"resources":{"limits":{"cpu":"100m","memory":"96Mi"},"requests":{"cpu":"25m","memory":"32Mi"}}}]}}
+    creationTimestamp: "2026-09-22T03:20:11Z"
+    generation: 1
+    labels:
+      access-level: standard
+      app: web
+      environment: dev
+      tier: frontend
+    name: web-app
+    namespace: development
+    resourceVersion: "2276"
+    uid: 0edf4d9d-c4f4-4246-ae4c-6d5fdf9dd98a
+  spec:
+    containers:
+    - image: nginx:1.27-alpine
+      imagePullPolicy: IfNotPresent
+      name: nginx
+      ports:
+      - containerPort: 80
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 100m
+          memory: 96Mi
+        requests:
+          cpu: 25m
+          memory: 32Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-d4nm7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-172-31-10-94
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-d4nm7
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    allocatedResources:
+      cpu: 25m
+      memory: 32Mi
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:14Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:11Z"
+      observedGeneration: 1
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:18Z"
+      observedGeneration: 1
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:18Z"
+      observedGeneration: 1
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-09-22T03:20:11Z"
+      observedGeneration: 1
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - allocatedResources:
+        cpu: 25m
+        memory: 32Mi
+      containerID: containerd://4715014da5058474054b3ac00c18f6541ab8ae432d67c599fed139ad039295aa
+      image: docker.io/library/nginx:1.27-alpine
+      imageID: docker.io/library/nginx@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10
+      lastState: {}
+      name: nginx
+      ready: true
+      resources:
+        limits:
+          cpu: 100m
+          memory: 96Mi
+        requests:
+          cpu: 25m
+          memory: 32Mi
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-09-22T03:20:18Z"
+      user:
+        linux:
+          gid: 0
+          supplementalGroups:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 6
+          - 10
+          - 11
+          - 20
+          - 26
+          - 27
+          uid: 0
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-d4nm7
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.31.10.94
+    hostIPs:
+    - ip: 172.31.10.94
+    observedGeneration: 1
+    phase: Running
+    podIP: 192.168.166.137
+    podIPs:
+    - ip: 192.168.166.137
+    qosClass: Burstable
+    resources:
+      limits:
+        cpu: 100m
+        memory: 96Mi
+      requests:
+        memory: 32Mi
+    startTime: "2026-09-22T03:20:11Z"
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,4 @@
+NAME          STATUS   AGE     LABELS
+development   Active   6m16s   environment=dev,kubernetes.io/metadata.name=development,name=development,team=backend
+production    Active   6m16s   environment=prod,kubernetes.io/metadata.name=production,name=production,team=backend
+kube-system   Active   9m59s   kubernetes.io/metadata.name=kube-system

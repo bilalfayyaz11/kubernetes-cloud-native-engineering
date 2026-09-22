@@ -1,0 +1,52 @@
+=== Kubernetes Network Isolation Final Summary ===
+Timestamp: Tue Sep 22 03:29:40 UTC 2026
+
+Cluster:
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-94   Ready    control-plane   14m   v1.36.4   172.31.10.94   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+Calico:
+NAME        AVAILABLE   PROGRESSING   DEGRADED   SINCE   MESSAGE
+apiserver   True        False         False      11m     All objects available
+calico      True        False         False      12m     All objects available
+goldmane    True        False         False      10m     All objects available
+ippools     True        False         False      13m     All objects available
+tiers       True        False         False      11m     All objects available
+whisker     True        False         False      10m     All objects available
+
+Namespaces:
+NAME          STATUS   AGE   LABELS
+development   Active   10m   environment=dev,kubernetes.io/metadata.name=development,name=development,team=backend
+production    Active   10m   environment=prod,kubernetes.io/metadata.name=production,name=production,team=backend
+
+Development Pods:
+NAME          READY   STATUS    RESTARTS   AGE     IP                NODE              NOMINATED NODE   READINESS GATES   LABELS
+database      1/1     Running   0          9m29s   192.168.166.140   ip-172-31-10-94   <none>           <none>            access-level=restricted,app=db,environment=dev,tier=backend
+test-client   1/1     Running   0          42s     192.168.166.143   ip-172-31-10-94   <none>           <none>            access-level=testing,app=client,environment=dev,tier=testing
+web-app       1/1     Running   0          9m29s   192.168.166.137   ip-172-31-10-94   <none>           <none>            access-level=standard,app=web,environment=dev,tier=frontend
+
+Production Pods:
+NAME          READY   STATUS    RESTARTS   AGE     IP                NODE              NOMINATED NODE   READINESS GATES   LABELS
+database      1/1     Running   0          9m29s   192.168.166.141   ip-172-31-10-94   <none>           <none>            app=db,environment=prod,tier=backend
+test-client   1/1     Running   0          42s     192.168.166.144   ip-172-31-10-94   <none>           <none>            app=client,environment=prod,tier=testing
+web-app       1/1     Running   0          9m29s   192.168.166.142   ip-172-31-10-94   <none>           <none>            app=web,environment=prod,tier=frontend
+
+Policies:
+NAMESPACE     NAME                       POD-SELECTOR              AGE
+development   advanced-access-policy     access-level=restricted   4m57s
+development   allow-client-to-web        app=web,tier=frontend     7m23s
+development   allow-web-to-db            app=db,tier=backend       7m23s
+development   default-deny-ingress       <none>                    8m12s
+development   web-egress-policy          app=web,tier=frontend     5m47s
+production    allow-dev-web-to-prod-db   app=db,tier=backend       6m32s
+production    default-deny-ingress       <none>                    8m12s
+
+Security Controls:
+Default deny ingress: PASS
+Selective client-to-web ingress: PASS
+Selective web-to-database ingress: PASS
+Cross-namespace least privilege: PASS
+Development web egress restrictions: PASS
+Explicit CoreDNS access: PASS
+Advanced label selectors: PASS
+Automated connectivity matrix: PASS

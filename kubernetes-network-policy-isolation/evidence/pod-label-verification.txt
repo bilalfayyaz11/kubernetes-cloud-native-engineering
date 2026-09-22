@@ -1,0 +1,14 @@
+=== Pod Label Verification ===
+Timestamp: Tue Sep 22 03:25:36 UTC 2026
+
+Development:
+NAME          READY   STATUS      RESTARTS        AGE     LABELS
+database      1/1     Running     0               5m25s   access-level=restricted,app=db,environment=dev,tier=backend
+test-client   0/1     Completed   4 (2m17s ago)   5m25s   access-level=testing,app=client,environment=dev,tier=testing
+web-app       1/1     Running     0               5m25s   access-level=standard,app=web,environment=dev,tier=frontend
+
+Production:
+NAME          READY   STATUS      RESTARTS       AGE     LABELS
+database      1/1     Running     0              5m25s   app=db,environment=prod,tier=backend
+test-client   0/1     Completed   3 (2m8s ago)   5m25s   app=client,environment=prod,tier=testing
+web-app       1/1     Running     0              5m25s   app=web,environment=prod,tier=frontend

@@ -1,0 +1,36 @@
+=== Production Policy Inspection ===
+Timestamp: Tue Sep 22 03:25:35 UTC 2026
+
+==================================================
+allow-dev-web-to-prod-db
+==================================================
+Name:         allow-dev-web-to-prod-db
+Namespace:    production
+Created on:   2026-09-22 03:23:09 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=db,tier=backend
+  Allowing ingress traffic:
+    To Port: 3306/TCP
+    From:
+      NamespaceSelector: environment=dev
+      PodSelector: app=web,tier=frontend
+  Not affecting egress traffic
+  Policy Types: Ingress
+
+==================================================
+default-deny-ingress
+==================================================
+Name:         default-deny-ingress
+Namespace:    production
+Created on:   2026-09-22 03:21:29 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     <none> (Allowing the specific traffic to all pods in this namespace)
+  Allowing ingress traffic:
+    <none> (Selected pods are isolated for ingress connectivity)
+  Not affecting egress traffic
+  Policy Types: Ingress
+

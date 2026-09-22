@@ -1,0 +1,28 @@
+=== Selective Development Allow Policy Validation ===
+Timestamp: Tue Sep 22 03:22:38 UTC 2026
+
+Development policies:
+NAME                   POD-SELECTOR            AGE
+allow-client-to-web    app=web,tier=frontend   20s
+allow-web-to-db        app=db,tier=backend     20s
+default-deny-ingress   <none>                  69s
+
+Production policies:
+NAME                   POD-SELECTOR   AGE
+default-deny-ingress   <none>         69s
+
+Expected connectivity matrix:
+ALLOW - dev client -> dev web:80
+ALLOW - dev web -> dev db:3306
+DENY  - dev client -> dev db:3306
+DENY  - dev client -> prod web:80
+DENY  - dev web -> prod db:3306
+DENY  - prod client -> prod web:80
+
+Validation:
+PASS - client -> dev web
+PASS - web -> dev db
+PASS - client -> dev db blocked
+PASS - client -> prod web blocked
+PASS - dev web -> prod db blocked
+PASS - prod client -> prod web blocked

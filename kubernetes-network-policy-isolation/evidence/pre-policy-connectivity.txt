@@ -1,0 +1,20 @@
+=== Pre-Policy Connectivity Baseline ===
+Timestamp: Tue Sep 22 03:20:53 UTC 2026
+
+NetworkPolicies:
+
+Pod IPs:
+DEV_WEB_IP=192.168.166.137
+PROD_WEB_IP=192.168.166.142
+DEV_DB_IP=192.168.166.140
+PROD_DB_IP=192.168.166.141
+
+Connectivity Results:
+ALLOW - dev client -> dev web
+ALLOW - dev client -> prod web
+ALLOW - dev client -> dev db:3306
+ALLOW - dev client -> prod db:3306
+ALLOW - prod client -> prod web
+ALLOW - prod client -> dev web
+ALLOW - dev web -> dev db:3306
+ALLOW - dev web -> prod db:3306

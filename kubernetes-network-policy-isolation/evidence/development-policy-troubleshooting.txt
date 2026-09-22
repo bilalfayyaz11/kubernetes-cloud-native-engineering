@@ -1,0 +1,97 @@
+=== Development Policy Inspection ===
+Timestamp: Tue Sep 22 03:25:35 UTC 2026
+
+==================================================
+advanced-access-policy
+==================================================
+Name:         advanced-access-policy
+Namespace:    development
+Created on:   2026-09-22 03:24:44 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     access-level=restricted
+  Allowing ingress traffic:
+    To Port: 3306/TCP
+    From:
+      PodSelector: access-level=standard,tier in (frontend)
+  Not affecting egress traffic
+  Policy Types: Ingress
+
+==================================================
+allow-client-to-web
+==================================================
+Name:         allow-client-to-web
+Namespace:    development
+Created on:   2026-09-22 03:22:18 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=web,tier=frontend
+  Allowing ingress traffic:
+    To Port: 80/TCP
+    From:
+      PodSelector: app=client,tier=testing
+  Not affecting egress traffic
+  Policy Types: Ingress
+
+==================================================
+allow-web-to-db
+==================================================
+Name:         allow-web-to-db
+Namespace:    development
+Created on:   2026-09-22 03:22:18 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=db,tier=backend
+  Allowing ingress traffic:
+    To Port: 3306/TCP
+    From:
+      PodSelector: app=web,tier=frontend
+  Not affecting egress traffic
+  Policy Types: Ingress
+
+==================================================
+default-deny-ingress
+==================================================
+Name:         default-deny-ingress
+Namespace:    development
+Created on:   2026-09-22 03:21:29 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     <none> (Allowing the specific traffic to all pods in this namespace)
+  Allowing ingress traffic:
+    <none> (Selected pods are isolated for ingress connectivity)
+  Not affecting egress traffic
+  Policy Types: Ingress
+
+==================================================
+web-egress-policy
+==================================================
+Name:         web-egress-policy
+Namespace:    development
+Created on:   2026-09-22 03:23:54 +0000 UTC
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=web,tier=frontend
+  Not affecting ingress traffic
+  Allowing egress traffic:
+    To Port: 3306/TCP
+    To:
+      PodSelector: app=db,tier=backend
+    ----------
+    To Port: 3306/TCP
+    To:
+      NamespaceSelector: environment=prod
+      PodSelector: app=db,tier=backend
+    ----------
+    To Port: 53/UDP
+    To Port: 53/TCP
+    To:
+      NamespaceSelector: kubernetes.io/metadata.name=kube-system
+      PodSelector: k8s-app=kube-dns
+  Policy Types: Egress
+
