@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ha-web
+  namespace: default
+  labels:
+    app: ha-web
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ha-web
+  template:
+    metadata:
+      labels:
+        app: ha-web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi

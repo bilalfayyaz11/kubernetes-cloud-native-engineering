@@ -1,0 +1,39 @@
+=== HA Simulation Environment ===
+Timestamp: Tue Sep 22 04:00:13 UTC 2026
+
+Host:
+ip-172-31-10-42
+
+Host IP:
+172.31.10.42 172.17.0.1 172.30.0.1 
+
+CPU:
+2
+
+Memory:
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       1.2Gi       1.1Gi       9.3Mi       1.7Gi       2.6Gi
+Swap:             0B          0B          0B
+
+Docker:
+Docker version 29.6.0, build fb59821
+
+etcdctl:
+etcdctl version: 3.7.1
+API version: 3.7
+
+Network:
+[{"Subnet":"172.30.0.0/24","Gateway":"172.30.0.1"}]
+
+Topology:
+ETCD1_IP=172.30.0.11
+ETCD2_IP=172.30.0.12
+ETCD3_IP=172.30.0.13
+
+SERVER1_IP=172.30.0.21
+SERVER2_IP=172.30.0.22
+SERVER3_IP=172.30.0.23
+
+HAPROXY_IP=172.30.0.30
+
+ETCD_ENDPOINTS=https://172.30.0.11:2379,https://172.30.0.12:2379,https://172.30.0.13:2379

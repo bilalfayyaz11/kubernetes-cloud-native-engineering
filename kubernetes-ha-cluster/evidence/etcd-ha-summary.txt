@@ -1,0 +1,32 @@
+External etcd HA validation
+
+Topology:
+- etcd1: 172.30.0.11
+- etcd2: 172.30.0.12
+- etcd3: 172.30.0.13
+
+Transport:
+- TLS enabled for client traffic
+- TLS enabled for peer traffic
+- client certificate authentication enabled
+- peer certificate authentication enabled
+
+Validated:
+- 3-member cluster formation
+- leader election
+- endpoint health
+- replicated write/read consistency
+- one-member failure tolerance
+- quorum writes with 2/3 members
+- recovered member data synchronization
+
+Failure simulation:
+- etcd3 stopped
+- etcd1 + etcd2 maintained quorum
+- write operation succeeded
+- etcd3 restarted
+- failover data replicated to recovered member
+
+Important scope:
+This is a single-host process/container-level HA simulation and
+does not provide independent machine or availability-zone fault isolation.

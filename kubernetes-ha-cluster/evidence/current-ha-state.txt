@@ -1,0 +1,28 @@
+High Availability Kubernetes Current State
+
+Timestamp: Tue Sep 22 04:21:33 UTC 2026
+
+Execution scope:
+Single-host multi-container HA simulation
+
+Kubernetes nodes:
+NAME          STATUS   ROLES           AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE           KERNEL-VERSION            CONTAINER-RUNTIME
+k8s-server1   Ready    control-plane   18m   v1.36.4+k3s1   172.30.0.21   <none>        K3s v1.36.4+k3s1   6.14.0-1018-aws (amd64)   containerd://2.3.4-k3s1.36
+
+HA workload:
+
+HA workload Pods:
+
+HAProxy backends:
+k8s-server1 UP
+k8s-server2 DOWN
+k8s-server3 DOWN
+
+External etcd:
+┌──────────────────────────┬────────┬─────────────┬───────┐
+│         ENDPOINT         │ HEALTH │    TOOK     │ ERROR │
+├──────────────────────────┼────────┼─────────────┼───────┤
+│ https://172.30.0.13:2379 │   true │ 61.270637ms │       │
+│ https://172.30.0.12:2379 │   true │ 61.319308ms │       │
+│ https://172.30.0.11:2379 │   true │ 67.428203ms │       │
+└──────────────────────────┴────────┴─────────────┴───────┘

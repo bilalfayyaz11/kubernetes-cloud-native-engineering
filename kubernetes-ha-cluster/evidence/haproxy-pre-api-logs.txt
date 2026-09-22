@@ -1,0 +1,5 @@
+Server kubernetes-api-backend/k8s-server1 is DOWN, reason: Layer4 timeout, info: " at initial connection step of tcp-check", check duration: 2001ms. 2 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+Server kubernetes-api-backend/k8s-server2 is DOWN, reason: Layer4 timeout, info: " at initial connection step of tcp-check", check duration: 2001ms. 1 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+172.30.0.1:52014 [22/Sep/2026:04:01:41.737] stats stats/<STATS> 0/0/1 22618 LR 1/1/0/0/0 0/0
+Server kubernetes-api-backend/k8s-server3 is DOWN, reason: Layer4 timeout, info: " at initial connection step of tcp-check", check duration: 2001ms. 0 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+backend kubernetes-api-backend has no server available!

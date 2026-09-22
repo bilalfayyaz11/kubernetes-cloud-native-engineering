@@ -1,0 +1,30 @@
+Kubernetes API load-balancer design
+
+Frontend:
+- host endpoint: 127.0.0.1:6443
+- container IP: 172.30.0.30
+- protocol: TCP
+
+Backends:
+- k8s-server1: 172.30.0.21:6443
+- k8s-server2: 172.30.0.22:6443
+- k8s-server3: 172.30.0.23:6443
+
+Balancing:
+- round robin
+
+Health checking:
+- TCP checks
+- interval: 2 seconds
+- fall threshold: 2
+- rise threshold: 2
+
+Stats:
+- http://127.0.0.1:8404/stats
+
+Current expected state:
+All API backends are DOWN because Kubernetes server
+instances have not yet been deployed.
+
+This is intentional and establishes the pre-control-plane
+load-balancer baseline.

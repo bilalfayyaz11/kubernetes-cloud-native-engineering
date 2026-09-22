@@ -1,0 +1,15 @@
+=== External etcd Failure State ===
+Timestamp: Tue Sep 22 04:01:08 UTC 2026
+
+Containers:
+NAMES     STATUS                    NETWORKS
+etcd3     Exited (0) 1 second ago   ha-k8s-net
+etcd2     Up 6 seconds              ha-k8s-net
+etcd1     Up 7 seconds              ha-k8s-net
+
+Healthy surviving endpoints:
+https://172.30.0.12:2379 is healthy: successfully committed proposal: took = 87.639559ms
+https://172.30.0.11:2379 is healthy: successfully committed proposal: took = 90.611541ms
+
+Failover value:
+write-during-member-loss

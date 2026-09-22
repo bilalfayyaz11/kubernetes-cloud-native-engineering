@@ -1,0 +1,34 @@
+HA Kubernetes topology scope
+
+Host:
+ip-172-31-10-42
+
+Host IP:
+172.31.10.42
+
+Available CPU:
+2
+
+Available memory:
+3.8Gi
+
+Execution model:
+Single-host high-availability simulation.
+
+Reason:
+The supplied environment contains one VM rather than separate
+control-plane, worker, etcd and load-balancer machines.
+
+Planned logical topology:
+- etcd1
+- etcd2
+- etcd3
+- k8s-server1
+- k8s-server2
+- k8s-server3
+- haproxy
+
+Important:
+This validates quorum, API balancing and process-level failover,
+but it does not provide independent machine or availability-zone
+fault isolation.
