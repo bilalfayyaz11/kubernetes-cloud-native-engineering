@@ -1,0 +1,29 @@
+=== Kubernetes HTTPS Ingress Evidence ===
+Timestamp: Tue Sep 22 02:41:26 UTC 2026
+
+Ingress:
+NAME              CLASS   HOSTS              ADDRESS         PORTS     AGE
+web-app-ingress   nginx   networking.local   172.31.10.149   80, 443   2m8s
+
+TLS Secret:
+NAME             TYPE                DATA   AGE
+networking-tls   kubernetes.io/tls   2      11s
+
+Routing:
+HTTPS /     -> web-app-service : PASS
+HTTPS /api  -> api-app-service : PASS
+
+Redirect:
+HTTP status: 308
+
+Certificate:
+subject=CN = networking.local, O = networking.local
+issuer=CN = networking.local, O = networking.local
+notBefore=Sep 22 02:41:15 2026 GMT
+notAfter=Sep 22 02:41:15 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:networking.local
+
+Security:
+Private key payload excluded from evidence.
+Local TLS directory excluded from Git packaging.

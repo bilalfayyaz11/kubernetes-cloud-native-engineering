@@ -1,0 +1,38 @@
+-------------------------------------------------------------------------------
+NGINX Ingress controller
+  Release:       v1.15.1
+  Build:         0df02f2cfcf5fe4ad3cf31492bca770ac2a1606a
+  Repository:    https://github.com/kubernetes/ingress-nginx
+  nginx version: nginx/1.27.1
+
+-------------------------------------------------------------------------------
+
+W0922 02:38:55.898073       7 client_config.go:682] Neither --kubeconfig nor --master was specified.  Using the inClusterConfig.  This might not work.
+I0922 02:38:55.898463       7 main.go:205] "Creating API client" host="https://10.96.0.1:443"
+I0922 02:38:55.913103       7 main.go:248] "Running in Kubernetes cluster" major="1" minor="36" git="v1.36.4" state="clean" commit="bb826b1d48562f110659e64e8ec444327433db95" platform="linux/amd64"
+I0922 02:38:56.320876       7 main.go:101] "SSL fake certificate created" file="/etc/ingress-controller/ssl/default-fake-certificate.pem"
+I0922 02:38:56.349070       7 ssl.go:535] "loading tls certificate" path="/usr/local/certificates/cert" key="/usr/local/certificates/key"
+I0922 02:38:56.371401       7 nginx.go:273] "Starting NGINX Ingress controller"
+I0922 02:38:56.417845       7 event.go:377] Event(v1.ObjectReference{Kind:"ConfigMap", Namespace:"ingress-nginx", Name:"ingress-nginx-controller", UID:"e18157b8-7b78-4ff2-88e5-c68471cc9691", APIVersion:"v1", ResourceVersion:"841", FieldPath:""}): type: 'Normal' reason: 'CREATE' ConfigMap ingress-nginx/ingress-nginx-controller
+I0922 02:38:57.575197       7 nginx.go:319] "Starting NGINX process"
+I0922 02:38:57.576421       7 leaderelection.go:258] "Attempting to acquire leader lease..." lock="ingress-nginx/ingress-nginx-leader"
+I0922 02:38:57.578517       7 nginx.go:339] "Starting validation webhook" address=":8443" certPath="/usr/local/certificates/cert" keyPath="/usr/local/certificates/key"
+I0922 02:38:57.585777       7 controller.go:217] "Configuration changes detected, backend reload required"
+I0922 02:38:57.620536       7 leaderelection.go:272] "Successfully acquired lease" lock="ingress-nginx/ingress-nginx-leader"
+I0922 02:38:57.620566       7 status.go:85] "New leader elected" identity="ingress-nginx-controller-744c769855-p2687"
+I0922 02:38:57.641261       7 status.go:224] "POD is not ready" pod="ingress-nginx/ingress-nginx-controller-744c769855-p2687" node="ip-172-31-10-149"
+I0922 02:38:57.651620       7 status.go:224] "POD is not ready" pod="ingress-nginx/ingress-nginx-controller-744c769855-p2687" node="ip-172-31-10-149"
+I0922 02:38:57.744575       7 controller.go:231] "Backend successfully reloaded"
+I0922 02:38:57.744940       7 controller.go:243] "Initial sync, sleeping for 1 second"
+I0922 02:38:57.745330       7 event.go:377] Event(v1.ObjectReference{Kind:"Pod", Namespace:"ingress-nginx", Name:"ingress-nginx-controller-744c769855-p2687", UID:"150e0e72-d3f4-4b53-8daa-ec592a35f37f", APIVersion:"v1", ResourceVersion:"961", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+I0922 02:39:18.474835       7 main.go:107] "successfully validated configuration, accepting" ingress="default/web-app-ingress"
+I0922 02:39:18.668841       7 main.go:107] "successfully validated configuration, accepting" ingress="default/web-app-ingress"
+I0922 02:39:18.676655       7 store.go:443] "Found valid IngressClass" ingress="default/web-app-ingress" ingressclass="nginx"
+I0922 02:39:18.677195       7 event.go:377] Event(v1.ObjectReference{Kind:"Ingress", Namespace:"default", Name:"web-app-ingress", UID:"3d26ad13-c243-4a2b-839e-09116a269c6b", APIVersion:"networking.k8s.io/v1", ResourceVersion:"1065", FieldPath:""}): type: 'Normal' reason: 'Sync' Scheduled for sync
+I0922 02:39:21.240287       7 controller.go:217] "Configuration changes detected, backend reload required"
+I0922 02:39:21.450422       7 controller.go:231] "Backend successfully reloaded"
+I0922 02:39:21.469469       7 event.go:377] Event(v1.ObjectReference{Kind:"Pod", Namespace:"ingress-nginx", Name:"ingress-nginx-controller-744c769855-p2687", UID:"150e0e72-d3f4-4b53-8daa-ec592a35f37f", APIVersion:"v1", ResourceVersion:"961", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+10.244.0.1 - - [22/Sep/2026:02:39:27 +0000] "GET / HTTP/1.1" 200 236 "-" "curl/8.5.0" 79 0.001 [default-web-app-service-80] [] 10.244.0.7:80 236 0.001 200 73e1bb1341f5aefd3c47e7a2937c00c1
+10.244.0.1 - - [22/Sep/2026:02:39:27 +0000] "GET /api/ HTTP/1.1" 200 192 "-" "curl/8.5.0" 83 0.001 [default-api-app-service-80] [] 10.244.0.14:80 192 0.000 200 d8961bf15392725200c2e0685f5baf54
+127.0.0.1 - - [22/Sep/2026:02:39:28 +0000] "GET / HTTP/1.1" 200 236 "-" "curl/8.5.0" 79 0.001 [default-web-app-service-80] [] 10.244.0.6:80 236 0.001 200 5ffd1a316a304c6542c8c33a39e9b12d
+127.0.0.1 - - [22/Sep/2026:02:39:28 +0000] "GET /api/ HTTP/1.1" 200 192 "-" "curl/8.5.0" 83 0.002 [default-api-app-service-80] [] 10.244.0.15:80 192 0.002 200 cfccf59fa28e397ba361867ffdfb7e3b

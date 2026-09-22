@@ -1,0 +1,10 @@
+=== Networking Environment Notes ===
+Timestamp: Tue Sep 22 02:37:05 UTC 2026
+
+Host HTTPS port check:
+LISTEN 0      10           0.0.0.0:8443       0.0.0.0:*    users:(("dcvserver",pid=731,fd=9))                     
+LISTEN 0      10              [::]:8443          [::]:*    users:(("dcvserver",pid=731,fd=10))                    
+
+Decision:
+Local HTTPS ingress forwarding will use port 9443
+because host port 8443 is already occupied by dcvserver.

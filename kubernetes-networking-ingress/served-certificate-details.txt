@@ -1,0 +1,6 @@
+subject=CN = networking.local, O = networking.local
+issuer=CN = networking.local, O = networking.local
+notBefore=Sep 22 02:41:15 2026 GMT
+notAfter=Sep 22 02:41:15 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:networking.local

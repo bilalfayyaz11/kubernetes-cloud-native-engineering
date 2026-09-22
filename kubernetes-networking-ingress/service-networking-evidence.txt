@@ -1,0 +1,43 @@
+=== Kubernetes Service Networking Evidence ===
+Timestamp: Tue Sep 22 02:37:31 UTC 2026
+
+Deployment:
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+web-app   3/3     3            3           14s
+
+Pods:
+NAME                       READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+web-app-5788778bf7-9qk9b   1/1     Running   0          14s   10.244.0.7   ip-172-31-10-149   <none>           <none>
+web-app-5788778bf7-grtvb   1/1     Running   0          14s   10.244.0.8   ip-172-31-10-149   <none>           <none>
+web-app-5788778bf7-z24s8   1/1     Running   0          14s   10.244.0.6   ip-172-31-10-149   <none>           <none>
+
+ClusterIP Service:
+NAME              TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+web-app-service   ClusterIP   10.96.197.9   <none>        80/TCP    12s   app=web-app
+
+LoadBalancer Service:
+NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+web-app-loadbalancer   LoadBalancer   10.100.213.174   <pending>     80:31146/TCP   13s   app=web-app
+
+ClusterIP EndpointSlice:
+NAME                    ADDRESSTYPE   PORTS   ENDPOINTS                          AGE
+web-app-service-xd4j7   IPv4          80      10.244.0.6,10.244.0.8,10.244.0.7   13s
+
+LoadBalancer EndpointSlice:
+NAME                         ADDRESSTYPE   PORTS   ENDPOINTS                          AGE
+web-app-loadbalancer-s58mx   IPv4          80      10.244.0.6,10.244.0.8,10.244.0.7   13s
+
+NodePort:
+31146
+
+External IP:
+not-assigned
+
+Internal ClusterIP request:
+PASS
+
+Internal LoadBalancer request:
+PASS
+
+Finite port-forward request:
+PASS

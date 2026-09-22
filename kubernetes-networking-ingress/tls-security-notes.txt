@@ -1,0 +1,10 @@
+TLS security notes
+
+- TLS terminates at the Kubernetes Ingress controller.
+- The certificate is self-signed and intended only for controlled testing.
+- The Kubernetes TLS Secret contains both the certificate and private key.
+- Secret payloads must not be printed into logs or repository evidence.
+- The TLS private key remains under the local .tls directory.
+- The .tls directory must never be committed to Git.
+- HTTP traffic is redirected to HTTPS.
+- One Ingress resource owns the host/path rules; TLS was added to that existing resource.

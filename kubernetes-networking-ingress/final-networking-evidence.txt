@@ -1,0 +1,39 @@
+=== Kubernetes Networking and Ingress Evidence ===
+Timestamp: Tue Sep 22 02:42:15 UTC 2026
+
+Application backends:
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+web-app   3/3     3            3           4m58s
+api-app   2/2     2            2           3m5s
+
+Services:
+NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+web-app-service        ClusterIP      10.96.197.9      <none>        80/TCP         4m56s   app=web-app
+api-app-service        ClusterIP      10.99.135.186    <none>        80/TCP         3m5s    app=api-app
+web-app-loadbalancer   LoadBalancer   10.100.213.174   <pending>     80:31146/TCP   4m56s   app=web-app
+
+Ingress:
+NAME              CLASS   HOSTS              ADDRESS         PORTS     AGE
+web-app-ingress   nginx   networking.local   172.31.10.149   80, 443   2m57s
+
+Ingress controller:
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+ingress-nginx-controller   1/1     1            1           3m38s
+
+TLS:
+NAME             TYPE                DATA   AGE
+networking-tls   kubernetes.io/tls   2      60s
+
+Validated routing:
+/       -> web-app-service
+/api    -> api-app-service
+HTTP    -> redirected to HTTPS
+HTTPS   -> TLS terminated by ingress controller
+
+LoadBalancer behavior:
+Service exists and works internally.
+No cloud load-balancer implementation is present in this kubeadm environment.
+
+Security:
+TLS private key retained only in local .tls directory.
+Private key is excluded from repository packaging.

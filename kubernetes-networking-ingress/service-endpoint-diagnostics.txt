@@ -1,0 +1,24 @@
+=== Kubernetes Service Diagnostics ===
+Timestamp: Tue Sep 22 02:42:15 UTC 2026
+
+Services:
+NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+api-app-service        ClusterIP      10.99.135.186    <none>        80/TCP         3m5s    app=api-app
+kubernetes             ClusterIP      10.96.0.1        <none>        443/TCP        6m5s    <none>
+web-app-loadbalancer   LoadBalancer   10.100.213.174   <pending>     80:31146/TCP   4m56s   app=web-app
+web-app-service        ClusterIP      10.96.197.9      <none>        80/TCP         4m56s   app=web-app
+
+EndpointSlices:
+NAME                         ADDRESSTYPE   PORTS   ENDPOINTS                          AGE
+api-app-service-pxr7r        IPv4          80      10.244.0.15,10.244.0.14            3m5s
+kubernetes                   IPv4          6443    172.31.10.149                      6m5s
+web-app-loadbalancer-s58mx   IPv4          80      10.244.0.6,10.244.0.8,10.244.0.7   4m56s
+web-app-service-xd4j7        IPv4          80      10.244.0.6,10.244.0.8,10.244.0.7   4m56s
+
+Pods:
+NAME                       READY   STATUS    RESTARTS   AGE     IP            NODE               NOMINATED NODE   READINESS GATES   LABELS
+api-app-5cc77799f7-7q5js   1/1     Running   0          3m5s    10.244.0.14   ip-172-31-10-149   <none>           <none>            app=api-app,pod-template-hash=5cc77799f7
+api-app-5cc77799f7-82w9s   1/1     Running   0          3m5s    10.244.0.15   ip-172-31-10-149   <none>           <none>            app=api-app,pod-template-hash=5cc77799f7
+web-app-5788778bf7-9qk9b   1/1     Running   0          4m58s   10.244.0.7    ip-172-31-10-149   <none>           <none>            app=web-app,pod-template-hash=5788778bf7
+web-app-5788778bf7-grtvb   1/1     Running   0          4m58s   10.244.0.8    ip-172-31-10-149   <none>           <none>            app=web-app,pod-template-hash=5788778bf7
+web-app-5788778bf7-z24s8   1/1     Running   0          4m58s   10.244.0.6    ip-172-31-10-149   <none>           <none>            app=web-app,pod-template-hash=5788778bf7

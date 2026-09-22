@@ -1,0 +1,83 @@
+=== Kubernetes Networking and Ingress Test ===
+Timestamp: Tue Sep 22 02:42:12 UTC 2026
+
+Node IP:        172.31.10.149
+HTTP NodePort:  32129
+HTTPS NodePort: 32727
+
+1. LoadBalancer Service
+NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+web-app-loadbalancer   LoadBalancer   10.100.213.174   <pending>     80:31146/TCP   4m53s   app=web-app
+
+2. Web Backend Deployment
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+web-app   3/3     3            3           4m55s
+
+3. API Backend Deployment
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+api-app   2/2     2            2           3m3s
+
+4. Backend Services
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+web-app-service   ClusterIP   10.96.197.9     <none>        80/TCP    4m54s
+api-app-service   ClusterIP   10.99.135.186   <none>        80/TCP    3m3s
+
+5. Web EndpointSlice
+NAME                    ADDRESSTYPE   PORTS   ENDPOINTS                          AGE
+web-app-service-xd4j7   IPv4          80      10.244.0.6,10.244.0.8,10.244.0.7   4m54s
+
+6. API EndpointSlice
+NAME                    ADDRESSTYPE   PORTS   ENDPOINTS                 AGE
+api-app-service-pxr7r   IPv4          80      10.244.0.15,10.244.0.14   3m3s
+
+7. Ingress Resource
+NAME              CLASS   HOSTS              ADDRESS         PORTS     AGE
+web-app-ingress   nginx   networking.local   172.31.10.149   80, 443   2m55s
+
+8. TLS Secret
+NAME             TYPE                DATA   AGE
+networking-tls   kubernetes.io/tls   2      57s
+
+9. HTTPS Root Route
+PASS: / -> web-app-service
+
+10. HTTPS API Route
+PASS: /api -> api-app-service
+
+11. HTTP -> HTTPS Redirect
+HTTP status: 308
+PASS: redirect response observed
+
+12. Served Certificate
+subject=CN = networking.local, O = networking.local
+issuer=CN = networking.local, O = networking.local
+notBefore=Sep 22 02:41:15 2026 GMT
+notAfter=Sep 22 02:41:15 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:networking.local
+PASS: certificate hostname verified
+
+13. Ingress Controller
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+ingress-nginx-controller   1/1     1            1           3m36s
+
+14. IngressClass
+NAME    CONTROLLER             PARAMETERS   AGE
+nginx   k8s.io/ingress-nginx   <none>       3m36s
+
+15. Warning Events
+NAMESPACE       LAST SEEN   TYPE      REASON                   OBJECT                                          MESSAGE
+kube-system     5m57s       Warning   NodeNotReady             pod/etcd-ip-172-31-10-149                       Node is not ready
+kube-system     5m57s       Warning   NodeNotReady             pod/kube-apiserver-ip-172-31-10-149             Node is not ready
+kube-system     5m57s       Warning   NodeNotReady             pod/kube-controller-manager-ip-172-31-10-149    Node is not ready
+kube-system     5m57s       Warning   NodeNotReady             pod/kube-scheduler-ip-172-31-10-149             Node is not ready
+kube-system     5m56s       Warning   FailedScheduling         pod/coredns-589f44dc88-gdqrz                    0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system     5m56s       Warning   FailedScheduling         pod/coredns-589f44dc88-wqqqr                    0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system     5m50s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-wqqqr                    Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "36171e19159b57248f16f7bc297a1f55170a54d77687877dff5fdbe364d6e342": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system     5m49s       Warning   FailedCreatePodSandBox   pod/coredns-589f44dc88-gdqrz                    Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "2b812c12bf3c716a7eb13ff10c68579e491cca771679e90ac022530dec44610f": plugin type="flannel" failed (add): failed to load flannel 'subnet.env' file: open /run/flannel/subnet.env: no such file or directory. Check the flannel pod log for this node.
+kube-system     5m33s       Warning   Unhealthy                pod/coredns-589f44dc88-wqqqr                    Readiness probe failed: Get "http://10.244.0.3:8181/ready": dial tcp 10.244.0.3:8181: connect: connection refused
+ingress-nginx   3m32s       Warning   FailedMount              pod/ingress-nginx-controller-744c769855-p2687   MountVolume.SetUp failed for volume "webhook-cert" : secret "ingress-nginx-admission" not found
+
+========================================
+RESULT: ALL NETWORKING CHECKS PASSED
+========================================

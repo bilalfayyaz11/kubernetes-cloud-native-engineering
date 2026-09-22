@@ -1,0 +1,15 @@
+=== Kubernetes Service Type Comparison ===
+
+ClusterIP:
+- Internal virtual IP
+- Reachable inside the cluster
+- No direct external exposure
+
+LoadBalancer:
+- Includes ClusterIP behavior
+- Allocates a NodePort by default
+- Requires an external load-balancer implementation for an external address
+
+Environment result:
+- External address: not assigned
+- Reason: kubeadm environment has no cloud LoadBalancer controller

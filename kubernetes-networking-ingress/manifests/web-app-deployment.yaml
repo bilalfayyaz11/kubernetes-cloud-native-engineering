@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-content
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Kubernetes Networking Demo</title>
+    </head>
+    <body>
+      <h1>Kubernetes Networking and Ingress</h1>
+      <p>Service: Web Application Demo</p>
+      <p>Version: 1.0</p>
+      <p>Status: Running</p>
+    </body>
+    </html>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  labels:
+    app: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+        - name: web-app
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html-content
+              mountPath: /usr/share/nginx/html
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 96Mi
+      volumes:
+        - name: html-content
+          configMap:
+            name: web-content

@@ -1,0 +1,41 @@
+=== Kubernetes HTTP Ingress Evidence ===
+Timestamp: Tue Sep 22 02:39:28 UTC 2026
+
+Ingress controller:
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+ingress-nginx-controller   1/1     1            1           50s
+
+IngressClass:
+NAME    CONTROLLER             PARAMETERS   AGE
+nginx   k8s.io/ingress-nginx   <none>       50s
+
+Controller Service:
+NAME                       TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE   SELECTOR
+ingress-nginx-controller   NodePort   10.97.203.63   <none>        80:32129/TCP,443:32727/TCP   52s   app.kubernetes.io/component=controller,app.kubernetes.io/instance=ingress-nginx,app.kubernetes.io/name=ingress-nginx
+
+Node IP: 172.31.10.149
+HTTP NodePort: 32129
+HTTPS NodePort: 32727
+
+Backends:
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+web-app   3/3     3            3           2m12s
+api-app   2/2     2            2           19s
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+web-app-service   ClusterIP   10.96.197.9     <none>        80/TCP    2m10s
+api-app-service   ClusterIP   10.99.135.186   <none>        80/TCP    19s
+
+Ingress:
+NAME              CLASS   HOSTS              ADDRESS   PORTS   AGE
+web-app-ingress   nginx   networking.local             80      11s
+
+Routing validation:
+/     -> web-app-service : PASS
+/api  -> api-app-service : PASS
+
+Host:
+networking.local
+
+Controller status:
+ingress-nginx v1.15.1
+Lab-only compatibility deployment; project is retired.
