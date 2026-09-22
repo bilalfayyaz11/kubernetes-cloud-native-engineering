@@ -1,0 +1,6 @@
+NAME                                             READY   STATUS    RESTARTS   AGE   IP            NODE                         NOMINATED NODE   READINESS GATES
+my-web-application-deployment-54694c867b-2t6kp   1/1     Running   0          25m   10.244.0.18   crd-operator-control-plane   <none>           <none>
+my-web-application-deployment-54694c867b-f6nz8   1/1     Running   0          25m   10.244.0.14   crd-operator-control-plane   <none>           <none>
+my-web-application-deployment-54694c867b-qpqm9   1/1     Running   0          27m   10.244.0.11   crd-operator-control-plane   <none>           <none>
+my-web-application-deployment-54694c867b-sqrcb   1/1     Running   0          27m   10.244.0.9    crd-operator-control-plane   <none>           <none>
+my-web-application-deployment-54694c867b-vwsj2   1/1     Running   0          25m   10.244.0.13   crd-operator-control-plane   <none>           <none>

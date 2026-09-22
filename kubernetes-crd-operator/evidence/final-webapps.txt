@@ -1,0 +1,3 @@
+NAME                 REPLICAS   AVAILABLE   IMAGE               READY
+my-web-application   5          4           nginx:1.28-alpine   False
+secondary-webapp     2          0           httpd:2.4-alpine    False

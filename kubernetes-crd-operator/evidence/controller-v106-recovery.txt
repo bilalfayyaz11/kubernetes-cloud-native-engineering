@@ -1,0 +1,66 @@
+WebApp controller final recovery
+
+Previous failure:
+The Kubernetes Python client rejected the _content_type
+argument supplied to patch_namespaced_service.
+
+Earlier failure:
+The generated V1ServiceSpec model exposed clusterIPs using
+an implementation-specific Python attribute name.
+
+Final correction:
+Service reconciliation uses replace_namespaced_service.
+
+The live Service is serialized through:
+client.ApiClient().sanitize_for_serialization()
+
+This provides canonical Kubernetes API field names such as:
+clusterIP
+clusterIPs
+ipFamilies
+ipFamilyPolicy
+
+The replacement preserves API-assigned Service networking
+while replacing the complete desired Service port list.
+
+Controller image:
+webapp-controller:1.0.6
+
+Managed WebApp:
+my-web-application
+
+Desired replicas:
+5
+
+Available replicas:
+5
+
+Desired port:
+8080
+
+Service port entries:
+1
+
+ClusterIP:
+10.96.22.205
+
+Service reconciliation:
+PASS
+
+Deployment reconciliation:
+PASS
+
+Status reconciliation:
+PASS
+
+Owner references:
+PASS
+
+Namespace-scoped RBAC:
+PASS
+
+Controller logs:
+clean
+
+Final result:
+SUCCESS

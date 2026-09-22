@@ -1,0 +1,164 @@
+Loaded in-cluster Kubernetes configuration
+WebApp controller started; reconcile interval=5s
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application
+Found 1 WebApp resource(s)
+Reconciling WebApp default/my-web-application
+Reconciled Deployment default/my-web-application-deployment
+Reconciled Service default/my-web-application-service
+Updated status for default/my-web-application: 5/5 available
+Completed reconciliation for default/my-web-application

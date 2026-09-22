@@ -1,0 +1,3 @@
+The WebApp "final-missing-fields" is invalid: 
+* spec.image: Required value
+* spec.port: Required value

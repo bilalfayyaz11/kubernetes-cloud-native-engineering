@@ -1,0 +1,100 @@
+25m         Normal   ScalingReplicaSet         deployment/my-web-application-deployment              Scaled up replica set my-web-application-deployment-54694c867b from 2 to 5
+25m         Normal   Scheduled                 pod/my-web-application-deployment-54694c867b-vwsj2    Successfully assigned default/my-web-application-deployment-54694c867b-vwsj2 to crd-operator-control-plane
+25m         Normal   Scheduled                 pod/my-web-application-deployment-54694c867b-sftk2    Successfully assigned default/my-web-application-deployment-54694c867b-sftk2 to crd-operator-control-plane
+25m         Normal   Scheduled                 pod/my-web-application-deployment-54694c867b-f6nz8    Successfully assigned default/my-web-application-deployment-54694c867b-f6nz8 to crd-operator-control-plane
+25m         Normal   Scheduled                 pod/my-web-application-deployment-679b4794f-65s7g     Successfully assigned default/my-web-application-deployment-679b4794f-65s7g to crd-operator-control-plane
+25m         Normal   SuccessfulCreate          replicaset/my-web-application-deployment-679b4794f    Created pod: my-web-application-deployment-679b4794f-65s7g
+25m         Normal   ScalingReplicaSet         deployment/my-web-application-deployment              Scaled down replica set my-web-application-deployment-54694c867b from 5 to 4
+25m         Normal   ScalingReplicaSet         deployment/my-web-application-deployment              Scaled up replica set my-web-application-deployment-679b4794f from 0 to 2
+25m         Normal   SuccessfulCreate          replicaset/my-web-application-deployment-679b4794f    Created pod: my-web-application-deployment-679b4794f-gmstd
+25m         Normal   SuccessfulDelete          replicaset/my-web-application-deployment-54694c867b   Deleted pod: my-web-application-deployment-54694c867b-sftk2
+25m         Normal   Scheduled                 pod/my-web-application-deployment-679b4794f-g2wml     Successfully assigned default/my-web-application-deployment-679b4794f-g2wml to crd-operator-control-plane
+25m         Normal   ScalingReplicaSet         deployment/my-web-application-deployment              Scaled up replica set my-web-application-deployment-679b4794f from 2 to 3
+25m         Normal   SuccessfulCreate          replicaset/my-web-application-deployment-679b4794f    Created pod: my-web-application-deployment-679b4794f-g2wml
+25m         Normal   Scheduled                 pod/my-web-application-deployment-679b4794f-gmstd     Successfully assigned default/my-web-application-deployment-679b4794f-gmstd to crd-operator-control-plane
+25m         Normal   Pulled                    pod/my-web-application-deployment-54694c867b-sftk2    Container image "nginx:1.28-alpine" already present on machine and can be accessed by the pod
+25m         Normal   Created                   pod/my-web-application-deployment-54694c867b-sftk2    Container created
+25m         Normal   Created                   pod/my-web-application-deployment-54694c867b-vwsj2    Container created
+25m         Normal   Pulled                    pod/my-web-application-deployment-54694c867b-f6nz8    Container image "nginx:1.28-alpine" already present on machine and can be accessed by the pod
+25m         Normal   Created                   pod/my-web-application-deployment-54694c867b-f6nz8    Container created
+25m         Normal   Pulled                    pod/my-web-application-deployment-54694c867b-vwsj2    Container image "nginx:1.28-alpine" already present on machine and can be accessed by the pod
+25m         Normal   Pulling                   pod/my-web-application-deployment-679b4794f-g2wml     Pulling image "nginx:1.27-alpine"
+25m         Normal   Started                   pod/my-web-application-deployment-54694c867b-vwsj2    Container started
+25m         Normal   Pulling                   pod/my-web-application-deployment-679b4794f-65s7g     Pulling image "nginx:1.27-alpine"
+25m         Normal   Killing                   pod/my-web-application-deployment-54694c867b-sftk2    Stopping container webapp
+25m         Normal   Started                   pod/my-web-application-deployment-54694c867b-sftk2    Container started
+25m         Normal   Started                   pod/my-web-application-deployment-54694c867b-f6nz8    Container started
+25m         Normal   Pulling                   pod/my-web-application-deployment-679b4794f-gmstd     Pulling image "nginx:1.27-alpine"
+25m         Normal   ScalingReplicaSet         deployment/my-web-application-deployment              Scaled down replica set my-web-application-deployment-679b4794f from 3 to 0
+25m         Normal   SuccessfulDelete          replicaset/my-web-application-deployment-679b4794f    Deleted pod: my-web-application-deployment-679b4794f-gmstd
+25m         Normal   Scheduled                 pod/my-web-application-deployment-54694c867b-2t6kp    Successfully assigned default/my-web-application-deployment-54694c867b-2t6kp to crd-operator-control-plane
+25m         Normal   ScalingReplicaSet         deployment/my-web-application-deployment              Scaled up replica set my-web-application-deployment-54694c867b from 4 to 5
+25m         Normal   SuccessfulCreate          replicaset/my-web-application-deployment-54694c867b   Created pod: my-web-application-deployment-54694c867b-2t6kp
+25m         Normal   SuccessfulDelete          replicaset/my-web-application-deployment-679b4794f    Deleted pod: my-web-application-deployment-679b4794f-65s7g
+25m         Normal   SuccessfulDelete          replicaset/my-web-application-deployment-679b4794f    Deleted pod: my-web-application-deployment-679b4794f-g2wml
+25m         Normal   Created                   pod/my-web-application-deployment-679b4794f-g2wml     Container created
+25m         Normal   Pulled                    pod/my-web-application-deployment-679b4794f-g2wml     Successfully pulled image "nginx:1.27-alpine" in 3.894s (3.895s including waiting). Image size: 20984244 bytes.
+25m         Normal   Created                   pod/my-web-application-deployment-679b4794f-65s7g     Container created
+25m         Normal   Pulled                    pod/my-web-application-deployment-679b4794f-gmstd     Successfully pulled image "nginx:1.27-alpine" in 609ms (3.708s including waiting). Image size: 20984244 bytes.
+25m         Normal   Created                   pod/my-web-application-deployment-54694c867b-2t6kp    Container created
+25m         Normal   Pulled                    pod/my-web-application-deployment-54694c867b-2t6kp    Container image "nginx:1.28-alpine" already present on machine and can be accessed by the pod
+25m         Normal   Pulled                    pod/my-web-application-deployment-679b4794f-65s7g     Successfully pulled image "nginx:1.27-alpine" in 259ms (3.789s including waiting). Image size: 20984244 bytes.
+25m         Normal   Created                   pod/my-web-application-deployment-679b4794f-gmstd     Container created
+25m         Normal   Started                   pod/my-web-application-deployment-54694c867b-2t6kp    Container started
+25m         Normal   Killing                   pod/my-web-application-deployment-679b4794f-g2wml     Stopping container webapp
+25m         Normal   Started                   pod/my-web-application-deployment-679b4794f-g2wml     Container started
+25m         Normal   Killing                   pod/my-web-application-deployment-679b4794f-gmstd     Stopping container webapp
+25m         Normal   Started                   pod/my-web-application-deployment-679b4794f-gmstd     Container started
+25m         Normal   Killing                   pod/my-web-application-deployment-679b4794f-65s7g     Stopping container webapp
+25m         Normal   Started                   pod/my-web-application-deployment-679b4794f-65s7g     Container started
+21m         Normal   SuccessfulCreate          replicaset/webapp-controller-77fb74dc9d               Created pod: webapp-controller-77fb74dc9d-mh2xp
+21m         Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled up replica set webapp-controller-77fb74dc9d from 0 to 1
+21m         Normal   Scheduled                 pod/webapp-controller-77fb74dc9d-mh2xp                Successfully assigned default/webapp-controller-77fb74dc9d-mh2xp to crd-operator-control-plane
+21m         Normal   Killing                   pod/webapp-controller-76b8c74b5-fnzzh                 Stopping container controller
+21m         Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled down replica set webapp-controller-76b8c74b5 from 1 to 0
+21m         Normal   Pulled                    pod/webapp-controller-77fb74dc9d-mh2xp                Container image "webapp-controller:1.0.2" already present on machine and can be accessed by the pod
+21m         Normal   SuccessfulDelete          replicaset/webapp-controller-76b8c74b5                Deleted pod: webapp-controller-76b8c74b5-fnzzh
+21m         Normal   Started                   pod/webapp-controller-77fb74dc9d-mh2xp                Container started
+21m         Normal   Created                   pod/webapp-controller-77fb74dc9d-mh2xp                Container created
+17m         Normal   SuccessfulCreate          replicaset/webapp-controller-5fdfb97b48               Created pod: webapp-controller-5fdfb97b48-n6c9s
+17m         Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled up replica set webapp-controller-5fdfb97b48 from 0 to 1
+17m         Normal   Scheduled                 pod/webapp-controller-5fdfb97b48-n6c9s                Successfully assigned default/webapp-controller-5fdfb97b48-n6c9s to crd-operator-control-plane
+17m         Normal   Started                   pod/webapp-controller-5fdfb97b48-n6c9s                Container started
+17m         Normal   Pulled                    pod/webapp-controller-5fdfb97b48-n6c9s                Container image "webapp-controller:1.0.4" already present on machine and can be accessed by the pod
+17m         Normal   Created                   pod/webapp-controller-5fdfb97b48-n6c9s                Container created
+17m         Normal   Killing                   pod/webapp-controller-77fb74dc9d-mh2xp                Stopping container controller
+17m         Normal   SuccessfulDelete          replicaset/webapp-controller-77fb74dc9d               Deleted pod: webapp-controller-77fb74dc9d-mh2xp
+17m         Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled down replica set webapp-controller-77fb74dc9d from 1 to 0
+16m         Normal   Scheduled                 pod/secondary-webapp-deployment-784f4c4c96-2827t      Successfully assigned default/secondary-webapp-deployment-784f4c4c96-2827t to crd-operator-control-plane
+16m         Normal   Scheduled                 pod/secondary-webapp-deployment-784f4c4c96-zhkcj      Successfully assigned default/secondary-webapp-deployment-784f4c4c96-zhkcj to crd-operator-control-plane
+16m         Normal   ScalingReplicaSet         deployment/secondary-webapp-deployment                Scaled up replica set secondary-webapp-deployment-784f4c4c96 from 0 to 2
+16m         Normal   SuccessfulCreate          replicaset/secondary-webapp-deployment-784f4c4c96     Created pod: secondary-webapp-deployment-784f4c4c96-2827t
+16m         Normal   SuccessfulCreate          replicaset/secondary-webapp-deployment-784f4c4c96     Created pod: secondary-webapp-deployment-784f4c4c96-zhkcj
+16m         Normal   Pulling                   pod/secondary-webapp-deployment-784f4c4c96-zhkcj      Pulling image "httpd:2.4-alpine"
+16m         Normal   Pulling                   pod/secondary-webapp-deployment-784f4c4c96-2827t      Pulling image "httpd:2.4-alpine"
+15m         Normal   Started                   pod/secondary-webapp-deployment-784f4c4c96-2827t      Container started
+15m         Normal   Created                   pod/secondary-webapp-deployment-784f4c4c96-zhkcj      Container created
+15m         Normal   Started                   pod/secondary-webapp-deployment-784f4c4c96-zhkcj      Container started
+15m         Normal   Pulled                    pod/secondary-webapp-deployment-784f4c4c96-2827t      Successfully pulled image "httpd:2.4-alpine" in 2.427s (2.427s including waiting). Image size: 20729986 bytes.
+15m         Normal   Created                   pod/secondary-webapp-deployment-784f4c4c96-2827t      Container created
+15m         Normal   Pulled                    pod/secondary-webapp-deployment-784f4c4c96-zhkcj      Successfully pulled image "httpd:2.4-alpine" in 219ms (2.601s including waiting). Image size: 20729986 bytes.
+10m         Normal   Killing                   pod/secondary-webapp-deployment-784f4c4c96-zhkcj      Stopping container webapp
+10m         Normal   Killing                   pod/secondary-webapp-deployment-784f4c4c96-2827t      Stopping container webapp
+5m22s       Normal   Scheduled                 pod/webapp-controller-74f674c797-g75nl                Successfully assigned default/webapp-controller-74f674c797-g75nl to crd-operator-control-plane
+5m22s       Normal   SuccessfulCreate          replicaset/webapp-controller-74f674c797               Created pod: webapp-controller-74f674c797-g75nl
+5m22s       Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled up replica set webapp-controller-74f674c797 from 0 to 1
+5m21s       Normal   Pulled                    pod/webapp-controller-74f674c797-g75nl                Container image "webapp-controller:1.0.5" already present on machine and can be accessed by the pod
+5m21s       Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled down replica set webapp-controller-5fdfb97b48 from 1 to 0
+5m21s       Normal   Started                   pod/webapp-controller-74f674c797-g75nl                Container started
+5m21s       Normal   Created                   pod/webapp-controller-74f674c797-g75nl                Container created
+5m20s       Normal   SuccessfulDelete          replicaset/webapp-controller-5fdfb97b48               Deleted pod: webapp-controller-5fdfb97b48-n6c9s
+5m20s       Normal   Killing                   pod/webapp-controller-5fdfb97b48-n6c9s                Stopping container controller
+2m29s       Normal   Scheduled                 pod/webapp-controller-978557846-6l8gh                 Successfully assigned default/webapp-controller-978557846-6l8gh to crd-operator-control-plane
+2m29s       Normal   SuccessfulCreate          replicaset/webapp-controller-978557846                Created pod: webapp-controller-978557846-6l8gh
+2m29s       Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled up replica set webapp-controller-978557846 from 0 to 1
+2m28s       Normal   Pulled                    pod/webapp-controller-978557846-6l8gh                 Container image "webapp-controller:1.0.6" already present on machine and can be accessed by the pod
+2m28s       Normal   Killing                   pod/webapp-controller-74f674c797-g75nl                Stopping container controller
+2m28s       Normal   SuccessfulDelete          replicaset/webapp-controller-74f674c797               Deleted pod: webapp-controller-74f674c797-g75nl
+2m28s       Normal   Started                   pod/webapp-controller-978557846-6l8gh                 Container started
+2m28s       Normal   Created                   pod/webapp-controller-978557846-6l8gh                 Container created
+2m28s       Normal   ScalingReplicaSet         deployment/webapp-controller                          Scaled down replica set webapp-controller-74f674c797 from 1 to 0

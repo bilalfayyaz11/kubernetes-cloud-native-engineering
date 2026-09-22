@@ -1,0 +1,33 @@
+apiVersion: platform.example/v1
+kind: WebApp
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"platform.example/v1","kind":"WebApp","metadata":{"annotations":{},"name":"my-web-application","namespace":"default"},"spec":{"env":[{"name":"ENV_TYPE","value":"production"},{"name":"LOG_LEVEL","value":"info"}],"image":"nginx:1.27-alpine","port":80,"replicas":3}}
+  creationTimestamp: "2026-09-22T04:52:50Z"
+  generation: 2
+  name: my-web-application
+  namespace: default
+  resourceVersion: "4149"
+  uid: 02875bf2-eb59-453c-9fb7-de00ea1c5a05
+spec:
+  env:
+  - name: ENV_TYPE
+    value: staging
+  - name: LOG_LEVEL
+    value: debug
+  - name: FEATURE_FLAG
+    value: enabled
+  image: nginx:1.28-alpine
+  port: 8080
+  replicas: 5
+status:
+  availableReplicas: 5
+  conditions:
+  - lastTransitionTime: "2026-09-22T05:28:09.709435Z"
+    message: 5/5 replicas available
+    observedGeneration: 2
+    reason: DeploymentReady
+    status: "True"
+    type: Ready
+  observedGeneration: 2

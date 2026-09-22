@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2026-09-22T05:00:52Z"
+  labels:
+    app.kubernetes.io/managed-by: webapp-controller
+    app.kubernetes.io/name: my-web-application
+    platform.example/webapp: my-web-application
+  name: my-web-application-service
+  namespace: default
+  ownerReferences:
+  - apiVersion: platform.example/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: WebApp
+    name: my-web-application
+    uid: 02875bf2-eb59-453c-9fb7-de00ea1c5a05
+  resourceVersion: "3923"
+  uid: abad7e73-dc75-4aac-be0e-37e4fb349b89
+spec:
+  clusterIP: 10.96.22.205
+  clusterIPs:
+  - 10.96.22.205
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    platform.example/webapp: my-web-application
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

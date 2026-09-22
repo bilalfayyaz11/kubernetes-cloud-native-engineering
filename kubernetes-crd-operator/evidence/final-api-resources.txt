@@ -1,0 +1,2 @@
+NAME      SHORTNAMES   APIVERSION            NAMESPACED   KIND
+webapps   wa           platform.example/v1   true         WebApp

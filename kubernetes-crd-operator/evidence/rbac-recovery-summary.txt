@@ -1,0 +1,38 @@
+Controller RBAC recovery
+
+Root cause:
+The controller used the cluster-scoped custom-resource list API:
+
+list_cluster_custom_object
+
+The service account intentionally had only namespace-scoped
+Role permissions.
+
+Observed result:
+HTTP 403 Forbidden
+
+Correction:
+Changed controller discovery to:
+
+list_namespaced_custom_object
+
+Watch namespace:
+default
+
+RBAC model:
+namespace-scoped Role and RoleBinding
+
+Validation:
+- controller restarted successfully
+- cluster-scope 403 removed
+- WebApp discovered
+- Deployment created
+- Service created
+- desired replicas reconciled
+- desired image reconciled
+- desired Service port reconciled
+- status subresource updated
+- owner references validated
+
+Result:
+PASS

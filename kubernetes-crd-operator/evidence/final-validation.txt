@@ -1,0 +1,117 @@
+Kubernetes Custom Resource and Controller Validation
+
+Cluster:
+Ready
+
+Custom Resource Definition:
+webapps.platform.example
+
+API:
+platform.example/v1
+
+Scope:
+Namespaced
+
+CRD Established:
+PASS
+
+Schema validation:
+PASS
+
+Replicas range:
+1-10
+
+Port range:
+1-65535
+
+Required fields:
+replicas
+image
+port
+
+Invalid resource rejection:
+PASS
+
+Status subresource:
+enabled
+
+Controller:
+webapp-controller:1.0.6
+
+Controller Ready:
+PASS
+
+Controller scope:
+namespace-scoped
+
+Cluster-wide WebApp listing:
+DENIED
+
+Namespaced WebApp listing:
+ALLOWED
+
+Managed custom resource:
+my-web-application
+
+Desired replicas:
+5
+
+Available replicas:
+5
+
+Desired image:
+nginx:1.28-alpine
+
+Desired port:
+8080
+
+Deployment reconciliation:
+PASS
+
+Service reconciliation:
+PASS
+
+Environment reconciliation:
+PASS
+
+Replica drift correction:
+PASS
+
+Image drift correction:
+PASS
+
+Service drift correction:
+PASS
+
+Owner references:
+PASS
+
+Status observedGeneration:
+synchronized
+
+Ready condition:
+True
+
+Multi-resource reconciliation:
+PASS
+
+Secondary WebApp deletion:
+PASS
+
+Automatic Deployment garbage collection:
+PASS
+
+Automatic Service garbage collection:
+PASS
+
+Primary workload after garbage collection:
+PASS
+
+Controller logs:
+clean
+
+Final WebApp count:
+1
+
+Final result:
+SUCCESS

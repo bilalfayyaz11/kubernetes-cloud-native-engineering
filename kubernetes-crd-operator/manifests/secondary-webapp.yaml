@@ -1,0 +1,16 @@
+apiVersion: platform.example/v1
+kind: WebApp
+metadata:
+  name: secondary-webapp
+  namespace: default
+spec:
+  replicas: 2
+  image: httpd:2.4-alpine
+  port: 80
+
+  env:
+    - name: APP_ROLE
+      value: secondary
+
+    - name: LOG_LEVEL
+      value: info

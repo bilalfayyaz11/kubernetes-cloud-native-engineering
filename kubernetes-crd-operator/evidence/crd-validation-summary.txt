@@ -1,0 +1,37 @@
+WebApp CRD validation
+
+API group:
+platform.example
+
+Version:
+v1
+
+Scope:
+Namespaced
+
+Resource:
+webapps
+
+Kind:
+WebApp
+
+Short name:
+wa
+
+Status subresource:
+enabled
+
+Schema validation:
+replicas minimum: 1
+replicas maximum: 10
+image required
+port required
+port range: 1-65535
+
+Validation tests:
+valid custom resource: PASS
+replicas=15 rejected: PASS
+missing image and port rejected: PASS
+
+Result:
+PASS
