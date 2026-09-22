@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: advanced-dns-test
+  namespace: default
+  labels:
+    app: advanced-dns-test
+spec:
+  restartPolicy: Always
+  containers:
+  - name: network-tools
+    image: nicolaka/netshoot:latest
+    command:
+    - sh
+    - -c
+    - |
+      while true; do
+        sleep 3600
+      done
+    resources:
+      requests:
+        cpu: "20m"
+        memory: "64Mi"
+      limits:
+        cpu: "150m"
+        memory: "256Mi"

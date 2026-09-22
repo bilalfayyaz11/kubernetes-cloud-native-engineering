@@ -1,0 +1,29 @@
+=== Kubernetes CoreDNS Operations Summary ===
+Timestamp: Tue Sep 22 03:49:46 UTC 2026
+
+Validated capabilities:
+- Kubernetes service short-name resolution
+- Kubernetes service FQDN resolution
+- Direct CoreDNS querying
+- Custom internal DNS records
+- Safe CoreDNS ConfigMap modification
+- Controlled DNS failure simulation
+- CoreDNS log analysis
+- dig/nslookup troubleshooting
+- DNS recovery validation
+- Prometheus metrics endpoint
+- Controlled DNS load
+- Post-load service discovery validation
+
+DNS load result:
+PASS=100
+FAIL=0
+
+CoreDNS:
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                    SELECTOR
+coredns   2/2     2            2           8m49s   coredns      registry.k8s.io/coredns/coredns:v1.14.2   k8s-app=kube-dns
+
+CoreDNS Pods:
+NAME                       READY   STATUS    RESTARTS   AGE   IP            NODE              NOMINATED NODE   READINESS GATES
+coredns-585fdd4677-7x2d5   1/1     Running   0          72s   10.244.0.14   ip-172-31-10-40   <none>           <none>
+coredns-585fdd4677-94ss5   1/1     Running   0          72s   10.244.0.13   ip-172-31-10-40   <none>           <none>

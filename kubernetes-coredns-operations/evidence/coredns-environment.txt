@@ -1,0 +1,62 @@
+=== CoreDNS Environment ===
+Timestamp: Tue Sep 22 03:42:02 UTC 2026
+
+Node:
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-40   Ready    control-plane   72s   v1.36.4   172.31.10.40   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+System Pods:
+NAME                                      READY   STATUS    RESTARTS   AGE   IP             NODE              NOMINATED NODE   READINESS GATES
+coredns-589f44dc88-d262w                  1/1     Running   0          61s   10.244.0.2     ip-172-31-10-40   <none>           <none>
+coredns-589f44dc88-frshc                  1/1     Running   0          61s   10.244.0.3     ip-172-31-10-40   <none>           <none>
+etcd-ip-172-31-10-40                      1/1     Running   0          71s   172.31.10.40   ip-172-31-10-40   <none>           <none>
+kube-apiserver-ip-172-31-10-40            1/1     Running   0          66s   172.31.10.40   ip-172-31-10-40   <none>           <none>
+kube-controller-manager-ip-172-31-10-40   1/1     Running   0          66s   172.31.10.40   ip-172-31-10-40   <none>           <none>
+kube-proxy-vmrv6                          1/1     Running   0          61s   172.31.10.40   ip-172-31-10-40   <none>           <none>
+kube-scheduler-ip-172-31-10-40            1/1     Running   0          71s   172.31.10.40   ip-172-31-10-40   <none>           <none>
+
+Flannel:
+NAME                    READY   STATUS    RESTARTS   AGE   IP             NODE              NOMINATED NODE   READINESS GATES
+kube-flannel-ds-qzdfv   1/1     Running   0          61s   172.31.10.40   ip-172-31-10-40   <none>           <none>
+
+CoreDNS Deployment:
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                    SELECTOR
+coredns   2/2     2            2           66s   coredns      registry.k8s.io/coredns/coredns:v1.14.2   k8s-app=kube-dns
+
+CoreDNS Pods:
+NAME                       READY   STATUS    RESTARTS   AGE   IP           NODE              NOMINATED NODE   READINESS GATES
+coredns-589f44dc88-d262w   1/1     Running   0          61s   10.244.0.2   ip-172-31-10-40   <none>           <none>
+coredns-589f44dc88-frshc   1/1     Running   0          61s   10.244.0.3   ip-172-31-10-40   <none>           <none>
+
+CoreDNS Service:
+NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE   SELECTOR
+kube-dns   ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   66s   k8s-app=kube-dns
+
+CoreDNS Service IP:
+10.96.0.10
+
+Corefile:
+.:53 {
+    errors
+    health {
+       lameduck 5s
+    }
+    ready
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+       pods insecure
+       fallthrough in-addr.arpa ip6.arpa
+       ttl 30
+    }
+    prometheus :9153
+    forward . /etc/resolv.conf {
+       max_concurrent 1000
+    }
+    cache 30 {
+       disable success cluster.local
+       disable denial cluster.local
+    }
+    loop
+    reload
+    loadbalance
+}
+

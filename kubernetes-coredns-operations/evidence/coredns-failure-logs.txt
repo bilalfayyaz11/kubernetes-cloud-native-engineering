@@ -1,0 +1,26 @@
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 87a2bb018f5023ed7493748a7232aeb0fbb914b520c57ae44b39d5b3dd288a0fb96b0db6e63f495e7a55bf26f43830c3530caf228007f62b571b64364b2d26a9
+CoreDNS-1.14.2
+linux/amd64, go1.26.1, dd1df4f
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+.:53
+mycompany.local.:53
+[INFO] plugin/reload: Running configuration SHA512 = 0f284f6a17f1ed9889a05439b0d2aea4378453017e48e1c52736d01a829e6b8f8d5e1488abc4f90dbdbab6b9194d930d039ff92c34e57bcdb8a0fa2d9c8e5637
+CoreDNS-1.14.2
+linux/amd64, go1.26.1, dd1df4f
+[INFO] SIGTERM: Shutting down servers then terminating
+[INFO] plugin/health: Going into lameduck mode for 5s
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+.:53
+mycompany.local.:53
+[INFO] plugin/reload: Running configuration SHA512 = 0f284f6a17f1ed9889a05439b0d2aea4378453017e48e1c52736d01a829e6b8f8d5e1488abc4f90dbdbab6b9194d930d039ff92c34e57bcdb8a0fa2d9c8e5637
+CoreDNS-1.14.2
+linux/amd64, go1.26.1, dd1df4f
+[INFO] SIGTERM: Shutting down servers then terminating
+[INFO] plugin/health: Going into lameduck mode for 5s
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 87a2bb018f5023ed7493748a7232aeb0fbb914b520c57ae44b39d5b3dd288a0fb96b0db6e63f495e7a55bf26f43830c3530caf228007f62b571b64364b2d26a9
+CoreDNS-1.14.2
+linux/amd64, go1.26.1, dd1df4f

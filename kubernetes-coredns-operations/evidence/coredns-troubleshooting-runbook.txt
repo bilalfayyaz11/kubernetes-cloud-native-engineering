@@ -1,0 +1,73 @@
+Kubernetes CoreDNS Troubleshooting Runbook
+
+1. Verify node health:
+   kubectl get nodes
+
+2. Verify CoreDNS deployment:
+   kubectl get deployment coredns -n kube-system
+
+3. Verify CoreDNS Pods:
+   kubectl get pods -n kube-system -l k8s-app=kube-dns
+
+4. Verify kube-dns Service:
+   kubectl get service kube-dns -n kube-system
+
+5. Inspect the active Corefile:
+   kubectl get configmap coredns -n kube-system \
+     -o jsonpath='{.data.Corefile}'
+
+6. Verify the application Service exists:
+   kubectl get service -A
+
+7. Verify Service endpoints:
+   kubectl get endpointslice -A
+
+8. Inspect Pod resolver settings:
+   kubectl exec <pod> -- cat /etc/resolv.conf
+
+9. Test short-name resolution:
+   kubectl exec <pod> -- nslookup <service>
+
+10. Test service FQDN:
+    kubectl exec <pod> -- \
+      nslookup <service>.<namespace>.svc.cluster.local
+
+11. Discover CoreDNS dynamically:
+    kubectl get service kube-dns -n kube-system \
+      -o jsonpath='{.spec.clusterIP}'
+
+12. Query CoreDNS directly:
+    dig @<coredns-ip> \
+      <service>.<namespace>.svc.cluster.local
+
+13. Capture finite logs:
+    kubectl logs \
+      -n kube-system \
+      -l k8s-app=kube-dns \
+      --tail=100
+
+14. NXDOMAIN generally indicates:
+    - missing Service
+    - wrong namespace
+    - Kubernetes plugin missing or misconfigured
+    - incorrect query name
+
+15. DNS timeouts generally indicate:
+    - CoreDNS unavailable
+    - port 53 reachability issue
+    - NetworkPolicy restriction
+    - CNI/network problem
+
+16. Back up CoreDNS before changing the ConfigMap.
+
+17. After every change, validate:
+    - native Kubernetes DNS
+    - custom DNS
+    - workload connectivity
+
+18. If a configuration breaks service discovery:
+    restore a known-good ConfigMap and restart CoreDNS.
+
+19. CoreDNS metrics are exposed through the Prometheus plugin on port 9153.
+
+20. Use finite load tests and finite log captures for safe troubleshooting.

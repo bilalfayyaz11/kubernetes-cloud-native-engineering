@@ -1,0 +1,25 @@
+=== CoreDNS Metrics and Load Validation ===
+Timestamp: Tue Sep 22 03:49:46 UTC 2026
+
+Queries: 100
+Successful: 100
+Failed: 0
+
+Target:
+sample-web-service.default.svc.cluster.local
+
+Post-load DNS:
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	sample-web-service.default.svc.cluster.local
+Address: 10.100.253.9
+
+
+HTTP service discovery:
+PASS
+
+CoreDNS status:
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                    SELECTOR
+coredns   2/2     2            2           8m49s   coredns      registry.k8s.io/coredns/coredns:v1.14.2   k8s-app=kube-dns

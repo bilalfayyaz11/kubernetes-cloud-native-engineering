@@ -1,0 +1,12 @@
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+.:53
+mycompany.local.:53
+[INFO] plugin/reload: Running configuration SHA512 = 0f284f6a17f1ed9889a05439b0d2aea4378453017e48e1c52736d01a829e6b8f8d5e1488abc4f90dbdbab6b9194d930d039ff92c34e57bcdb8a0fa2d9c8e5637
+CoreDNS-1.14.2
+linux/amd64, go1.26.1, dd1df4f
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+.:53
+mycompany.local.:53
+[INFO] plugin/reload: Running configuration SHA512 = 0f284f6a17f1ed9889a05439b0d2aea4378453017e48e1c52736d01a829e6b8f8d5e1488abc4f90dbdbab6b9194d930d039ff92c34e57bcdb8a0fa2d9c8e5637
+CoreDNS-1.14.2
+linux/amd64, go1.26.1, dd1df4f

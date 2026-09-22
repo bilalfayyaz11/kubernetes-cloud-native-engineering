@@ -1,0 +1,32 @@
+.:53 {
+    errors
+    health {
+        lameduck 5s
+    }
+    ready
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+        pods insecure
+        fallthrough in-addr.arpa ip6.arpa
+        ttl 30
+    }
+    prometheus :9153
+    forward . /etc/resolv.conf {
+        max_concurrent 1000
+    }
+    cache 30
+    loop
+    reload
+    loadbalance
+}
+
+mycompany.local:53 {
+    errors
+    hosts {
+        10.96.0.1 api.mycompany.local
+        192.168.100.10 database.mycompany.local
+        192.168.100.20 cache.mycompany.local
+        fallthrough
+    }
+    cache 30
+    reload
+}

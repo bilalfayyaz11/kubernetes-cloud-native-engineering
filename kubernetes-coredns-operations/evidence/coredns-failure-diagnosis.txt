@@ -1,0 +1,102 @@
+=== CoreDNS Controlled Failure Diagnosis ===
+Timestamp: Tue Sep 22 03:46:10 UTC 2026
+
+Failure introduced:
+The Kubernetes plugin was removed from the CoreDNS Corefile.
+
+Expected impact:
+cluster.local Kubernetes service discovery fails.
+
+CoreDNS Service IP:
+10.96.0.10
+
+Service DNS failure:
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+** server can't find sample-web-service.default.svc.cluster.local: NXDOMAIN
+
+** server can't find sample-web-service.default.svc.cluster.local: NXDOMAIN
+
+command terminated with exit code 1
+
+Short-name failure:
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+** server can't find sample-web-service.default.svc.cluster.local: NXDOMAIN
+
+** server can't find sample-web-service.default.svc.cluster.local: NXDOMAIN
+
+** server can't find sample-web-service.ec2.internal: NXDOMAIN
+
+** server can't find sample-web-service.ec2.internal: NXDOMAIN
+
+** server can't find sample-web-service.svc.cluster.local: NXDOMAIN
+
+** server can't find sample-web-service.cluster.local: NXDOMAIN
+
+** server can't find sample-web-service.svc.cluster.local: NXDOMAIN
+
+** server can't find sample-web-service.cluster.local: NXDOMAIN
+
+command terminated with exit code 1
+
+Default resolver dig:
+
+; <<>> DiG 9.20.23 <<>> sample-web-service.default.svc.cluster.local
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 61290
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: c28dc8b89e07ab77 (echoed)
+;; QUESTION SECTION:
+;sample-web-service.default.svc.cluster.local. IN A
+
+;; AUTHORITY SECTION:
+.			12	IN	SOA	a.root-servers.net. nstld.verisign-grs.com. 2026092101 1800 900 604800 86400
+
+;; Query time: 1 msec
+;; SERVER: 10.96.0.10#53(10.96.0.10) (UDP)
+;; WHEN: Tue Sep 22 03:46:09 UTC 2026
+;; MSG SIZE  rcvd: 160
+
+
+Direct CoreDNS dig:
+
+; <<>> DiG 9.20.23 <<>> @10.96.0.10 sample-web-service.default.svc.cluster.local
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 31835
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: fc28464bde36d484 (echoed)
+;; QUESTION SECTION:
+;sample-web-service.default.svc.cluster.local. IN A
+
+;; AUTHORITY SECTION:
+.			12	IN	SOA	a.root-servers.net. nstld.verisign-grs.com. 2026092101 1800 900 604800 86400
+
+;; Query time: 0 msec
+;; SERVER: 10.96.0.10#53(10.96.0.10) (UDP)
+;; WHEN: Tue Sep 22 03:46:10 UTC 2026
+;; MSG SIZE  rcvd: 160
+
+
+CoreDNS port 53 connectivity:
+Connection to 10.96.0.10 53 port [tcp/domain] succeeded!
+
+Diagnosis:
+CoreDNS remains reachable as a DNS server, but without the
+Kubernetes plugin it cannot authoritatively resolve
+Kubernetes service names in cluster.local.
