@@ -1,0 +1,5 @@
+NAME                                 APP                 NODE                       STATUS
+database-tolerant-6f59f85487-x7vbb   database-tolerant   scheduling-policy-worker   Running
+database-tolerant-6f59f85487-ztw87   database-tolerant   scheduling-policy-worker   Running
+frontend-app-6c699c955c-jh6jp        frontend            scheduling-policy-worker   Running
+frontend-app-6c699c955c-qfvkj        frontend            scheduling-policy-worker   Running

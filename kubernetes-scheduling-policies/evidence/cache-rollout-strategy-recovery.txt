@@ -1,0 +1,37 @@
+Cache hard anti-affinity rollout recovery
+
+Observed condition:
+A Pod-template update introduced tolerations while cache-app
+already had required hostname anti-affinity.
+
+Original Deployment strategy:
+Default RollingUpdate
+
+Why the rollout stalled:
+The default strategy attempted to create an additional replacement
+Pod before enough old replicas had terminated.
+
+Because three existing cache replicas already occupied all three
+kubernetes.io/hostname topology domains, the replacement Pod could
+not satisfy required pod anti-affinity.
+
+Scheduler proof:
+0/3 nodes were available because all three nodes conflicted with
+pod anti-affinity.
+
+Correction:
+RollingUpdate
+maxSurge=0
+maxUnavailable=1
+
+Result:
+- Deployment converged to exactly 3 updated replicas
+- all 3 replicas became Ready
+- one replica scheduled per hostname
+- no Pending replicas remained
+- scale to 4 intentionally produced exactly one Pending replica
+- scheduler reported pod anti-affinity as the cause
+- scale back to 3 recovered cleanly
+
+Final result:
+PASS

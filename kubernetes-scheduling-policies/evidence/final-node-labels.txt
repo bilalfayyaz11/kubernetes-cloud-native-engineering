@@ -1,0 +1,4 @@
+NAME                              STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME    TIER       DISK   NODE      ROLE
+scheduling-policy-control-plane   Ready    control-plane   15m   v1.36.1   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.1                               
+scheduling-policy-worker          Ready    <none>          15m   v1.36.1   172.18.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.1   database   ssd    worker1   worker-a
+scheduling-policy-worker2         Ready    <none>          15m   v1.36.1   172.18.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.1   web        hdd    worker2   worker-b

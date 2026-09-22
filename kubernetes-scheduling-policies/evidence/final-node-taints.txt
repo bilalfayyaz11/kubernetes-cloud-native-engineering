@@ -1,0 +1,9 @@
+Node: scheduling-policy-control-plane
+node-role.kubernetes.io/control-plane=:NoSchedule
+
+Node: scheduling-policy-worker
+dedicated=database:NoSchedule
+
+Node: scheduling-policy-worker2
+No taints
+

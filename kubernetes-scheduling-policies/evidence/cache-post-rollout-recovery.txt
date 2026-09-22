@@ -1,0 +1,4 @@
+NAME                         NODE                              PHASE     READY
+cache-app-66ff669c9d-dxnf8   scheduling-policy-worker          Running   true
+cache-app-66ff669c9d-ftlkh   scheduling-policy-worker2         Running   true
+cache-app-66ff669c9d-mmnwd   scheduling-policy-control-plane   Running   true

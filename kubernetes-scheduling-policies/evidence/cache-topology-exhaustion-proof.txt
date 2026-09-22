@@ -1,0 +1,47 @@
+Name:             cache-app-66ff669c9d-cjkhx
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           app=cache
+                  component=cache
+                  pod-template-hash=66ff669c9d
+Annotations:      <none>
+Status:           Pending
+IP:               
+IPs:              <none>
+Controlled By:    ReplicaSet/cache-app-66ff669c9d
+Containers:
+  cache:
+    Image:      redis:7-alpine
+    Port:       6379/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     50m
+      memory:  64Mi
+    Requests:
+      cpu:        10m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hc99v (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  kube-api-access-hc99v:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 dedicated=database:NoSchedule
+                             node-role.kubernetes.io/control-plane:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  1s    default-scheduler  0/3 nodes are available: 3 node(s) didn't match pod anti-affinity rules. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.

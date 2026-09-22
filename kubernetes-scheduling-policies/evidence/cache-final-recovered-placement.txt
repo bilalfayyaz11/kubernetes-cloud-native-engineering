@@ -1,0 +1,4 @@
+NAME                         READY   STATUS    RESTARTS   AGE     IP            NODE                              NOMINATED NODE   READINESS GATES
+cache-app-66ff669c9d-dxnf8   1/1     Running   0          3m42s   10.244.2.13   scheduling-policy-worker          <none>           <none>
+cache-app-66ff669c9d-ftlkh   1/1     Running   0          7s      10.244.1.5    scheduling-policy-worker2         <none>           <none>
+cache-app-66ff669c9d-mmnwd   1/1     Running   0          3m37s   10.244.0.5    scheduling-policy-control-plane   <none>           <none>

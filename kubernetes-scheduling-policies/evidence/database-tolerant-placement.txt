@@ -1,0 +1,3 @@
+NAME                                 READY   STATUS    RESTARTS   AGE   IP           NODE                       NOMINATED NODE   READINESS GATES
+database-tolerant-6f59f85487-x7vbb   1/1     Running   0          8s    10.244.2.7   scheduling-policy-worker   <none>           <none>
+database-tolerant-6f59f85487-ztw87   1/1     Running   0          8s    10.244.2.8   scheduling-policy-worker   <none>           <none>

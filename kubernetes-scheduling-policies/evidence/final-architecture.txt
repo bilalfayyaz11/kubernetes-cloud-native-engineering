@@ -1,0 +1,50 @@
+Kubernetes Scheduling Architecture
+
+Cluster:
+kind scheduling-policy
+
+Topology:
+1 control-plane node
+2 worker nodes
+3 total hostname domains
+
+Nodes:
+scheduling-policy-control-plane
+scheduling-policy-worker
+scheduling-policy-worker2
+
+Worker labels:
+
+scheduling-policy-worker
+tier=database
+disk=ssd
+
+scheduling-policy-worker2
+tier=web
+disk=hdd
+
+Taints:
+
+scheduling-policy-control-plane
+node-role.kubernetes.io/control-plane=:NoSchedule
+
+scheduling-policy-worker
+dedicated=database:NoSchedule
+
+Validated scheduling mechanisms:
+
+- required node affinity
+- preferred node affinity
+- NoSchedule taints
+- explicit tolerations
+- preferred pod affinity
+- required pod anti-affinity
+- preferred pod anti-affinity
+- simultaneous scheduler preferences
+- intentional Pending workloads
+- topology exhaustion
+- anti-affinity-aware rolling strategy
+
+Primary topology key:
+
+kubernetes.io/hostname

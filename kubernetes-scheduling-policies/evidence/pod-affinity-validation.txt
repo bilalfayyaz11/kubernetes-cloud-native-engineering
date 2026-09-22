@@ -1,0 +1,42 @@
+Pod affinity validation
+
+Reference workload:
+database-tolerant
+
+Reference node:
+scheduling-policy-worker
+
+Frontend workload:
+frontend-app
+
+Frontend replicas:
+2
+
+Rule:
+preferredDuringSchedulingIgnoredDuringExecution
+
+Weight:
+100
+
+Selector:
+app=database-tolerant
+
+Topology:
+kubernetes.io/hostname
+
+Frontend Pods on database node:
+2
+
+Validated:
+- reference database workload available
+- frontend workload became Ready
+- podAffinity selector matched database-tolerant
+- hostname topology configured
+- frontend placement analyzed relative to database Pods
+
+Interpretation:
+The rule is a scheduling preference rather than a strict
+requirement, so co-location is encouraged but not guaranteed.
+
+Result:
+PASS

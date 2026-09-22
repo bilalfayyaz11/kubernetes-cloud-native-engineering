@@ -1,0 +1,34 @@
+Strict node affinity validation
+
+Target node:
+scheduling-policy-worker
+
+Required labels:
+tier=database
+disk=ssd
+
+Non-target node:
+scheduling-policy-worker2
+
+Non-target labels:
+tier=web
+disk=hdd
+
+Deployment:
+database-app
+
+Replicas:
+2
+
+Rule:
+requiredDuringSchedulingIgnoredDuringExecution
+
+Validated:
+- both replicas became Ready
+- both replicas scheduled on scheduling-policy-worker
+- target node matches tier=database
+- target node matches disk=ssd
+- non-target node does not match the full required expression
+
+Result:
+PASS

@@ -1,0 +1,43 @@
+Taint and toleration validation
+
+Target node:
+scheduling-policy-worker
+
+Taint:
+dedicated=database:NoSchedule
+
+Negative test:
+no-toleration-test
+
+Expected:
+Pending
+
+Observed:
+Pending and unscheduled
+
+Scheduler reason:
+Matching toleration was missing.
+
+Positive test:
+database-tolerant
+
+Replicas:
+2
+
+Toleration:
+key=dedicated
+value=database
+effect=NoSchedule
+
+Placement:
+scheduling-policy-worker
+
+Validated:
+- NoSchedule taint applied
+- untolerated Pod remained Pending
+- scheduler reported taint mismatch
+- tolerated workload became Ready
+- tolerated workload scheduled on tainted node
+
+Result:
+PASS

@@ -1,0 +1,100 @@
+default              13m         Normal    Created                   pod/web-app-759f45b87c-xjqc4                                  Container created
+default              13m         Normal    Pulled                    pod/web-app-759f45b87c-t9wd5                                  Successfully pulled image "nginx:1.27-alpine" in 221ms (2.139s including waiting). Image size: 20984244 bytes.
+default              13m         Normal    Pulled                    pod/web-app-759f45b87c-xjqc4                                  Successfully pulled image "nginx:1.27-alpine" in 1.932s (1.932s including waiting). Image size: 20984244 bytes.
+default              13m         Normal    Started                   pod/web-app-759f45b87c-xjqc4                                  Container started
+default              13m         Normal    Started                   pod/web-app-759f45b87c-t9wd5                                  Container started
+default              13m         Normal    Created                   pod/web-app-759f45b87c-t9wd5                                  Container created
+default              12m         Normal    Scheduled                 pod/web-app-759f45b87c-pxdvk                                  Successfully assigned default/web-app-759f45b87c-pxdvk to scheduling-policy-worker
+default              12m         Normal    ScalingReplicaSet         deployment/web-app                                            Scaled up replica set web-app-759f45b87c from 3 to 4
+default              12m         Normal    SuccessfulCreate          replicaset/web-app-759f45b87c                                 Created pod: web-app-759f45b87c-pxdvk
+default              12m         Normal    Created                   pod/web-app-759f45b87c-pxdvk                                  Container created
+default              12m         Normal    Pulled                    pod/web-app-759f45b87c-pxdvk                                  Container image "nginx:1.27-alpine" already present on machine and can be accessed by the pod
+default              12m         Normal    Started                   pod/web-app-759f45b87c-pxdvk                                  Container started
+default              12m         Normal    Killing                   pod/web-app-759f45b87c-pxdvk                                  Stopping container web
+default              12m         Normal    ScalingReplicaSet         deployment/web-app                                            Scaled down replica set web-app-759f45b87c from 4 to 3
+default              12m         Normal    SuccessfulDelete          replicaset/web-app-759f45b87c                                 Deleted pod: web-app-759f45b87c-pxdvk
+default              109s        Warning   FailedScheduling          pod/no-toleration-test                                        0/3 nodes are available: 1 node(s) didn't match Pod's node affinity/selector, 2 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling.
+default              12m         Normal    ScalingReplicaSet         deployment/database-tolerant                                  Scaled up replica set database-tolerant-6f59f85487 from 0 to 2
+default              12m         Normal    SuccessfulCreate          replicaset/database-tolerant-6f59f85487                       Created pod: database-tolerant-6f59f85487-x7vbb
+default              12m         Normal    Scheduled                 pod/database-tolerant-6f59f85487-x7vbb                        Successfully assigned default/database-tolerant-6f59f85487-x7vbb to scheduling-policy-worker
+default              12m         Normal    Scheduled                 pod/database-tolerant-6f59f85487-ztw87                        Successfully assigned default/database-tolerant-6f59f85487-ztw87 to scheduling-policy-worker
+default              12m         Normal    SuccessfulCreate          replicaset/database-tolerant-6f59f85487                       Created pod: database-tolerant-6f59f85487-ztw87
+default              12m         Normal    Pulling                   pod/database-tolerant-6f59f85487-ztw87                        Pulling image "postgres:17-alpine"
+default              12m         Normal    Pulling                   pod/database-tolerant-6f59f85487-x7vbb                        Pulling image "postgres:17-alpine"
+default              12m         Normal    Created                   pod/database-tolerant-6f59f85487-x7vbb                        Container created
+default              12m         Normal    Pulled                    pod/database-tolerant-6f59f85487-x7vbb                        Successfully pulled image "postgres:17-alpine" in 6.206s (6.206s including waiting). Image size: 117212703 bytes.
+default              12m         Normal    Created                   pod/database-tolerant-6f59f85487-ztw87                        Container created
+default              12m         Normal    Started                   pod/database-tolerant-6f59f85487-ztw87                        Container started
+default              12m         Normal    Started                   pod/database-tolerant-6f59f85487-x7vbb                        Container started
+default              12m         Normal    Pulled                    pod/database-tolerant-6f59f85487-ztw87                        Successfully pulled image "postgres:17-alpine" in 224ms (6.346s including waiting). Image size: 117212703 bytes.
+default              11m         Normal    Scheduled                 pod/frontend-app-6c699c955c-jh6jp                             Successfully assigned default/frontend-app-6c699c955c-jh6jp to scheduling-policy-worker
+default              11m         Normal    ScalingReplicaSet         deployment/frontend-app                                       Scaled up replica set frontend-app-6c699c955c from 0 to 2
+default              11m         Normal    SuccessfulCreate          replicaset/frontend-app-6c699c955c                            Created pod: frontend-app-6c699c955c-qfvkj
+default              11m         Normal    SuccessfulCreate          replicaset/frontend-app-6c699c955c                            Created pod: frontend-app-6c699c955c-jh6jp
+default              11m         Normal    Scheduled                 pod/frontend-app-6c699c955c-qfvkj                             Successfully assigned default/frontend-app-6c699c955c-qfvkj to scheduling-policy-worker
+default              11m         Normal    Created                   pod/frontend-app-6c699c955c-qfvkj                             Container created
+default              11m         Normal    Pulled                    pod/frontend-app-6c699c955c-qfvkj                             Container image "nginx:1.27-alpine" already present on machine and can be accessed by the pod
+default              11m         Normal    Pulled                    pod/frontend-app-6c699c955c-jh6jp                             Container image "nginx:1.27-alpine" already present on machine and can be accessed by the pod
+default              11m         Normal    Created                   pod/frontend-app-6c699c955c-jh6jp                             Container created
+default              11m         Normal    Started                   pod/frontend-app-6c699c955c-qfvkj                             Container started
+default              11m         Normal    Started                   pod/frontend-app-6c699c955c-jh6jp                             Container started
+default              4m49s       Warning   FailedScheduling          pod/cache-app-b8fd4bcdc-8sl6l                                 0/3 nodes are available: 1 node(s) didn't match pod anti-affinity rules, 2 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/3 nodes are available: 1 No preemption victims found for incoming pod, 2 Preemption is not helpful for scheduling.
+default              10m         Normal    SuccessfulCreate          replicaset/cache-app-b8fd4bcdc                                Created pod: cache-app-b8fd4bcdc-b4lx5
+default              10m         Normal    SuccessfulCreate          replicaset/cache-app-b8fd4bcdc                                Created pod: cache-app-b8fd4bcdc-8sl6l
+default              10m         Normal    Scheduled                 pod/cache-app-b8fd4bcdc-b4lx5                                 Successfully assigned default/cache-app-b8fd4bcdc-b4lx5 to scheduling-policy-worker2
+default              10m         Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled up replica set cache-app-b8fd4bcdc from 0 to 3
+default              10m         Normal    SuccessfulCreate          replicaset/cache-app-b8fd4bcdc                                Created pod: cache-app-b8fd4bcdc-8ptvs
+default              4m49s       Warning   FailedScheduling          pod/cache-app-b8fd4bcdc-8ptvs                                 0/3 nodes are available: 1 node(s) didn't match pod anti-affinity rules, 2 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/3 nodes are available: 1 No preemption victims found for incoming pod, 2 Preemption is not helpful for scheduling.
+default              10m         Normal    Pulling                   pod/cache-app-b8fd4bcdc-b4lx5                                 Pulling image "redis:7-alpine"
+default              10m         Normal    Pulled                    pod/cache-app-b8fd4bcdc-b4lx5                                 Successfully pulled image "redis:7-alpine" in 1.534s (1.534s including waiting). Image size: 16260342 bytes.
+default              10m         Normal    Created                   pod/cache-app-b8fd4bcdc-b4lx5                                 Container created
+default              10m         Normal    Started                   pod/cache-app-b8fd4bcdc-b4lx5                                 Container started
+default              7m2s        Normal    SuccessfulCreate          replicaset/complex-app-7dc55f7499                             Created pod: complex-app-7dc55f7499-7lhzw
+default              7m2s        Normal    Scheduled                 pod/complex-app-7dc55f7499-cj4kc                              Successfully assigned default/complex-app-7dc55f7499-cj4kc to scheduling-policy-worker
+default              7m2s        Normal    Scheduled                 pod/complex-app-7dc55f7499-7lhzw                              Successfully assigned default/complex-app-7dc55f7499-7lhzw to scheduling-policy-worker
+default              7m2s        Normal    ScalingReplicaSet         deployment/complex-app                                        Scaled up replica set complex-app-7dc55f7499 from 0 to 2
+default              7m2s        Normal    SuccessfulCreate          replicaset/complex-app-7dc55f7499                             Created pod: complex-app-7dc55f7499-cj4kc
+default              7m          Normal    Pulled                    pod/complex-app-7dc55f7499-cj4kc                              Container image "nginx:1.27-alpine" already present on machine and can be accessed by the pod
+default              7m          Normal    Pulled                    pod/complex-app-7dc55f7499-7lhzw                              Container image "nginx:1.27-alpine" already present on machine and can be accessed by the pod
+default              7m          Normal    Created                   pod/complex-app-7dc55f7499-7lhzw                              Container created
+default              7m          Normal    Created                   pod/complex-app-7dc55f7499-cj4kc                              Container created
+default              6m59s       Normal    Started                   pod/complex-app-7dc55f7499-cj4kc                              Container started
+default              6m59s       Normal    Started                   pod/complex-app-7dc55f7499-7lhzw                              Container started
+default              4m43s       Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled up replica set cache-app-66ff669c9d from 0 to 1
+default              4m43s       Normal    SuccessfulCreate          replicaset/cache-app-66ff669c9d                               Created pod: cache-app-66ff669c9d-dxnf8
+default              4m43s       Normal    Scheduled                 pod/cache-app-66ff669c9d-dxnf8                                Successfully assigned default/cache-app-66ff669c9d-dxnf8 to scheduling-policy-worker
+default              4m41s       Normal    Pulling                   pod/cache-app-66ff669c9d-dxnf8                                Pulling image "redis:7-alpine"
+default              4m39s       Normal    Pulled                    pod/cache-app-66ff669c9d-dxnf8                                Successfully pulled image "redis:7-alpine" in 1.914s (1.914s including waiting). Image size: 16260342 bytes.
+default              4m39s       Normal    Created                   pod/cache-app-66ff669c9d-dxnf8                                Container created
+default              4m38s       Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled up replica set cache-app-66ff669c9d from 1 to 2
+default              4m38s       Normal    SuccessfulDelete          replicaset/cache-app-b8fd4bcdc                                Deleted pod: cache-app-b8fd4bcdc-8sl6l
+default              4m38s       Normal    Started                   pod/cache-app-66ff669c9d-dxnf8                                Container started
+default              4m38s       Normal    Scheduled                 pod/cache-app-66ff669c9d-mmnwd                                Successfully assigned default/cache-app-66ff669c9d-mmnwd to scheduling-policy-control-plane
+default              4m38s       Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled down replica set cache-app-b8fd4bcdc from 3 to 2
+default              4m38s       Normal    SuccessfulCreate          replicaset/cache-app-66ff669c9d                               Created pod: cache-app-66ff669c9d-mmnwd
+default              4m36s       Normal    Pulling                   pod/cache-app-66ff669c9d-mmnwd                                Pulling image "redis:7-alpine"
+default              4m35s       Normal    Pulled                    pod/cache-app-66ff669c9d-mmnwd                                Successfully pulled image "redis:7-alpine" in 1.649s (1.649s including waiting). Image size: 16260342 bytes.
+default              4m34s       Normal    Created                   pod/cache-app-66ff669c9d-mmnwd                                Container created
+default              4m33s       Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled down replica set cache-app-b8fd4bcdc from 2 to 1
+default              4m33s       Warning   FailedScheduling          pod/cache-app-66ff669c9d-nhkpv                                0/3 nodes are available: 3 node(s) didn't match pod anti-affinity rules. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+default              4m33s       Normal    Started                   pod/cache-app-66ff669c9d-mmnwd                                Container started
+default              4m33s       Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled up replica set cache-app-66ff669c9d from 2 to 3
+default              4m33s       Normal    SuccessfulCreate          replicaset/cache-app-66ff669c9d                               Created pod: cache-app-66ff669c9d-nhkpv
+default              4m33s       Normal    SuccessfulDelete          replicaset/cache-app-b8fd4bcdc                                Deleted pod: cache-app-b8fd4bcdc-8ptvs
+default              4m32s       Warning   FailedScheduling          pod/cache-app-66ff669c9d-pg2nn                                0/3 nodes are available: 3 node(s) didn't match pod anti-affinity rules. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+default              4m32s       Normal    SuccessfulCreate          replicaset/cache-app-66ff669c9d                               Created pod: cache-app-66ff669c9d-pg2nn
+default              63s         Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled up replica set cache-app-66ff669c9d from 3 to 4
+default              4m31s       Normal    SuccessfulDelete          replicaset/cache-app-66ff669c9d                               Deleted pod: cache-app-66ff669c9d-pg2nn
+default              62s         Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled down replica set cache-app-66ff669c9d from 4 to 3
+default              69s         Normal    ScalingReplicaSet         deployment/cache-app                                          Scaled down replica set cache-app-b8fd4bcdc from 1 to 0
+default              68s         Normal    SuccessfulCreate          replicaset/cache-app-66ff669c9d                               Created pod: cache-app-66ff669c9d-ftlkh
+default              68s         Warning   FailedScheduling          pod/cache-app-66ff669c9d-ftlkh                                0/3 nodes are available: 3 node(s) didn't match pod anti-affinity rules. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+default              68s         Normal    Scheduled                 pod/cache-app-66ff669c9d-ftlkh                                Successfully assigned default/cache-app-66ff669c9d-ftlkh to scheduling-policy-worker2
+default              68s         Normal    Killing                   pod/cache-app-b8fd4bcdc-b4lx5                                 Stopping container cache
+default              68s         Normal    SuccessfulDelete          replicaset/cache-app-b8fd4bcdc                                Deleted pod: cache-app-b8fd4bcdc-b4lx5
+default              66s         Normal    Pulled                    pod/cache-app-66ff669c9d-ftlkh                                Container image "redis:7-alpine" already present on machine and can be accessed by the pod
+default              66s         Normal    Created                   pod/cache-app-66ff669c9d-ftlkh                                Container created
+default              65s         Normal    Started                   pod/cache-app-66ff669c9d-ftlkh                                Container started
+default              63s         Warning   FailedScheduling          pod/cache-app-66ff669c9d-cjkhx                                0/3 nodes are available: 3 node(s) didn't match pod anti-affinity rules. no new claims to deallocate, preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+default              63s         Normal    SuccessfulCreate          replicaset/cache-app-66ff669c9d                               Created pod: cache-app-66ff669c9d-cjkhx
+default              62s         Normal    SuccessfulDelete          replicaset/cache-app-66ff669c9d                               Deleted pod: cache-app-66ff669c9d-cjkhx

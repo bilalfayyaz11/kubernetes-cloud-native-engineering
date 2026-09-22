@@ -1,0 +1,30 @@
+Preferred node affinity validation
+
+Preferred node:
+scheduling-policy-worker2
+
+Preferred rule:
+tier=web, weight=100
+
+Secondary preference:
+disk=ssd, weight=50
+
+Deployment:
+web-app
+
+Baseline replicas:
+3
+
+Flexibility test:
+- preferred node cordoned
+- deployment scaled from 3 to 4
+- new Pod successfully scheduled elsewhere
+- preferred node restored
+- deployment returned to 3 replicas
+
+Result:
+PASS
+
+Interpretation:
+preferredDuringSchedulingIgnoredDuringExecution influences
+scheduler scoring but does not make the preferred node mandatory.

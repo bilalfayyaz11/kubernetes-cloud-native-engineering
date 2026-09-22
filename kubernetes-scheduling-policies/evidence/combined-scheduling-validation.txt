@@ -1,0 +1,45 @@
+Combined scheduling policy validation
+
+Deployment:
+complex-app
+
+Replicas:
+2
+
+Toleration:
+dedicated=database:NoSchedule
+
+Preferred node affinity:
+tier=database
+weight=80
+
+Preferred pod affinity:
+app=database-tolerant
+weight=60
+topology=kubernetes.io/hostname
+
+Preferred pod anti-affinity:
+app=complex
+weight=40
+topology=kubernetes.io/hostname
+
+Observed placement:
+scheduling-policy-worker = 2
+scheduling-policy-worker2 = 0
+scheduling-policy-control-plane = 0
+
+Validated:
+- deployment became 2/2 Ready
+- database-node toleration present
+- preferred node affinity present
+- preferred pod affinity present
+- preferred pod anti-affinity present
+- scheduler placement captured and analyzed
+
+Interpretation:
+All three affinity mechanisms participate in scheduler scoring,
+while the toleration allows the workload to use the tainted
+database worker when selected.
+
+Result:
+PASS

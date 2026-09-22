@@ -1,0 +1,74 @@
+Kubernetes Scheduling Policy Validation
+
+Cluster:
+kind scheduling-policy
+
+Topology:
+1 control plane
+2 workers
+3 total nodes
+
+Required node affinity:
+PASS
+
+Preferred node affinity:
+PASS
+
+NoSchedule taint:
+PASS
+
+Pod without matching toleration:
+PASS - intentionally Pending
+
+Matching toleration:
+PASS
+
+Preferred pod affinity:
+PASS
+
+Required pod anti-affinity:
+PASS
+
+Three-way cache spread:
+PASS
+
+Anti-affinity topology exhaustion:
+PASS
+
+Anti-affinity-aware rollout:
+PASS
+
+Combined scheduling policy:
+PASS
+
+Scheduler event analysis:
+PASS
+
+Monitoring:
+PASS
+
+Final workloads:
+
+database-app:
+2/2 Ready
+
+web-app:
+3/3 Ready
+
+database-tolerant:
+2/2 Ready
+
+frontend-app:
+2/2 Ready
+
+cache-app:
+3/3 Ready across 3 distinct nodes
+
+complex-app:
+2/2 Ready
+
+no-toleration-test:
+Pending by design
+
+Final result:
+SUCCESS

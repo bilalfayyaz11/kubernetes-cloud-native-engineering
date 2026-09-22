@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cache-app
+  labels:
+    app: cache
+spec:
+  replicas: 3
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+
+  selector:
+    matchLabels:
+      app: cache
+
+  template:
+    metadata:
+      labels:
+        app: cache
+        component: cache
+
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+
+        - key: dedicated
+          operator: Equal
+          value: database
+          effect: NoSchedule
+
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - cache
+              topologyKey: kubernetes.io/hostname
+
+      containers:
+        - name: cache
+          image: redis:7-alpine
+
+          ports:
+            - containerPort: 6379
+
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+
+            limits:
+              cpu: 50m
+              memory: 64Mi
