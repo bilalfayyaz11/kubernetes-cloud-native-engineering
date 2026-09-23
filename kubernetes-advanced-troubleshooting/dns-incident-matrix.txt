@@ -1,0 +1,56 @@
+KUBERNETES DNS INCIDENT
+
+Healthy Components
+------------------
+CoreDNS Deployment
+kube-dns Service
+Pod networking
+Service ClusterIP
+Backend Pods
+Service targetPort
+
+Broken Component
+----------------
+dns-debug Pod resolver configuration
+
+Broken Policy
+-------------
+dnsPolicy: None
+
+Configured nameserver:
+192.0.2.53
+
+Expected Kubernetes DNS:
+10.96.0.10
+
+Symptoms
+--------
+Direct Pod IP connectivity:     SUCCESS
+Direct Service ClusterIP:       SUCCESS
+Service DNS name:               FAILURE
+kubernetes.default DNS name:    FAILURE
+
+Isolation Test
+--------------
+Explicit query to CoreDNS:
+SUCCESS
+
+Root Cause
+----------
+The Pod was configured to ignore Kubernetes-generated DNS settings and
+use a deliberately invalid resolver.
+
+Recovery
+--------
+The Pod specification was not modified in place.
+
+The broken Pod was deleted and recreated with:
+
+dnsPolicy: ClusterFirst
+
+Recovered State
+---------------
+Service DNS resolution:         SUCCESS
+Kubernetes Service resolution:  SUCCESS
+Short Service name resolution:  SUCCESS
+HTTP through Service DNS:       SUCCESS

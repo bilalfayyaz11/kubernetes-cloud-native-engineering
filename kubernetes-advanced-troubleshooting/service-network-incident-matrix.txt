@@ -1,0 +1,55 @@
+KUBERNETES SERVICE NETWORK INCIDENT
+
+Symptom
+-------
+Client Pod can resolve the Service DNS name, but HTTP traffic through
+the Service fails.
+
+Healthy Components
+------------------
+Client Pod
+CoreDNS
+Service DNS
+Service selector
+Backend Pods
+Pod-to-Pod networking
+nginx on TCP/80
+
+Fault
+-----
+Service:
+  port:       80
+  targetPort: 8080
+
+Container:
+  listening port: 80
+
+Observed Result
+---------------
+Service selected the correct Pods, but forwarded connections toward
+TCP/8080 where nginx was not listening.
+
+Diagnosis
+---------
+1. Verify client and server Pods are Ready.
+2. Verify Service DNS resolution.
+3. Verify Service selector matches intended Pods.
+4. Inspect EndpointSlices.
+5. Test backend Pod IP directly.
+6. Compare Service targetPort with workload listening port.
+7. Capture traffic with tcpdump.
+8. Trace network paths as supporting evidence.
+9. Correct targetPort.
+10. Retest DNS name and ClusterIP.
+
+Resolution
+----------
+Change Service targetPort:
+
+  8080 -> 80
+
+Final Result
+------------
+Service DNS request: SUCCESS
+ClusterIP request:   SUCCESS
+Direct Pod request:  SUCCESS

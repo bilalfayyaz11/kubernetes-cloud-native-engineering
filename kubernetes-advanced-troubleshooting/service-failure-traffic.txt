@@ -1,0 +1,34 @@
+reading from file /home/ubuntu/kubernetes-advanced-troubleshooting/service-failure-traffic.pcap, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144
+Warning: interface names might be incorrect
+21:42:09.046987 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [S], seq 272275351, win 62377, options [mss 8911,sackOK,TS val 4060748255 ecr 0,nop,wscale 7], length 0
+21:42:09.046998 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [S], seq 272275351, win 62377, options [mss 8911,sackOK,TS val 4060748255 ecr 0,nop,wscale 7], length 0
+21:42:09.047027 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [S.], seq 2924487490, ack 272275352, win 62293, options [mss 8911,sackOK,TS val 3337151496 ecr 4060748255,nop,wscale 7], length 0
+21:42:09.047034 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [S.], seq 2924487490, ack 272275352, win 62293, options [mss 8911,sackOK,TS val 3337151496 ecr 4060748255,nop,wscale 7], length 0
+21:42:09.047058 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 0
+21:42:09.047061 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 0
+21:42:09.047278 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [P.], seq 1:102, ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 101: HTTP: GET / HTTP/1.1
+21:42:09.047282 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [P.], seq 1:102, ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 101: HTTP: GET / HTTP/1.1
+21:42:09.047302 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 0
+21:42:09.047307 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 0
+21:42:09.047451 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 1:234, ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 233: HTTP: HTTP/1.1 200 OK
+21:42:09.047486 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 1:234, ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 233: HTTP: HTTP/1.1 200 OK
+21:42:09.047511 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 234, win 487, options [nop,nop,TS val 4060748256 ecr 3337151496], length 0
+21:42:09.047516 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 234, win 487, options [nop,nop,TS val 4060748256 ecr 3337151496], length 0
+21:42:09.047558 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 234:849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 615: HTTP
+21:42:09.047563 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 234:849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 615: HTTP
+21:42:09.047574 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047577 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047615 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [F.], seq 102, ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047619 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [F.], seq 102, ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047624 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [F.], seq 849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:09.047628 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [F.], seq 849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:09.047636 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 850, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047638 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 850, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047652 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 103, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:09.047655 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 103, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:10.110500 vethb590da54 Out IP 10.244.0.13.58426 > 10.244.0.12.8080: Flags [S], seq 1179935288, win 62377, options [mss 8911,sackOK,TS val 886008416 ecr 0,nop,wscale 7], length 0
+21:42:10.110521 vethb590da54 P   IP 10.244.0.12.8080 > 10.244.0.13.58426: Flags [R.], seq 0, ack 1179935289, win 0, length 0
+21:42:11.133521 vethb590da54 P   ARP, Request who-has 10.244.0.13 tell 10.244.0.12, length 28
+21:42:11.133577 veth9eb5c8ea Out ARP, Request who-has 10.244.0.13 tell 10.244.0.12, length 28
+21:42:11.133588 veth9eb5c8ea P   ARP, Reply 10.244.0.13 is-at 16:ec:47:7b:d6:ba, length 28
+21:42:11.133591 vethb590da54 Out ARP, Reply 10.244.0.13 is-at 16:ec:47:7b:d6:ba, length 28

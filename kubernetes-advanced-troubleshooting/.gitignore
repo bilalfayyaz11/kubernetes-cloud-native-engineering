@@ -1,0 +1,16 @@
+*.key
+*.crt
+*.pem
+*.kubeconfig
+admin.conf
+.env
+.env.*
+*credentials*
+*token*
+kubeadm-init-output.txt
+kube-flannel.yml
+etcd-environment.sh
+current-backup.env
+pre-snapshot-resource-identities.txt
+etcd-container-before-failure.json
+control-plane-backups/

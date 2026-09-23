@@ -1,0 +1,6 @@
+;; communications error to 192.0.2.53#53: timed out
+
+; <<>> DiG 9.20.23 <<>> +time=2 +tries=1 web-service.network-debug.svc.cluster.local
+;; global options: +cmd
+;; no servers could be reached
+command terminated with exit code 9

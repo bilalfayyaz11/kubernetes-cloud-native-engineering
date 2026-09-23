@@ -1,0 +1,13 @@
+CONTAINER           IMAGE               CREATED             STATE               NAME                      ATTEMPT             POD ID              POD                                        NAMESPACE
+0f1dba6806f58       dc73b49f5124c       2 minutes ago       Running             nginx                     0                   4ac6c07cdc86a       test-app-5bdfdf8444-ltsmm                  test-recovery
+5fc11cda10e7b       dc73b49f5124c       2 minutes ago       Running             nginx                     0                   3240b74abcef0       test-app-5bdfdf8444-64z7g                  test-recovery
+a2e23d6e057af       38667dd9be96c       3 minutes ago       Running             coredns                   0                   071c021a9b79d       coredns-589f44dc88-rc5tg                   kube-system
+4c03f65f2221a       38667dd9be96c       3 minutes ago       Running             coredns                   0                   a2e865f8d30b0       coredns-589f44dc88-vzlx6                   kube-system
+d8e1dc552b1c6       1644118ebe089       3 minutes ago       Running             kube-flannel              0                   92a5569af5e16       kube-flannel-ds-h47wg                      kube-flannel
+04667bfa6bf85       1644118ebe089       3 minutes ago       Exited              install-cni               0                   92a5569af5e16       kube-flannel-ds-h47wg                      kube-flannel
+2d13c1997ba28       f12bfaa8145d8       3 minutes ago       Exited              install-cni-plugin        0                   92a5569af5e16       kube-flannel-ds-h47wg                      kube-flannel
+4624f39f77454       a83c93aedd6ac       3 minutes ago       Running             kube-proxy                0                   9193bfdb81c25       kube-proxy-4qjpn                           kube-system
+b5d75f067285d       ee85eb1f0edd2       4 minutes ago       Exited              etcd                      0                   d8bd8c6d544a8       etcd-ip-172-31-10-147                      kube-system
+b15c07cde822b       137b99d7bbba0       4 minutes ago       Exited              kube-scheduler            0                   bde74d8635730       kube-scheduler-ip-172-31-10-147            kube-system
+d79dad6faff16       cf2bbfca0a634       4 minutes ago       Exited              kube-controller-manager   0                   370d549ee479b       kube-controller-manager-ip-172-31-10-147   kube-system
+542bf64403428       d350c55cb17bb       4 minutes ago       Running             kube-apiserver            0                   7d56bf21c3513       kube-apiserver-ip-172-31-10-147            kube-system

@@ -1,0 +1,8 @@
+;; Got recursion not available from 10.96.0.10
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	web-service.network-debug.svc.cluster.local
+Address: 10.104.106.79
+;; Got recursion not available from 10.96.0.10
+

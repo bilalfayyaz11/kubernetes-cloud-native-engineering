@@ -1,0 +1,11 @@
+The Pod "dns-debug" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
+@@ -140,7 +140,7 @@
+  "RestartPolicy": "Always",
+  "TerminationGracePeriodSeconds": 30,
+  "ActiveDeadlineSeconds": null,
+- "DNSPolicy": "None",
++ "DNSPolicy": "ClusterFirst",
+  "NodeSelector": null,
+  "ServiceAccountName": "default",
+  "AutomountServiceAccountToken": null,
+

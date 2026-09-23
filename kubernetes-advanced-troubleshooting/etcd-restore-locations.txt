@@ -1,0 +1,5 @@
+SNAPSHOT='/opt/etcd-backup/etcd-snapshot-20260923-213334.db'
+RESTORED_DATA_DIR='/var/lib/etcd'
+PRESERVED_PRE_RESTORE_DATA='/var/lib/etcd-failed-20260923-213606'
+REVISION_BUMP='1000000000'
+MARK_COMPACTED='true'

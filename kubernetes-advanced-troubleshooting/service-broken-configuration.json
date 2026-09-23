@@ -1,0 +1,14 @@
+{
+  "serviceIP": "10.104.106.79",
+  "selector": {
+    "app": "web-app"
+  },
+  "ports": [
+    {
+      "name": "http",
+      "port": 80,
+      "protocol": "TCP",
+      "targetPort": 8080
+    }
+  ]
+}

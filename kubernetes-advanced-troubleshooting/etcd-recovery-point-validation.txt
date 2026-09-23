@@ -1,0 +1,32 @@
+=== ETCD RECOVERY POINT VALIDATION ===
+Timestamp: 2026-09-23T21:33:35+00:00
+
+ETCD version: 3.6.8
+Endpoint: https://172.31.10.147:2379
+Member: ip-172-31-10-147
+Data directory: /var/lib/etcd
+
+Live revision before snapshot:
+743
+
+Snapshot revision:
+743
+
+Snapshot hash:
+2069761702
+
+Snapshot key count:
+380
+
+Snapshot file:
+/opt/etcd-backup/etcd-snapshot-20260923-213334.db
+
+Snapshot status:
++----------+----------+------------+------------+---------+
+|   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE | VERSION |
++----------+----------+------------+------------+---------+
+| 7b5e0ea6 |      743 |        380 |     1.6 MB |   3.6.0 |
++----------+----------+------------+------------+---------+
+
+Checksum:
+34c4f152a134606259912a7e65a8c0f0734b72df36f4c52eb459121c4dadd70f  /opt/etcd-backup/etcd-snapshot-20260923-213334.db

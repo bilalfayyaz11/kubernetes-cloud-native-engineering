@@ -1,0 +1,224 @@
+=== KUBERNETES SERVICE TROUBLESHOOTING ===
+Timestamp: 2026-09-23T21:42:35+00:00
+
+=== PODS ===
+NAME                          READY   STATUS    RESTARTS   AGE   IP            NODE               NOMINATED NODE   READINESS GATES
+client-app-555b5848dc-hnmqr   1/1     Running   0          52s   10.244.0.13   ip-172-31-10-147   <none>           <none>
+web-app-7b8554879c-44wwz      1/1     Running   0          52s   10.244.0.12   ip-172-31-10-147   <none>           <none>
+web-app-7b8554879c-g7wh4      1/1     Running   0          52s   10.244.0.11   ip-172-31-10-147   <none>           <none>
+
+=== SERVICE ===
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"web-service","namespace":"network-debug"},"spec":{"ports":[{"name":"http","port":80,"protocol":"TCP","targetPort":8080}],"selector":{"app":"web-app"},"type":"ClusterIP"}}
+  creationTimestamp: "2026-09-23T21:41:43Z"
+  name: web-service
+  namespace: network-debug
+  resourceVersion: "1000001132"
+  uid: fa13ecad-8180-4bd0-b07c-175cd9e3a735
+spec:
+  clusterIP: 10.104.106.79
+  clusterIPs:
+  - 10.104.106.79
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web-app
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+=== ENDPOINTSLICE ===
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.0.11
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-172-31-10-147
+    targetRef:
+      kind: Pod
+      name: web-app-7b8554879c-g7wh4
+      namespace: network-debug
+      uid: 5614a6c9-191f-425c-aae6-6ff5af8a300f
+  - addresses:
+    - 10.244.0.12
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-172-31-10-147
+    targetRef:
+      kind: Pod
+      name: web-app-7b8554879c-44wwz
+      namespace: network-debug
+      uid: d852f432-4c4d-4680-9bdd-9498529aff8c
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2026-09-23T21:41:43Z"
+    generateName: web-service-
+    generation: 6
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: web-service
+    name: web-service-ntwtw
+    namespace: network-debug
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: web-service
+      uid: fa13ecad-8180-4bd0-b07c-175cd9e3a735
+    resourceVersion: "1000001134"
+    uid: a8fd4094-e7bb-4036-b4ad-5493ef2a1e8f
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""
+
+=== ROOT CAUSE ===
+Original Service targetPort: 8080
+Container listening port: 80
+Corrected Service targetPort: 80
+
+=== FAILED REQUEST ===
+* Host web-service.network-debug.svc.cluster.local:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.104.106.79
+*   Trying 10.104.106.79:80...
+* connect to 10.104.106.79 port 80 from 10.244.0.13 port 58410 failed: Connection refused
+* Failed to connect to web-service.network-debug.svc.cluster.local:80 after 7 ms: Could not connect to server
+* closing connection #0
+curl: (7) Failed to connect to web-service.network-debug.svc.cluster.local:80 after 7 ms: Could not connect to server
+command terminated with exit code 7
+
+=== TCPDUMP ANALYSIS ===
+reading from file /home/ubuntu/kubernetes-advanced-troubleshooting/service-failure-traffic.pcap, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144
+Warning: interface names might be incorrect
+21:42:09.046987 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [S], seq 272275351, win 62377, options [mss 8911,sackOK,TS val 4060748255 ecr 0,nop,wscale 7], length 0
+21:42:09.046998 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [S], seq 272275351, win 62377, options [mss 8911,sackOK,TS val 4060748255 ecr 0,nop,wscale 7], length 0
+21:42:09.047027 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [S.], seq 2924487490, ack 272275352, win 62293, options [mss 8911,sackOK,TS val 3337151496 ecr 4060748255,nop,wscale 7], length 0
+21:42:09.047034 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [S.], seq 2924487490, ack 272275352, win 62293, options [mss 8911,sackOK,TS val 3337151496 ecr 4060748255,nop,wscale 7], length 0
+21:42:09.047058 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 0
+21:42:09.047061 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 0
+21:42:09.047278 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [P.], seq 1:102, ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 101: HTTP: GET / HTTP/1.1
+21:42:09.047282 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [P.], seq 1:102, ack 1, win 488, options [nop,nop,TS val 4060748255 ecr 3337151496], length 101: HTTP: GET / HTTP/1.1
+21:42:09.047302 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 0
+21:42:09.047307 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 0
+21:42:09.047451 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 1:234, ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 233: HTTP: HTTP/1.1 200 OK
+21:42:09.047486 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 1:234, ack 102, win 486, options [nop,nop,TS val 3337151496 ecr 4060748255], length 233: HTTP: HTTP/1.1 200 OK
+21:42:09.047511 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 234, win 487, options [nop,nop,TS val 4060748256 ecr 3337151496], length 0
+21:42:09.047516 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 234, win 487, options [nop,nop,TS val 4060748256 ecr 3337151496], length 0
+21:42:09.047558 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 234:849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 615: HTTP
+21:42:09.047563 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [P.], seq 234:849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 615: HTTP
+21:42:09.047574 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047577 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047615 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [F.], seq 102, ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047619 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [F.], seq 102, ack 849, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047624 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [F.], seq 849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:09.047628 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [F.], seq 849, ack 102, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:09.047636 cni0  Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 850, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047638 vethb590da54 Out IP 10.244.0.1.52908 > 10.244.0.12.80: Flags [.], ack 850, win 483, options [nop,nop,TS val 4060748256 ecr 3337151497], length 0
+21:42:09.047652 vethb590da54 P   IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 103, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:09.047655 cni0  In  IP 10.244.0.12.80 > 10.244.0.1.52908: Flags [.], ack 103, win 486, options [nop,nop,TS val 3337151497 ecr 4060748256], length 0
+21:42:10.110500 vethb590da54 Out IP 10.244.0.13.58426 > 10.244.0.12.8080: Flags [S], seq 1179935288, win 62377, options [mss 8911,sackOK,TS val 886008416 ecr 0,nop,wscale 7], length 0
+21:42:10.110521 vethb590da54 P   IP 10.244.0.12.8080 > 10.244.0.13.58426: Flags [R.], seq 0, ack 1179935289, win 0, length 0
+21:42:11.133521 vethb590da54 P   ARP, Request who-has 10.244.0.13 tell 10.244.0.12, length 28
+21:42:11.133577 veth9eb5c8ea Out ARP, Request who-has 10.244.0.13 tell 10.244.0.12, length 28
+21:42:11.133588 veth9eb5c8ea P   ARP, Reply 10.244.0.13 is-at 16:ec:47:7b:d6:ba, length 28
+21:42:11.133591 vethb590da54 Out ARP, Reply 10.244.0.13 is-at 16:ec:47:7b:d6:ba, length 28
+
+=== TRACEROUTE TO WEB POD ===
+traceroute to 10.244.0.12 (10.244.0.12), 8 hops max, 46 byte packets
+ 1  10.244.0.12  0.011 ms  0.009 ms  0.009 ms
+
+=== TRACEROUTE TO SERVICE ===
+traceroute to 10.104.106.79 (10.104.106.79), 8 hops max, 46 byte packets
+ 1  10.244.0.1  0.012 ms  0.008 ms  0.007 ms
+ 2  244.5.0.17  1.535 ms  244.5.0.91  2.154 ms  244.5.11.189  3.200 ms
+ 3  *  *  *
+ 4  *  *  *
+ 5  *  *  *
+ 6  *  *  *
+ 7  *  *  *
+ 8  *  *  *
+
+=== FINAL HTTP CHECK ===
+Welcome to nginx: VERIFIED
+
+=== INCIDENT MATRIX ===
+KUBERNETES SERVICE NETWORK INCIDENT
+
+Symptom
+-------
+Client Pod can resolve the Service DNS name, but HTTP traffic through
+the Service fails.
+
+Healthy Components
+------------------
+Client Pod
+CoreDNS
+Service DNS
+Service selector
+Backend Pods
+Pod-to-Pod networking
+nginx on TCP/80
+
+Fault
+-----
+Service:
+  port:       80
+  targetPort: 8080
+
+Container:
+  listening port: 80
+
+Observed Result
+---------------
+Service selected the correct Pods, but forwarded connections toward
+TCP/8080 where nginx was not listening.
+
+Diagnosis
+---------
+1. Verify client and server Pods are Ready.
+2. Verify Service DNS resolution.
+3. Verify Service selector matches intended Pods.
+4. Inspect EndpointSlices.
+5. Test backend Pod IP directly.
+6. Compare Service targetPort with workload listening port.
+7. Capture traffic with tcpdump.
+8. Trace network paths as supporting evidence.
+9. Correct targetPort.
+10. Retest DNS name and ClusterIP.
+
+Resolution
+----------
+Change Service targetPort:
+
+  8080 -> 80
+
+Final Result
+------------
+Service DNS request: SUCCESS
+ClusterIP request:   SUCCESS
+Direct Pod request:  SUCCESS

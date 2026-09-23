@@ -1,0 +1,134 @@
+=== DNS TROUBLESHOOTING REPORT ===
+Timestamp: 2026-09-23T21:45:24+00:00
+
+=== COREDNS STATE ===
+NAME      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                    SELECTOR
+coredns   2/2     2            2           13m   coredns      registry.k8s.io/coredns/coredns:v1.14.2   k8s-app=kube-dns
+NAME                       READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+coredns-589f44dc88-rc5tg   1/1     Running   0          13m   10.244.0.3   ip-172-31-10-147   <none>           <none>
+coredns-589f44dc88-vzlx6   1/1     Running   0          13m   10.244.0.2   ip-172-31-10-147   <none>           <none>
+NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE   SELECTOR
+kube-dns   ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   13m   k8s-app=kube-dns
+
+=== BROKEN DNS CONFIG ===
+search invalid.example
+nameserver 192.0.2.53
+options ndots:1
+
+=== FAILED DNS LOOKUP ===
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; no servers could be reached
+
+command terminated with exit code 1
+
+=== DIRECT COREDNS QUERY ===
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	web-service.network-debug.svc.cluster.local
+Address: 10.104.106.79
+
+
+=== PATCH ATTEMPT ===
+The Pod "dns-debug" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
+@@ -140,7 +140,7 @@
+  "RestartPolicy": "Always",
+  "TerminationGracePeriodSeconds": 30,
+  "ActiveDeadlineSeconds": null,
+- "DNSPolicy": "None",
++ "DNSPolicy": "ClusterFirst",
+  "NodeSelector": null,
+  "ServiceAccountName": "default",
+  "AutomountServiceAccountToken": null,
+
+
+=== FIXED DNS CONFIG ===
+search network-debug.svc.cluster.local svc.cluster.local cluster.local ec2.internal
+nameserver 10.96.0.10
+options ndots:5
+
+=== RECOVERED SERVICE LOOKUP ===
+;; Got recursion not available from 10.96.0.10
+;; Got recursion not available from 10.96.0.10
+;; Got recursion not available from 10.96.0.10
+;; Got recursion not available from 10.96.0.10
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	web-service.network-debug.svc.cluster.local
+Address: 10.104.106.79
+;; Got recursion not available from 10.96.0.10
+
+
+=== RECOVERED KUBERNETES LOOKUP ===
+;; Got recursion not available from 10.96.0.10
+;; Got recursion not available from 10.96.0.10
+;; Got recursion not available from 10.96.0.10
+;; Got recursion not available from 10.96.0.10
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+;; Got recursion not available from 10.96.0.10
+
+
+=== INCIDENT MATRIX ===
+KUBERNETES DNS INCIDENT
+
+Healthy Components
+------------------
+CoreDNS Deployment
+kube-dns Service
+Pod networking
+Service ClusterIP
+Backend Pods
+Service targetPort
+
+Broken Component
+----------------
+dns-debug Pod resolver configuration
+
+Broken Policy
+-------------
+dnsPolicy: None
+
+Configured nameserver:
+192.0.2.53
+
+Expected Kubernetes DNS:
+10.96.0.10
+
+Symptoms
+--------
+Direct Pod IP connectivity:     SUCCESS
+Direct Service ClusterIP:       SUCCESS
+Service DNS name:               FAILURE
+kubernetes.default DNS name:    FAILURE
+
+Isolation Test
+--------------
+Explicit query to CoreDNS:
+SUCCESS
+
+Root Cause
+----------
+The Pod was configured to ignore Kubernetes-generated DNS settings and
+use a deliberately invalid resolver.
+
+Recovery
+--------
+The Pod specification was not modified in place.
+
+The broken Pod was deleted and recreated with:
+
+dnsPolicy: ClusterFirst
+
+Recovered State
+---------------
+Service DNS resolution:         SUCCESS
+Kubernetes Service resolution:  SUCCESS
+Short Service name resolution:  SUCCESS
+HTTP through Service DNS:       SUCCESS

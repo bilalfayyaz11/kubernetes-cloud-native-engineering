@@ -1,0 +1,86 @@
+KUBERNETES ADVANCED TROUBLESHOOTING SUMMARY
+
+Scenario 1 - etcd Disaster Recovery
+-----------------------------------
+Failure:
+  etcd was deliberately taken offline.
+
+Observed impact:
+  etcd endpoint health failed.
+  Kubernetes API readiness degraded.
+  API operations became unavailable.
+
+Recovery:
+  A previously validated snapshot was restored using etcdutl.
+  The restore used a revision bump and mark-compacted behavior.
+  The failed datastore was preserved instead of destroyed.
+
+Recovery proof:
+  Pre-snapshot Kubernetes objects returned with the same UIDs.
+  A ConfigMap created after the snapshot disappeared.
+  The cluster accepted new writes after recovery.
+
+Scenario 2 - kube-apiserver Misconfiguration
+--------------------------------------------
+Failure A:
+  Invalid --secure-port value.
+
+Failure B:
+  Invalid TLS certificate path.
+
+Diagnosis:
+  Static Pod manifest inspection.
+  crictl container state.
+  kube-apiserver logs.
+  kubelet journal.
+  socket inspection.
+  API readiness testing.
+
+Recovery:
+  Known-good manifests stored outside the static Pod manifest directory
+  were restored.
+
+Scenario 3 - Kubernetes Service Networking
+------------------------------------------
+Failure:
+  Service targetPort was 8080 while nginx listened on TCP/80.
+
+Diagnosis:
+  Pod readiness.
+  Service selectors.
+  EndpointSlices.
+  direct Pod-IP tests.
+  ClusterIP tests.
+  DNS tests.
+  tcpdump packet capture.
+  traceroute.
+  routing inspection.
+
+Recovery:
+  Service targetPort changed from 8080 to 80.
+
+Scenario 4 - Kubernetes DNS
+---------------------------
+Failure:
+  Pod used dnsPolicy=None with a deliberately invalid resolver.
+
+Observed behavior:
+  Pod IP networking succeeded.
+  Service ClusterIP networking succeeded.
+  DNS lookups failed.
+
+Isolation:
+  Direct queries to CoreDNS succeeded.
+
+Recovery:
+  Pod was recreated with dnsPolicy=ClusterFirst.
+
+Final State
+-----------
+etcd: healthy
+kube-apiserver: ready
+node: Ready
+CoreDNS: healthy
+recovered application: healthy
+web-service: healthy
+Service DNS: healthy

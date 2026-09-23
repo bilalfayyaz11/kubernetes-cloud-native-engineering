@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-debug
+  namespace: network-debug
+  labels:
+    app: dns-debug
+spec:
+  dnsPolicy: ClusterFirst
+  containers:
+    - name: network-tools
+      image: nicolaka/netshoot:latest
+      command:
+        - sh
+        - -c
+        - sleep infinity

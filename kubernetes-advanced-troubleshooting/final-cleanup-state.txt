@@ -1,0 +1,25 @@
+=== TIMESTAMP ===
+2026-09-23T21:47:12+00:00
+
+=== API SERVER ===
+ok
+=== NODES ===
+NAME               STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-147   Ready    control-plane   15m   v1.36.5   172.31.10.147   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+=== ETCD HEALTH ===
+https://172.31.10.147:2379 is healthy: successfully committed proposal: took = 13.062286ms
+
+=== SYSTEM PODS ===
+NAME                                       READY   STATUS    RESTARTS        AGE   IP              NODE               NOMINATED NODE   READINESS GATES
+coredns-589f44dc88-rc5tg                   1/1     Running   0               15m   10.244.0.3      ip-172-31-10-147   <none>           <none>
+coredns-589f44dc88-vzlx6                   1/1     Running   0               15m   10.244.0.2      ip-172-31-10-147   <none>           <none>
+etcd-ip-172-31-10-147                      1/1     Running   1 (11m ago)     15m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-apiserver-ip-172-31-10-147            1/1     Running   2 (6m28s ago)   15m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-controller-manager-ip-172-31-10-147   1/1     Running   2 (7m27s ago)   15m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-proxy-4qjpn                           1/1     Running   0               15m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-scheduler-ip-172-31-10-147            1/1     Running   2 (7m27s ago)   15m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+
+=== TEST NAMESPACE CHECK ===
+test-recovery: REMOVED
+network-debug: REMOVED

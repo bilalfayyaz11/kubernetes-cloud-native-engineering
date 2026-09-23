@@ -1,0 +1,46 @@
+KUBE-APISERVER INCIDENT MATRIX
+
+Scenario 1
+----------
+Failure:
+  Invalid --secure-port value
+
+Expected effect:
+  kube-apiserver static Pod cannot start correctly
+  Kubernetes API becomes unavailable
+  port 6443 stops accepting API traffic
+
+Diagnosis:
+  crictl ps -a
+  crictl logs
+  kubelet journal
+  static Pod manifest inspection
+  socket inspection with ss
+
+Recovery:
+  Restore known-good manifest from backup stored outside
+  /etc/kubernetes/manifests
+
+Scenario 2
+----------
+Failure:
+  --tls-cert-file points to a nonexistent certificate
+
+Expected effect:
+  kube-apiserver cannot initialize TLS
+  API becomes unavailable
+
+Diagnosis:
+  crictl container state
+  kube-apiserver logs
+  kubelet logs
+  manifest inspection
+
+Recovery:
+  Restore the valid certificate path from the known-good manifest
+
+Key Operational Principle
+-------------------------
+Static Pod manifest backups must not be stored as ordinary files inside
+/etc/kubernetes/manifests because kubelet scans that directory when
+managing static Pods.

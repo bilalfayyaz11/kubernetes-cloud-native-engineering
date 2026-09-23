@@ -1,0 +1,61 @@
+=== TIMESTAMP ===
+2026-09-23T21:33:34+00:00
+
+=== NODE STATE ===
+NAME               STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-147   Ready    control-plane   95s   v1.36.5   172.31.10.147   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+=== CONTROL-PLANE PODS ===
+NAME                                       READY   STATUS    RESTARTS   AGE   IP              NODE               NOMINATED NODE   READINESS GATES
+coredns-589f44dc88-rc5tg                   1/1     Running   0          85s   10.244.0.3      ip-172-31-10-147   <none>           <none>
+coredns-589f44dc88-vzlx6                   1/1     Running   0          85s   10.244.0.2      ip-172-31-10-147   <none>           <none>
+etcd-ip-172-31-10-147                      1/1     Running   0          90s   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-apiserver-ip-172-31-10-147            1/1     Running   0          90s   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-controller-manager-ip-172-31-10-147   1/1     Running   0          91s   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-proxy-4qjpn                           1/1     Running   0          85s   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-scheduler-ip-172-31-10-147            1/1     Running   0          90s   172.31.10.147   ip-172-31-10-147   <none>           <none>
+
+=== RECOVERY RESOURCES ===
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+pod/test-app-5bdfdf8444-64z7g   1/1     Running   0          14s   10.244.0.7   ip-172-31-10-147   <none>           <none>
+pod/test-app-5bdfdf8444-ltsmm   1/1     Running   0          14s   10.244.0.8   ip-172-31-10-147   <none>           <none>
+
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/test-app   ClusterIP   10.111.252.161   <none>        80/TCP    14s   app=test-app
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES              SELECTOR
+deployment.apps/test-app   2/2     2            2           14s   nginx        nginx:1.28-alpine   app=test-app
+
+NAME                                  DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES              SELECTOR
+replicaset.apps/test-app-5bdfdf8444   2         2         2       14s   nginx        nginx:1.28-alpine   app=test-app,pod-template-hash=5bdfdf8444
+
+=== RECOVERY MARKER ===
+apiVersion: v1
+data:
+  recovery_state: must-return-after-etcd-restore
+  source: pre-failure-snapshot
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"recovery_state":"must-return-after-etcd-restore","source":"pre-failure-snapshot"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"recovery-marker","namespace":"test-recovery"}}
+  creationTimestamp: "2026-09-23T21:33:21Z"
+  name: recovery-marker
+  namespace: test-recovery
+  resourceVersion: "671"
+  uid: 931be1c9-4ae5-4109-8031-d85d4484a5bd
+
+=== RESOURCE IDENTITIES ===
+NAMESPACE_UID='5b554759-8928-447e-8ef2-ba5c82350872'
+DEPLOYMENT_UID='85aab758-ee03-4b61-8a6c-183c037df30e'
+SERVICE_UID='2e9f36f0-906f-4803-bead-d67129c7c8a2'
+CONFIGMAP_UID='931be1c9-4ae5-4109-8031-d85d4484a5bd'
+
+=== ETCD REVISION ===
+743
+
+=== SNAPSHOT REVISION ===
+743
+
+=== SNAPSHOT FILE ===
+/opt/etcd-backup/etcd-snapshot-20260923-213334.db

@@ -1,0 +1,6 @@
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; no servers could be reached
+
+command terminated with exit code 1

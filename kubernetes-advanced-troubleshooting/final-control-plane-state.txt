@@ -1,0 +1,8 @@
+NAME                                       READY   STATUS    RESTARTS        AGE   IP              NODE               NOMINATED NODE   READINESS GATES
+coredns-589f44dc88-rc5tg                   1/1     Running   0               13m   10.244.0.3      ip-172-31-10-147   <none>           <none>
+coredns-589f44dc88-vzlx6                   1/1     Running   0               13m   10.244.0.2      ip-172-31-10-147   <none>           <none>
+etcd-ip-172-31-10-147                      1/1     Running   1 (10m ago)     14m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-apiserver-ip-172-31-10-147            1/1     Running   2 (5m25s ago)   14m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-controller-manager-ip-172-31-10-147   1/1     Running   2 (6m24s ago)   14m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-proxy-4qjpn                           1/1     Running   0               13m   172.31.10.147   ip-172-31-10-147   <none>           <none>
+kube-scheduler-ip-172-31-10-147            1/1     Running   2 (6m24s ago)   14m   172.31.10.147   ip-172-31-10-147   <none>           <none>

@@ -1,0 +1,5 @@
+.kubelet-keep
+etcd.yaml
+kube-apiserver.yaml
+kube-controller-manager.yaml
+kube-scheduler.yaml

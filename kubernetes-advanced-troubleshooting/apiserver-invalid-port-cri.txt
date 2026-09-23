@@ -1,0 +1,2 @@
+CONTAINER           IMAGE               CREATED             STATE               NAME                ATTEMPT             POD ID              POD                               NAMESPACE
+542bf64403428       d350c55cb17bb       8 minutes ago       Running             kube-apiserver      0                   7d56bf21c3513       kube-apiserver-ip-172-31-10-147   kube-system

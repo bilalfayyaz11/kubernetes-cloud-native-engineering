@@ -1,0 +1,4 @@
+LISTEN 0      4096       127.0.0.1:2379       0.0.0.0:*    users:(("etcd",pid=14420,fd=7))                        
+LISTEN 0      4096   172.31.10.147:2380       0.0.0.0:*    users:(("etcd",pid=14420,fd=3))                        
+LISTEN 0      4096   172.31.10.147:2379       0.0.0.0:*    users:(("etcd",pid=14420,fd=8))                        
+LISTEN 0      4096               *:6443             *:*    users:(("kube-apiserver",pid=17211,fd=4))              

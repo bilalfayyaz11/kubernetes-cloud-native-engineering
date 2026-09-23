@@ -1,0 +1,87 @@
+=== ETCD DISASTER RECOVERY ===
+Timestamp: 2026-09-23T21:39:21+00:00
+
+=== SNAPSHOT ===
+File: /opt/etcd-backup/etcd-snapshot-20260923-213334.db
+Snapshot revision: 743
+
+=== PRE-FAILURE REVISION ===
+918
+
+=== RESTORED REVISION ===
+1000000819
+
+=== RESTORE SETTINGS ===
+Revision bump: 1000000000
+Mark compacted: true
+
+=== FAILED DATA PRESERVED ===
+/var/lib/etcd-failed-20260923-213606
+
+=== ETCD OUTAGE HEALTH TEST ===
+{"level":"warn","ts":"2026-09-23T21:35:51.527970Z","caller":"flags/flag.go:94","msg":"unrecognized environment variable","environment-variable":"ETCDCTL_API=3"}
+{"level":"warn","ts":"2026-09-23T21:35:56.532116Z","logger":"client","caller":"v3@v3.6.8/retry_interceptor.go:65","msg":"retrying of unary invoker failed","target":"etcd-endpoints://0xc000274960/172.31.10.147:2379","method":"/etcdserverpb.KV/Range","attempt":0,"error":"rpc error: code = DeadlineExceeded desc = latest balancer error: connection error: desc = \"transport: Error while dialing: dial tcp 172.31.10.147:2379: connect: connection refused\""}
+https://172.31.10.147:2379 is unhealthy: failed to commit proposal: context deadline exceeded
+Error: unhealthy cluster
+
+=== API DURING ETCD OUTAGE ===
+Unable to connect to the server: context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+
+=== API READINESS DURING OUTAGE ===
+Error from server (InternalError): an error on the server ("[+]ping ok\n[+]log ok\n[-]etcd failed: reason withheld\n[-]etcd-readiness failed: reason withheld\n[+]informer-sync ok\n[+]poststarthook/start-apiserver-admission-initializer ok\n[+]poststarthook/generic-apiserver-start-informers ok\n[+]poststarthook/priority-and-fairness-config-consumer ok\n[+]poststarthook/priority-and-fairness-filter ok\n[+]poststarthook/storage-object-count-tracker-hook ok\n[+]poststarthook/start-apiextensions-informers ok\n[+]poststarthook/start-apiextensions-controllers ok\n[+]poststarthook/crd-informer-synced ok\n[+]poststarthook/start-system-namespaces-controller ok\n[+]poststarthook/peer-endpoint-reconciler-controller ok\n[+]poststarthook/start-cluster-authentication-info-controller ok\n[+]poststarthook/start-kube-apiserver-identity-lease-controller ok\n[+]poststarthook/start-kube-apiserver-identity-lease-garbage-collector ok\n[+]poststarthook/storage-readiness ok\n[+]poststarthook/start-legacy-token-tracking-controller ok\n[+]poststarthook/start-service-ip-repair-controllers ok\n[+]poststarthook/rbac/bootstrap-roles ok\n[+]poststarthook/scheduling/bootstrap-system-priority-classes ok\n[+]poststarthook/priority-and-fairness-config-producer ok\n[+]poststarthook/bootstrap-controller ok\n[+]poststarthook/start-kubernetes-service-cidr-controller ok\n[+]poststarthook/aggregator-reload-proxy-client-cert ok\n[+]poststarthook/start-kube-aggregator-informers ok\n[+]poststarthook/apiservice-status-local-available-controller ok\n[+]poststarthook/apiservice-status-remote-available-controller ok\n[+]poststarthook/apiservice-registration-controller ok\n[+]poststarthook/apiservice-discovery-controller ok\n[+]poststarthook/kube-apiserver-autoregistration ok\n[+]autoregister-completion ok\n[+]poststarthook/apiservice-openapi-controller ok\n[+]poststarthook/apiservice-openapiv3-controller ok\n[+]shutdown ok\nreadyz check failed") has prevented the request from succeeding
+
+=== RESTORE OUTPUT ===
+2026-09-23T21:36:06Z	info	snapshot/v3_snapshot.go:305	restoring snapshot	{"path": "/opt/etcd-backup/etcd-snapshot-20260923-213334.db", "wal-dir": "/var/lib/etcd/member/wal", "data-dir": "/var/lib/etcd", "snap-dir": "/var/lib/etcd/member/snap", "initial-memory-map-size": 10737418240}
+2026-09-23T21:36:06Z	info	bbolt	backend/backend.go:203	Opening db file (/var/lib/etcd/member/snap/db) with mode -rw------- and with options: {Timeout: 0s, NoGrowSync: false, NoFreelistSync: true, PreLoadFreelist: false, FreelistType: , ReadOnly: false, MmapFlags: 8000, InitialMmapSize: 10737418240, PageSize: 0, NoSync: false, OpenFile: 0x0, Mlock: false, Logger: 0xc000060068}
+2026-09-23T21:36:06Z	info	bbolt	bbolt@v1.4.3/db.go:321	Opening bbolt db (/var/lib/etcd/member/snap/db) successfully
+2026-09-23T21:36:06Z	info	schema/membership.go:138	Trimming membership information from the backend...
+2026-09-23T21:36:06Z	info	bbolt	backend/backend.go:203	Opening db file (/var/lib/etcd/member/snap/db) with mode -rw------- and with options: {Timeout: 0s, NoGrowSync: false, NoFreelistSync: true, PreLoadFreelist: false, FreelistType: , ReadOnly: false, MmapFlags: 8000, InitialMmapSize: 10737418240, PageSize: 0, NoSync: false, OpenFile: 0x0, Mlock: false, Logger: 0xc0000601d0}
+2026-09-23T21:36:06Z	info	bbolt	bbolt@v1.4.3/db.go:321	Opening bbolt db (/var/lib/etcd/member/snap/db) successfully
+2026-09-23T21:36:06Z	info	snapshot/v3_snapshot.go:396	bumping latest revision	{"latest-revision": 743, "bump-amount": 1000000000, "new-latest-revision": 1000000743}
+2026-09-23T21:36:06Z	info	snapshot/v3_snapshot.go:413	marking revision compacted	{"revision": 1000000743}
+2026-09-23T21:36:06Z	info	bbolt	backend/backend.go:203	Opening db file (/var/lib/etcd/member/snap/db) with mode -rw------- and with options: {Timeout: 0s, NoGrowSync: false, NoFreelistSync: true, PreLoadFreelist: false, FreelistType: , ReadOnly: false, MmapFlags: 8000, InitialMmapSize: 10737418240, PageSize: 0, NoSync: false, OpenFile: 0x0, Mlock: false, Logger: 0xc0000602c0}
+2026-09-23T21:36:06Z	info	bbolt	bbolt@v1.4.3/db.go:321	Opening bbolt db (/var/lib/etcd/member/snap/db) successfully
+2026-09-23T21:36:06Z	info	membership/cluster.go:424	added member	{"cluster-id": "87b3f21dd6fea312", "local-member-id": "0", "added-peer-id": "42111ca4e206f66c", "added-peer-peer-urls": ["https://172.31.10.147:2380"], "added-peer-is-learner": false}
+2026-09-23T21:36:06Z	info	bbolt	backend/backend.go:203	Opening db file (/var/lib/etcd/member/snap/db) with mode -rw------- and with options: {Timeout: 0s, NoGrowSync: false, NoFreelistSync: true, PreLoadFreelist: false, FreelistType: , ReadOnly: false, MmapFlags: 8000, InitialMmapSize: 10737418240, PageSize: 0, NoSync: false, OpenFile: 0x0, Mlock: false, Logger: 0xc000060ac8}
+2026-09-23T21:36:06Z	info	bbolt	bbolt@v1.4.3/db.go:321	Opening bbolt db (/var/lib/etcd/member/snap/db) successfully
+2026-09-23T21:36:06Z	info	snapshot/v3_snapshot.go:333	restored snapshot	{"path": "/opt/etcd-backup/etcd-snapshot-20260923-213334.db", "wal-dir": "/var/lib/etcd/member/wal", "data-dir": "/var/lib/etcd", "snap-dir": "/var/lib/etcd/member/snap", "initial-memory-map-size": 10737418240}
+
+=== RESOURCE IDENTITY CHECK ===
+Namespace before:  5b554759-8928-447e-8ef2-ba5c82350872
+Namespace after:   5b554759-8928-447e-8ef2-ba5c82350872
+Deployment before: 85aab758-ee03-4b61-8a6c-183c037df30e
+Deployment after:  85aab758-ee03-4b61-8a6c-183c037df30e
+Service before:    2e9f36f0-906f-4803-bead-d67129c7c8a2
+Service after:     2e9f36f0-906f-4803-bead-d67129c7c8a2
+ConfigMap before:  931be1c9-4ae5-4109-8031-d85d4484a5bd
+ConfigMap after:   931be1c9-4ae5-4109-8031-d85d4484a5bd
+
+=== ROLLBACK CHECK ===
+Post-snapshot object: ABSENT
+
+=== ETCD HEALTH ===
+https://172.31.10.147:2379 is healthy: successfully committed proposal: took = 12.108974ms
+
+=== NODE STATE ===
+NAME               STATUS   ROLES           AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-147   Ready    control-plane   7m21s   v1.36.5   172.31.10.147   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+=== RECOVERED RESOURCES ===
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+pod/test-app-5bdfdf8444-64z7g   1/1     Running   0          6m    10.244.0.7   ip-172-31-10-147   <none>           <none>
+pod/test-app-5bdfdf8444-ltsmm   1/1     Running   0          6m    10.244.0.8   ip-172-31-10-147   <none>           <none>
+
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/test-app   ClusterIP   10.111.252.161   <none>        80/TCP    6m    app=test-app
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES              SELECTOR
+deployment.apps/test-app   2/2     2            2           6m    nginx        nginx:1.28-alpine   app=test-app
+
+NAME                                  DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES              SELECTOR
+replicaset.apps/test-app-5bdfdf8444   2         2         2       6m    nginx        nginx:1.28-alpine   app=test-app,pod-template-hash=5bdfdf8444
+
+=== CONFIGMAPS ===
+NAME                       DATA   AGE
+kube-root-ca.crt           1      6m
+post-recovery-write-test   1      1s
+recovery-marker            2      6m

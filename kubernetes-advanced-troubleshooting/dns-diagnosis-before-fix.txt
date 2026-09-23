@@ -1,0 +1,62 @@
+=== TIMESTAMP ===
+2026-09-23T21:44:49+00:00
+
+=== BROKEN POD SPEC ===
+{
+  "dnsPolicy": "None",
+  "dnsConfig": {
+    "nameservers": [
+      "192.0.2.53"
+    ],
+    "options": [
+      {
+        "name": "ndots",
+        "value": "1"
+      }
+    ],
+    "searches": [
+      "invalid.example"
+    ]
+  },
+  "podIP": "10.244.0.14",
+  "node": "ip-172-31-10-147"
+}
+
+=== BROKEN RESOLV.CONF ===
+search invalid.example
+nameserver 192.0.2.53
+options ndots:1
+
+=== CLUSTER DNS SERVICE ===
+NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE   SELECTOR
+kube-dns   ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   12m   k8s-app=kube-dns
+
+=== DIRECT POD IP TEST ===
+SUCCESS
+
+=== DIRECT SERVICE IP TEST ===
+SUCCESS
+
+=== SERVICE DNS LOOKUP ===
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; no servers could be reached
+
+command terminated with exit code 1
+
+=== KUBERNETES SERVICE DNS LOOKUP ===
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; communications error to 192.0.2.53#53: timed out
+;; no servers could be reached
+
+command terminated with exit code 1
+
+=== DIRECT COREDNS QUERY ===
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	web-service.network-debug.svc.cluster.local
+Address: 10.104.106.79
+
