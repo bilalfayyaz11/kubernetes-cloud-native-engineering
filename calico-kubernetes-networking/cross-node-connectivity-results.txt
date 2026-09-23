@@ -1,0 +1,27 @@
+========================================
+ CROSS-NODE POD CONNECTIVITY TEST
+========================================
+test-pod-1 IP: 192.168.151.2
+test-pod-2 IP: 192.168.160.8
+
+===== test-pod-1 -> test-pod-2 =====
+PING 192.168.160.8 (192.168.160.8): 56 data bytes
+64 bytes from 192.168.160.8: seq=0 ttl=62 time=0.536 ms
+64 bytes from 192.168.160.8: seq=1 ttl=62 time=0.289 ms
+64 bytes from 192.168.160.8: seq=2 ttl=62 time=0.286 ms
+
+--- 192.168.160.8 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.286/0.370/0.536 ms
+
+===== test-pod-2 -> test-pod-1 =====
+PING 192.168.151.2 (192.168.151.2): 56 data bytes
+64 bytes from 192.168.151.2: seq=0 ttl=62 time=0.302 ms
+64 bytes from 192.168.151.2: seq=1 ttl=62 time=0.183 ms
+64 bytes from 192.168.151.2: seq=2 ttl=62 time=0.177 ms
+
+--- 192.168.151.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.177/0.220/0.302 ms
+
+PASS: bidirectional Pod-to-Pod connectivity verified

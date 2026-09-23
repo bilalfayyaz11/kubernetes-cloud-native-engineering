@@ -1,0 +1,71 @@
+=== NETWORKPOLICY VERIFICATION ===
+========================================
+ NETWORKPOLICY VALIDATION
+========================================
+
+1. Frontend -> Backend
+Expected: ALLOWED
+RESULT: SUCCESS (expected)
+
+2. Frontend -> Database
+Expected: BLOCKED
+RESULT: BLOCKED (expected)
+
+3. Backend -> Database
+Expected: ALLOWED
+RESULT: SUCCESS (expected)
+
+Passed checks: 3/3
+PASS: NetworkPolicy behavior matches intended tier isolation
+
+=== NETWORKPOLICIES ===
+NAMESPACE   NAME                     POD-SELECTOR    AGE
+backend     backend-allow-frontend   tier=backend    25s
+backend     backend-deny-all         <none>          25s
+database    database-allow-backend   tier=database   25s
+database    database-deny-all        <none>          25s
+
+=== APPLICATION PODS ===
+NAME                            READY   STATUS    RESTARTS   AGE   IP              NODE                    NOMINATED NODE   READINESS GATES
+frontend-app-6b4964b9cf-c4qbt   1/1     Running   0          64s   192.168.151.7   calico-network-worker   <none>           <none>
+NAME                           READY   STATUS    RESTARTS   AGE   IP              NODE                    NOMINATED NODE   READINESS GATES
+backend-app-7856898f6b-dtd4v   1/1     Running   0          64s   192.168.151.8   calico-network-worker   <none>           <none>
+NAME                            READY   STATUS    RESTARTS   AGE   IP              NODE                    NOMINATED NODE   READINESS GATES
+database-app-788d9d6f67-gg8dw   1/1     Running   0          63s   192.168.151.9   calico-network-worker   <none>           <none>
+
+=== IPERF3 POD PLACEMENT ===
+NAME            READY   STATUS    RESTARTS   AGE     IP               NODE                     NOMINATED NODE   READINESS GATES
+iperf3-client   1/1     Running   0          20s     192.168.160.10   calico-network-worker2   <none>           <none>
+iperf3-server   1/1     Running   0          20s     192.168.151.10   calico-network-worker    <none>           <none>
+test-pod-1      1/1     Running   0          3m39s   192.168.151.2    calico-network-worker    <none>           <none>
+test-pod-2      1/1     Running   0          3m39s   192.168.160.8    calico-network-worker2   <none>           <none>
+
+=== IPERF3 RESULTS ===
+========================================
+ IPERF3 CROSS-NODE PERFORMANCE TEST
+========================================
+Server Service IP: 10.96.221.155
+Server Node: calico-network-worker
+Client Node: calico-network-worker2
+
+Running 10-second TCP throughput test...
+
+Connecting to host 10.96.221.155, port 5201
+[  5] local 192.168.160.10 port 57966 connected to 10.96.221.155 port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   471 MBytes  3945 Mbits/sec   99   1.14 MBytes       
+[  5]   1.00-2.00   sec   446 MBytes  3744 Mbits/sec  1517   1.15 MBytes       
+[  5]   2.00-3.00   sec   394 MBytes  3299 Mbits/sec  268   1.15 MBytes       
+[  5]   3.00-4.00   sec   459 MBytes  3857 Mbits/sec    0   1.15 MBytes       
+[  5]   4.00-5.00   sec   482 MBytes  4044 Mbits/sec  581   1.16 MBytes       
+[  5]   5.00-6.00   sec   476 MBytes  3994 Mbits/sec    0   1.16 MBytes       
+[  5]   6.00-7.00   sec   470 MBytes  3944 Mbits/sec  679   1.16 MBytes       
+[  5]   7.00-8.00   sec   479 MBytes  4020 Mbits/sec   46   1.18 MBytes       
+[  5]   8.00-9.00   sec   452 MBytes  3788 Mbits/sec  658   1.18 MBytes       
+[  5]   9.00-10.00  sec   444 MBytes  3715 Mbits/sec    0   1.18 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-10.00  sec  4.47 GBytes  3839 Mbits/sec  3848            sender
+[  5]   0.00-10.02  sec  4.47 GBytes  3833 Mbits/sec                  receiver
+
+iperf Done.

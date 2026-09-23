@@ -1,0 +1,28 @@
+========================================
+ IPERF3 CROSS-NODE PERFORMANCE TEST
+========================================
+Server Service IP: 10.96.221.155
+Server Node: calico-network-worker
+Client Node: calico-network-worker2
+
+Running 10-second TCP throughput test...
+
+Connecting to host 10.96.221.155, port 5201
+[  5] local 192.168.160.10 port 57966 connected to 10.96.221.155 port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   471 MBytes  3945 Mbits/sec   99   1.14 MBytes       
+[  5]   1.00-2.00   sec   446 MBytes  3744 Mbits/sec  1517   1.15 MBytes       
+[  5]   2.00-3.00   sec   394 MBytes  3299 Mbits/sec  268   1.15 MBytes       
+[  5]   3.00-4.00   sec   459 MBytes  3857 Mbits/sec    0   1.15 MBytes       
+[  5]   4.00-5.00   sec   482 MBytes  4044 Mbits/sec  581   1.16 MBytes       
+[  5]   5.00-6.00   sec   476 MBytes  3994 Mbits/sec    0   1.16 MBytes       
+[  5]   6.00-7.00   sec   470 MBytes  3944 Mbits/sec  679   1.16 MBytes       
+[  5]   7.00-8.00   sec   479 MBytes  4020 Mbits/sec   46   1.18 MBytes       
+[  5]   8.00-9.00   sec   452 MBytes  3788 Mbits/sec  658   1.18 MBytes       
+[  5]   9.00-10.00  sec   444 MBytes  3715 Mbits/sec    0   1.18 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-10.00  sec  4.47 GBytes  3839 Mbits/sec  3848            sender
+[  5]   0.00-10.02  sec  4.47 GBytes  3833 Mbits/sec                  receiver
+
+iperf Done.

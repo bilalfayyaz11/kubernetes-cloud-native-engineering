@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: iperf3-server
+  namespace: network-test
+  labels:
+    app: iperf3-server
+spec:
+  containers:
+    - name: iperf3-server
+      image: networkstatic/iperf3:latest
+      command:
+        - iperf3
+        - -s
+      ports:
+        - containerPort: 5201
+          name: iperf3
+  nodeSelector:
+    networking-role: worker-node-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iperf3-server-service
+  namespace: network-test
+spec:
+  selector:
+    app: iperf3-server
+  ports:
+    - name: iperf3
+      port: 5201
+      targetPort: 5201
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: iperf3-client
+  namespace: network-test
+  labels:
+    app: iperf3-client
+spec:
+  containers:
+    - name: iperf3-client
+      image: networkstatic/iperf3:latest
+      command:
+        - sleep
+        - "3600"
+  nodeSelector:
+    networking-role: worker-node-2

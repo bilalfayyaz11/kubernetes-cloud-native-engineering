@@ -1,0 +1,171 @@
+=== CALICO FAILURE AND RECOVERY VERIFICATION ===
+Timestamp: 2026-09-23T20:19:40+00:00
+
+=== ORIGINAL CALICO POD ===
+calico-node-5snnr
+
+=== TARGET NODE ===
+calico-network-worker
+
+=== REPLACEMENT CALICO POD ===
+calico-node-mnqsq
+
+=== CALICO SYSTEM STATE ===
+NAME                                       READY   STATUS    RESTARTS   AGE     IP                NODE                           NOMINATED NODE   READINESS GATES
+calico-apiserver-6848fbfb48-7m5vd          1/1     Running   0          4m3s    192.168.160.4     calico-network-worker2         <none>           <none>
+calico-apiserver-6848fbfb48-znhjs          1/1     Running   0          4m3s    192.168.160.1     calico-network-worker2         <none>           <none>
+calico-kube-controllers-576b895d8f-vd8kq   1/1     Running   0          61s     192.168.160.9     calico-network-worker2         <none>           <none>
+calico-node-hkdqk                          1/1     Running   0          64s     172.18.0.2        calico-network-worker2         <none>           <none>
+calico-node-lsbml                          1/1     Running   0          64s     172.18.0.4        calico-network-control-plane   <none>           <none>
+calico-node-zsf8t                          1/1     Running   0          64s     172.18.0.3        calico-network-worker          <none>           <none>
+calico-typha-794cd6798b-fztwg              1/1     Running   0          4m3s    172.18.0.2        calico-network-worker2         <none>           <none>
+calico-typha-794cd6798b-vfrds              1/1     Running   0          3m59s   172.18.0.3        calico-network-worker          <none>           <none>
+csi-node-driver-hqq5z                      2/2     Running   0          4m2s    192.168.151.1     calico-network-worker          <none>           <none>
+csi-node-driver-n6d2d                      2/2     Running   0          4m2s    192.168.160.5     calico-network-worker2         <none>           <none>
+csi-node-driver-wgsqv                      2/2     Running   0          4m2s    192.168.182.193   calico-network-control-plane   <none>           <none>
+
+=== NODE STATE ===
+NAME                           STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+calico-network-control-plane   Ready    control-plane   8m35s   v1.37.0   172.18.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker          Ready    <none>          8m19s   v1.37.0   172.18.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker2         Ready    <none>          8m19s   v1.37.0   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+
+=== POST-RECOVERY CONNECTIVITY ===
+========================================
+ CROSS-NODE POD CONNECTIVITY TEST
+========================================
+test-pod-1 IP: 192.168.151.2
+test-pod-2 IP: 192.168.160.8
+
+===== test-pod-1 -> test-pod-2 =====
+PING 192.168.160.8 (192.168.160.8): 56 data bytes
+64 bytes from 192.168.160.8: seq=0 ttl=62 time=0.328 ms
+64 bytes from 192.168.160.8: seq=1 ttl=62 time=0.241 ms
+64 bytes from 192.168.160.8: seq=2 ttl=62 time=0.224 ms
+
+--- 192.168.160.8 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.224/0.264/0.328 ms
+
+===== test-pod-2 -> test-pod-1 =====
+PING 192.168.151.2 (192.168.151.2): 56 data bytes
+64 bytes from 192.168.151.2: seq=0 ttl=62 time=0.249 ms
+64 bytes from 192.168.151.2: seq=1 ttl=62 time=0.188 ms
+64 bytes from 192.168.151.2: seq=2 ttl=62 time=0.970 ms
+
+--- 192.168.151.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.188/0.469/0.970 ms
+
+PASS: bidirectional Pod-to-Pod connectivity verified
+
+=== RECOVERY PROCEDURE OUTPUT ===
+==================================================
+ NETWORK RECOVERY PROCEDURE
+==================================================
+
+===== 1. RESTART CALICO NODE PODS =====
+pod "calico-node-9d5lz" deleted from calico-system namespace
+pod "calico-node-j6jrx" deleted from calico-system namespace
+pod "calico-node-mnqsq" deleted from calico-system namespace
+
+===== 2. RESTART CALICO CONTROLLERS =====
+pod "calico-kube-controllers-576b895d8f-q2zp9" deleted from calico-system namespace
+
+===== 3. WAIT FOR CALICO NODE DAEMONSET =====
+Waiting for daemon set "calico-node" rollout to finish: 0 of 3 updated pods are available...
+Waiting for daemon set "calico-node" rollout to finish: 1 of 3 updated pods are available...
+Waiting for daemon set "calico-node" rollout to finish: 2 of 3 updated pods are available...
+daemon set "calico-node" successfully rolled out
+PASS: calico-node recovered
+
+===== 4. WAIT FOR CALICO CONTROLLERS =====
+deployment "calico-kube-controllers" successfully rolled out
+PASS: Calico controllers recovered
+
+===== 5. RESTART COREDNS =====
+deployment.apps/coredns restarted
+
+===== 6. WAIT FOR COREDNS =====
+Waiting for deployment spec update to be observed...
+Waiting for deployment "coredns" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "coredns" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "coredns" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "coredns" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "coredns" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "coredns" rollout to finish: 1 of 2 updated replicas are available...
+Waiting for deployment "coredns" rollout to finish: 1 of 2 updated replicas are available...
+Waiting for deployment "coredns" rollout to finish: 1 of 2 updated replicas are available...
+deployment "coredns" successfully rolled out
+PASS: CoreDNS recovered
+
+===== 7. VERIFY CALICO PODS =====
+NAME                                       READY   STATUS    RESTARTS   AGE     IP                NODE                           NOMINATED NODE   READINESS GATES
+calico-apiserver-6848fbfb48-7m5vd          1/1     Running   0          3m48s   192.168.160.4     calico-network-worker2         <none>           <none>
+calico-apiserver-6848fbfb48-znhjs          1/1     Running   0          3m48s   192.168.160.1     calico-network-worker2         <none>           <none>
+calico-kube-controllers-576b895d8f-vd8kq   1/1     Running   0          46s     192.168.160.9     calico-network-worker2         <none>           <none>
+calico-node-hkdqk                          1/1     Running   0          49s     172.18.0.2        calico-network-worker2         <none>           <none>
+calico-node-lsbml                          1/1     Running   0          49s     172.18.0.4        calico-network-control-plane   <none>           <none>
+calico-node-zsf8t                          1/1     Running   0          49s     172.18.0.3        calico-network-worker          <none>           <none>
+calico-typha-794cd6798b-fztwg              1/1     Running   0          3m48s   172.18.0.2        calico-network-worker2         <none>           <none>
+calico-typha-794cd6798b-vfrds              1/1     Running   0          3m44s   172.18.0.3        calico-network-worker          <none>           <none>
+csi-node-driver-hqq5z                      2/2     Running   0          3m47s   192.168.151.1     calico-network-worker          <none>           <none>
+csi-node-driver-n6d2d                      2/2     Running   0          3m47s   192.168.160.5     calico-network-worker2         <none>           <none>
+csi-node-driver-wgsqv                      2/2     Running   0          3m47s   192.168.182.193   calico-network-control-plane   <none>           <none>
+
+===== 8. VERIFY COREDNS PODS =====
+NAME                       READY   STATUS    RESTARTS   AGE   IP                NODE                           NOMINATED NODE   READINESS GATES
+coredns-5b95f7887c-jqp5d   1/1     Running   0          18s   192.168.182.194   calico-network-control-plane   <none>           <none>
+coredns-5b95f7887c-vk2tq   1/1     Running   0          18s   192.168.151.5     calico-network-worker          <none>           <none>
+
+===== 9. VERIFY TEST PODS =====
+NAME         READY   STATUS    RESTARTS   AGE     IP              NODE                     NOMINATED NODE   READINESS GATES
+test-pod-1   1/1     Running   0          2m10s   192.168.151.2   calico-network-worker    <none>           <none>
+test-pod-2   1/1     Running   0          2m10s   192.168.160.8   calico-network-worker2   <none>           <none>
+
+===== 10. VERIFY CROSS-NODE CONNECTIVITY =====
+PING 192.168.160.8 (192.168.160.8): 56 data bytes
+64 bytes from 192.168.160.8: seq=0 ttl=62 time=1.191 ms
+64 bytes from 192.168.160.8: seq=1 ttl=62 time=0.202 ms
+64 bytes from 192.168.160.8: seq=2 ttl=62 time=0.308 ms
+
+--- 192.168.160.8 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.202/0.567/1.191 ms
+PING 192.168.151.2 (192.168.151.2): 56 data bytes
+64 bytes from 192.168.151.2: seq=0 ttl=62 time=1.122 ms
+64 bytes from 192.168.151.2: seq=1 ttl=62 time=0.186 ms
+64 bytes from 192.168.151.2: seq=2 ttl=62 time=0.183 ms
+
+--- 192.168.151.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.183/0.497/1.122 ms
+Network recovery verified: connectivity restored.
+
+===== 11. VERIFY DNS =====
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+
+pod "recovery-dns-check" deleted from network-test namespace
+PASS: DNS resolution working
+
+===== 12. FINAL NODE STATE =====
+NAME                           STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+calico-network-control-plane   Ready    control-plane   8m29s   v1.37.0   172.18.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker          Ready    <none>          8m13s   v1.37.0   172.18.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker2         Ready    <none>          8m13s   v1.37.0   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+
+==================================================
+ NETWORK RECOVERY PROCEDURE COMPLETE
+==================================================

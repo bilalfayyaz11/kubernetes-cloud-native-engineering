@@ -1,0 +1,84 @@
+=== CALICO VERSION ===
+v3.32.2
+
+=== NODES ===
+NAME                           STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+calico-network-control-plane   Ready    control-plane   6m23s   v1.37.0   172.18.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker          Ready    <none>          6m7s    v1.37.0   172.18.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker2         Ready    <none>          6m7s    v1.37.0   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+
+=== CALICO PODS ===
+NAME                                       READY   STATUS    RESTARTS   AGE    IP                NODE                           NOMINATED NODE   READINESS GATES
+calico-apiserver-6848fbfb48-7m5vd          1/1     Running   0          112s   192.168.160.4     calico-network-worker2         <none>           <none>
+calico-apiserver-6848fbfb48-znhjs          0/1     Running   0          112s   192.168.160.1     calico-network-worker2         <none>           <none>
+calico-kube-controllers-576b895d8f-q2zp9   1/1     Running   0          110s   192.168.160.6     calico-network-worker2         <none>           <none>
+calico-node-5snnr                          1/1     Running   0          102s   172.18.0.3        calico-network-worker          <none>           <none>
+calico-node-9d5lz                          1/1     Running   0          101s   172.18.0.2        calico-network-worker2         <none>           <none>
+calico-node-j6jrx                          1/1     Running   0          101s   172.18.0.4        calico-network-control-plane   <none>           <none>
+calico-typha-794cd6798b-fztwg              1/1     Running   0          112s   172.18.0.2        calico-network-worker2         <none>           <none>
+calico-typha-794cd6798b-vfrds              1/1     Running   0          108s   172.18.0.3        calico-network-worker          <none>           <none>
+csi-node-driver-hqq5z                      2/2     Running   0          111s   192.168.151.1     calico-network-worker          <none>           <none>
+csi-node-driver-n6d2d                      2/2     Running   0          111s   192.168.160.5     calico-network-worker2         <none>           <none>
+csi-node-driver-wgsqv                      2/2     Running   0          111s   192.168.182.193   calico-network-control-plane   <none>           <none>
+
+=== CALICO IP POOL ===
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPPool
+  metadata:
+    creationTimestamp: "2026-09-23T20:15:36Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: tigera-operator
+    name: default-ipv4-ippool
+    resourceVersion: "1064"
+    uid: 785900ff-0dfb-4f28-ba93-077fea8b5915
+  spec:
+    allowedUses:
+    - Workload
+    - Tunnel
+    assignmentMode: Automatic
+    blockSize: 26
+    cidr: 192.168.0.0/16
+    ipipMode: Never
+    natOutgoing: true
+    nodeSelector: all()
+    vxlanMode: CrossSubnet
+kind: List
+metadata:
+  resourceVersion: ""
+
+=== TEST PODS ===
+NAME         READY   STATUS    RESTARTS   AGE   IP              NODE                     NOMINATED NODE   READINESS GATES
+test-pod-1   1/1     Running   0          13s   192.168.151.2   calico-network-worker    <none>           <none>
+test-pod-2   1/1     Running   0          13s   192.168.160.8   calico-network-worker2   <none>           <none>
+
+=== CONNECTIVITY RESULTS ===
+========================================
+ CROSS-NODE POD CONNECTIVITY TEST
+========================================
+test-pod-1 IP: 192.168.151.2
+test-pod-2 IP: 192.168.160.8
+
+===== test-pod-1 -> test-pod-2 =====
+PING 192.168.160.8 (192.168.160.8): 56 data bytes
+64 bytes from 192.168.160.8: seq=0 ttl=62 time=0.536 ms
+64 bytes from 192.168.160.8: seq=1 ttl=62 time=0.289 ms
+64 bytes from 192.168.160.8: seq=2 ttl=62 time=0.286 ms
+
+--- 192.168.160.8 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.286/0.370/0.536 ms
+
+===== test-pod-2 -> test-pod-1 =====
+PING 192.168.151.2 (192.168.151.2): 56 data bytes
+64 bytes from 192.168.151.2: seq=0 ttl=62 time=0.302 ms
+64 bytes from 192.168.151.2: seq=1 ttl=62 time=0.183 ms
+64 bytes from 192.168.151.2: seq=2 ttl=62 time=0.177 ms
+
+--- 192.168.151.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.177/0.220/0.302 ms
+
+PASS: bidirectional Pod-to-Pod connectivity verified

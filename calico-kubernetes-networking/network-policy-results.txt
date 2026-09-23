@@ -1,0 +1,18 @@
+========================================
+ NETWORKPOLICY VALIDATION
+========================================
+
+1. Frontend -> Backend
+Expected: ALLOWED
+RESULT: SUCCESS (expected)
+
+2. Frontend -> Database
+Expected: BLOCKED
+RESULT: BLOCKED (expected)
+
+3. Backend -> Database
+Expected: ALLOWED
+RESULT: SUCCESS (expected)
+
+Passed checks: 3/3
+PASS: NetworkPolicy behavior matches intended tier isolation

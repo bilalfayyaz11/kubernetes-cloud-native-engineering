@@ -1,0 +1,283 @@
+==================================================
+ KUBERNETES NETWORK TROUBLESHOOTING REPORT
+==================================================
+Timestamp: 2026-09-23T20:18:27+00:00
+
+===== 1. NODE STATUS =====
+NAME                           STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+calico-network-control-plane   Ready    control-plane   7m21s   v1.37.0   172.18.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker          Ready    <none>          7m5s    v1.37.0   172.18.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+calico-network-worker2         Ready    <none>          7m5s    v1.37.0   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.14.0-1018-aws (amd64)   containerd://2.3.4
+
+===== 2. CALICO SYSTEM PODS =====
+NAME                                       READY   STATUS    RESTARTS   AGE     IP                NODE                           NOMINATED NODE   READINESS GATES
+calico-apiserver-6848fbfb48-7m5vd          1/1     Running   0          2m50s   192.168.160.4     calico-network-worker2         <none>           <none>
+calico-apiserver-6848fbfb48-znhjs          1/1     Running   0          2m50s   192.168.160.1     calico-network-worker2         <none>           <none>
+calico-kube-controllers-576b895d8f-q2zp9   1/1     Running   0          2m48s   192.168.160.6     calico-network-worker2         <none>           <none>
+calico-node-9d5lz                          1/1     Running   0          2m39s   172.18.0.2        calico-network-worker2         <none>           <none>
+calico-node-j6jrx                          1/1     Running   0          2m39s   172.18.0.4        calico-network-control-plane   <none>           <none>
+calico-node-mnqsq                          1/1     Running   0          26s     172.18.0.3        calico-network-worker          <none>           <none>
+calico-typha-794cd6798b-fztwg              1/1     Running   0          2m50s   172.18.0.2        calico-network-worker2         <none>           <none>
+calico-typha-794cd6798b-vfrds              1/1     Running   0          2m46s   172.18.0.3        calico-network-worker          <none>           <none>
+csi-node-driver-hqq5z                      2/2     Running   0          2m49s   192.168.151.1     calico-network-worker          <none>           <none>
+csi-node-driver-n6d2d                      2/2     Running   0          2m49s   192.168.160.5     calico-network-worker2         <none>           <none>
+csi-node-driver-wgsqv                      2/2     Running   0          2m49s   192.168.182.193   calico-network-control-plane   <none>           <none>
+
+===== 3. CALICO DAEMONSET =====
+NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE     CONTAINERS    IMAGES                        SELECTOR
+calico-node   3         3         3       3            3           kubernetes.io/os=linux   2m49s   calico-node   quay.io/calico/node:v3.32.2   k8s-app=calico-node
+
+===== 4. CALICO CONTROLLERS =====
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS                IMAGES                                    SELECTOR
+calico-kube-controllers   1/1     1            1           2m48s   calico-kube-controllers   quay.io/calico/kube-controllers:v3.32.2   k8s-app=calico-kube-controllers
+
+===== 5. TEST NAMESPACE PODS =====
+NAME         READY   STATUS    RESTARTS   AGE   IP              NODE                     NOMINATED NODE   READINESS GATES
+test-pod-1   1/1     Running   0          72s   192.168.151.2   calico-network-worker    <none>           <none>
+test-pod-2   1/1     Running   0          72s   192.168.160.8   calico-network-worker2   <none>           <none>
+
+===== 6. CALICO IP POOLS =====
+NAME                  CIDR             VXLAN         NAT
+default-ipv4-ippool   192.168.0.0/16   CrossSubnet   true
+
+===== 7. NETWORK POLICIES =====
+
+===== 8. NODE ROUTING =====
+
+--- calico-network-worker ---
+default via 172.18.0.1 dev eth0 
+172.18.0.0/16 dev eth0 proto kernel scope link src 172.18.0.3 
+blackhole 192.168.151.0/26 proto 80 
+192.168.151.1 dev cali8ab457637dc scope link metric 1024 
+192.168.151.2 dev calief3a0552273 scope link metric 1024 
+192.168.160.0/26 via 172.18.0.2 dev eth0 proto 80 onlink 
+192.168.182.192/26 via 172.18.0.4 dev eth0 proto 80 onlink 
+
+--- calico-network-control-plane ---
+default via 172.18.0.1 dev eth0 
+172.18.0.0/16 dev eth0 proto kernel scope link src 172.18.0.4 
+192.168.151.0/26 via 172.18.0.3 dev eth0 proto 80 onlink 
+192.168.160.0/26 via 172.18.0.2 dev eth0 proto 80 onlink 
+blackhole 192.168.182.192/26 proto 80 
+192.168.182.193 dev cali8ced2e42c39 scope link metric 1024 
+
+--- calico-network-worker2 ---
+default via 172.18.0.1 dev eth0 
+172.18.0.0/16 dev eth0 proto kernel scope link src 172.18.0.2 
+192.168.151.0/26 via 172.18.0.3 dev eth0 proto 80 onlink 
+blackhole 192.168.160.0/26 proto 80 
+192.168.160.1 dev cali36c27a30772 scope link metric 1024 
+192.168.160.2 dev calie65ce6feaee scope link metric 1024 
+192.168.160.3 dev calic0818e37001 scope link metric 1024 
+192.168.160.4 dev cali1681bd1301b scope link metric 1024 
+192.168.160.5 dev cali2771ee14d82 scope link metric 1024 
+192.168.160.6 dev calie089483e829 scope link metric 1024 
+192.168.160.7 dev calidfce6677643 scope link metric 1024 
+192.168.160.8 dev calicb8fb708bf0 scope link metric 1024 
+192.168.182.192/26 via 172.18.0.4 dev eth0 proto 80 onlink 
+
+===== 9. VXLAN INTERFACES =====
+
+--- calico-network-worker ---
+4: vxlan.calico: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 66:cc:55:38:b9:9c brd ff:ff:ff:ff:ff:ff promiscuity 0 allmulti 0 minmtu 68 maxmtu 65535 
+    vxlan id 4096 local 172.18.0.3 dev eth0 srcport 0 0 dstport 4789 ttl auto ageing 300 reserved_bits 0xf7ffffff000000ff nolearning addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 gso_ipv4_max_size 65536 gro_ipv4_max_size 65536 
+
+--- calico-network-control-plane ---
+3: vxlan.calico: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 66:f8:4d:ef:d1:f3 brd ff:ff:ff:ff:ff:ff promiscuity 0 allmulti 0 minmtu 68 maxmtu 65535 
+    vxlan id 4096 local 172.18.0.4 dev eth0 srcport 0 0 dstport 4789 ttl auto ageing 300 reserved_bits 0xf7ffffff000000ff nolearning addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 gso_ipv4_max_size 65536 gro_ipv4_max_size 65536 
+
+--- calico-network-worker2 ---
+3: vxlan.calico: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 66:ff:d9:15:50:2f brd ff:ff:ff:ff:ff:ff promiscuity 0 allmulti 0 minmtu 68 maxmtu 65535 
+    vxlan id 4096 local 172.18.0.2 dev eth0 srcport 0 0 dstport 4789 ttl auto ageing 300 reserved_bits 0xf7ffffff000000ff nolearning addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 gso_ipv4_max_size 65536 gro_ipv4_max_size 65536 
+
+===== 10. CNI CONFIGURATION =====
+
+--- calico-network-worker ---
+total 20
+drwx------ 1 root root 4096 Sep 23 20:16 .
+drwxr-xr-x 1 root root 4096 Aug 26 21:01 ..
+-rw------- 1 root root  735 Sep 23 20:18 10-calico.conflist
+-rw------- 1 root root 2801 Sep 23 20:18 calico-kubeconfig
+{
+			  "name": "k8s-pod-network",
+			  "cniVersion": "1.0.0",
+			  "plugins": [{"calico_api_group":"","container_settings":{"allow_ip_forwarding":false},"datastore_type":"kubernetes","endpoint_status_dir":"/var/run/calico/endpoint-status","ipam":{"assign_ipv4":"true","assign_ipv6":"false","type":"calico-ipam"},"kubernetes":{"k8s_api_root":"https://10.96.0.1:443","kubeconfig":"/etc/cni/net.d/calico-kubeconfig"},"log_file_max_age":30,"log_file_max_count":10,"log_file_max_size":100,"log_file_path":"/var/log/calico/cni/cni.log","log_level":"Info","mtu":0,"nodename_file_optional":false,"policy":{"type":"k8s"},"policy_setup_timeout_seconds":0,"type":"calico"},{"capabilities":{"portMappings":true},"snat":true,"type":"portmap"}]
+			}
+--- calico-network-control-plane ---
+total 20
+drwx------ 1 root root 4096 Sep 23 20:16 .
+drwxr-xr-x 1 root root 4096 Aug 26 21:01 ..
+-rw------- 1 root root  735 Sep 23 20:16 10-calico.conflist
+-rw------- 1 root root 2801 Sep 23 20:16 calico-kubeconfig
+{
+			  "name": "k8s-pod-network",
+			  "cniVersion": "1.0.0",
+			  "plugins": [{"calico_api_group":"","container_settings":{"allow_ip_forwarding":false},"datastore_type":"kubernetes","endpoint_status_dir":"/var/run/calico/endpoint-status","ipam":{"assign_ipv4":"true","assign_ipv6":"false","type":"calico-ipam"},"kubernetes":{"k8s_api_root":"https://10.96.0.1:443","kubeconfig":"/etc/cni/net.d/calico-kubeconfig"},"log_file_max_age":30,"log_file_max_count":10,"log_file_max_size":100,"log_file_path":"/var/log/calico/cni/cni.log","log_level":"Info","mtu":0,"nodename_file_optional":false,"policy":{"type":"k8s"},"policy_setup_timeout_seconds":0,"type":"calico"},{"capabilities":{"portMappings":true},"snat":true,"type":"portmap"}]
+			}
+--- calico-network-worker2 ---
+total 20
+drwx------ 1 root root 4096 Sep 23 20:16 .
+drwxr-xr-x 1 root root 4096 Aug 26 21:01 ..
+-rw------- 1 root root  735 Sep 23 20:16 10-calico.conflist
+-rw------- 1 root root 2801 Sep 23 20:16 calico-kubeconfig
+{
+			  "name": "k8s-pod-network",
+			  "cniVersion": "1.0.0",
+			  "plugins": [{"calico_api_group":"","container_settings":{"allow_ip_forwarding":false},"datastore_type":"kubernetes","endpoint_status_dir":"/var/run/calico/endpoint-status","ipam":{"assign_ipv4":"true","assign_ipv6":"false","type":"calico-ipam"},"kubernetes":{"k8s_api_root":"https://10.96.0.1:443","kubeconfig":"/etc/cni/net.d/calico-kubeconfig"},"log_file_max_age":30,"log_file_max_count":10,"log_file_max_size":100,"log_file_path":"/var/log/calico/cni/cni.log","log_level":"Info","mtu":0,"nodename_file_optional":false,"policy":{"type":"k8s"},"policy_setup_timeout_seconds":0,"type":"calico"},{"capabilities":{"portMappings":true},"snat":true,"type":"portmap"}]
+			}
+===== 11. CALICO NODE LOGS =====
+
+--- calico-node-9d5lz ---
+2026-09-23 20:18:07.450 [INFO][76] felix/ipsets.go 202: Queueing IP set for creation family="inet" setID="s:JTjFM5yrI7xYfYk_R4mpGBfDo8qojWBIcE34Qg" setType="hash:net"
+2026-09-23 20:18:07.450 [INFO][76] felix/int_dataplane.go 2550: Received *proto.IPSetUpdate update from calculation graph. msg=id:"s:a7nDJdWBdGNoRvtNxts5Q6VSeouWbpdepP4tPQ" type:NET
+2026-09-23 20:18:07.450 [INFO][76] felix/ipsets.go 202: Queueing IP set for creation family="inet" setID="s:a7nDJdWBdGNoRvtNxts5Q6VSeouWbpdepP4tPQ" setType="hash:net"
+2026-09-23 20:18:07.450 [INFO][76] felix/int_dataplane.go 2550: Received *proto.ActivePolicyUpdate update from calculation graph. msg=id:{name:"calico-system.kube-controller-access" namespace:"calico-system" kind:"NetworkPolicy"} policy:{namespace:"calico-system" inbound_rules:{action:"allow" protocol:{name:"tcp"} dst_ports:{first:9094 last:9094} src_ip_set_ids:"s:a7nDJdWBdGNoRvtNxts5Q6VSeouWbpdepP4tPQ" original_src_selector:"k8s-app == 'tigera-prometheus'" original_src_namespace_selector:"name == 'tigera-prometheus'" rule_id:"YxM2bUs75K1fBwSu"} outbound_rules:{action:"allow" protocol:{name:"udp"} dst_ports:{first:53 last:53} dst_ip_set_ids:"s:IkX8sGssZSJYP2i1GgcRP5d0SIyeg4krMaUERA" original_dst_selector:"k8s-app in { 'kube-dns', 'coredns' }" original_dst_namespace_selector:"projectcalico.org/name == 'kube-system'" rule_id:"tJqUnmb6bTGEQHtI"} outbound_rules:{action:"allow" protocol:{name:"tcp"} dst_ports:{first:443 last:443} dst_ports:{first:6443 last:6443} dst_ports:{first:12388 last:12388} rule_id:"PsiYDffw5h7YJv4a"} outbound_rules:{action:"allow" protocol:{name:"tcp"} dst_ports:{first:9443 last:9443} dst_ip_set_ids:"s:JTjFM5yrI7xYfYk_R4mpGBfDo8qojWBIcE34Qg" original_dst_selector:"k8s-app == 'calico-manager'" original_dst_namespace_selector:"projectcalico.org/name == 'calico-system'" rule_id:"w6zl1bqjchFuaI4V"} outbound_rules:{action:"allow" protocol:{name:"tcp"} dst_net:"10.96.0.1/32" dst_ports:{first:443 last:443} rule_id:"ox2j3NS8MyCNAAe7"} original_selector:"(k8s-app == \"calico-kube-controllers\" && projectcalico.org/namespace == \"calico-system\")" tier:"calico-system"}
+2026-09-23 20:18:07.451 [INFO][76] felix/int_dataplane.go 2550: Received *proto.WorkloadEndpointUpdate update from calculation graph. msg=id:{orchestrator_id:"k8s" workload_id:"calico-system/calico-kube-controllers-576b895d8f-q2zp9" endpoint_id:"eth0"} endpoint:{state:"active" name:"calie089483e829" profile_ids:"kns.calico-system" profile_ids:"ksa.calico-system.calico-kube-controllers" ipv4_nets:"192.168.160.6/32" tiers:{name:"calico-system" ingress_policies:{name:"calico-system.kube-controller-access" namespace:"calico-system" kind:"NetworkPolicy"} egress_policies:{name:"calico-system.kube-controller-access" namespace:"calico-system" kind:"NetworkPolicy"} default_action:"Deny"}}
+2026-09-23 20:18:07.451 [INFO][76] felix/endpoint_mgr.go 790: Updating per-endpoint chains. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.451 [INFO][76] felix/ratelimitedlogger.go 216: Chain became referenced, marking it for programming chainName="cali-pi-_af13Cx1UAUjxVJcwe4J" ipVersion=0x4 table="filter"
+2026-09-23 20:18:07.451 [INFO][76] felix/ratelimitedlogger.go 216: Chain became referenced, marking it for programming chainName="cali-po-_af13Cx1UAUjxVJcwe4J" ipVersion=0x4 table="filter"
+2026-09-23 20:18:07.451 [INFO][76] felix/endpoint_mgr.go 823: Updating endpoint routes. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.453 [INFO][76] felix/endpoint_mgr.go 836: Updating QoS bandwidth state if changed id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.458 [INFO][76] felix/endpoint_mgr.go 1589: Applying /proc/sys configuration to interface. ifaceName="calie089483e829"
+2026-09-23 20:18:07.460 [INFO][76] felix/endpoint_mgr.go 663: Re-evaluated workload endpoint status adminUp=true failed=false known=true operUp=true status="up" workloadEndpointID=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.460 [INFO][76] felix/status_combiner.go 62: Storing endpoint status update ipVersion=0x4 status="up" workload=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.550 [INFO][76] felix/label_inheritance_index.go 187: Updating selector id=Policy(Name=calico-system.default-deny, Namespace=calico-system, Kind=NetworkPolicy) selector=(k8s-app != "calico-apiserver" && projectcalico.org/namespace == "calico-system")
+2026-09-23 20:18:07.606 [INFO][76] felix/status_combiner.go 95: Endpoint up for at least one IP version id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"} ipVersion=0x4 status="up"
+2026-09-23 20:18:07.607 [INFO][76] felix/status_combiner.go 114: Reporting combined status. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"} status="up"
+2026-09-23 20:18:07.609 [INFO][76] felix/int_dataplane.go 2550: Received *proto.ActivePolicyUpdate update from calculation graph. msg=id:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} policy:{namespace:"calico-system" original_selector:"(k8s-app != \"calico-apiserver\" && projectcalico.org/namespace == \"calico-system\")" tier:"calico-system"}
+2026-09-23 20:18:07.609 [INFO][76] felix/int_dataplane.go 2550: Received *proto.WorkloadEndpointUpdate update from calculation graph. msg=id:{orchestrator_id:"k8s" workload_id:"calico-system/csi-node-driver-n6d2d" endpoint_id:"eth0"} endpoint:{state:"active" name:"cali2771ee14d82" profile_ids:"kns.calico-system" profile_ids:"ksa.calico-system.csi-node-driver" ipv4_nets:"192.168.160.5/32" tiers:{name:"calico-system" ingress_policies:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} egress_policies:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} default_action:"Deny"}}
+2026-09-23 20:18:07.609 [INFO][76] felix/int_dataplane.go 2550: Received *proto.WorkloadEndpointUpdate update from calculation graph. msg=id:{orchestrator_id:"k8s" workload_id:"calico-system/calico-kube-controllers-576b895d8f-q2zp9" endpoint_id:"eth0"} endpoint:{state:"active" name:"calie089483e829" profile_ids:"kns.calico-system" profile_ids:"ksa.calico-system.calico-kube-controllers" ipv4_nets:"192.168.160.6/32" tiers:{name:"calico-system" ingress_policies:{name:"calico-system.kube-controller-access" namespace:"calico-system" kind:"NetworkPolicy"} ingress_policies:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} egress_policies:{name:"calico-system.kube-controller-access" namespace:"calico-system" kind:"NetworkPolicy"} egress_policies:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} default_action:"Deny"}}
+2026-09-23 20:18:07.609 [INFO][76] felix/endpoint_mgr.go 790: Updating per-endpoint chains. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-n6d2d", EndpointId:"eth0"}
+2026-09-23 20:18:07.610 [INFO][76] felix/ratelimitedlogger.go 216: Chain became referenced, marking it for programming chainName="cali-pi-_0dPptdegtTXt1D_kwEh" ipVersion=0x4 table="filter"
+2026-09-23 20:18:07.610 [INFO][76] felix/ratelimitedlogger.go 216: Chain became referenced, marking it for programming chainName="cali-po-_0dPptdegtTXt1D_kwEh" ipVersion=0x4 table="filter"
+2026-09-23 20:18:07.610 [INFO][76] felix/endpoint_mgr.go 823: Updating endpoint routes. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-n6d2d", EndpointId:"eth0"}
+2026-09-23 20:18:07.610 [INFO][76] felix/endpoint_mgr.go 836: Updating QoS bandwidth state if changed id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-n6d2d", EndpointId:"eth0"}
+2026-09-23 20:18:07.612 [INFO][76] felix/endpoint_mgr.go 790: Updating per-endpoint chains. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.612 [INFO][76] felix/endpoint_mgr.go 823: Updating endpoint routes. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.613 [INFO][76] felix/endpoint_mgr.go 836: Updating QoS bandwidth state if changed id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.615 [INFO][76] felix/endpoint_mgr.go 1589: Applying /proc/sys configuration to interface. ifaceName="cali2771ee14d82"
+2026-09-23 20:18:07.616 [INFO][76] felix/endpoint_mgr.go 1589: Applying /proc/sys configuration to interface. ifaceName="calie089483e829"
+2026-09-23 20:18:07.616 [INFO][76] felix/endpoint_mgr.go 663: Re-evaluated workload endpoint status adminUp=true failed=false known=true operUp=true status="up" workloadEndpointID=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-n6d2d", EndpointId:"eth0"}
+2026-09-23 20:18:07.616 [INFO][76] felix/status_combiner.go 62: Storing endpoint status update ipVersion=0x4 status="up" workload=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-n6d2d", EndpointId:"eth0"}
+2026-09-23 20:18:07.616 [INFO][76] felix/endpoint_mgr.go 663: Re-evaluated workload endpoint status adminUp=true failed=false known=true operUp=true status="up" workloadEndpointID=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.616 [INFO][76] felix/status_combiner.go 62: Storing endpoint status update ipVersion=0x4 status="up" workload=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"}
+2026-09-23 20:18:07.716 [INFO][76] felix/status_combiner.go 95: Endpoint up for at least one IP version id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-n6d2d", EndpointId:"eth0"} ipVersion=0x4 status="up"
+2026-09-23 20:18:07.716 [INFO][76] felix/status_combiner.go 114: Reporting combined status. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-n6d2d", EndpointId:"eth0"} status="up"
+2026-09-23 20:18:07.716 [INFO][76] felix/status_combiner.go 95: Endpoint up for at least one IP version id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"} ipVersion=0x4 status="up"
+2026-09-23 20:18:07.716 [INFO][76] felix/status_combiner.go 114: Reporting combined status. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/calico-kube-controllers-576b895d8f-q2zp9", EndpointId:"eth0"} status="up"
+bird: Mesh_172_18_0_3: State changed to feed
+bird: Mesh_172_18_0_3: Invalid NEXT_HOP attribute in route 192.168.151.0/26
+bird: Mesh_172_18_0_3: State changed to up
+
+--- calico-node-j6jrx ---
+2026-09-23 20:16:46.258 [INFO][74] felix/endpoint_mgr.go 604: Workload interface state changed; marking for status update. ifaceName="cali8ced2e42c39"
+2026-09-23 20:16:46.259 [INFO][74] felix/endpoint_mgr.go 1589: Applying /proc/sys configuration to interface. ifaceName="cali8ced2e42c39"
+2026-09-23 20:16:46.260 [INFO][74] felix/endpoint_mgr.go 663: Re-evaluated workload endpoint status adminUp=true failed=false known=true operUp=true status="up" workloadEndpointID=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"}
+2026-09-23 20:16:46.260 [INFO][74] felix/status_combiner.go 62: Storing endpoint status update ipVersion=0x4 status="up" workload=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"}
+2026-09-23 20:16:46.376 [INFO][74] felix/status_combiner.go 95: Endpoint up for at least one IP version id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"} ipVersion=0x4 status="up"
+2026-09-23 20:16:46.376 [INFO][74] felix/status_combiner.go 114: Reporting combined status. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"} status="up"
+2026-09-23 20:16:47.052 [INFO][74] felix/iface_monitor.go 246: Netlink address update for known interface.  addr="fe80::ecee:eeff:feee:eeee" exists=true ifIndex=6
+2026-09-23 20:16:47.052 [INFO][74] felix/int_dataplane.go 1955: Linux interface addrs changed. addrs=set.Set{fe80::ecee:eeff:feee:eeee} ifaceName="cali8ced2e42c39"
+2026-09-23 20:16:47.052 [INFO][74] felix/int_dataplane.go 2645: Received interface addresses update msg=&intdataplane.ifaceAddrsUpdate{Name:"cali8ced2e42c39", Addrs:set.Typed[string]{"fe80::ecee:eeff:feee:eeee":set.v{}}}
+2026-09-23 20:16:47.052 [INFO][74] felix/hostip_mgr.go 83: Interface addrs changed. update=&intdataplane.ifaceAddrsUpdate{Name:"cali8ced2e42c39", Addrs:set.Typed[string]{"fe80::ecee:eeff:feee:eeee":set.v{}}}
+2026-09-23 20:17:02.523 [ERROR][70] confd/status_file_watcher.go 112: Error initializing fsnotify. error=too many open files
+2026-09-23 20:17:02.524 [INFO][70] confd/status_file_watcher.go 185: Error initializing fsnotify. Falling back to polling. error=too many open files
+2026-09-23 20:17:11.408 [INFO][74] felix/int_dataplane.go 2550: Received *proto.ServiceUpdate update from calculation graph. msg=name:"calico-kube-controllers-metrics" namespace:"calico-system" type:"ClusterIP" cluster_ips:"None" ports:{Protocol:"TCP" Port:9094}
+2026-09-23 20:17:16.466 [INFO][74] felix/int_dataplane.go 2550: Received *proto.NamespaceUpdate update from calculation graph. msg=id:{name:"network-test"} labels:{key:"kubernetes.io/metadata.name" value:"network-test"} labels:{key:"projectcalico.org/name" value:"network-test"}
+2026-09-23 20:17:16.468 [INFO][74] felix/int_dataplane.go 2550: Received *proto.ServiceAccountUpdate update from calculation graph. msg=id:{namespace:"network-test" name:"default"} labels:{key:"projectcalico.org/name" value:"default"}
+2026-09-23 20:17:32.527 [ERROR][70] confd/status_file_watcher.go 112: Error initializing fsnotify. error=too many open files
+2026-09-23 20:17:32.529 [INFO][70] confd/status_file_watcher.go 185: Error initializing fsnotify. Falling back to polling. error=too many open files
+2026-09-23 20:17:33.356 [INFO][73] node-services/autodetection_methods.go 103: Using autodetected IPv4 address on interface eth0: 172.18.0.4/16
+bird: Mesh_172_18_0_3: State changed to start
+2026-09-23 20:18:02.535 [INFO][70] confd/status_file_watcher.go 123: Started watching directory via fsnotify. dir="/var/run/calico/endpoint-status"
+2026-09-23 20:18:03.217 [INFO][74] felix/summary.go 100: Summarising 17 dataplane reconciliation loops over 1m29s: avg=288ms longest=1.089s (resync-calico-arp-v4,resync-calico-v4,resync-filter-v4,resync-ipsets-v4,resync-mangle-v4,resync-nat-v4,resync-raw-v4,resync-routes-v4,resync-routes-v4,resync-rules-v4,update-calico-arp-v4,update-filter-v4,update-ipsets-4,update-mangle-v4,update-nat-v4,update-raw-v4,update-routes,update-vxlan-vteps)
+2026-09-23 20:18:07.075 [INFO][74] felix/label_inheritance_index.go 187: Updating selector id=Policy(Name=calico-system.cluster-dns, Namespace=kube-system, Kind=NetworkPolicy) selector=(k8s-app in {"coredns", "kube-dns"} && projectcalico.org/namespace == "kube-system")
+2026-09-23 20:18:07.088 [INFO][74] felix/label_inheritance_index.go 187: Updating selector id=Policy(Name=calico-system.apiserver-access, Namespace=calico-system, Kind=NetworkPolicy) selector=(k8s-app == "calico-apiserver" && projectcalico.org/namespace == "calico-system")
+2026-09-23 20:18:07.501 [INFO][74] felix/label_inheritance_index.go 187: Updating selector id=Policy(Name=calico-system.kube-controller-access, Namespace=calico-system, Kind=NetworkPolicy) selector=(k8s-app == "calico-kube-controllers" && projectcalico.org/namespace == "calico-system")
+2026-09-23 20:18:07.557 [INFO][74] felix/label_inheritance_index.go 187: Updating selector id=Policy(Name=calico-system.default-deny, Namespace=calico-system, Kind=NetworkPolicy) selector=(k8s-app != "calico-apiserver" && projectcalico.org/namespace == "calico-system")
+2026-09-23 20:18:07.572 [INFO][74] felix/int_dataplane.go 2550: Received *proto.ActivePolicyUpdate update from calculation graph. msg=id:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} policy:{namespace:"calico-system" original_selector:"(k8s-app != \"calico-apiserver\" && projectcalico.org/namespace == \"calico-system\")" tier:"calico-system"}
+2026-09-23 20:18:07.579 [INFO][74] felix/int_dataplane.go 2550: Received *proto.WorkloadEndpointUpdate update from calculation graph. msg=id:{orchestrator_id:"k8s" workload_id:"calico-system/csi-node-driver-wgsqv" endpoint_id:"eth0"} endpoint:{state:"active" name:"cali8ced2e42c39" profile_ids:"kns.calico-system" profile_ids:"ksa.calico-system.csi-node-driver" ipv4_nets:"192.168.182.193/32" tiers:{name:"calico-system" ingress_policies:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} egress_policies:{name:"calico-system.default-deny" namespace:"calico-system" kind:"NetworkPolicy"} default_action:"Deny"}}
+2026-09-23 20:18:07.579 [INFO][74] felix/endpoint_mgr.go 790: Updating per-endpoint chains. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"}
+2026-09-23 20:18:07.579 [INFO][74] felix/ratelimitedlogger.go 216: Chain became referenced, marking it for programming chainName="cali-pi-_0dPptdegtTXt1D_kwEh" ipVersion=0x4 table="filter"
+2026-09-23 20:18:07.580 [INFO][74] felix/ratelimitedlogger.go 216: Chain became referenced, marking it for programming chainName="cali-po-_0dPptdegtTXt1D_kwEh" ipVersion=0x4 table="filter"
+2026-09-23 20:18:07.580 [INFO][74] felix/endpoint_mgr.go 823: Updating endpoint routes. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"}
+2026-09-23 20:18:07.582 [INFO][74] felix/endpoint_mgr.go 836: Updating QoS bandwidth state if changed id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"}
+2026-09-23 20:18:07.588 [INFO][74] felix/endpoint_mgr.go 1589: Applying /proc/sys configuration to interface. ifaceName="cali8ced2e42c39"
+2026-09-23 20:18:07.589 [INFO][74] felix/endpoint_mgr.go 663: Re-evaluated workload endpoint status adminUp=true failed=false known=true operUp=true status="up" workloadEndpointID=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"}
+2026-09-23 20:18:07.589 [INFO][74] felix/status_combiner.go 62: Storing endpoint status update ipVersion=0x4 status="up" workload=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"}
+2026-09-23 20:18:07.773 [INFO][74] felix/status_combiner.go 95: Endpoint up for at least one IP version id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"} ipVersion=0x4 status="up"
+2026-09-23 20:18:07.776 [INFO][74] felix/status_combiner.go 114: Reporting combined status. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-wgsqv", EndpointId:"eth0"} status="up"
+bird: Mesh_172_18_0_3: State changed to feed
+bird: Mesh_172_18_0_3: Invalid NEXT_HOP attribute in route 192.168.151.0/26
+bird: Mesh_172_18_0_3: State changed to up
+
+--- calico-node-mnqsq ---
+2026-09-23 20:18:17.105 [INFO][57] felix/int_dataplane.go 1955: Linux interface addrs changed. addrs=<nil> ifaceName="calico_tmp_B"
+2026-09-23 20:18:17.167 [INFO][57] felix/status_combiner.go 95: Endpoint up for at least one IP version id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"network-test/test-pod-1", EndpointId:"eth0"} ipVersion=0x4 status="up"
+2026-09-23 20:18:17.167 [INFO][57] felix/status_combiner.go 114: Reporting combined status. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"network-test/test-pod-1", EndpointId:"eth0"} status="up"
+2026-09-23 20:18:17.167 [INFO][57] felix/status_combiner.go 95: Endpoint up for at least one IP version id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-hqq5z", EndpointId:"eth0"} ipVersion=0x4 status="up"
+2026-09-23 20:18:17.168 [INFO][57] felix/status_combiner.go 114: Reporting combined status. id=types.WorkloadEndpointID{OrchestratorId:"k8s", WorkloadId:"calico-system/csi-node-driver-hqq5z", EndpointId:"eth0"} status="up"
+2026-09-23 20:18:17.168 [INFO][57] felix/int_dataplane.go 2500: Completed first update to dataplane. secsSinceStart=3.897252147
+2026-09-23 20:18:17.178 [INFO][57] felix/health.go 203: Health of component changed name="InternalDataplaneMainLoop" newReport="live,ready" oldReport="live,non-ready"
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2618: Received interface update msg=&intdataplane.ifaceStateUpdate{Name:"calico_tmp_B", State:"down", Index:9}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2645: Received interface addresses update msg=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_B", Addrs:set.Typed[string]{}}
+2026-09-23 20:18:17.178 [INFO][57] felix/hostip_mgr.go 83: Interface addrs changed. update=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_B", Addrs:set.Typed[string]{}}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2618: Received interface update msg=&intdataplane.ifaceStateUpdate{Name:"calico_tmp_A", State:"down", Index:10}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2645: Received interface addresses update msg=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_A", Addrs:set.Typed[string]{}}
+2026-09-23 20:18:17.178 [INFO][57] felix/hostip_mgr.go 83: Interface addrs changed. update=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_A", Addrs:set.Typed[string]{}}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2618: Received interface update msg=&intdataplane.ifaceStateUpdate{Name:"calico_tmp_A", State:"", Index:10}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2645: Received interface addresses update msg=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_A", Addrs:set.Set[string](nil)}
+2026-09-23 20:18:17.178 [INFO][57] felix/hostip_mgr.go 83: Interface addrs changed. update=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_A", Addrs:set.Set[string](nil)}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2618: Received interface update msg=&intdataplane.ifaceStateUpdate{Name:"calico_tmp_B", State:"", Index:9}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2645: Received interface addresses update msg=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_B", Addrs:set.Set[string](nil)}
+2026-09-23 20:18:17.178 [INFO][57] felix/hostip_mgr.go 83: Interface addrs changed. update=&intdataplane.ifaceAddrsUpdate{Name:"calico_tmp_B", Addrs:set.Set[string](nil)}
+2026-09-23 20:18:17.178 [INFO][57] felix/int_dataplane.go 2516: Dataplane updates throttled
+bird: Mesh_172_18_0_2: Invalid NEXT_HOP attribute in route 192.168.160.0/26
+bird: Mesh_172_18_0_2: State changed to up
+bird: Mesh_172_18_0_4: Invalid NEXT_HOP attribute in route 192.168.182.192/26
+bird: Mesh_172_18_0_4: State changed to up
+2026-09-23 20:18:17.307 [INFO][57] felix/health.go 333: Overall health status changed: live=true ready=true
++---------------------------+---------+----------------+-----------------+--------+
+|         COMPONENT         | TIMEOUT |    LIVENESS    |    READINESS    | DETAIL |
++---------------------------+---------+----------------+-----------------+--------+
+| CalculationGraph          | 30s     | reporting live | reporting ready |        |
+| FelixStartup              | -       | reporting live | reporting ready |        |
+| InternalDataplaneMainLoop | 1m30s   | reporting live | reporting ready |        |
++---------------------------+---------+----------------+-----------------+--------+
+2026-09-23 20:18:17.307 [INFO][64] node-services/health.go 207: Number of node(s) with BGP peering established = 2
+2026-09-23 20:18:17.307 [INFO][64] node-services/health.go 207: Number of node(s) with BGP peering established = 0
+2026-09-23 20:18:17.308 [INFO][64] node-services/utils.go 125: Using NODENAME environment for node name calico-network-worker
+2026-09-23 20:18:17.308 [INFO][64] node-services/utils.go 137: Determined node name: calico-network-worker
+2026-09-23 20:18:17.309 [INFO][64] node-services/utils.go 191: Setting NetworkUnavailable to false
+2026-09-23 20:18:17.330 [INFO][64] node-services/utils.go 93: removed shutdown timestamp timestamp="2026-09-23T20:18:00Z"
+2026-09-23 20:18:17.331 [INFO][64] node-services/startup.go 346: Calico started successfully
+2026-09-23 20:18:22.175 [INFO][57] felix/int_dataplane.go 2472: Dataplane updates no longer throttled
+
+===== 12. COREDNS STATUS =====
+NAME                       READY   STATUS    RESTARTS   AGE     IP              NODE                     NOMINATED NODE   READINESS GATES
+coredns-559f6c778d-78vlm   1/1     Running   0          7m13s   192.168.160.7   calico-network-worker2   <none>           <none>
+coredns-559f6c778d-nq8bs   1/1     Running   0          7m13s   192.168.160.2   calico-network-worker2   <none>           <none>
+
+===== 13. DNS RESOLUTION TEST =====
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+Name:	kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+
+
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+Name:	kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+
+
+pod "dns-check" deleted from network-test namespace
+
+==================================================
+ END OF NETWORK TROUBLESHOOTING REPORT
+==================================================
