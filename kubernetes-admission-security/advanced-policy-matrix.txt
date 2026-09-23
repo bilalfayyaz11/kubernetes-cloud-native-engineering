@@ -1,0 +1,45 @@
+POD SECURITY ADMISSION ADVANCED POLICY MATRIX
+
+Kubernetes policy version:
+v1.36
+
+restricted-test
+---------------
+enforce: restricted
+audit: restricted
+warn: restricted
+
+baseline-test
+-------------
+enforce: baseline
+audit: baseline
+warn: baseline
+
+privileged-test
+---------------
+enforce: privileged
+audit: privileged
+warn: privileged
+
+mixed-policy-test
+-----------------
+enforce: baseline
+audit: restricted
+warn: restricted
+
+Behavior
+--------
+enforce:
+  decides whether a workload is admitted or rejected
+
+warn:
+  returns policy warnings to the requesting client without blocking
+
+audit:
+  annotates admission decisions for audit logging when Kubernetes
+  API audit logging is configured
+
+Mixed-policy expectation:
+  baseline-compliant workloads are admitted because enforce=baseline,
+  while violations of restricted policy may still produce warnings
+  and audit annotations.

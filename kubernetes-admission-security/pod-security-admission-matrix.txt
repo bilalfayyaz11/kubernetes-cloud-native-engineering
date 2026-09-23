@@ -1,0 +1,19 @@
+POD SECURITY ADMISSION MATRIX
+
+Privileged Pod
+---------------
+restricted-test : REJECTED
+baseline-test   : REJECTED
+privileged-test : ADMITTED
+
+Baseline Pod
+------------
+restricted-test : REJECTED
+baseline-test   : ADMITTED
+privileged-test : ADMITTED
+
+Restricted Pod
+--------------
+restricted-test : ADMITTED
+baseline-test   : ADMITTED
+privileged-test : ADMITTED

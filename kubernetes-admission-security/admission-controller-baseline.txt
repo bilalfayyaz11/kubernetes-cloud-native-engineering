@@ -1,0 +1,26 @@
+=== TIMESTAMP ===
+2026-09-23T21:11:22+00:00
+
+=== KUBERNETES VERSION ===
+Client Version: v1.36.2
+Kustomize Version: v5.8.1
+Server Version: v1.36.5
+
+=== API SERVER POD ===
+kube-apiserver-ip-172-31-10-217
+
+=== EXPLICIT ADMISSION FLAGS ===
+--enable-admission-plugins=NodeRestriction
+
+=== DISABLED ADMISSION PLUGINS ===
+none
+
+=== PSA TEST NAMESPACE ===
+NAME               STATUS   AGE   LABELS
+psa-verification   Active   2s    kubernetes.io/metadata.name=psa-verification,pod-security.kubernetes.io/audit-version=v1.36,pod-security.kubernetes.io/audit=restricted,pod-security.kubernetes.io/enforce-version=v1.36,pod-security.kubernetes.io/enforce=restricted,pod-security.kubernetes.io/warn-version=v1.36,pod-security.kubernetes.io/warn=restricted
+
+=== PRIVILEGED WORKLOAD RESULT ===
+Error from server (Forbidden): error when creating "/home/ubuntu/kubernetes-admission-security/psa-rejection-test.yaml": pods "psa-rejection-test" is forbidden: violates PodSecurity "restricted:v1.36": privileged (container "test" must not set securityContext.privileged=true), allowPrivilegeEscalation != false (container "test" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "test" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "test" must set securityContext.runAsNonRoot=true), runAsUser=0 (container "test" must not set runAsUser=0), seccompProfile (pod or container "test" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+
+=== RESTRICTED-COMPLIANT WORKLOAD RESULT ===
+pod/psa-compliant-test

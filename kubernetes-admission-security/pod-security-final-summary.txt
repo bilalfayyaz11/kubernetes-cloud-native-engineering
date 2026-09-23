@@ -1,0 +1,73 @@
+KUBERNETES POD SECURITY ADMISSION SUMMARY
+
+Admission Control
+-----------------
+The kube-apiserver was verified to use the built-in admission path.
+PodSecurity was not explicitly disabled.
+
+Namespace Policy Levels
+-----------------------
+restricted-test:
+  enforce=restricted
+  audit=restricted
+  warn=restricted
+
+baseline-test:
+  enforce=baseline
+  audit=baseline
+  warn=baseline
+
+privileged-test:
+  enforce=privileged
+  audit=privileged
+  warn=privileged
+
+mixed-policy-test:
+  enforce=baseline
+  audit=restricted
+  warn=restricted
+
+Pod Enforcement Results
+-----------------------
+Privileged Pod:
+  restricted-test -> rejected
+  baseline-test   -> rejected
+  privileged-test -> admitted
+
+Baseline Pod:
+  restricted-test -> rejected
+  baseline-test   -> admitted
+  privileged-test -> admitted
+
+Restricted Pod:
+  restricted-test -> admitted
+  baseline-test   -> admitted
+  privileged-test -> admitted
+
+Deployment Enforcement Observation
+----------------------------------
+Higher-level Deployment objects can be admitted while their ReplicaSets
+fail to create non-compliant Pods.
+
+The effective security control is applied when Pod admission occurs.
+
+Mixed Policy Observation
+------------------------
+enforce determines whether a workload is allowed.
+
+warn can return policy warnings to the requesting client without blocking.
+
+audit can annotate admission decisions for audit processing when API server
+audit logging is configured.
+
+Security Controls Demonstrated
+------------------------------
+- privileged container restriction
+- hostPath restriction
+- non-root execution
+- seccomp RuntimeDefault
+- capability dropping
+- privilege escalation prevention
+- namespace-level Pod Security Standards
+- enforcement, warning, and audit policy modes
+- controller-level admission behavior

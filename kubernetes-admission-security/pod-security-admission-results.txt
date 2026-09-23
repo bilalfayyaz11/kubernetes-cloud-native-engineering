@@ -1,0 +1,67 @@
+=== TIMESTAMP ===
+2026-09-23T21:13:34+00:00
+
+=== EXPECTED MATRIX ===
+POD SECURITY ADMISSION MATRIX
+
+Privileged Pod
+---------------
+restricted-test : REJECTED
+baseline-test   : REJECTED
+privileged-test : ADMITTED
+
+Baseline Pod
+------------
+restricted-test : REJECTED
+baseline-test   : ADMITTED
+privileged-test : ADMITTED
+
+Restricted Pod
+--------------
+restricted-test : ADMITTED
+baseline-test   : ADMITTED
+privileged-test : ADMITTED
+
+=== PRIVILEGED -> RESTRICTED ===
+Error from server (Forbidden): error when creating "/home/ubuntu/kubernetes-admission-security/privileged-pod.yaml": pods "privileged-pod" is forbidden: violates PodSecurity "restricted:v1.36": privileged (container "privileged-container" must not set securityContext.privileged=true), allowPrivilegeEscalation != false (container "privileged-container" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "privileged-container" must set securityContext.capabilities.drop=["ALL"]; container "privileged-container" must not include "NET_ADMIN", "SYS_ADMIN" in securityContext.capabilities.add), restricted volume types (volume "host-root" uses restricted volume type "hostPath"), runAsNonRoot != true (pod or container "privileged-container" must set securityContext.runAsNonRoot=true), runAsUser=0 (container "privileged-container" must not set runAsUser=0), seccompProfile (pod or container "privileged-container" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+
+=== PRIVILEGED -> BASELINE ===
+Error from server (Forbidden): error when creating "/home/ubuntu/kubernetes-admission-security/privileged-pod.yaml": pods "privileged-pod" is forbidden: violates PodSecurity "baseline:v1.36": non-default capabilities (container "privileged-container" must not include "NET_ADMIN", "SYS_ADMIN" in securityContext.capabilities.add), hostPath volumes (volume "host-root"), privileged (container "privileged-container" must not set securityContext.privileged=true)
+
+=== PRIVILEGED -> PRIVILEGED ===
+pod/privileged-pod created
+
+=== BASELINE -> RESTRICTED ===
+Error from server (Forbidden): error when creating "/home/ubuntu/kubernetes-admission-security/baseline-pod.yaml": pods "baseline-pod" is forbidden: violates PodSecurity "restricted:v1.36": unrestricted capabilities (container "baseline-container" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "baseline-container" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "baseline-container" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+
+=== BASELINE -> BASELINE ===
+pod/baseline-pod created
+
+=== BASELINE -> PRIVILEGED ===
+pod/baseline-pod created
+
+=== RESTRICTED -> RESTRICTED ===
+pod/restricted-pod created
+
+=== RESTRICTED -> BASELINE ===
+pod/restricted-pod created
+
+=== RESTRICTED -> PRIVILEGED ===
+pod/restricted-pod created
+
+=== FINAL POD STATE ===
+
+--- restricted-test ---
+NAME             READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+restricted-pod   1/1     Running   0          5s    10.244.0.8   ip-172-31-10-217   <none>           <none>
+
+--- baseline-test ---
+NAME             READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+baseline-pod     1/1     Running   0          7s    10.244.0.5   ip-172-31-10-217   <none>           <none>
+restricted-pod   1/1     Running   0          4s    10.244.0.7   ip-172-31-10-217   <none>           <none>
+
+--- privileged-test ---
+NAME             READY   STATUS    RESTARTS   AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+baseline-pod     1/1     Running   0          6s    10.244.0.6   ip-172-31-10-217   <none>           <none>
+privileged-pod   1/1     Running   0          10s   10.244.0.4   ip-172-31-10-217   <none>           <none>
+restricted-pod   1/1     Running   0          4s    10.244.0.9   ip-172-31-10-217   <none>           <none>

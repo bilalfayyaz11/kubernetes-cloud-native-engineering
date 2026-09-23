@@ -1,0 +1,47 @@
+POD SECURITY ADMISSION - DEPLOYMENT MATRIX
+
+Privileged Deployment
+---------------------
+restricted-test
+  Deployment object: may be admitted
+  Pod creation: BLOCKED
+
+baseline-test
+  Deployment object: may be admitted
+  Pod creation: BLOCKED
+
+privileged-test
+  Deployment object: ADMITTED
+  Pod creation: ADMITTED
+
+Baseline Deployment
+-------------------
+restricted-test
+  Deployment object: may be admitted
+  Pod creation: BLOCKED
+
+baseline-test
+  Deployment object: ADMITTED
+  Pod creation: ADMITTED
+
+Restricted Deployment
+---------------------
+restricted-test
+  Deployment object: ADMITTED
+  Pod creation: ADMITTED
+
+baseline-test
+  Deployment object: ADMITTED
+  Pod creation: ADMITTED
+
+privileged-test
+  Deployment object: ADMITTED
+  Pod creation: ADMITTED
+
+KEY OBSERVATION
+---------------
+Pod Security Admission enforcement ultimately protects Pod creation.
+
+A higher-level workload controller such as a Deployment can exist while
+its ReplicaSet repeatedly fails to create Pods that violate namespace
+Pod Security policy.

@@ -1,0 +1,36 @@
+=== RESTRICTED NAMESPACE EVENTS ===
+LAST SEEN   TYPE     REASON      OBJECT               MESSAGE
+4s          Normal   Scheduled   pod/restricted-pod   Successfully assigned restricted-test/restricted-pod to ip-172-31-10-217
+3s          Normal   Pulling     pod/restricted-pod   Pulling image "busybox:1.37"
+2s          Normal   Pulled      pod/restricted-pod   Successfully pulled image "busybox:1.37" in 212ms (945ms including waiting). Image size: 2222118 bytes.
+2s          Normal   Created     pod/restricted-pod   Container created
+2s          Normal   Started     pod/restricted-pod   Container started
+
+=== BASELINE NAMESPACE EVENTS ===
+LAST SEEN   TYPE     REASON      OBJECT               MESSAGE
+7s          Normal   Scheduled   pod/baseline-pod     Successfully assigned baseline-test/baseline-pod to ip-172-31-10-217
+5s          Normal   Pulled      pod/baseline-pod     Container image "nginx:1.28-alpine" already present on machine and can be accessed by the pod
+5s          Normal   Created     pod/baseline-pod     Container created
+5s          Normal   Started     pod/baseline-pod     Container started
+4s          Normal   Scheduled   pod/restricted-pod   Successfully assigned baseline-test/restricted-pod to ip-172-31-10-217
+3s          Normal   Pulling     pod/restricted-pod   Pulling image "busybox:1.37"
+2s          Normal   Pulled      pod/restricted-pod   Successfully pulled image "busybox:1.37" in 797ms (797ms including waiting). Image size: 2222118 bytes.
+2s          Normal   Created     pod/restricted-pod   Container created
+2s          Normal   Started     pod/restricted-pod   Container started
+
+=== PRIVILEGED NAMESPACE EVENTS ===
+LAST SEEN   TYPE     REASON      OBJECT               MESSAGE
+10s         Normal   Scheduled   pod/privileged-pod   Successfully assigned privileged-test/privileged-pod to ip-172-31-10-217
+9s          Normal   Pulling     pod/privileged-pod   Pulling image "nginx:1.28-alpine"
+7s          Normal   Pulled      pod/privileged-pod   Successfully pulled image "nginx:1.28-alpine" in 1.909s (1.909s including waiting). Image size: 25976042 bytes.
+7s          Normal   Started     pod/privileged-pod   Container started
+7s          Normal   Created     pod/privileged-pod   Container created
+6s          Normal   Scheduled   pod/baseline-pod     Successfully assigned privileged-test/baseline-pod to ip-172-31-10-217
+5s          Normal   Started     pod/baseline-pod     Container started
+5s          Normal   Created     pod/baseline-pod     Container created
+5s          Normal   Pulled      pod/baseline-pod     Container image "nginx:1.28-alpine" already present on machine and can be accessed by the pod
+4s          Normal   Scheduled   pod/restricted-pod   Successfully assigned privileged-test/restricted-pod to ip-172-31-10-217
+3s          Normal   Pulling     pod/restricted-pod   Pulling image "busybox:1.37"
+2s          Normal   Pulled      pod/restricted-pod   Successfully pulled image "busybox:1.37" in 205ms (983ms including waiting). Image size: 2222118 bytes.
+2s          Normal   Created     pod/restricted-pod   Container created
+1s          Normal   Started     pod/restricted-pod   Container started

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baseline-deployment
+  labels:
+    app: baseline-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: baseline-app
+  template:
+    metadata:
+      labels:
+        app: baseline-app
+    spec:
+      containers:
+        - name: baseline-container
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              while true; do
+                echo "baseline deployment running"
+                sleep 30
+              done
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false

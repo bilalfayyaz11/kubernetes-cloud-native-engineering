@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: custom-security-pod
+  labels:
+    app: custom-security
+spec:
+  securityContext:
+    runAsUser: 2000
+    runAsGroup: 2000
+    fsGroup: 2000
+    supplementalGroups:
+      - 3000
+      - 4000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: custom-container
+      image: busybox:1.37
+      command:
+        - sh
+        - -c
+        - |
+          while true; do
+            id
+            sleep 30
+          done
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 2000
+        runAsGroup: 2000
+        capabilities:
+          drop:
+            - ALL
+          add:
+            - NET_BIND_SERVICE

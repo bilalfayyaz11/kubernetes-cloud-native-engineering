@@ -1,0 +1,14 @@
+=== BASELINE POD IN MIXED POLICY ===
+
+STDOUT:
+pod/baseline-pod created
+
+STDERR:
+Warning: would violate PodSecurity "restricted:v1.36": unrestricted capabilities (container "baseline-container" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "baseline-container" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "baseline-container" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+
+=== CUSTOM POD IN MIXED POLICY ===
+
+STDOUT:
+pod/custom-security-pod created
+
+STDERR:

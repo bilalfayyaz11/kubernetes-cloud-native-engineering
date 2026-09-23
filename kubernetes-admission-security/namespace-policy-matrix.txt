@@ -1,0 +1,16 @@
+Kubernetes Policy Version: v1.36
+
+Namespace: restricted-test
+Enforce: restricted
+Audit: restricted
+Warn: restricted
+
+Namespace: baseline-test
+Enforce: baseline
+Audit: baseline
+Warn: baseline
+
+Namespace: privileged-test
+Enforce: privileged
+Audit: privileged
+Warn: privileged

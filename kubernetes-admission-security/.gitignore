@@ -1,0 +1,12 @@
+*.key
+*.crt
+*.pem
+*.kubeconfig
+admin.conf
+.env
+.env.*
+*credentials*
+*token*
+kubeadm-init-output.txt
+kube-flannel.yml
+cluster-foundation-state.txt

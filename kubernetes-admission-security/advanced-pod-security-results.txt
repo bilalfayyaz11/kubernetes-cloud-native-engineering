@@ -1,0 +1,130 @@
+=== TIMESTAMP ===
+2026-09-23T21:16:45+00:00
+
+=== POLICY MATRIX ===
+POD SECURITY ADMISSION ADVANCED POLICY MATRIX
+
+Kubernetes policy version:
+v1.36
+
+restricted-test
+---------------
+enforce: restricted
+audit: restricted
+warn: restricted
+
+baseline-test
+-------------
+enforce: baseline
+audit: baseline
+warn: baseline
+
+privileged-test
+---------------
+enforce: privileged
+audit: privileged
+warn: privileged
+
+mixed-policy-test
+-----------------
+enforce: baseline
+audit: restricted
+warn: restricted
+
+Behavior
+--------
+enforce:
+  decides whether a workload is admitted or rejected
+
+warn:
+  returns policy warnings to the requesting client without blocking
+
+audit:
+  annotates admission decisions for audit logging when Kubernetes
+  API audit logging is configured
+
+Mixed-policy expectation:
+  baseline-compliant workloads are admitted because enforce=baseline,
+  while violations of restricted policy may still produce warnings
+  and audit annotations.
+
+=== NAMESPACE LABELS ===
+NAME                STATUS   AGE     ENFORCE      AUDIT        WARN         ENFORCE-VERSION
+restricted-test     Active   4m33s   restricted   restricted   restricted   v1.36
+baseline-test       Active   4m33s   baseline     baseline     baseline     v1.36
+privileged-test     Active   4m33s   privileged   privileged   privileged   v1.36
+mixed-policy-test   Active   9s      baseline     restricted   restricted   v1.36
+
+=== BASELINE POD UNDER MIXED POLICY ===
+=== BASELINE POD IN MIXED POLICY ===
+
+STDOUT:
+pod/baseline-pod created
+
+STDERR:
+Warning: would violate PodSecurity "restricted:v1.36": unrestricted capabilities (container "baseline-container" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "baseline-container" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "baseline-container" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+
+=== CUSTOM POD IN MIXED POLICY ===
+
+STDOUT:
+pod/custom-security-pod created
+
+STDERR:
+
+=== CUSTOM POD -> BASELINE ===
+pod/custom-security-pod created
+
+=== CUSTOM POD -> RESTRICTED ===
+pod/custom-security-pod created
+
+=== CUSTOM POD RESTRICTED DRY-RUN ===
+pod/custom-security-pod unchanged (server dry run)
+
+=== CUSTOM POD -> MIXED ===
+pod/custom-security-pod created
+
+=== EFFECTIVE SECURITY CONTEXT ===
+{
+  "podSecurityContext": {
+    "fsGroup": 2000,
+    "runAsGroup": 2000,
+    "runAsUser": 2000,
+    "seccompProfile": {
+      "type": "RuntimeDefault"
+    },
+    "supplementalGroups": [
+      3000,
+      4000
+    ]
+  },
+  "containerSecurityContext": {
+    "allowPrivilegeEscalation": false,
+    "capabilities": {
+      "add": [
+        "NET_BIND_SERVICE"
+      ],
+      "drop": [
+        "ALL"
+      ]
+    },
+    "readOnlyRootFilesystem": false,
+    "runAsGroup": 2000,
+    "runAsNonRoot": true,
+    "runAsUser": 2000
+  }
+}
+
+=== MIXED POLICY EVENTS ===
+LAST SEEN   TYPE     REASON      OBJECT                    MESSAGE
+8s          Normal   Scheduled   pod/baseline-pod          Successfully assigned mixed-policy-test/baseline-pod to ip-172-31-10-217
+7s          Normal   Pulled      pod/baseline-pod          Container image "nginx:1.28-alpine" already present on machine and can be accessed by the pod
+7s          Normal   Created     pod/baseline-pod          Container created
+7s          Normal   Started     pod/baseline-pod          Container started
+3s          Normal   Scheduled   pod/custom-security-pod   Successfully assigned mixed-policy-test/custom-security-pod to ip-172-31-10-217
+2s          Normal   Pulled      pod/custom-security-pod   Container image "busybox:1.37" already present on machine and can be accessed by the pod
+2s          Normal   Created     pod/custom-security-pod   Container created
+2s          Normal   Started     pod/custom-security-pod   Container started
+
+=== AUDIT CONFIGURATION ===
+not configured
+not configured

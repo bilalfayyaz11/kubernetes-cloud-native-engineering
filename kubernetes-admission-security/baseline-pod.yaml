@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: baseline-pod
+  labels:
+    app: baseline-test
+spec:
+  containers:
+    - name: baseline-container
+      image: nginx:1.28-alpine
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        allowPrivilegeEscalation: false
+      command:
+        - sh
+        - -c
+        - |
+          while true; do
+            echo "baseline workload running"
+            sleep 30
+          done

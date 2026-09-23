@@ -1,0 +1,26 @@
+=== REUSABLE MANIFESTS ===
+privileged-pod.yaml
+baseline-pod.yaml
+restricted-pod.yaml
+privileged-deployment.yaml
+baseline-deployment.yaml
+restricted-deployment.yaml
+custom-security-pod.yaml
+
+=== POLICY EVIDENCE ===
+admission-controller-baseline.txt
+namespace-policy-matrix.txt
+namespace-security-labels.txt
+pod-security-admission-matrix.txt
+pod-security-admission-results.txt
+pod-security-events.txt
+deployment-security-matrix.txt
+deployment-policy-events.txt
+deployment-admission-results.txt
+apiserver-admission-log-extract.txt
+advanced-policy-matrix.txt
+advanced-pod-security-results.txt
+mixed-policy-warning-results.txt
+custom-security-context-effective.json
+pod-security-final-summary.txt
+final-pre-cleanup-state.txt
