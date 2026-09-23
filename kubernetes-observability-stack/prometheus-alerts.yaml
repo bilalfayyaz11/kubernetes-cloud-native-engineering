@@ -1,0 +1,73 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kubernetes-resource-alerts
+  namespace: monitoring
+  labels:
+    release: prometheus
+    app: kube-prometheus-stack
+spec:
+  groups:
+    - name: kubernetes-resource-alerts
+      rules:
+
+        - alert: HighPodCPUUsage
+          expr: |
+            sum by (namespace, pod) (
+              rate(container_cpu_usage_seconds_total{
+                container!="",
+                container!="POD",
+                image!=""
+              }[2m])
+            ) > 0.15
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High CPU usage detected for pod"
+            description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is consuming more than 150m CPU."
+
+        - alert: HighPodMemoryUsage
+          expr: |
+            (
+              sum by (namespace, pod) (
+                container_memory_working_set_bytes{
+                  container!="",
+                  container!="POD",
+                  image!=""
+                }
+              )
+              /
+              sum by (namespace, pod) (
+                kube_pod_container_resource_limits{
+                  resource="memory",
+                  unit="byte"
+                } > 0
+              )
+            ) > 0.90
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "High memory utilization detected for pod"
+            description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is above 90% of its configured memory limit."
+
+        - alert: NodeFilesystemSpaceLow
+          expr: |
+            (
+              node_filesystem_avail_bytes{
+                fstype!~"tmpfs|overlay|squashfs",
+                mountpoint!=""
+              }
+              /
+              node_filesystem_size_bytes{
+                fstype!~"tmpfs|overlay|squashfs",
+                mountpoint!=""
+              }
+            ) < 0.10
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Node filesystem space is running low"
+            description: "Filesystem {{ $labels.mountpoint }} on {{ $labels.instance }} has less than 10% free space."

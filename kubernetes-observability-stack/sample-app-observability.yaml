@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-web-app
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-web-app
+  template:
+    metadata:
+      labels:
+        app: sample-web-app
+    spec:
+      containers:
+        - name: web-app
+          image: nginx:1.28-alpine
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 150m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+
+        - name: nginx-exporter
+          image: nginx/nginx-prometheus-exporter:1.4.2
+          args:
+            - --nginx.scrape-uri=http://127.0.0.1/nginx_status
+          ports:
+            - name: metrics
+              containerPort: 9113
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: sample-web-app-nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-web-app-service
+  namespace: default
+  labels:
+    app: sample-web-app
+spec:
+  selector:
+    app: sample-web-app
+  ports:
+    - name: web
+      port: 80
+      targetPort: http
+
+    - name: metrics
+      port: 9113
+      targetPort: metrics
+
+  type: ClusterIP

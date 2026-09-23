@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-web-app-nginx-config
+  namespace: default
+data:
+  default.conf: |
+    server {
+        listen 80;
+
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+
+        location /nginx_status {
+            stub_status;
+            allow 127.0.0.1;
+            allow ::1;
+            deny all;
+        }
+    }

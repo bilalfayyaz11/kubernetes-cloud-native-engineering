@@ -1,0 +1,6 @@
+*password*
+*.pid
+*.log
+*response.json
+*error.json
+grafana-admin-password.txt

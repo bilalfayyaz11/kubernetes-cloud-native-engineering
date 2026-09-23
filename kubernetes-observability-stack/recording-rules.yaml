@@ -1,0 +1,47 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kubernetes-observability-recording-rules
+  namespace: monitoring
+  labels:
+    release: prometheus
+    app: kube-prometheus-stack
+spec:
+  groups:
+    - name: kubernetes-observability-recording-rules
+      interval: 30s
+      rules:
+        - record: kubernetes:pod_cpu_usage_cores:rate2m
+          expr: |
+            sum by (namespace, pod) (
+              rate(container_cpu_usage_seconds_total{
+                container!="",
+                container!="POD",
+                image!=""
+              }[2m])
+            )
+
+        - record: kubernetes:pod_memory_working_set_bytes
+          expr: |
+            sum by (namespace, pod) (
+              container_memory_working_set_bytes{
+                container!="",
+                container!="POD",
+                image!=""
+              }
+            )
+
+        - record: kubernetes:node_cpu_utilization:ratio
+          expr: |
+            1 -
+            avg by (instance) (
+              rate(node_cpu_seconds_total{
+                mode="idle"
+              }[5m])
+            )
+
+        - record: application:nginx_active_connections
+          expr: |
+            sum by (namespace, pod) (
+              nginx_connections_active
+            )

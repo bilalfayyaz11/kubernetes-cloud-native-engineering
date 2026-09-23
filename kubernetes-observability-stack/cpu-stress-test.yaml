@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-stress-test
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-stress-test
+  template:
+    metadata:
+      labels:
+        app: cpu-stress-test
+    spec:
+      containers:
+        - name: cpu-stress
+          image: busybox:1.36.1
+          command:
+            - /bin/sh
+            - -c
+            - |
+              while true; do
+                yes > /dev/null
+              done
+          resources:
+            requests:
+              cpu: 100m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 64Mi

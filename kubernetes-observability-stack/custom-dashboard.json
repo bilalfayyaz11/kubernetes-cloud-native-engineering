@@ -1,0 +1,185 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "sample-web-app-performance",
+    "title": "Sample Web App Performance",
+    "tags": [
+      "kubernetes",
+      "nginx",
+      "observability"
+    ],
+    "timezone": "browser",
+    "schemaVersion": 41,
+    "version": 0,
+    "refresh": "15s",
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "timeseries",
+        "title": "Application Pod CPU",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"default\",pod=~\"sample-web-app.*\",container=\"web-app\"}[2m]))",
+            "legendFormat": "{{pod}}",
+            "range": true
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "cores"
+          },
+          "overrides": []
+        },
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "type": "timeseries",
+        "title": "Application Pod Memory",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"default\",pod=~\"sample-web-app.*\",container=\"web-app\"})",
+            "legendFormat": "{{pod}}",
+            "range": true
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 3,
+        "type": "timeseries",
+        "title": "Application Network Receive",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum by (pod) (rate(container_network_receive_bytes_total{namespace=\"default\",pod=~\"sample-web-app.*\"}[2m]))",
+            "legendFormat": "{{pod}}",
+            "range": true
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 4,
+        "type": "timeseries",
+        "title": "Application Network Transmit",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum by (pod) (rate(container_network_transmit_bytes_total{namespace=\"default\",pod=~\"sample-web-app.*\"}[2m]))",
+            "legendFormat": "{{pod}}",
+            "range": true
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        }
+      }
+    ]
+  },
+  "folderId": 0,
+  "overwrite": true,
+  "message": "Create application performance dashboard"
+}
