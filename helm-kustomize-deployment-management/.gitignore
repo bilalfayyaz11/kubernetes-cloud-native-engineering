@@ -1,0 +1,10 @@
+*.log
+*.pid
+*.tmp
+*.swp
+*~
+.env
+.env.*
+*.secret
+*credentials*
+*password*

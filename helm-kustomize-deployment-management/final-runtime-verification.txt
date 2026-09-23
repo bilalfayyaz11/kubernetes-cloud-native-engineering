@@ -1,0 +1,53 @@
+# Final Runtime Verification
+
+## Helm Releases
+NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION
+custom-nginx	helm-demo	4       	2026-09-23 20:01:00.017538541 +0000 UTC	deployed	nginx-25.1.14	1.31.6     
+my-nginx    	helm-demo	1       	2026-09-23 19:43:14.198686256 +0000 UTC	deployed	nginx-25.1.14	1.31.6     
+
+## Development
+NAME                          READY   STATUS      RESTARTS   AGE
+pod/http-check-development    0/1     Completed   0          4m45s
+pod/webapp-754d9f44c4-4q7ll   1/1     Running     0          22s
+
+NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/webapp-service   ClusterIP   10.96.225.95   <none>        80/TCP    5m
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webapp   1/1     1            1           5m
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/webapp-54645d9db8   0         0         0       5m
+replicaset.apps/webapp-754d9f44c4   1         1         1       22s
+
+## Staging
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/webapp-79497f89fd-c62rp   1/1     Running   0          4m59s
+pod/webapp-79497f89fd-mqqlm   1/1     Running   0          4m59s
+
+NAME                     TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/webapp-service   NodePort   10.96.213.11   <none>        80:30081/TCP   4m59s
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webapp   2/2     2            2           4m59s
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/webapp-79497f89fd   2         2         2       4m59s
+
+## Production
+NAME                          READY   STATUS      RESTARTS   AGE
+pod/http-check-production     0/1     Completed   0          4m39s
+pod/webapp-79967b6659-5lpxx   1/1     Running     0          4m58s
+pod/webapp-79967b6659-fctm9   1/1     Running     0          4m58s
+pod/webapp-79967b6659-rpgrp   1/1     Running     0          4m58s
+pod/webapp-79967b6659-t66dn   1/1     Running     0          4m58s
+pod/webapp-79967b6659-w82c5   1/1     Running     0          4m58s
+
+NAME                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/webapp-service   ClusterIP   10.96.251.192   <none>        80/TCP    4m58s
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webapp   5/5     5            5           4m59s
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/webapp-79967b6659   5         5         5       4m59s
