@@ -1,0 +1,27 @@
+=== DISASTER SIMULATION EVIDENCE ===
+Timestamp: 2026-09-23T20:37:00+00:00
+
+Backup used for future recovery:
+/opt/etcd-backup/etcd-backup-20260923_203525.db
+
+Recovery targets intentionally deleted:
+- namespace/backup-test
+- configmap/kube-system/coredns
+
+Namespace verification:
+Error from server (NotFound): namespaces "backup-test" not found
+
+CoreDNS ConfigMap verification:
+Error from server (NotFound): configmaps "coredns" not found
+
+Snapshot revision:
+779
+
+Post-disaster revision:
+966
+
+Pod count before:
+10
+
+Pod count after:
+8

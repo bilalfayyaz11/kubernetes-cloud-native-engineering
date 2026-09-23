@@ -1,0 +1,72 @@
+=== ETCD DISASTER RECOVERY REPORT ===
+Timestamp: 2026-09-23T20:43:11+00:00
+
+=== SNAPSHOT ===
+/opt/etcd-backup/etcd-backup-20260923_203525.db
+
+=== ORIGINAL DATA DIRECTORY ===
+/var/lib/etcd
+
+=== RESTORED DATA DIRECTORY ===
+/var/lib/etcd-restored
+
+=== MEMBER NAME ===
+ip-172-31-10-45
+
+=== INITIAL CLUSTER ===
+ip-172-31-10-45=https://172.31.10.45:2380
+
+=== SNAPSHOT REVISION ===
+779
+
+=== POST-RESTORE REVISION ===
+1000001038
+
+=== NODE STATE ===
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-45   Ready    control-plane   10m   v1.36.5   172.31.10.45   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+=== RESTORED TEST RESOURCES ===
+NAME                            READY   STATUS    RESTARTS   AGE     IP           NODE              NOMINATED NODE   READINESS GATES
+pod/test-app-776db5b856-bgsmk   1/1     Running   1          8m52s   10.244.0.8   ip-172-31-10-45   <none>           <none>
+pod/test-app-776db5b856-l7nvh   1/1     Running   1          8m52s   10.244.0.7   ip-172-31-10-45   <none>           <none>
+
+NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+service/test-app-service   ClusterIP   10.97.242.14   <none>        80/TCP    8m40s   app=test-app
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES              SELECTOR
+deployment.apps/test-app   2/2     2            2           8m52s   nginx        nginx:1.28-alpine   app=test-app
+
+NAME                                  DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES              SELECTOR
+replicaset.apps/test-app-776db5b856   2         2         2       8m52s   nginx        nginx:1.28-alpine   app=test-app,pod-template-hash=776db5b856
+
+=== RESTORED CONFIGURATION ===
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      8m52s
+configmap/test-config        2      8m41s
+
+NAME                 TYPE     DATA   AGE
+secret/test-secret   Opaque   2      8m41s
+
+=== COREDNS ===
+NAME      DATA   AGE
+coredns   1      10m
+
+=== ETCD ENDPOINT ===
++---------------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+|         ENDPOINT          |        ID        | VERSION | STORAGE VERSION | DB SIZE | IN USE | PERCENTAGE NOT IN USE | QUOTA  | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS | DOWNGRADE TARGET VERSION | DOWNGRADE ENABLED |
++---------------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+| https://172.31.10.45:2379 | a4c8c733c3906297 |   3.6.8 |           3.6.0 |  1.8 MB | 1.0 MB |                   44% | 2.1 GB |      true |      false |         2 |        327 |                327 |        |                          |             false |
++---------------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+
+=== RESOURCE UID COMPARISON ===
+original_namespace_uid=e07ad3f5-3699-4bc3-9404-aaeae944323c
+restored_namespace_uid=e07ad3f5-3699-4bc3-9404-aaeae944323c
+original_deployment_uid=45a042d1-a74e-4ce5-82c2-a010ce03ea8d
+restored_deployment_uid=45a042d1-a74e-4ce5-82c2-a010ce03ea8d
+original_configmap_uid=fb24b223-9a9a-43cc-977a-ecd307c36816
+restored_configmap_uid=fb24b223-9a9a-43cc-977a-ecd307c36816
+original_secret_uid=6fde4c9b-1d5d-4039-a6ac-d00d9a95b516
+restored_secret_uid=6fde4c9b-1d5d-4039-a6ac-d00d9a95b516
+original_service_uid=fc184424-ab7b-4058-b534-948dfa7d668b
+restored_service_uid=fc184424-ab7b-4058-b534-948dfa7d668b

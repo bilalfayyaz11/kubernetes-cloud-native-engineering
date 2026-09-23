@@ -1,881 +1,717 @@
-# Kubernetes Etcd Backup and Disaster Recovery
+# Kubernetes etcd Disaster Recovery
 
-## Overview
+## What This Does
 
-This implementation demonstrates end-to-end Kubernetes control-plane disaster recovery using real etcd snapshots.
+This implementation demonstrates a complete Kubernetes control-plane disaster recovery workflow using real etcd snapshots.
 
-The environment was built from a fresh Ubuntu host, initialized as a kubeadm control plane, populated with application state, backed up using etcd snapshot tooling, deliberately modified to simulate state loss, and recovered from a known-good snapshot.
+A single-control-plane kubeadm cluster is created with a locally hosted etcd static Pod. Kubernetes resources are deployed, the etcd datastore is backed up, critical resources are deliberately deleted, and the control plane is restored from the snapshot.
 
-The workflow covers:
+The workflow validates that Kubernetes objects return with their original identities and that the recovered cluster can continue accepting new workload changes.
 
-- Kubernetes control-plane bootstrap
-- containerd CRI configuration
-- Flannel CNI
-- etcd static Pod discovery
-- etcd topology inspection
-- PKI-based etcd authentication
-- live snapshot creation
-- snapshot integrity verification
-- SHA256 checksum generation
-- destructive Kubernetes state-loss simulation
-- control-plane shutdown
-- preservation of post-failure etcd data
-- snapshot restoration
-- etcd revision bump
-- restored-revision compaction marking
-- API server recovery
-- application-state verification
-- resource fingerprint comparison
-- automated etcd backups
-- snapshot retention
-- disaster-recovery health checks
-- operational recovery documentation
+It also includes reusable automation for:
 
----
+- authenticated etcd snapshots
+- snapshot integrity validation
+- SHA256 verification
+- backup metadata
+- retention management
+- controlled etcd restoration
+- revision bumping
+- post-restore health validation
 
 ## Architecture
 
-~~text
-                     Kubernetes API Server
-                              |
-                              v
-                        +-----------+
-                        |   etcd    |
-                        | Cluster   |
-                        |   State   |
-                        +-----+-----+
-                              |
-                     Snapshot Backup
-                              |
-                              v
-                  /opt/etcd-backup/*.db
-                              |
-                      Disaster Event
-                              |
-                              v
-                    Kubernetes State Loss
-                              |
-                     Control Plane Stop
-                              |
-                              v
-                    Snapshot Restoration
-                              |
-                  +-----------+------------+
-                  |                        |
-           Revision Bump             Mark Compacted
-                  |                        |
-                  +-----------+------------+
-                              |
-                              v
-                      Restored etcd
-                              |
-                              v
-                   Kubernetes API Server
-                              |
-                              v
-                 Recovered Application State
-~~
+```text
+                         Kubernetes Control Plane
+                                  |
+                                  v
+                         +------------------+
+                         |   kube-apiserver |
+                         +--------+---------+
+                                  |
+                                  v
+                         +------------------+
+                         |       etcd       |
+                         | Kubernetes State |
+                         +--------+---------+
+                                  |
+                    +-------------+-------------+
+                    |                           |
+                    v                           v
+             Live Datastore               Snapshot Backup
+             /var/lib/etcd                     |
+                                                v
+                                      +------------------+
+                                      | etcdctl snapshot |
+                                      |      save        |
+                                      +--------+---------+
+                                               |
+                                               v
+                                      +------------------+
+                                      | etcdutl validate |
+                                      +--------+---------+
+                                               |
+                            Disaster           |
+                               |               |
+                               v               v
+                    Delete Kubernetes     Restore Snapshot
+                         Resources              |
+                                               v
+                                    New etcd Data Directory
+                                               |
+                                               v
+                                    Restart Control Plane
+                                               |
+                                               v
+                                      Validate Recovery
+```
 
----
+## Prerequisites
 
-## Environment
+- Ubuntu 24.04 LTS or compatible Linux environment
+- sudo access
+- containerd
+- Kubernetes installed with kubeadm
+- kubelet
+- kubectl
+- etcdctl
+- etcdutl
+- jq
+- curl
+- SHA256 utilities
+- Internet access during environment preparation
 
-The environment uses:
+Validated architecture:
 
-- Ubuntu 24.04
-- Kubernetes v1.36
+```text
+1 kubeadm control-plane node
+1 stacked etcd member
+Flannel CNI
+containerd runtime
+```
+
+## Setup & Installation
+
+The Kubernetes control plane was initialized with kubeadm.
+
+Example:
+
+```bash
+sudo kubeadm init \
+  --apiserver-advertise-address=<CONTROL_PLANE_IP> \
+  --pod-network-cidr=10.244.0.0/16 \
+  --cri-socket=unix:///run/containerd/containerd.sock
+```
+
+The control plane uses a static etcd Pod whose configuration is stored at:
+
+```text
+/etc/kubernetes/manifests/etcd.yaml
+```
+
+The etcd PKI is stored under:
+
+```text
+/etc/kubernetes/pki/etcd/
+```
+
+The initial datastore is stored at:
+
+```text
+/var/lib/etcd
+```
+
+The restore workflow does not delete this datastore.
+
+## How to Reproduce
+
+### 1. Inspect etcd Configuration
+
+Inspect the running etcd static Pod:
+
+```bash
+kubectl get pods \
+  -n kube-system \
+  -l component=etcd \
+  -o wide
+```
+
+Inspect the manifest:
+
+```bash
+sudo grep -E \
+  -- '--name=|--data-dir=|--advertise-client-urls=|--initial-advertise-peer-urls=|--cert-file=|--key-file=|--trusted-ca-file=' \
+  /etc/kubernetes/manifests/etcd.yaml
+```
+
+The implementation dynamically derives:
+
+- etcd endpoint
+- CA certificate
+- client certificate
+- client key
+- member name
+- peer URL
+- data directory
+- running etcd version
+
+This avoids hard-coded assumptions about control-plane configuration.
+
+### 2. Verify etcd Health
+
+Authenticated access uses:
+
+```bash
+etcdctl \
+  --endpoints="$ETCD_ENDPOINT" \
+  --cacert="$ETCD_CACERT" \
+  --cert="$ETCD_CERT" \
+  --key="$ETCD_KEY" \
+  endpoint health
+```
+
+Additional inspection includes:
+
+```bash
+etcdctl endpoint status --write-out=table
+etcdctl member list --write-out=table
+```
+
+### 3. Create Recovery Validation Resources
+
+The recovery workload contains:
+
+```text
+Namespace
+  backup-test
+
+Deployment
+  test-app
+
+ConfigMap
+  test-config
+
+Secret
+  test-secret
+
+Service
+  test-app-service
+```
+
+The application is deployed with multiple replicas so workload recovery can be validated after restoring etcd.
+
+The runtime Secret value is generated dynamically and is not stored in the repository.
+
+### 4. Capture Original Kubernetes Object Identity
+
+Before taking the snapshot, Kubernetes UIDs are recorded for:
+
+- namespace
+- Deployment
+- ConfigMap
+- Secret
+- Service
+- CoreDNS ConfigMap
+
+This creates stronger restore evidence than checking resource names alone.
+
+After restoration, the UIDs can be compared to prove that the original snapshot objects returned.
+
+### 5. Create the etcd Snapshot
+
+Create the snapshot:
+
+```bash
+sudo etcdctl \
+  --endpoints="$ETCD_ENDPOINT" \
+  --cacert="$ETCD_CACERT" \
+  --cert="$ETCD_CERT" \
+  --key="$ETCD_KEY" \
+  snapshot save /opt/etcd-backup/<snapshot>.db
+```
+
+The snapshot is then protected with restrictive file permissions.
+
+### 6. Validate Snapshot Integrity
+
+Use `etcdutl`:
+
+```bash
+sudo etcdutl \
+  --write-out=table \
+  snapshot status /opt/etcd-backup/<snapshot>.db
+```
+
+Additional metadata captured includes:
+
+- snapshot hash
+- revision
+- key count
+- database size
+- etcd version
+- creation timestamp
+
+A SHA256 checksum is also generated:
+
+```bash
+sudo sha256sum \
+  /opt/etcd-backup/<snapshot>.db
+```
+
+### 7. Simulate Disaster
+
+The recovery validation namespace is deliberately deleted:
+
+```bash
+kubectl delete namespace backup-test
+```
+
+The CoreDNS ConfigMap is also removed:
+
+```bash
+kubectl delete configmap coredns \
+  -n kube-system
+```
+
+The workflow explicitly verifies that both resources are absent before restoration.
+
+The etcd revision after the destructive changes is recorded to prove that cluster state changed after the snapshot.
+
+### 8. Stop Control-Plane Access During Restore
+
+The kube-apiserver static Pod manifest is temporarily moved outside the monitored static Pod directory.
+
+The etcd static Pod is stopped the same way.
+
+This prevents active API writes while restoring the datastore.
+
+### 9. Restore into a New etcd Data Directory
+
+Rather than deleting the original datastore, the snapshot is restored into a new directory.
+
+Example:
+
+```text
+/var/lib/etcd-restored
+```
+
+or:
+
+```text
+/var/lib/etcd-restored-YYYYMMDD_HHMMSS
+```
+
+The restore uses:
+
+```bash
+sudo etcdutl snapshot restore <snapshot> \
+  --name "$ETCD_NAME" \
+  --data-dir "$RESTORE_DIR" \
+  --initial-cluster "$INITIAL_CLUSTER" \
+  --initial-cluster-token "$INITIAL_CLUSTER_TOKEN" \
+  --initial-advertise-peer-urls "$ETCD_PEER_URL" \
+  --bump-revision 1000000000 \
+  --mark-compacted
+```
+
+Revision bumping and compaction marking help Kubernetes controllers and informers correctly handle restored state.
+
+### 10. Update the etcd Static Pod
+
+The `etcd-data` hostPath in the static Pod manifest is changed to the restored datastore.
+
+Conceptually:
+
+```text
+Before
+/etc/kubernetes/manifests/etcd.yaml
+        |
+        +--> /var/lib/etcd
+
+After
+/etc/kubernetes/manifests/etcd.yaml
+        |
+        +--> /var/lib/etcd-restored
+```
+
+The original datastore remains preserved.
+
+### 11. Restart the Control Plane
+
+After restored etcd is healthy, the kube-apiserver static Pod manifest is returned.
+
+Health is validated using:
+
+```bash
+kubectl get --raw='/readyz'
+```
+
+The node must return to:
+
+```text
+Ready
+```
+
+### 12. Verify Restored Kubernetes Resources
+
+Recovery validation checks that the following return:
+
+```text
+namespace/backup-test
+deployment/test-app
+configmap/test-config
+secret/test-secret
+service/test-app-service
+configmap/kube-system/coredns
+```
+
+The restored resource UIDs are compared with their pre-backup values.
+
+Matching UIDs provide evidence that the resources were restored from the etcd snapshot rather than recreated manually.
+
+### 13. Validate Application Functionality
+
+Post-restore validation includes:
+
+```text
+Kubernetes API health
+node readiness
+etcd health
+Deployment availability
+Pod readiness
+ConfigMap content
+Secret key structure
+CoreDNS configuration
+cluster DNS
+Service DNS
+application HTTP connectivity
+```
+
+The Secret values themselves are never printed into repository artifacts.
+
+### 14. Validate New Writes After Recovery
+
+A new Kubernetes object is created after restoration.
+
+This confirms that:
+
+```text
+API Server
+    |
+    v
+Restored etcd
+    |
+    v
+New Kubernetes state
+```
+
+is functioning normally.
+
+### 15. Validate Post-Restore Cluster Operations
+
+Normal cluster operations are tested after recovery.
+
+These include:
+
+- creating a new Deployment
+- scaling the restored Deployment
+- creating Services
+- verifying workload availability
+- verifying etcd revision advancement
+- checking Pod counts
+- comparing pre-disaster and post-restore state
+
+### 16. Automated Backup
+
+Run:
+
+```bash
+sudo /opt/etcd-backup/backup-etcd.sh
+```
+
+The automation performs:
+
+1. etcd endpoint health validation
+2. live snapshot creation
+3. snapshot integrity validation
+4. SHA256 checksum generation
+5. snapshot metadata collection
+6. backup retention cleanup
+
+### 17. Backup Retention
+
+The automated backup script retains backups for seven days.
+
+Managed files include:
+
+```text
+etcd-backup-YYYYMMDD_HHMMSS.db
+etcd-backup-YYYYMMDD_HHMMSS.db.sha256
+etcd-backup-YYYYMMDD_HHMMSS.db.metadata
+```
+
+Actual snapshot database files are deliberately excluded from version control because etcd snapshots can contain Kubernetes Secrets and other sensitive cluster state.
+
+### 18. Automated Restore Procedure
+
+The restore utility requires explicit execution confirmation:
+
+```bash
+sudo ETCD_RESTORE_CONFIRM=YES \
+  /opt/etcd-backup/restore-etcd.sh \
+  /opt/etcd-backup/<snapshot>.db
+```
+
+Without the confirmation variable, the script exits before modifying the control plane.
+
+The restore utility:
+
+1. verifies snapshot integrity
+2. verifies checksum when available
+3. preserves the active datastore
+4. stops kube-apiserver
+5. stops etcd
+6. restores into a new datastore
+7. applies a revision bump
+8. marks the restored revision compacted
+9. updates the static Pod hostPath
+10. starts restored etcd
+11. checks etcd health
+12. starts kube-apiserver
+13. checks Kubernetes API readiness
+
+## Tools Used
+
+- Kubernetes
 - kubeadm
 - kubelet
 - kubectl
-- containerd
-- crictl
-- Flannel CNI
 - etcd
 - etcdctl
 - etcdutl
-- OpenSSL
+- containerd
+- crictl
+- Flannel
+- Bash
 - jq
 - curl
-
-The host initially contained no Kubernetes cluster, etcd data directory, etcd PKI, or control-plane components.
-
-A complete control plane was therefore created before the disaster-recovery workflow began.
-
----
-
-## Kubernetes Bootstrap
-
-The cluster was initialized with kubeadm using:
-
-~~text
-CRI: containerd
-Pod network: 10.244.0.0/16
-Control plane: single node
-CNI: Flannel
-~~
-
-containerd was configured with systemd cgroups and validated through the CRI interface before Kubernetes initialization.
-
-Because the environment contains a single node, the control-plane scheduling taint was removed to permit application workloads.
-
----
-
-## Etcd Architecture Discovery
-
-The running etcd instance was inspected before any backup activity.
-
-The workflow identified:
-
-- etcd static Pod
-- member name
-- data directory
-- client URLs
-- peer URLs
-- initial cluster configuration
-- Kubernetes PKI paths
-- etcd endpoint health
-- member status
-- active etcd release
-
-Recovery parameters were derived from the actual static Pod manifest rather than hard-coded example values.
-
-This is important because restore values such as:
-
-~~text
---name
---initial-cluster
---initial-advertise-peer-urls
---data-dir
-~~
-
-must match the real control-plane configuration.
-
----
-
-## Matching Etcd Tooling
-
-The running etcd version was detected from the Kubernetes static Pod image.
-
-Matching versions of:
-
-~~text
-etcdctl
-etcdutl
-~~
-
-were installed under:
-
-~~text
-/usr/local/bin/
-~~
-
-Absolute binary paths are used by operational scripts to avoid differences between the normal user PATH and sudo's execution environment.
-
----
-
-## Etcd Authentication
-
-Administrative etcd operations use Kubernetes-generated TLS credentials.
-
-The workflow uses:
-
-~~text
-/etc/kubernetes/pki/etcd/ca.crt
-/etc/kubernetes/pki/etcd/healthcheck-client.crt
-/etc/kubernetes/pki/etcd/healthcheck-client.key
-~~
-
-Endpoint health is verified before backup or recovery operations.
-
-Example:
-
-~~bash
-sudo env ETCDCTL_API=3 \
-  /usr/local/bin/etcdctl \
-  --endpoints=https://127.0.0.1:2379 \
-  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
-  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
-  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
-  endpoint health
-~~
-
----
-
-## Recovery Test State
-
-A dedicated namespace was created to provide deterministic state for backup and recovery validation.
-
-~~text
-Namespace:  backup-test
-Deployment: nginx-deployment
-Replicas:   3
-Service:    nginx-service
-ConfigMap:  test-config
-Secret:     test-secret
-~~
-
-A unique recovery marker was written into the test state.
-
-Example:
-
-~~text
-restore-marker-YYYYMMDD-HHMMSS
-~~
-
-That marker provides a strong proof that the restored resources came from the intended pre-failure state.
-
----
-
-## Resource Fingerprinting
-
-A compact resource fingerprint records the expected state before destructive testing.
-
-~~text
-namespace=backup-test
-deployment=nginx-deployment
-replicas=3
-service=nginx-service
-configmap=test-config
-secret=test-secret
-marker=<recovery-marker>
-~~
-
-After restoration, an equivalent fingerprint is generated and compared with `diff`.
-
-An exact match confirms that the expected logical resource set returned.
-
----
-
-## Etcd Snapshot Creation
-
-Snapshots are created from the live etcd endpoint using:
-
-~~bash
-etcdctl snapshot save
-~~
-
-Snapshots are stored under:
-
-~~text
-/opt/etcd-backup/
-~~
-
-Example naming convention:
-
-~~text
-etcd-snapshot-YYYYMMDD-HHMMSS.db
-~~
-
-The snapshot database itself is treated as sensitive because etcd can contain Kubernetes Secret data.
-
-It is never placed inside the repository.
-
----
-
-## Snapshot Integrity Verification
-
-Each snapshot is verified with:
-
-~~bash
-etcdutl snapshot status
-~~
-
-The workflow records:
-
-- snapshot filename
-- database size
-- snapshot revision
-- SHA256 checksum
-- integrity status
-
-Example:
-
-~~bash
-etcdutl snapshot status \
-  /opt/etcd-backup/etcd-snapshot-*.db \
-  --write-out=table
-~~
-
----
-
-## Snapshot Security
-
-An etcd snapshot is effectively a backup of Kubernetes cluster state.
-
-It may contain:
-
-- Secret objects
-- ConfigMaps
-- RBAC configuration
-- workload definitions
-- ServiceAccounts
-- cluster metadata
-- admission configuration
-
-For this reason:
-
-- `.db` snapshots are excluded from Git
-- Kubernetes PKI keys are excluded from Git
-- kubeconfig credentials are excluded from Git
-- Secret payloads are not written into recruiter-facing evidence
-- only safe snapshot metadata is retained in the repository
-
----
-
-## Failure Simulation
-
-State loss was simulated by deleting:
-
-~~text
-namespace/backup-test
-~~
-
-Because deleting a namespace removes its namespaced resources, this removed:
-
-- nginx Deployment
-- nginx Pods
-- nginx Service
-- ConfigMap
-- Secret
-
-The Kubernetes control plane remained operational.
-
-This isolates the exercise to an etcd state-recovery scenario without unnecessarily damaging unrelated system services.
-
----
-
-## Failure Evidence
-
-Before deletion, the environment records:
-
-- resource inventory
-- recovery marker
-- etcd revision
-- namespace state
-
-After deletion, it records:
-
-- namespace absence
-- resource absence
-- updated etcd revision
-- healthy control-plane status
-
-The etcd revision advancing after deletion confirms that destructive state changes were committed after the snapshot.
-
----
-
-## Control-Plane Shutdown
-
-For an etcd restore, static control-plane components are stopped by temporarily moving their manifests out of:
-
-~~text
-/etc/kubernetes/manifests/
-~~
-
-The shutdown sequence used is:
-
-~~text
-kube-apiserver
-      |
-      v
-kube-controller-manager
-      |
-      v
-kube-scheduler
-      |
-      v
-etcd
-~~
-
-The kubelet automatically stops static Pods when their manifests disappear.
-
----
-
-## Preserving Failed-State Data
-
-Before replacing the etcd database, the existing data directory is preserved.
-
-Conceptually:
-
-~~text
-/var/lib/etcd
-      |
-      v
-/var/lib/etcd.pre-corrected-restore.<timestamp>
-~~
-
-This preserves the post-failure database for investigation or rollback.
-
-The live data directory is never blindly deleted.
-
----
-
-## Snapshot Restoration
-
-The snapshot is restored using:
-
-~~bash
-etcdutl snapshot restore
-~~
-
-Restore parameters are derived from the real etcd configuration.
-
-The recovery procedure uses:
-
-~~text
---data-dir
---name
---initial-cluster
---initial-advertise-peer-urls
---initial-cluster-token
-~~
-
-This avoids assumptions about hostnames or member identities.
-
----
-
-## Kubernetes Revision-Bump Recovery
-
-Rolling Kubernetes etcd state backward requires special care.
-
-Controllers and API clients may have previously observed revisions newer than those inside the snapshot.
-
-The corrected restore therefore uses:
-
-~~text
---bump-revision
---mark-compacted
-~~
-
-The revision bump moves restored etcd to a revision above the original snapshot revision.
-
-Marking the restored revision compacted forces clients relying on older watch history to rebuild their state rather than silently assuming stale observations remain authoritative.
-
-This provides a more robust Kubernetes rollback procedure than restoring an old revision without accounting for watcher state.
-
----
-
-## Recovery Sequence
-
-The final recovery sequence is:
-
-~~text
-Verify snapshot
-      |
-      v
-Stop API server
-      |
-      v
-Stop controller-manager
-      |
-      v
-Stop scheduler
-      |
-      v
-Stop etcd
-      |
-      v
-Preserve current /var/lib/etcd
-      |
-      v
-Restore snapshot
-      |
-      v
-Apply revision bump
-      |
-      v
-Mark restored revision compacted
-      |
-      v
-Restart etcd
-      |
-      v
-Verify etcd health
-      |
-      v
-Restart API server
-      |
-      v
-Restart controller-manager
-      |
-      v
-Restart scheduler
-      |
-      v
-Validate restored Kubernetes state
-~~
-
----
-
-## Etcd Recovery Validation
-
-After restoration, the workflow verifies:
-
-- etcd endpoint health
-- etcd endpoint status
-- etcd member list
-- Kubernetes API readiness
-- node Ready status
-- control-plane Pods
-- restored namespace
-- restored Deployment
-- 3 ready replicas
-- restored Service
-- EndpointSlice
-- restored ConfigMap
-- restored Secret
-- recovery marker
-- application connectivity
-
----
-
-## Recovery Marker Validation
-
-The same unique marker generated before the snapshot must exist after restoration.
-
-The ConfigMap marker is compared against the locally recorded expected marker.
-
-The Secret marker is also verified programmatically without writing its payload to evidence files.
-
-This provides stronger verification than checking only whether similarly named resources exist.
-
----
-
-## Application Recovery
-
-The restored nginx Service is tested from an ephemeral Kubernetes client.
-
-Conceptually:
-
-~~text
-Temporary client Pod
-        |
-        v
-nginx-service
-        |
-        v
-EndpointSlice
-        |
-        v
-Restored nginx Pods
-~~
-
-Successful HTTP connectivity verifies that the recovered state is operational, not merely present in etcd.
-
----
-
-## Automated Backup Script
-
-The reusable script:
-
-~~text
-scripts/etcd-backup.sh
-~~
-
-performs:
-
-1. etcd health validation
-2. timestamped snapshot creation
-3. snapshot integrity verification
-4. SHA256 calculation
-5. size capture
-6. revision capture
-7. metadata generation
-8. retention enforcement
-
-Example:
-
-~~bash
-RETENTION_DAYS=7 ./scripts/etcd-backup.sh
-~~
-
----
-
-## Retention Policy
-
-Old snapshot databases and their metadata can be removed automatically according to the configured retention period.
-
-Default:
-
-~~text
-7 days
-~~
-
-Retention can be changed with:
-
-~~bash
-RETENTION_DAYS=14 ./scripts/etcd-backup.sh
-~~
-
-Snapshot retention alone is not a complete production backup strategy.
-
-Production backups should also be copied to durable, access-controlled storage outside the cluster.
-
----
-
-## Backup Metadata
-
-Each automated snapshot produces metadata containing:
-
-~~text
-timestamp
-snapshot filename
-size
-SHA256
-revision
-retention period
-security classification
-repository policy
-~~
-
-The database itself remains outside source control.
-
----
-
-## Final Recovery Health Check
-
-The reusable script:
-
-~~text
-scripts/verify-etcd-recovery.sh
-~~
-
-checks:
-
-- Kubernetes API readiness
-- node readiness
-- etcd endpoint health
-- recovered namespace
-- Deployment replica count
-- restored Service
-- ConfigMap recovery marker
-- Secret existence
-- application connectivity
-- control-plane static manifests
-
-The script returns a non-zero exit code when a required recovery check fails.
-
----
-
-## Operational Runbook
-
-The generated disaster-recovery runbook documents the complete process.
-
-### Backup Procedure
-
-~~text
-1. Verify etcd health
-2. Create snapshot
-3. Verify snapshot integrity
-4. Record checksum, revision, and size
-5. Store snapshot securely
-6. Enforce retention
-7. Periodically perform restore tests
-~~
-
-### Recovery Procedure
-
-~~text
-1. Identify the intended snapshot
-2. Capture live etcd topology
-3. Stop static control-plane components
-4. Preserve current etcd data
-5. Restore snapshot
-6. Apply Kubernetes-safe revision handling
-7. Restart etcd
-8. Verify etcd health
-9. Restart API server
-10. Restart remaining control-plane components
-11. Verify Kubernetes resources
-12. Validate application connectivity
-13. Compare restored fingerprints
-~~
-
----
-
-## Evidence
-
-Safe operational evidence includes:
-
-~~text
-evidence/
-├── etcd-environment-evidence.txt
-├── etcd-static-pod-parameters.txt
-├── etcd-recovery-parameters.txt
-├── etcd-discovery-evidence.txt
-├── recovery-safety-notes.txt
-├── recovery-marker.txt
-├── pre-snapshot-state.txt
-├── pre-snapshot-resource-fingerprint.txt
-├── etcd-revision-before-snapshot.txt
-├── etcd-snapshot-metadata.txt
-├── etcd-snapshot-status.txt
-├── etcd-snapshot-evidence.txt
-├── final-pre-failure-state.txt
-├── etcd-revision-before-deletion.txt
-├── etcd-revision-after-deletion.txt
-├── post-failure-state.txt
-├── failure-comparison.txt
-├── pre-restore-control-plane-state.txt
-├── etcd-restore-evidence.txt
-├── snapshot-content-diagnostic.txt
-├── corrected-pre-restore-fingerprint.txt
-├── corrected-post-restore-fingerprint.txt
-├── corrected-fingerprint-diff.txt
-├── corrected-etcd-recovery-evidence.txt
-├── automated-backup-run.txt
-├── final-recovery-health-report.txt
-├── final-etcd-status.txt
-├── final-etcd-member-list.txt
-├── final-disaster-recovery-state.txt
-└── etcd-disaster-recovery-runbook.txt
-~~
-
-Files are included only when they exist locally.
-
----
-
-## Repository Structure
-
-~~text
-kubernetes-etcd-disaster-recovery/
-├── README.md
-├── manifests/
-│   └── backup-test-state.yaml
-├── scripts/
-│   ├── etcd-backup.sh
-│   └── verify-etcd-recovery.sh
-└── evidence/
-    ├── etcd-environment-evidence.txt
-    ├── etcd-static-pod-parameters.txt
-    ├── etcd-recovery-parameters.txt
-    ├── etcd-discovery-evidence.txt
-    ├── recovery-safety-notes.txt
-    ├── recovery-marker.txt
-    ├── pre-snapshot-state.txt
-    ├── pre-snapshot-resource-fingerprint.txt
-    ├── etcd-revision-before-snapshot.txt
-    ├── etcd-snapshot-metadata.txt
-    ├── etcd-snapshot-status.txt
-    ├── etcd-snapshot-evidence.txt
-    ├── final-pre-failure-state.txt
-    ├── etcd-revision-before-deletion.txt
-    ├── etcd-revision-after-deletion.txt
-    ├── post-failure-state.txt
-    ├── failure-comparison.txt
-    ├── pre-restore-control-plane-state.txt
-    ├── etcd-restore-evidence.txt
-    ├── snapshot-content-diagnostic.txt
-    ├── corrected-pre-restore-fingerprint.txt
-    ├── corrected-post-restore-fingerprint.txt
-    ├── corrected-fingerprint-diff.txt
-    ├── corrected-etcd-recovery-evidence.txt
-    ├── automated-backup-run.txt
-    ├── final-recovery-health-report.txt
-    ├── final-etcd-status.txt
-    ├── final-etcd-member-list.txt
-    ├── final-disaster-recovery-state.txt
-    └── etcd-disaster-recovery-runbook.txt
-~~
-
----
-
-## Skills Demonstrated
-
-- Kubernetes control-plane administration
-- kubeadm
-- containerd
-- CRI troubleshooting
-- Flannel CNI
-- etcd architecture
-- etcd static Pods
-- etcd PKI
-- etcdctl
-- etcdutl
-- etcd endpoint health
-- etcd member inspection
-- Kubernetes state backup
+- SHA256 utilities
+- systemd
+
+## Key Skills Demonstrated
+
+- Kubernetes control-plane architecture
+- stacked etcd administration
+- kubeadm cluster initialization
+- static Pod management
+- etcd endpoint authentication
+- PKI-aware administration
+- etcd snapshot creation
 - snapshot integrity verification
-- SHA256 verification
-- disaster simulation
-- control-plane shutdown
-- etcd data preservation
-- snapshot restoration
-- revision bump recovery
-- compaction marking
-- Kubernetes API recovery
-- state fingerprinting
-- Secret-safe verification
-- application recovery testing
-- retention automation
-- disaster-recovery runbook development
+- checksum verification
+- Kubernetes disaster simulation
+- point-in-time cluster recovery
+- safe datastore restoration
+- etcd revision management
+- Kubernetes object identity validation
+- control-plane recovery
+- CoreDNS restoration
+- post-recovery workload validation
+- cluster write-path validation
+- backup automation
+- restore automation
+- retention management
+- disaster-recovery documentation
 
----
+## Real-World Use Case
 
-## Security Considerations
+Kubernetes stores cluster state inside etcd.
 
-The following artifacts must never be committed:
+This includes objects such as:
 
-~~text
-*.db
-*.snap
-*.key
-*.pem
-admin.conf
-kubeconfig files
-Kubernetes PKI private keys
-live kubeadm bootstrap tokens
-etcd database directories
-~~
+```text
+Deployments
+Services
+ConfigMaps
+Secrets
+Namespaces
+RBAC
+Custom Resources
+Cluster configuration
+```
 
-Etcd snapshots are intentionally treated as sensitive even when the test workload contains no production credentials.
+Loss or corruption of etcd can therefore make an otherwise healthy compute environment unusable.
 
-This is because snapshots represent the broader Kubernetes state database and may contain sensitive cluster objects.
+A production recovery process needs more than a backup command.
 
----
+It should include:
 
-## Operational Relevance
+```text
+Snapshot creation
+        |
+        v
+Integrity verification
+        |
+        v
+Secure backup handling
+        |
+        v
+Controlled restore
+        |
+        v
+API recovery
+        |
+        v
+Workload verification
+        |
+        v
+Normal operations testing
+```
 
-These procedures directly apply to:
+Regular restore testing is important because an untested backup does not prove recoverability.
 
-- Kubernetes administration
-- Site Reliability Engineering
-- Platform engineering
-- DevOps
-- infrastructure operations
-- control-plane incident response
-- disaster-recovery planning
-- business-continuity engineering
-- production backup strategy
+## Lessons Learned
 
-The central operational workflow demonstrated is:
+- etcd is the source of truth for Kubernetes control-plane state.
+- Snapshot creation and restoration are separate operational concerns.
+- `etcdctl` can capture a live snapshot.
+- `etcdutl` is appropriate for snapshot inspection and restore operations.
+- etcd client access requires the correct endpoint and PKI material.
+- Hard-coded certificate paths and member names should be avoided when they can be derived from the live manifest.
+- Kubernetes object UIDs provide strong evidence that objects were truly restored.
+- The API server should not continue writing state while etcd restoration is underway.
+- Restoring into a new datastore is safer than immediately deleting the previous datastore.
+- The etcd static Pod can be redirected to the restored datastore through its hostPath.
+- Revision bumping helps Kubernetes consumers handle state rollback.
+- CoreDNS restoration provides a useful system-level recovery test.
+- Workload existence alone is not sufficient proof of successful recovery.
+- DNS, Services, scaling, new object creation, and application traffic should also be validated.
+- Backup integrity should be verified before any destructive restore procedure.
+- Checksums provide an additional validation layer for snapshot files.
+- Automated backup procedures should implement retention policies.
+- Restore automation should require explicit operator confirmation.
+- etcd snapshot databases should not be committed to source control because they can contain sensitive Kubernetes state.
 
-~~text
-Healthy Cluster
-      |
-      v
-Create Snapshot
-      |
-      v
-Verify Backup
-      |
-      v
-State Loss
-      |
-      v
-Preserve Failed State
-      |
-      v
-Restore Etcd
-      |
-      v
-Recover Control Plane
-      |
-      v
-Validate Resources
-      |
-      v
-Verify Application
-~~
+## Troubleshooting Log
 
-The key outcome is not simply creating an etcd snapshot, but demonstrating a tested procedure for recovering Kubernetes control-plane state and proving that deleted application resources return in a functional state.
+### Fresh Machine Had No Kubernetes Cluster
+
+The starting environment contained kubectl, Docker, and containerd but no kubeadm control plane.
+
+A real kubeadm control plane was created so the recovery workflow could operate on:
+
+```text
+/etc/kubernetes/manifests/etcd.yaml
+/etc/kubernetes/pki/etcd/
+/var/lib/etcd
+```
+
+rather than simulating etcd behavior inside an unrelated cluster type.
+
+### etcd Tooling Was Missing
+
+Neither `etcdctl` nor `etcdutl` was initially installed.
+
+The etcd version was determined from the running Kubernetes etcd image and matching tooling was installed.
+
+This avoided version mismatch between the datastore and administrative utilities.
+
+### Hard-Coded etcd Values Avoided
+
+The initial recovery procedure could have assumed values such as:
+
+```text
+https://127.0.0.1:2379
+master
+/var/lib/etcd
+```
+
+Instead, endpoint, member, peer URL, certificate, key, and data-directory values were derived from the actual static Pod configuration.
+
+### Runtime Secret Protection
+
+The recovery test required a Secret object.
+
+A temporary value was generated at runtime rather than storing a reusable plaintext password in source-controlled manifests.
+
+Repository artifacts expose only Secret metadata and key names.
+
+### Snapshot Verification Modernized
+
+Snapshot creation uses:
+
+```text
+etcdctl snapshot save
+```
+
+Snapshot inspection and restore use:
+
+```text
+etcdutl snapshot status
+etcdutl snapshot restore
+```
+
+This separates live-cluster operations from offline snapshot operations.
+
+### Original Datastore Preserved
+
+The disaster recovery workflow does not immediately remove the existing etcd datastore.
+
+The snapshot is restored into a separate directory and the static Pod is redirected to that datastore.
+
+This leaves the previous datastore available as an additional rollback path.
+
+### Control Plane Temporarily Unavailable
+
+Stopping etcd makes the Kubernetes API unavailable.
+
+This is expected during a single-member stacked-etcd recovery operation.
+
+The workflow therefore uses container runtime inspection while the Kubernetes API is offline.
+
+### Restored Resource Identity Verified
+
+The test namespace and associated resources were deleted after the snapshot.
+
+Following restore, the returned Kubernetes object UIDs were compared against their pre-backup UIDs.
+
+This provided direct evidence that the historical snapshot state had been restored.
+
+### CoreDNS Recovery Verified
+
+The CoreDNS ConfigMap was deliberately deleted as an additional system-level failure.
+
+After restoration, the original ConfigMap returned.
+
+CoreDNS was restarted and DNS resolution was tested again.
+
+### Post-Restore Writes Verified
+
+A fresh Kubernetes object was successfully created after the restore.
+
+This confirmed that the recovered API server and etcd datastore were not merely readable but could accept new state.
+
+### Automated Backup Validated
+
+The backup automation was executed after recovery.
+
+The resulting snapshot was checked for:
+
+```text
+snapshot integrity
+checksum validity
+metadata
+retention configuration
+```
+
+### Restore Safety Guard Verified
+
+The reusable restore utility refuses to start a destructive restore unless:
+
+```text
+ETCD_RESTORE_CONFIRM=YES
+```
+
+is supplied explicitly.
+
+This reduces the risk of accidentally initiating control-plane recovery.

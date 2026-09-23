@@ -1,0 +1,27 @@
+=== ETCD SNAPSHOT VERIFICATION ===
+Timestamp: 2026-09-23T20:35:27+00:00
+
+Backup file:
+/opt/etcd-backup/etcd-backup-20260923_203525.db
+
+Snapshot metadata:
+BACKUP_FILE=/opt/etcd-backup/etcd-backup-20260923_203525.db
+ETCD_VERSION=3.6.8
+ETCD_ENDPOINT=https://172.31.10.45:2379
+ETCD_NAME=ip-172-31-10-45
+LIVE_REVISION_BEFORE_SNAPSHOT=779
+SNAPSHOT_HASH=1254671242
+SNAPSHOT_REVISION=779
+SNAPSHOT_TOTAL_KEYS=385
+SNAPSHOT_TOTAL_SIZE=1507328
+BACKUP_CREATED=2026-09-23T20:35:26+00:00
+
+Snapshot status:
++----------+----------+------------+------------+---------+
+|   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE | VERSION |
++----------+----------+------------+------------+---------+
+| 4ac8c38a |      779 |        385 |     1.5 MB |   3.6.0 |
++----------+----------+------------+------------+---------+
+
+SHA256:
+0c8a364ea43b8877c131401b733d2f45c15229c765cee15666ed558af7b19797  /opt/etcd-backup/etcd-backup-20260923_203525.db

@@ -1,0 +1,35 @@
+==================================================
+ ETCD AUTOMATED BACKUP
+==================================================
+
+===== VERIFY ETCD HEALTH =====
+https://172.31.10.45:2379 is healthy: successfully committed proposal: took = 19.815411ms
+
+===== CREATE SNAPSHOT =====
+Snapshot saved at /opt/etcd-backup/etcd-backup-20260923_204835.db
+Server version 3.6.0
+
+===== VALIDATE SNAPSHOT =====
++----------+------------+------------+------------+---------+
+|   HASH   |  REVISION  | TOTAL KEYS | TOTAL SIZE | VERSION |
++----------+------------+------------+------------+---------+
+| 2c3ca08e | 1000001681 |        475 |     2.1 MB |   3.6.0 |
++----------+------------+------------+------------+---------+
+
+===== CREATE CHECKSUM =====
+PASS: checksum verified
+
+===== CAPTURE SNAPSHOT METADATA =====
+
+===== APPLY RETENTION POLICY =====
+Retention policy: 7 days
+
+===== BACKUP SUMMARY =====
+Backup file: /opt/etcd-backup/etcd-backup-20260923_204835.db
+Revision: 1000001681
+Hash: 742170766
+Keys: 475
+
+==================================================
+ ETCD BACKUP COMPLETE
+==================================================

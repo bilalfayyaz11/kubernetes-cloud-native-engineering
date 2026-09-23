@@ -1,0 +1,19 @@
+=== KUBERNETES RESTORATION VALIDATION ===
+Timestamp: 2026-09-23T20:43:54+00:00
+
+Cluster API: PASS
+Node health: PASS
+etcd health: PASS
+backup-test namespace: PASS
+test-app Deployment: PASS
+test-app replicas: 2/2
+test-config ConfigMap: PASS
+test-secret structure: PASS
+test-app-service: PASS
+CoreDNS ConfigMap: PASS
+Kubernetes DNS: PASS
+Service DNS: PASS
+Application connectivity: PASS
+Post-restore write operation: PASS
+Matching original resource UIDs: 5/5
+Post-write etcd revision: 1000001222

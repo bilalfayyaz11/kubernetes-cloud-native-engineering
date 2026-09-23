@@ -1,0 +1,16 @@
+*.db
+*.db.sha256
+*.db.metadata
+*.key
+*.crt
+*.pem
+*.kubeconfig
+kubeconfig
+admin.conf
+.env
+.env.*
+*credentials*
+*secret*
+etcd-environment.sh
+pre-backup-resource-identifiers.txt
+coredns-pre-backup-uid.txt

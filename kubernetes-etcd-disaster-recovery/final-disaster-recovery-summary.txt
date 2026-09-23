@@ -1,0 +1,81 @@
+=== KUBERNETES ETCD RECOVERY SUMMARY ===
+Timestamp: 2026-09-23T20:48:36+00:00
+
+=== NODE STATE ===
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION            CONTAINER-RUNTIME
+ip-172-31-10-45   Ready    control-plane   16m   v1.36.5   172.31.10.45   <none>        Ubuntu 24.04.3 LTS   6.14.0-1018-aws (amd64)   containerd://2.2.5
+
+=== ETCD HEALTH ===
++---------------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+|         ENDPOINT          |        ID        | VERSION | STORAGE VERSION | DB SIZE | IN USE | PERCENTAGE NOT IN USE | QUOTA  | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS | DOWNGRADE TARGET VERSION | DOWNGRADE ENABLED |
++---------------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+| https://172.31.10.45:2379 | a4c8c733c3906297 |   3.6.8 |           3.6.0 |  2.1 MB | 2.1 MB |                    0% | 2.1 GB |      true |      false |         2 |       1109 |               1109 |        |                          |             false |
++---------------------------+------------------+---------+-----------------+---------+--------+-----------------------+--------+-----------+------------+-----------+------------+--------------------+--------+--------------------------+-------------------+
+
+=== LATEST AUTOMATED SNAPSHOT ===
+/opt/etcd-backup/etcd-backup-20260923_204835.db
+
+=== SNAPSHOT STATUS ===
++----------+------------+------------+------------+---------+
+|   HASH   |  REVISION  | TOTAL KEYS | TOTAL SIZE | VERSION |
++----------+------------+------------+------------+---------+
+| 2c3ca08e | 1000001681 |        475 |     2.1 MB |   3.6.0 |
++----------+------------+------------+------------+---------+
+
+=== AUTOMATION VALIDATION ===
+Backup automation: PASS
+Snapshot integrity: PASS
+Checksum validation: PASS
+Retention policy: 7 days
+Restore safety guard: PASS
+
+=== RESTORATION VALIDATION ===
+=== KUBERNETES RESTORATION VALIDATION ===
+Timestamp: 2026-09-23T20:43:54+00:00
+
+Cluster API: PASS
+Node health: PASS
+etcd health: PASS
+backup-test namespace: PASS
+test-app Deployment: PASS
+test-app replicas: 2/2
+test-config ConfigMap: PASS
+test-secret structure: PASS
+test-app-service: PASS
+CoreDNS ConfigMap: PASS
+Kubernetes DNS: PASS
+Service DNS: PASS
+Application connectivity: PASS
+Post-restore write operation: PASS
+Matching original resource UIDs: 5/5
+Post-write etcd revision: 1000001222
+
+=== PRE/POST RESTORE COMPARISON ===
+=== KUBERNETES PRE/POST RESTORE COMPARISON ===
+Timestamp: 2026-09-23T20:45:12+00:00
+
+=== POD COUNTS ===
+Before disaster: 10
+After restore and validation: 12
+
+=== CRITICAL RESTORED OBJECTS ===
+Verified: 6/6
+
+=== SNAPSHOT OBJECT UID MATCHES ===
+5/5
+
+=== POST-RESTORE OPERATIONS ===
+New Deployment creation: PASS
+Restored Deployment scaling to 3 replicas: PASS
+Service creation: PASS
+Application connectivity after scaling: PASS
+etcd write path: PASS
+
+=== PRE-DISASTER STATE ARTIFACT ===
+/home/ubuntu/kubernetes-disaster-recovery/cluster-state-before-disaster.txt
+
+=== POST-DISASTER STATE ARTIFACT ===
+/home/ubuntu/kubernetes-disaster-recovery/cluster-state-after-disaster.txt
+
+=== POST-RESTORE STATE ARTIFACT ===
+/home/ubuntu/kubernetes-disaster-recovery/cluster-state-after.txt

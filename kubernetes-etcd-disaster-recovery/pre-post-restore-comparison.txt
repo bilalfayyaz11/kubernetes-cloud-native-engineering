@@ -1,0 +1,28 @@
+=== KUBERNETES PRE/POST RESTORE COMPARISON ===
+Timestamp: 2026-09-23T20:45:12+00:00
+
+=== POD COUNTS ===
+Before disaster: 10
+After restore and validation: 12
+
+=== CRITICAL RESTORED OBJECTS ===
+Verified: 6/6
+
+=== SNAPSHOT OBJECT UID MATCHES ===
+5/5
+
+=== POST-RESTORE OPERATIONS ===
+New Deployment creation: PASS
+Restored Deployment scaling to 3 replicas: PASS
+Service creation: PASS
+Application connectivity after scaling: PASS
+etcd write path: PASS
+
+=== PRE-DISASTER STATE ARTIFACT ===
+/home/ubuntu/kubernetes-disaster-recovery/cluster-state-before-disaster.txt
+
+=== POST-DISASTER STATE ARTIFACT ===
+/home/ubuntu/kubernetes-disaster-recovery/cluster-state-after-disaster.txt
+
+=== POST-RESTORE STATE ARTIFACT ===
+/home/ubuntu/kubernetes-disaster-recovery/cluster-state-after.txt

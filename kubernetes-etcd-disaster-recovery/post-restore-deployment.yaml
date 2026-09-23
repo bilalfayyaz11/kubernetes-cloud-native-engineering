@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-restore-test
+  namespace: backup-test
+  labels:
+    app: post-restore-test
+    purpose: recovery-validation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-restore-test
+  template:
+    metadata:
+      labels:
+        app: post-restore-test
+        purpose: recovery-validation
+    spec:
+      containers:
+        - name: busybox
+          image: busybox:1.37
+          command:
+            - sleep
+            - "3600"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 50m
+              memory: 32Mi
