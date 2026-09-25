@@ -1,0 +1,8 @@
+developer.key
+developer.csr
+developer.crt
+*-key.pem
+*.key
+*.pem
+*.p12
+*.pfx
