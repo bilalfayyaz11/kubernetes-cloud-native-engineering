@@ -1,0 +1,7 @@
+tls.key
+tls.csr
+tls.crt
+*.key
+*.pem
+*.p12
+*.pfx
