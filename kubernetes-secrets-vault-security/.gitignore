@@ -1,0 +1,17 @@
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+*.token
+*.env
+.env
+.env.*
+kubeconfig
+config
+database-secret.yaml
+vault-env.sh
+encryption-config.yaml
+.vault-dev-token
+vault-dev.log
