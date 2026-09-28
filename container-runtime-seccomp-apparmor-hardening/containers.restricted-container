@@ -1,0 +1,109 @@
+#include <tunables/global>
+
+profile containers.restricted-container flags=(attach_disconnected,mediate_deleted) {
+
+  # Base rules required by common userspace
+  #include <abstractions/base>
+
+  # --------------------------------------------------
+  # EXECUTION
+  # --------------------------------------------------
+
+  /bin/** ix,
+  /usr/bin/** ix,
+  /sbin/** ix,
+  /usr/sbin/** ix,
+
+  /lib/** mr,
+  /lib64/** mr,
+  /usr/lib/** mr,
+  /usr/lib64/** mr,
+
+  # --------------------------------------------------
+  # BASIC SYSTEM READ ACCESS
+  # --------------------------------------------------
+
+  /etc/passwd r,
+  /etc/group r,
+  /etc/hostname r,
+  /etc/hosts r,
+  /etc/resolv.conf r,
+  /etc/nsswitch.conf r,
+
+  # --------------------------------------------------
+  # PROC ACCESS
+  # --------------------------------------------------
+
+  /proc/ r,
+  /proc/** r,
+
+  # Explicitly block writes to proc/sys
+  deny /proc/sys/** wklx,
+
+  # --------------------------------------------------
+  # SYSFS ACCESS
+  # --------------------------------------------------
+
+  /sys/ r,
+  /sys/** r,
+
+  # Prevent modification of sysfs
+  deny /sys/** wklx,
+
+  # --------------------------------------------------
+  # TEMPORARY WRITABLE STORAGE
+  # --------------------------------------------------
+
+  /tmp/ rw,
+  /tmp/** rwkl,
+
+  /var/tmp/ rw,
+  /var/tmp/** rwkl,
+
+  # --------------------------------------------------
+  # HOME ACCESS
+  # --------------------------------------------------
+
+  /home/ r,
+  /home/** rwkl,
+
+  # --------------------------------------------------
+  # SENSITIVE FILE DENIAL
+  # --------------------------------------------------
+
+  deny /etc/shadow r,
+  deny /etc/gshadow r,
+  deny /etc/sudoers r,
+  deny /etc/sudoers.d/** r,
+
+  deny /boot/ rwklx,
+  deny /boot/** rwklx,
+
+  # --------------------------------------------------
+  # DANGEROUS CAPABILITY DENIAL
+  # --------------------------------------------------
+
+  deny capability sys_admin,
+  deny capability sys_module,
+  deny capability sys_rawio,
+  deny capability sys_ptrace,
+  deny capability sys_boot,
+  deny capability mac_admin,
+  deny capability mac_override,
+
+  # --------------------------------------------------
+  # NETWORK
+  # --------------------------------------------------
+
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
+
+  # --------------------------------------------------
+  # SIGNALS
+  # --------------------------------------------------
+
+  signal (receive),
+  signal (send),
+}
