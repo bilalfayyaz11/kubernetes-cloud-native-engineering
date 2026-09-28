@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: secure-web-service
+  namespace: restricted-test
+spec:
+  selector:
+    app: secure-web-app
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP

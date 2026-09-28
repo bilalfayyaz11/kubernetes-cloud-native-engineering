@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-network-app
+  namespace: baseline-test
+spec:
+  hostNetwork: true
+  containers:
+    - name: app
+      image: nginx:1.28-alpine
+      command:
+        - sh
+        - -c
+        - sleep 3600
+  restartPolicy: Never

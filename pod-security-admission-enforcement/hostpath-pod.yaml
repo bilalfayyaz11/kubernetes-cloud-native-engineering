@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-app
+  namespace: baseline-test
+spec:
+  containers:
+    - name: app
+      image: nginx:1.28-alpine
+      command:
+        - sh
+        - -c
+        - sleep 3600
+      volumeMounts:
+        - name: host-volume
+          mountPath: /host-data
+  volumes:
+    - name: host-volume
+      hostPath:
+        path: /etc
+        type: Directory
+  restartPolicy: Never
