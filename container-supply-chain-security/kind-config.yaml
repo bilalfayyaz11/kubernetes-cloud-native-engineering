@@ -1,0 +1,8 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+containerdConfigPatches:
+  - |-
+    [plugins."io.containerd.cri.v1.images".registry.mirrors."localhost:5001"]
+      endpoint = ["http://supply-chain-registry:5000"]
+nodes:
+  - role: control-plane

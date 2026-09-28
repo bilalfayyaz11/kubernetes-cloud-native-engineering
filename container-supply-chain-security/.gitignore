@@ -1,0 +1,11 @@
+cosign.key
+*.key
+*.pem
+*.p12
+*.pfx
+*.token
+.env
+.env.*
+image-references.env
+kubeconfig
+config

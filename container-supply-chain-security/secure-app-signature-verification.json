@@ -1,0 +1,2 @@
+
+[{"critical":{"identity":{"docker-reference":"localhost:5001/secure-app@sha256:<IMAGE_DIGEST>"},"image":{"docker-manifest-digest":"sha256:eca0a3d3fa495df871c60c38976b69bce5ef8f25de2d944b9c26930544f62f73"},"type":"https://sigstore.dev/cosign/sign/v1"},"optional":{}}]

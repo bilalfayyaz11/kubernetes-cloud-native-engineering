@@ -1,0 +1,8 @@
+{
+  "image": "localhost:5001/secure-app:v1.0",
+  "immutableReference": "localhost:5001/secure-app@sha256:<IMAGE_DIGEST>",
+  "publicKey": "cosign.pub",
+  "signatureVerified": true,
+  "criticalVulnerabilities": 3,
+  "highVulnerabilities": 60
+}

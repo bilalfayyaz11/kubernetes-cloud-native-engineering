@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unsigned-app
+  namespace: supply-chain-demo
+spec:
+  containers:
+    - name: app
+      image: localhost:5001/unsigned-nginx@sha256:<IMAGE_DIGEST>
+      imagePullPolicy: Always
+  restartPolicy: Never
