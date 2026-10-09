@@ -1,0 +1,15 @@
+==============================================
+ Kubernetes Endpoint Security Validation
+==============================================
+PASS  Kubernetes API is healthy
+PASS  API firewall chain attached
+PASS  Untrusted API traffic reaches DROP rule
+PASS  EC2 metadata endpoint blocked from protected workload
+PASS  IMDSv2 token endpoint blocked
+PASS  Metadata protection NetworkPolicy present
+PASS  Automatic ServiceAccount token disabled
+PASS  Workload runs as non-root UID 10001
+PASS  Root filesystem is read-only
+
+Failures: 0
+OVERALL RESULT: PASS

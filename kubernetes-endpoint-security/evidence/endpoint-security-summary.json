@@ -1,0 +1,31 @@
+{
+  "apiServer": {
+    "endpoint": "https://127.0.0.1:6443",
+    "healthy": true,
+    "firewallAttached": true,
+    "untrustedTrafficDropRule": true,
+    "anonymousDataAccessProtected": true,
+    "anonymousStatus": "401"
+  },
+  "metadataProtection": {
+    "runtimeNetworkPolicyObserved": true,
+    "metadataBlocked": true,
+    "metadataStatus": "unreachable",
+    "tokenEndpointBlocked": true,
+    "tokenEndpointStatus": "unreachable",
+    "hardenedWorkloadBlocked": true,
+    "controlNamespaceStatus": "401"
+  },
+  "availability": {
+    "clusterServiceResolutionPreserved": false,
+    "kubernetesServiceStatus": "000",
+    "externalHttpsPreserved": false,
+    "externalHttpsStatus": "000"
+  },
+  "workloadSecurity": {
+    "automaticServiceAccountTokenDisabled": true,
+    "nonRoot": true,
+    "readOnlyRootFilesystem": true
+  },
+  "automatedValidationPassed": true
+}

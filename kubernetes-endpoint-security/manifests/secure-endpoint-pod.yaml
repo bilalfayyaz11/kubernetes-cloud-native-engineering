@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-endpoint-test
+  namespace: endpoint-security
+  labels:
+    app: secure-endpoint-test
+spec:
+  automountServiceAccountToken: false
+  restartPolicy: Never
+
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10001
+    runAsGroup: 10001
+    fsGroup: 10001
+    seccompProfile:
+      type: RuntimeDefault
+
+  containers:
+    - name: client
+      image: curlimages/curl:8.11.1
+
+      command:
+        - /bin/sh
+        - -c
+        - sleep 3600
+
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+
+        capabilities:
+          drop:
+            - ALL
+
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+
+  volumes:
+    - name: tmp
+      emptyDir: {}

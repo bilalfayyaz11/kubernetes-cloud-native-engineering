@@ -1,0 +1,8 @@
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-10-09 14:19 UTC
+Nmap scan report for ip-172-31-10-122.ec2.internal (172.31.10.122)
+Host is up (0.00013s latency).
+
+PORT     STATE SERVICE
+6443/tcp open  sun-sr-https
+
+Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds

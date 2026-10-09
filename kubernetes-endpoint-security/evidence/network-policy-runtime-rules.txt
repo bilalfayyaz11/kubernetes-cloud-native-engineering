@@ -1,0 +1,68 @@
+:KUBE-NWPLCY-COMMON - [0:0]
+:KUBE-NWPLCY-DE7SITURMGLCUPXW - [0:0]
+:KUBE-NWPLCY-DEFAULT - [0:0]
+:KUBE-ROUTER-FORWARD - [0:0]
+:KUBE-ROUTER-INPUT - [0:0]
+:KUBE-ROUTER-OUTPUT - [0:0]
+-A INPUT -m comment --comment "kube-router netpol - 4IA2OSFRMVNDXBVV" -j KUBE-ROUTER-INPUT
+-A INPUT -m comment --comment "KUBE-ROUTER rule to explicitly ACCEPT traffic that comply to network policies" -m mark --mark 0x20000/0x20000 -j ACCEPT
+-A FORWARD -m comment --comment "kube-router netpol - TEMCG2JMHZYE7H7T" -j KUBE-ROUTER-FORWARD
+-A FORWARD -m comment --comment "KUBE-ROUTER rule to explicitly ACCEPT traffic that comply to network policies" -m mark --mark 0x20000/0x20000 -j ACCEPT
+-A OUTPUT -m comment --comment "kube-router netpol - VEAAIY32XVBHCSCY" -j KUBE-ROUTER-OUTPUT
+-A OUTPUT -m comment --comment "KUBE-ROUTER rule to explicitly ACCEPT traffic that comply to network policies" -m mark --mark 0x20000/0x20000 -j ACCEPT
+-A KUBE-NWPLCY-COMMON -m comment --comment "\"rule to drop invalid state for pod\"" -m conntrack --ctstate INVALID -j DROP
+-A KUBE-NWPLCY-COMMON -m comment --comment "\"rule for stateful firewall for pod\"" -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A KUBE-NWPLCY-COMMON -p icmp -m comment --comment "allow icmp echo requests" -m icmp --icmp-type 8 -j ACCEPT
+-A KUBE-NWPLCY-COMMON -p icmp -m comment --comment "allow icmp destination unreachable messages" -m icmp --icmp-type 3 -j ACCEPT
+-A KUBE-NWPLCY-COMMON -p icmp -m comment --comment "allow icmp time exceeded messages" -m icmp --icmp-type 11 -j ACCEPT
+-A KUBE-NWPLCY-DE7SITURMGLCUPXW -p udp -m comment --comment "rule to ACCEPT traffic from source pods to specified ipBlocks selected by policy name: restrict-sensitive-egress namespace endpoint-security" -m set --match-set KUBE-SRC-M7M7UJA2WN4AGFTP src -m set --match-set KUBE-DST-G5YNGRK6IS3CK4XD dst -m udp --dport 53 -j MARK --set-xmark 0x10000/0x10000
+-A KUBE-NWPLCY-DE7SITURMGLCUPXW -p udp -m comment --comment "rule to ACCEPT traffic from source pods to specified ipBlocks selected by policy name: restrict-sensitive-egress namespace endpoint-security" -m set --match-set KUBE-SRC-M7M7UJA2WN4AGFTP src -m set --match-set KUBE-DST-G5YNGRK6IS3CK4XD dst -m udp --dport 53 -m mark --mark 0x10000/0x10000 -j RETURN
+-A KUBE-NWPLCY-DE7SITURMGLCUPXW -p tcp -m comment --comment "rule to ACCEPT traffic from source pods to specified ipBlocks selected by policy name: restrict-sensitive-egress namespace endpoint-security" -m set --match-set KUBE-SRC-M7M7UJA2WN4AGFTP src -m set --match-set KUBE-DST-G5YNGRK6IS3CK4XD dst -m tcp --dport 53 -j MARK --set-xmark 0x10000/0x10000
+-A KUBE-NWPLCY-DE7SITURMGLCUPXW -p tcp -m comment --comment "rule to ACCEPT traffic from source pods to specified ipBlocks selected by policy name: restrict-sensitive-egress namespace endpoint-security" -m set --match-set KUBE-SRC-M7M7UJA2WN4AGFTP src -m set --match-set KUBE-DST-G5YNGRK6IS3CK4XD dst -m tcp --dport 53 -m mark --mark 0x10000/0x10000 -j RETURN
+-A KUBE-NWPLCY-DE7SITURMGLCUPXW -m comment --comment "rule to ACCEPT traffic from source pods to specified ipBlocks selected by policy name: restrict-sensitive-egress namespace endpoint-security" -m set --match-set KUBE-SRC-M7M7UJA2WN4AGFTP src -m set --match-set KUBE-DST-V575BXT3JQM3GJMQ dst -j MARK --set-xmark 0x10000/0x10000
+-A KUBE-NWPLCY-DE7SITURMGLCUPXW -m comment --comment "rule to ACCEPT traffic from source pods to specified ipBlocks selected by policy name: restrict-sensitive-egress namespace endpoint-security" -m set --match-set KUBE-SRC-M7M7UJA2WN4AGFTP src -m set --match-set KUBE-DST-V575BXT3JQM3GJMQ dst -m mark --mark 0x10000/0x10000 -j RETURN
+-A KUBE-NWPLCY-DE7SITURMGLCUPXW -m comment --comment "rule to log dropped traffic" -m limit --limit 10/min --limit-burst 10 -m mark ! --mark 0x10000/0x10000 -j NFLOG --nflog-prefix "DROP by policy endpoint-security/restrict-sensitive-egress" --nflog-group 100
+-A KUBE-NWPLCY-DEFAULT -m comment --comment "rule to mark traffic matching a network policy" -j MARK --set-xmark 0x10000/0x10000
+-A KUBE-POD-FW-BMA37G6JKFXTJMJW -m comment --comment "common bi-directional traffic policy rules" -j KUBE-NWPLCY-COMMON
+-A KUBE-POD-FW-BMA37G6JKFXTJMJW -s 10.42.0.3/32 -m comment --comment "run through default egress network policy chain" -j KUBE-NWPLCY-DEFAULT
+-A KUBE-POD-FW-BMA37G6JKFXTJMJW -d 10.42.0.3/32 -m comment --comment "run through default ingress network policy chain" -j KUBE-NWPLCY-DEFAULT
+-A KUBE-POD-FW-P6F3XY3RZGJEE4OK -m comment --comment "common bi-directional traffic policy rules" -j KUBE-NWPLCY-COMMON
+-A KUBE-POD-FW-P6F3XY3RZGJEE4OK -s 10.42.0.2/32 -m comment --comment "run through default egress network policy chain" -j KUBE-NWPLCY-DEFAULT
+-A KUBE-POD-FW-P6F3XY3RZGJEE4OK -d 10.42.0.2/32 -m comment --comment "run through default ingress network policy chain" -j KUBE-NWPLCY-DEFAULT
+-A KUBE-POD-FW-X5QBDIDR6HTBQHPG -m comment --comment "common bi-directional traffic policy rules" -j KUBE-NWPLCY-COMMON
+-A KUBE-POD-FW-X5QBDIDR6HTBQHPG -s 10.42.0.4/32 -m comment --comment "run through default egress network policy chain" -j KUBE-NWPLCY-DEFAULT
+-A KUBE-POD-FW-X5QBDIDR6HTBQHPG -d 10.42.0.4/32 -m comment --comment "run through default ingress network policy chain" -j KUBE-NWPLCY-DEFAULT
+-A KUBE-POD-FW-YUX7X4TKV6Q7GE7A -m comment --comment "common bi-directional traffic policy rules" -j KUBE-NWPLCY-COMMON
+-A KUBE-POD-FW-YUX7X4TKV6Q7GE7A -d 10.42.0.5/32 -m comment --comment "run through default ingress network policy chain" -j KUBE-NWPLCY-DEFAULT
+-A KUBE-POD-FW-YUX7X4TKV6Q7GE7A -s 10.42.0.5/32 -m comment --comment "run through nw policy restrict-sensitive-egress" -j KUBE-NWPLCY-DE7SITURMGLCUPXW
+-A KUBE-ROUTER-FORWARD -d 10.42.0.5/32 -m comment --comment "rule to jump traffic destined to POD name:secure-endpoint-test namespace: endpoint-security to chain KUBE-POD-FW-YUX7X4TKV6Q7GE7A" -j KUBE-POD-FW-YUX7X4TKV6Q7GE7A
+-A KUBE-ROUTER-FORWARD -d 10.42.0.5/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic destined to POD name:secure-endpoint-test namespace: endpoint-security to chain KUBE-POD-FW-YUX7X4TKV6Q7GE7A" -j KUBE-POD-FW-YUX7X4TKV6Q7GE7A
+-A KUBE-ROUTER-FORWARD -s 10.42.0.5/32 -m comment --comment "rule to jump traffic from POD name:secure-endpoint-test namespace: endpoint-security to chain KUBE-POD-FW-YUX7X4TKV6Q7GE7A" -j KUBE-POD-FW-YUX7X4TKV6Q7GE7A
+-A KUBE-ROUTER-FORWARD -s 10.42.0.5/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic from POD name:secure-endpoint-test namespace: endpoint-security to chain KUBE-POD-FW-YUX7X4TKV6Q7GE7A" -j KUBE-POD-FW-YUX7X4TKV6Q7GE7A
+-A KUBE-ROUTER-FORWARD -d 10.42.0.3/32 -m comment --comment "rule to jump traffic destined to POD name:coredns-7cfb7bc9c7-k9xhc namespace: kube-system to chain KUBE-POD-FW-BMA37G6JKFXTJMJW" -j KUBE-POD-FW-BMA37G6JKFXTJMJW
+-A KUBE-ROUTER-FORWARD -d 10.42.0.3/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic destined to POD name:coredns-7cfb7bc9c7-k9xhc namespace: kube-system to chain KUBE-POD-FW-BMA37G6JKFXTJMJW" -j KUBE-POD-FW-BMA37G6JKFXTJMJW
+-A KUBE-ROUTER-FORWARD -s 10.42.0.3/32 -m comment --comment "rule to jump traffic from POD name:coredns-7cfb7bc9c7-k9xhc namespace: kube-system to chain KUBE-POD-FW-BMA37G6JKFXTJMJW" -j KUBE-POD-FW-BMA37G6JKFXTJMJW
+-A KUBE-ROUTER-FORWARD -s 10.42.0.3/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic from POD name:coredns-7cfb7bc9c7-k9xhc namespace: kube-system to chain KUBE-POD-FW-BMA37G6JKFXTJMJW" -j KUBE-POD-FW-BMA37G6JKFXTJMJW
+-A KUBE-ROUTER-FORWARD -d 10.42.0.2/32 -m comment --comment "rule to jump traffic destined to POD name:local-path-provisioner-77b9867795-jqpln namespace: kube-system to chain KUBE-POD-FW-P6F3XY3RZGJEE4OK" -j KUBE-POD-FW-P6F3XY3RZGJEE4OK
+-A KUBE-ROUTER-FORWARD -d 10.42.0.2/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic destined to POD name:local-path-provisioner-77b9867795-jqpln namespace: kube-system to chain KUBE-POD-FW-P6F3XY3RZGJEE4OK" -j KUBE-POD-FW-P6F3XY3RZGJEE4OK
+-A KUBE-ROUTER-FORWARD -s 10.42.0.2/32 -m comment --comment "rule to jump traffic from POD name:local-path-provisioner-77b9867795-jqpln namespace: kube-system to chain KUBE-POD-FW-P6F3XY3RZGJEE4OK" -j KUBE-POD-FW-P6F3XY3RZGJEE4OK
+-A KUBE-ROUTER-FORWARD -s 10.42.0.2/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic from POD name:local-path-provisioner-77b9867795-jqpln namespace: kube-system to chain KUBE-POD-FW-P6F3XY3RZGJEE4OK" -j KUBE-POD-FW-P6F3XY3RZGJEE4OK
+-A KUBE-ROUTER-FORWARD -d 10.42.0.4/32 -m comment --comment "rule to jump traffic destined to POD name:metrics-server-6dc596dfb8-xdqc4 namespace: kube-system to chain KUBE-POD-FW-X5QBDIDR6HTBQHPG" -j KUBE-POD-FW-X5QBDIDR6HTBQHPG
+-A KUBE-ROUTER-FORWARD -d 10.42.0.4/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic destined to POD name:metrics-server-6dc596dfb8-xdqc4 namespace: kube-system to chain KUBE-POD-FW-X5QBDIDR6HTBQHPG" -j KUBE-POD-FW-X5QBDIDR6HTBQHPG
+-A KUBE-ROUTER-FORWARD -s 10.42.0.4/32 -m comment --comment "rule to jump traffic from POD name:metrics-server-6dc596dfb8-xdqc4 namespace: kube-system to chain KUBE-POD-FW-X5QBDIDR6HTBQHPG" -j KUBE-POD-FW-X5QBDIDR6HTBQHPG
+-A KUBE-ROUTER-FORWARD -s 10.42.0.4/32 -m physdev --physdev-is-bridged -m comment --comment "rule to jump traffic from POD name:metrics-server-6dc596dfb8-xdqc4 namespace: kube-system to chain KUBE-POD-FW-X5QBDIDR6HTBQHPG" -j KUBE-POD-FW-X5QBDIDR6HTBQHPG
+-A KUBE-ROUTER-INPUT -d 10.43.0.0/16 -m comment --comment "allow traffic to primary/secondary cluster IP range - EKROEGTNIJ3AP3LC" -j RETURN
+-A KUBE-ROUTER-INPUT -p tcp -m comment --comment "allow LOCAL TCP traffic to node ports - LR7XO7NXDBGQJD2M" -m addrtype --dst-type LOCAL -m multiport --dports 30000:32767 -j RETURN
+-A KUBE-ROUTER-INPUT -p udp -m comment --comment "allow LOCAL UDP traffic to node ports - 76UCBPIZNGJNWNUZ" -m addrtype --dst-type LOCAL -m multiport --dports 30000:32767 -j RETURN
+-A KUBE-ROUTER-INPUT -s 10.42.0.5/32 -m comment --comment "rule to jump traffic from POD name:secure-endpoint-test namespace: endpoint-security to chain KUBE-POD-FW-YUX7X4TKV6Q7GE7A" -j KUBE-POD-FW-YUX7X4TKV6Q7GE7A
+-A KUBE-ROUTER-INPUT -s 10.42.0.3/32 -m comment --comment "rule to jump traffic from POD name:coredns-7cfb7bc9c7-k9xhc namespace: kube-system to chain KUBE-POD-FW-BMA37G6JKFXTJMJW" -j KUBE-POD-FW-BMA37G6JKFXTJMJW
+-A KUBE-ROUTER-INPUT -s 10.42.0.2/32 -m comment --comment "rule to jump traffic from POD name:local-path-provisioner-77b9867795-jqpln namespace: kube-system to chain KUBE-POD-FW-P6F3XY3RZGJEE4OK" -j KUBE-POD-FW-P6F3XY3RZGJEE4OK
+-A KUBE-ROUTER-INPUT -s 10.42.0.4/32 -m comment --comment "rule to jump traffic from POD name:metrics-server-6dc596dfb8-xdqc4 namespace: kube-system to chain KUBE-POD-FW-X5QBDIDR6HTBQHPG" -j KUBE-POD-FW-X5QBDIDR6HTBQHPG
+-A KUBE-ROUTER-OUTPUT -d 10.42.0.5/32 -m comment --comment "rule to jump traffic destined to POD name:secure-endpoint-test namespace: endpoint-security to chain KUBE-POD-FW-YUX7X4TKV6Q7GE7A" -j KUBE-POD-FW-YUX7X4TKV6Q7GE7A
+-A KUBE-ROUTER-OUTPUT -s 10.42.0.5/32 -m comment --comment "rule to jump traffic from POD name:secure-endpoint-test namespace: endpoint-security to chain KUBE-POD-FW-YUX7X4TKV6Q7GE7A" -j KUBE-POD-FW-YUX7X4TKV6Q7GE7A
+-A KUBE-ROUTER-OUTPUT -d 10.42.0.3/32 -m comment --comment "rule to jump traffic destined to POD name:coredns-7cfb7bc9c7-k9xhc namespace: kube-system to chain KUBE-POD-FW-BMA37G6JKFXTJMJW" -j KUBE-POD-FW-BMA37G6JKFXTJMJW
+-A KUBE-ROUTER-OUTPUT -s 10.42.0.3/32 -m comment --comment "rule to jump traffic from POD name:coredns-7cfb7bc9c7-k9xhc namespace: kube-system to chain KUBE-POD-FW-BMA37G6JKFXTJMJW" -j KUBE-POD-FW-BMA37G6JKFXTJMJW
+-A KUBE-ROUTER-OUTPUT -d 10.42.0.2/32 -m comment --comment "rule to jump traffic destined to POD name:local-path-provisioner-77b9867795-jqpln namespace: kube-system to chain KUBE-POD-FW-P6F3XY3RZGJEE4OK" -j KUBE-POD-FW-P6F3XY3RZGJEE4OK
+-A KUBE-ROUTER-OUTPUT -s 10.42.0.2/32 -m comment --comment "rule to jump traffic from POD name:local-path-provisioner-77b9867795-jqpln namespace: kube-system to chain KUBE-POD-FW-P6F3XY3RZGJEE4OK" -j KUBE-POD-FW-P6F3XY3RZGJEE4OK
+-A KUBE-ROUTER-OUTPUT -d 10.42.0.4/32 -m comment --comment "rule to jump traffic destined to POD name:metrics-server-6dc596dfb8-xdqc4 namespace: kube-system to chain KUBE-POD-FW-X5QBDIDR6HTBQHPG" -j KUBE-POD-FW-X5QBDIDR6HTBQHPG
+-A KUBE-ROUTER-OUTPUT -s 10.42.0.4/32 -m comment --comment "rule to jump traffic from POD name:metrics-server-6dc596dfb8-xdqc4 namespace: kube-system to chain KUBE-POD-FW-X5QBDIDR6HTBQHPG" -j KUBE-POD-FW-X5QBDIDR6HTBQHPG
