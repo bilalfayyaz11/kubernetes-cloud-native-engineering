@@ -1,0 +1,54 @@
+==================================================
+ KUBERNETES KERNEL SECURITY VERIFICATION
+==================================================
+
+===== Kubernetes API =====
+PASS: Kubernetes API healthy
+
+===== Hardened Workload =====
+FAIL: hardened workload replicas not fully ready
+Selected pod: hardened-web-768f9ccfc6-7df7v
+
+===== Seccomp =====
+PASS: custom Localhost Seccomp profile declared
+FAIL: Seccomp filter mode inactive
+FAIL: Seccomp filter count unavailable
+
+===== AppArmor =====
+FAIL: custom AppArmor profile inactive
+
+===== User Identity =====
+FAIL: unexpected workload UID
+
+===== Privilege Escalation =====
+PASS: privilege escalation disabled
+
+===== Capability Restrictions =====
+PASS: all Linux capabilities dropped
+
+===== Read-Only Root Filesystem =====
+PASS: read-only root filesystem configured
+PASS: root filesystem write blocked at runtime
+
+===== Writable Temporary Storage =====
+FAIL: controlled /tmp write failed
+
+===== Sensitive File Restriction =====
+PASS: sensitive /etc/shadow access blocked
+
+===== Dangerous Operation =====
+PASS: mount operation blocked
+
+===== ServiceAccount Token =====
+FAIL: ServiceAccount token present
+
+===== Service Functionality =====
+FAIL: hardened application functionality test failed
+
+==================================================
+ SECURITY VALIDATION SUMMARY
+==================================================
+Passed: 8
+Failed: 8
+Total:  16
+OVERALL RESULT: FAIL

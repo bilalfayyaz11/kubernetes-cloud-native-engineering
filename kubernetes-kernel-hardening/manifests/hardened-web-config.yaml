@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hardened-web-content
+  namespace: kernel-hardening
+data:
+  index.html: |
+    <!doctype html>
+    <html>
+      <head>
+        <title>Kernel Hardened Workload</title>
+      </head>
+      <body>
+        <h1>Kernel Hardened Workload</h1>
+        <p>Seccomp and AppArmor enforcement active.</p>
+      </body>
+    </html>

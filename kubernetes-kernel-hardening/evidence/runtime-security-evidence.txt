@@ -1,0 +1,13 @@
+Kubernetes Kernel Hardening Runtime Evidence
+Generated: 2026-10-09T14:48:52Z
+
+Pod: hardened-web-768f9ccfc6-7df7v
+
+=== Identity ===
+error: unable to upgrade connection: container not found ("web")
+
+=== Seccomp ===
+error: unable to upgrade connection: container not found ("web")
+
+=== AppArmor ===
+error: unable to upgrade connection: container not found ("web")

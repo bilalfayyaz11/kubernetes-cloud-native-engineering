@@ -1,0 +1,18 @@
+{
+  "generated": "2026-10-09T14:48:52Z",
+  "namespace": "kernel-hardening",
+  "workload": "hardened-web",
+  "controls": {
+    "seccomp": "custom-localhost-profile",
+    "apparmor": "custom-localhost-profile",
+    "runAsNonRoot": true,
+    "readOnlyRootFilesystem": true,
+    "allowPrivilegeEscalation": false,
+    "capabilitiesDropped": [
+      "ALL"
+    ],
+    "serviceAccountTokenAutomount": false
+  },
+  "automatedSecurityVerification": "FAIL",
+  "complianceCheck": "FAIL"
+}

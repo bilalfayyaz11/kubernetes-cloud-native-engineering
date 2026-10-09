@@ -1,0 +1,33 @@
+==================================================
+ KERNEL HARDENING COMPLIANCE CHECK
+==================================================
+
+Control 1 — Seccomp
+FAIL: Seccomp filtering active
+
+Control 2 — AppArmor
+FAIL: AppArmor confinement active
+
+Control 3 — Non-root
+/home/ubuntu/kubernetes-kernel-hardening/compliance-check.sh: line 66: UID: readonly variable
+FAIL: non-root UID enforced
+
+Control 4 — Capabilities
+PASS: all capabilities dropped
+
+Control 5 — Privilege Escalation
+PASS: privilege escalation disabled
+
+Control 6 — Read-only Root
+PASS: read-only root filesystem configured
+
+Control 7 — ServiceAccount Token
+PASS: ServiceAccount token automount disabled
+
+==================================================
+ COMPLIANCE SUMMARY
+==================================================
+Passed: 4
+Failed: 3
+Score:  57%
+COMPLIANCE RESULT: FAIL

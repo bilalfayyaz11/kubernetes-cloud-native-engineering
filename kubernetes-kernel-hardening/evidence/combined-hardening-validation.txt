@@ -1,0 +1,24 @@
+Kubernetes Kernel Hardening - Combined Controls
+Generated: 2026-10-09T14:47:55Z
+
+=== Deployment ===
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES         SELECTOR
+hardened-web   0/2     2            0           8s    web          busybox:1.36   app=hardened-web
+
+=== Pods ===
+NAME                            READY   STATUS   RESTARTS     AGE   IP           NODE               NOMINATED NODE   READINESS GATES
+hardened-web-768f9ccfc6-7df7v   0/1     Error    1 (6s ago)   8s    10.42.0.10   ip-172-31-10-109   <none>           <none>
+hardened-web-768f9ccfc6-w55jc   0/1     Error    1 (6s ago)   8s    10.42.0.11   ip-172-31-10-109   <none>           <none>
+
+=== Service ===
+NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+hardened-web   ClusterIP   10.43.67.116   <none>        80/TCP    8s    app=hardened-web
+
+=== Runtime Identity ===
+error: unable to upgrade connection: container not found ("web")
+
+=== Seccomp ===
+error: unable to upgrade connection: container not found ("web")
+
+=== AppArmor ===
+error: unable to upgrade connection: container not found ("web")

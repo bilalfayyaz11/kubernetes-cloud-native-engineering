@@ -1,0 +1,19 @@
+Kubernetes Kernel Hardening - AppArmor Evidence
+Generated: 2026-10-09T14:46:24Z
+
+Kernel: 6.14.0-1018-aws
+Profile: k8s-restricted-app
+
+=== Host Profile ===
+   k8s-restricted-app
+   /usr/bin/dash (10111) k8s-restricted-app
+
+=== Kubernetes Declaration ===
+type=Localhost profile=k8s-restricted-app
+
+=== Runtime Label ===
+k8s-restricted-app (enforce)
+
+=== Seccomp State ===
+sh: grep: Permission denied
+command terminated with exit code 126

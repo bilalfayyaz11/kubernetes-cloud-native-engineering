@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hardened-web
+  namespace: kernel-hardening
+  labels:
+    app: hardened-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hardened-web
+  template:
+    metadata:
+      labels:
+        app: hardened-web
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: Localhost
+          localhostProfile: profiles/restricted-profile.json
+      containers:
+        - name: web
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting hardened HTTP service"
+              echo "UID/GID:"
+              id
+              echo "Seccomp:"
+              grep -E '^(Seccomp|Seccomp_filters):' /proc/self/status
+              echo "AppArmor:"
+              cat /proc/self/attr/current
+              exec httpd -f -p 8080 -h /www
+          ports:
+            - name: http
+              containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            appArmorProfile:
+              type: Localhost
+              localhostProfile: k8s-restricted-app
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: content
+              mountPath: /www
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+            - name: runtime
+              mountPath: /var/run
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+      volumes:
+        - name: content
+          configMap:
+            name: hardened-web-content
+        - name: tmp
+          emptyDir: {}
+        - name: runtime
+          emptyDir: {}

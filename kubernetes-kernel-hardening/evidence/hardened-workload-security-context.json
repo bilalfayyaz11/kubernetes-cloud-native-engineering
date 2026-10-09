@@ -1,0 +1,39 @@
+{
+  "podSecurityContext": {
+    "fsGroup": 10001,
+    "runAsGroup": 10001,
+    "runAsNonRoot": true,
+    "runAsUser": 10001,
+    "seccompProfile": {
+      "localhostProfile": "profiles/restricted-profile.json",
+      "type": "Localhost"
+    }
+  },
+  "automountServiceAccountToken": false,
+  "containerSecurityContext": {
+    "allowPrivilegeEscalation": false,
+    "appArmorProfile": {
+      "localhostProfile": "k8s-restricted-app",
+      "type": "Localhost"
+    },
+    "capabilities": {
+      "drop": [
+        "ALL"
+      ]
+    },
+    "readOnlyRootFilesystem": true,
+    "runAsGroup": 10001,
+    "runAsNonRoot": true,
+    "runAsUser": 10001
+  },
+  "resources": {
+    "limits": {
+      "cpu": "100m",
+      "memory": "64Mi"
+    },
+    "requests": {
+      "cpu": "10m",
+      "memory": "16Mi"
+    }
+  }
+}
